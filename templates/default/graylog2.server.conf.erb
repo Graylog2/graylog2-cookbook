@@ -1,0 +1,94 @@
+# Cluster settings
+<%= config_option 'is_master', @is_master -%>
+<%= config_option 'node_id_file', node.graylog2[:node_id_file] -%>
+
+# Access secrets
+<%= config_option 'password_secret', node.graylog2[:password_secret] -%>
+<%= config_option 'root_username', node.graylog2[:root_username] -%>
+<%= config_option 'root_password_sha2', node.graylog2[:root_password_sha2] -%>
+
+# Plugins
+<%= config_option 'plugin_dir', node.graylog2[:plugin_dir] -%> 
+
+# REST interface
+<%= config_option 'rest_listen_uri', node.graylog2[:rest][:listen_uri] -%>
+<%= config_option 'rest_transport_uri', node.graylog2[:rest][:transport_uri] -%>
+<%= config_option 'rest_enable_cors', node.graylog2[:rest][:enable_cors] -%>
+<%= config_option 'rest_enable_gzip', node.graylog2[:rest][:enable_gzip] -%>
+
+# Search options
+<%= config_option 'allow_leading_wildcard_searches', node.graylog2[:allow_leading_wildcard_searches] -%>
+<%= config_option 'allow_highlighting', node.graylog2[:allow_highlighting] -%>
+
+# Elasticsearch
+elasticsearch_node_master = false
+elasticsearch_node_data = false
+elasticsearch_http_enabled = false
+<%= config_option 'elasticsearch_config_file', node.graylog2[:elasticsearch][:config_file] -%>
+<%= config_option 'elasticsearch_max_docs_per_index', node.graylog2[:elasticsearch][:max_docs_per_index] -%>
+<%= config_option 'elasticsearch_max_number_of_indices', node.graylog2[:elasticsearch][:max_number_of_indices] -%>
+<%= config_option 'retention_strategy', node.graylog2[:elasticsearch][:retention_strategy] -%>
+<%= config_option 'elasticsearch_shards', node.graylog2[:elasticsearch][:shards] -%>
+<%= config_option 'elasticsearch_replicas', node.graylog2[:elasticsearch][:replicas] -%>
+<%= config_option 'elasticsearch_index_prefix', node.graylog2[:elasticsearch][:index_prefix] -%>
+<%= config_option 'elasticsearch_cluster_name', node.graylog2[:elasticsearch][:cluster_name] -%>
+<%= config_option 'elasticsearch_cluster_discovery_timeout', node.graylog2[:elasticsearch][:cluster_discovery_timeout] -%>
+<%= config_option 'elasticsearch_node_name', node.graylog2[:elasticsearch][:node_name] -%>
+<%= config_option 'elasticsearch_transport_tcp_port', node.graylog2[:elasticsearch][:transport_tcp_port] -%>
+<%= config_option 'elasticsearch_discovery_zen_ping_multicast_enabled', node.graylog2[:elasticsearch][:discovery_zen_ping_multicast_enabled] -%>
+<%= config_option 'elasticsearch_discovery_zen_ping_unicast_hosts', node.graylog2[:elasticsearch][:discovery_zen_ping_unicast_hosts] -%>
+<%= config_option 'elasticsearch_network_host', node.graylog2[:elasticsearch][:network_host] -%>
+<%= config_option 'elasticsearch_network_bind_host', node.graylog2[:elasticsearch][:network_bind_host] -%>
+<%= config_option 'elasticsearch_network_publish_host', node.graylog2[:elasticsearch][:network_publish_host] -%>
+<%= config_option 'elasticsearch_analyzer', node.graylog2[:elasticsearch][:analyzer] -%>
+<%= config_option 'output_batch_size', node.graylog2[:elasticsearch][:output_batch_size] -%>
+<%= config_option 'output_flush_interval', node.graylog2[:elasticsearch][:output_flush_interval] -%>
+
+# Processors
+<%= config_option 'processbuffer_processors', node.graylog2[:processbuffer_processors] -%>
+<%= config_option 'outputbuffer_processors', node.graylog2[:outputbuffer_processors] -%>
+<%= config_option 'processor_wait_strategy', node.graylog2[:processor_wait_strategy] -%>
+
+# Ring buffers
+<%= config_option 'ring_size', node.graylog2[:ring_size] -%>
+
+# EXPERIMENTAL: Dead Letters
+<%= config_option 'dead_letters_enabled', node.graylog2[:dead_letters_enabled] -%>
+
+# Load balancing
+<%= config_option 'lb_recognition_period_seconds', node.graylog2[:lb_recognition_period_seconds] -%>
+
+# Stream processing
+<%= config_option 'stream_processing_timeout', node.graylog2[:stream_processing_timeout] -%>
+<%= config_option 'stream_processing_max_faults', node.graylog2[:stream_processing_max_faults] -%>
+
+# MongoDB Configuration
+<%= config_option 'mongodb_useauth', node.graylog2[:mongodb][:useauth] -%>
+<%= config_option 'mongodb_user', node.graylog2[:mongodb][:user] -%>
+<%= config_option 'mongodb_password', node.graylog2[:mongodb][:password] -%>
+<%= config_option 'mongodb_host', node.graylog2[:mongodb][:host] -%>
+<%= config_option 'mongodb_replica_set', node.graylog2[:mongodb][:replica_set] -%>
+<%= config_option 'mongodb_database', node.graylog2[:mongodb][:database] -%>
+<%= config_option 'mongodb_port', node.graylog2[:mongodb][:port] -%>
+<%= config_option 'mongodb_max_connections', node.graylog2[:mongodb][:max_connections] -%>
+<%= config_option 'mongodb_threads_allowed_to_block_multiplier', node.graylog2[:mongodb][:threads_allowed_to_block_multiplier] -%>
+
+# Drools Rule File (Use to rewrite incoming log messages)
+# See: http://support.torch.sh/help/kb/graylog2-server/custom-message-rewritingprocessing
+<%= config_option 'rules_file', node.graylog2[:rules_file] -%>
+
+# Email transport
+<%= config_option 'transport_email_enabled', node.graylog2[:transport_email_enabled] -%>
+<%= config_option 'transport_email_hostname', node.graylog2[:transport_email_hostname] -%>
+<%= config_option 'transport_email_port', node.graylog2[:transport_email_port] -%>
+<%= config_option 'transport_email_use_auth', node.graylog2[:transport_email_use_auth] -%>
+<%= config_option 'transport_email_use_tls', node.graylog2[:transport_email_use_tls] -%>
+<%= config_option 'transport_email_use_ssl', node.graylog2[:transport_email_use_ssl] -%>
+<%= config_option 'transport_email_auth_username', node.graylog2[:transport_email_auth_username] -%>
+<%= config_option 'transport_email_auth_password', node.graylog2[:transport_email_auth_password] -%>
+<%= config_option 'transport_email_subject_prefix', node.graylog2[:transport_email_subject_prefix] -%>
+<%= config_option 'transport_email_from_email', node.graylog2[:transport_email_from_email] -%>
+<%= config_option 'transport_email_web_interface_url', node.graylog2[:transport_email_web_interface_url] -%>
+
+# HTTP proxy for outgoing HTTP calls
+<%= config_option 'http_proxy_uri', node.graylog2[:http_proxy_uri] -%>
