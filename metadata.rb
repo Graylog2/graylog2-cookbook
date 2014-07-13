@@ -10,6 +10,7 @@ version          "0.1.0"
 depends 'ark', '>= 0.9.0'
 
 recommends 'java'
-recommends 'monit'
+recommends 'mongodb'
+recommends 'elasticsearch'
 
 provides 'torch-graylog2'
