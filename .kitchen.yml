@@ -1,0 +1,39 @@
+---
+driver:
+   name: vagrant
+
+provisioner:
+  name: chef_solo
+  require_chef_omnibus: latest
+
+provisioner:
+  data_path: test
+
+platforms:
+- name: ubuntu-14.04
+  run_list:
+  - recipe[apt]
+
+suites:
+  - name: default
+    attributes:
+      machine_fqdn: graylog2.local
+      machine_fqdn_as_hostname: true
+      graylog2:
+        password_secret: "2jueVqZpwLLjaWxV"
+        root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+        web:
+          secret: "2jueVqZpwLLjaWxV"
+      elasticsearch:
+        version: "0.90.10"
+        cluster:
+          name: "graylog2"
+    run_list:
+      - recipe[fqdn]
+      - recipe[apt]
+      - recipe[elasticsearch]
+      - recipe[mongodb]
+      - recipe[torch-graylog2]
+      - recipe[torch-graylog2::server]
+      - recipe[torch-graylog2::web]
+      - recipe[torch-graylog2::radio]
