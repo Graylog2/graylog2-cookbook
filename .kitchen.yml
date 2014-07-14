@@ -2,6 +2,10 @@
 driver:
    name: vagrant
 
+driver_config:
+  customize:
+    memory: 3072
+
 provisioner:
   name: chef_solo
   require_chef_omnibus: latest
@@ -10,6 +14,7 @@ provisioner:
   data_path: test
 
 platforms:
+- name: centos-6.5
 - name: ubuntu-14.04
   run_list:
   - recipe[apt]
@@ -35,5 +40,5 @@ suites:
       - recipe[mongodb]
       - recipe[torch-graylog2]
       - recipe[torch-graylog2::server]
-      - recipe[torch-graylog2::web]
-      - recipe[torch-graylog2::radio]
+#      - recipe[torch-graylog2::web]
+#      - recipe[torch-graylog2::radio]

@@ -3,10 +3,18 @@ package "graylog2-server" do
   version node.graylog2[:server][:version]
 end
 
+directory "/var/run/graylog2" do
+  action :create
+  owner node.graylog2[:user]
+  group node.graylog2[:group]
+end
+
 service "graylog2-server" do
   action :nothing
   supports :status => true, :restart => true
-  provider Chef::Provider::Service::Upstart
+  if platform?('ubuntu')
+    provider Chef::Provider::Service::Upstart
+  end
 end
 
 if node.graylog2[:ip_of_master] == node.ipaddress

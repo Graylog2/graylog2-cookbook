@@ -3,10 +3,18 @@ package "graylog2-radio" do
   version node.graylog2[:radio][:version]
 end
 
+directory "/var/run/graylog2-radio" do
+  action :create
+  owner 'graylog2-radio'
+  group node.graylog2[:group]
+end
+
 service "graylog2-radio" do
   action :nothing
   supports :status => true, :restart => true
-  provider Chef::Provider::Service::Upstart
+  if platform?('ubuntu')
+    provider Chef::Provider::Service::Upstart
+  end
 end
 
 template "/etc/graylog2-radio.conf" do

@@ -6,7 +6,9 @@ end
 service "graylog2-web" do
   action :nothing
   supports :status => true, :restart => true
-  provider Chef::Provider::Service::Upstart
+  if platform?('ubuntu')
+    provider Chef::Provider::Service::Upstart
+  end
 end
 
 template "/etc/graylog2/web/graylog2-web-interface.conf" do
