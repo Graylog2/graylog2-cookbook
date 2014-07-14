@@ -1,6 +1,9 @@
 package "graylog2-server" do
   action :install
   version node.graylog2[:server][:version]
+  if platform?('debian')
+    options "--force-yes"
+  end
 end
 
 directory "/var/run/graylog2" do

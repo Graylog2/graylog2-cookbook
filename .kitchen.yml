@@ -18,6 +18,7 @@ platforms:
 - name: ubuntu-14.04
   run_list:
   - recipe[apt]
+- name: debian-7.4
 
 suites:
   - name: default
@@ -40,5 +41,5 @@ suites:
       - recipe[mongodb]
       - recipe[torch-graylog2]
       - recipe[torch-graylog2::server]
-#      - recipe[torch-graylog2::web]
-#      - recipe[torch-graylog2::radio]
+      - recipe[torch-graylog2::web]
+      - recipe[torch-graylog2::radio]

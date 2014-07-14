@@ -1,6 +1,9 @@
 package "graylog2-radio" do
   action :install
   version node.graylog2[:radio][:version]
+  if platform?('debian')
+    options "--force-yes"
+  end
 end
 
 directory "/var/run/graylog2-radio" do

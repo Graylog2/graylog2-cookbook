@@ -5,6 +5,8 @@ if platform?('centos')
   repository_file = "graylog2-repository-centos6_latest.rpm"
 elsif platform?('ubuntu')
   repository_file = "graylog2-repository-ubuntu14.04_latest.deb"
+elsif platform?('debian')
+  repository_file = "graylog2-repository-debian7_latest.deb"
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{repository_file}" do
@@ -17,7 +19,7 @@ package repository_file do
   source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
   if platform?('centos')
     provider Chef::Provider::Package::Rpm
-  elsif platform?('ubuntu')
+  elsif platform?('ubuntu', 'debian')
     provider Chef::Provider::Package::Dpkg
     notifies :run, resources(:execute => "apt-get update"), :immediately
   end

@@ -1,6 +1,9 @@
 package "graylog2-web" do
   action :install
   version node.graylog2[:web][:version]
+  if platform?('debian')
+    options "--force-yes"
+  end
 end
 
 service "graylog2-web" do
