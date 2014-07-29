@@ -26,12 +26,16 @@ else
   is_master = false
 end
 
+default_rest_uri = "http://#{node['ipaddress']}:12900/"
+
 template "/etc/graylog2.conf" do
   source "graylog2.server.conf.erb"
   owner 'root'
   mode 0644
   variables({
-    :is_master => is_master
+    :is_master          => is_master,
+    :rest_listen_uri    => node.graylog2[:rest][:listen_uri] || default_rest_uri,
+    :rest_transport_uri => node.graylog2[:rest][:transport_uri] || default_rest_uri
   })
   notifies :restart, 'service[graylog2-server]'
 end

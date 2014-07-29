@@ -21,8 +21,8 @@ default.graylog2[:plugin_dir]   = '/usr/share/graylog2-server/plugin'
 default.graylog2[:http_proxy_uri] = nil
 
 # Rest
-default.graylog2[:rest][:listen_uri]    = "http://#{node['ipaddress']}:12900/"
-default.graylog2[:rest][:transport_uri] = "http://#{node['ipaddress']}:12900/"
+default.graylog2[:rest][:listen_uri]    = nil
+default.graylog2[:rest][:transport_uri] = nil
 default.graylog2[:rest][:enable_cors]   = nil
 default.graylog2[:rest][:enable_gzip]   = nil
 

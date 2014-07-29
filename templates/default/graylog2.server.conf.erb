@@ -11,8 +11,8 @@
 <%= config_option 'plugin_dir', node.graylog2[:plugin_dir] -%> 
 
 # REST interface
-<%= config_option 'rest_listen_uri', node.graylog2[:rest][:listen_uri] -%>
-<%= config_option 'rest_transport_uri', node.graylog2[:rest][:transport_uri] -%>
+<%= config_option 'rest_listen_uri', @rest_listen_uri -%>
+<%= config_option 'rest_transport_uri', @rest_transport_uri -%>
 <%= config_option 'rest_enable_cors', node.graylog2[:rest][:enable_cors] -%>
 <%= config_option 'rest_enable_gzip', node.graylog2[:rest][:enable_gzip] -%>
 
