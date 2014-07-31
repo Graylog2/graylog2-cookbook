@@ -1,8 +1,8 @@
 # General settings
 <%= config_option 'node_id_file',        node.graylog2[:radio][:node_id_file] -%>
 <%= config_option 'transport_type',      node.graylog2[:radio][:transport_type] -%>
-<%= config_option 'graylog2_server_uri', node.graylog2[:radio][:server_uri] -%>
-<%= config_option 'rest_listen_uri',     node.graylog2[:radio][:rest][:listen_uri] -%>
+<%= config_option 'graylog2_server_uri', @radio_server_uri -%>
+<%= config_option 'rest_listen_uri',     @radio_rest_listen_uri -%>
 <%= config_option 'rest_transport_uri',  node.graylog2[:radio][:rest][:transport_uri] -%>
 
 # AMQP

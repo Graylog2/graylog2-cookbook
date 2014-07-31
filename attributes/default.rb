@@ -110,7 +110,7 @@ default.graylog2[:server][:args]      = ''
 default.graylog2[:dead_letters_enabled] = false
 
 # Web
-default.graylog2[:web][:server_backends]  = "\"http://127.0.0.1:12900/\""
+default.graylog2[:web][:server_backends]  = nil
 default.graylog2[:web][:secret]           = ''
 default.graylog2[:web][:timezone]         = "Europe/Berlin"
 default.graylog2[:web][:field_list_limit] = 100
@@ -124,8 +124,8 @@ default.graylog2[:web][:log_level]        = "INFO"
 # Radio
 default.graylog2[:radio][:node_id_file]              = "/etc/graylog2/radio/node-id"
 default.graylog2[:radio][:transport_type]            = "amqp"
-default.graylog2[:radio][:server_uri]                = "http://127.0.0.1:12900/"
-default.graylog2[:radio][:rest][:listen_uri]         = "http://127.0.0.1:12950/"
+default.graylog2[:radio][:server_uri]                = nil
+default.graylog2[:radio][:rest][:listen_uri]         = nil
 default.graylog2[:radio][:rest][:transport_uri]      = nil
 default.graylog2[:radio][:amqp][:broker_hostname]    = "localhost"
 default.graylog2[:radio][:amqp][:broker_port]        = 5672

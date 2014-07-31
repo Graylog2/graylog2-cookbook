@@ -14,10 +14,15 @@ service "graylog2-web" do
   end
 end
 
+default_backend_uri = "http://#{node['ipaddress']}:12900/"
+
 template "/etc/graylog2/web/graylog2-web-interface.conf" do
   source "graylog2.web.conf.erb"
   owner 'root'
   mode 0644
+  variables({
+    :web_server_backends => node.graylog2[:web][:server_backends] || default_backend_uri
+  })
   notifies :restart, 'service[graylog2-web]'
 end
 

@@ -20,10 +20,18 @@ service "graylog2-radio" do
   end
 end
 
+default_server_uri = "http://#{node['ipaddress']}:12900/"
+default_rest_listen_uri = "http://#{node['ipaddress']}:12950/"
+
 template "/etc/graylog2-radio.conf" do
   source "graylog2.radio.conf.erb"
   owner 'root'
   mode 0644
+  variables({
+    :radio_server_uri => node.graylog2[:radio][:server_uri] || default_server_uri,
+    :radio_rest_listen_uri => node.graylog2[:radio][:rest][:listen_uri] || default_rest_listen_uri
+  })
+
   notifies :restart, 'service[graylog2-radio]'
 end
 
