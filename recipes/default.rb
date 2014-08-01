@@ -1,12 +1,14 @@
 # load template extensions, look under libraries/ for more informations
 Erubis::Context.send(:include, Extensions::Templates)
 
+version = node.graylog2[:major_version]
+
 if platform?('centos')
-  repository_file = "graylog2-repository-centos6_latest.rpm"
+  repository_file = "graylog2-#{version}-repository-centos6_latest.rpm"
 elsif platform?('ubuntu')
-  repository_file = "graylog2-repository-ubuntu14.04_latest.deb"
+  repository_file = "graylog2-#{version}-repository-ubuntu14.04_latest.deb"
 elsif platform?('debian')
-  repository_file = "graylog2-repository-debian7_latest.deb"
+  repository_file = "graylog2-#{version}-repository-debian7_latest.deb"
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{repository_file}" do

@@ -2,6 +2,7 @@ node.default[:graylog2] ||= {}
 node.default[:mongodb]  ||= {}
 
 # General
+default.graylog2[:major_version]    = '0.20'
 default.graylog2[:server][:version] = '0.20.6-1'
 default.graylog2[:web][:version]    = '0.20.6-1'
 default.graylog2[:radio][:version]  = '0.20.6-1'
