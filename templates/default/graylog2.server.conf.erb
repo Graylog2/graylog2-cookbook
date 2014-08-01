@@ -92,3 +92,8 @@ elasticsearch_http_enabled = false
 
 # HTTP proxy for outgoing HTTP calls
 <%= config_option 'http_proxy_uri', node.graylog2[:http_proxy_uri] -%>
+
+# Message cache options
+<%= config_option 'message_cache_off_heap', node.graylog2[:message_cache_off_heap] -%>
+<%= config_option 'message_cache_spool_dir', node.graylog2[:message_cache_spool_dir] -%>
+<%= config_option 'message_cache_commit_interval', node.graylog2[:message_cache_commit_interval] -%>

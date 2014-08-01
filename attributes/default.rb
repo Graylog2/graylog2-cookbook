@@ -21,6 +21,11 @@ default.graylog2[:plugin_dir]   = '/usr/share/graylog2-server/plugin'
 # Network
 default.graylog2[:http_proxy_uri] = nil
 
+# Message cache
+default.graylog2[:message_cache_off_heap] = true
+default.graylog2[:message_cache_spool_dir] = '/var/lib/graylog2-server/message-cache-spool'
+default.graylog2[:message_cache_commit_interval] = 1000
+
 # Rest
 default.graylog2[:rest][:listen_uri]    = nil
 default.graylog2[:rest][:transport_uri] = nil
