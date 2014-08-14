@@ -31,6 +31,7 @@ default.graylog2[:rest][:listen_uri]    = nil
 default.graylog2[:rest][:transport_uri] = nil
 default.graylog2[:rest][:enable_cors]   = nil
 default.graylog2[:rest][:enable_gzip]   = nil
+default.graylog2[:rest][:admin_access_token] = "belh3j5vmanhnvjtl3o56lo8e1v2hurf5tkh3tm3vvq59cbk2uf"
 
 # Elasticsearch
 default.graylog2[:elasticsearch][:config_file]           = '/etc/graylog2-elasticsearch.yml'
@@ -64,7 +65,6 @@ default.graylog2[:mongodb][:database]        = 'graylog2'
 default.graylog2[:mongodb][:port]            = 27017
 default.graylog2[:mongodb][:max_connections] = 100
 default.graylog2[:mongodb][:threads_allowed_to_block_multiplier] = 5
-default.graylog2[:mongodb][:access_token]    = "belh3j5vmanhnvjtl3o56lo8e1v2hurf5tkh3tm3vvq59cbk2uf"
 
 # Search
 default.graylog2[:allow_leading_wildcard_searches] = false

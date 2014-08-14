@@ -14,7 +14,7 @@ action :create do
     coll.insert({
             "username"=> "admin",
             "NAME"    => "chef",
-            "token"   => node[:graylog2][:mongodb][:access_token]
+            "token"   => node[:graylog2][:rest][:admin_access_token]
         })
   else
     Chef::Log.debug("Graylog2 access_token for #{new_resource} is already set - nothing to do")
