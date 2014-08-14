@@ -10,7 +10,7 @@ action :create do
   if new_resource.input
     response = connection.post('/system/inputs', resource_input, { :'Content-Type' => 'application/json' })
     Chef::Log.debug("Graylog2 API response: #{response.status}")
-  else
+  elsif not node[:graylog2][:inputs].nil?
     node[:graylog2][:inputs].each do |input|
       response = connection.post('/system/inputs', input, { :'Content-Type' => 'application/json' })
       Chef::Log.debug("Graylog2 API response: #{response.status}")
