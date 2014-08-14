@@ -2,7 +2,8 @@ require 'faraday'
 
 action :create do
   resource_input new_resource.input if new_resource.input
-  connection = Faraday.new(url: node[:graylog2][:rest][:listen_uri]) do |faraday|
+  rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
+  connection = Faraday.new(url: rest_uri) do |faraday|
     faraday.basic_auth(node[:graylog2][:rest][:admin_access_token], 'token')
     faraday.adapter(Faraday.default_adapter)
   end
