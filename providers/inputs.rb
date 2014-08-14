@@ -1,7 +1,7 @@
-require 'json'
-require 'faraday'
-
 action :create do
+  require 'json'
+  require 'faraday'
+
   resource_input new_resource.input if new_resource.input
   rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
   connection = Faraday.new(url: rest_uri) do |faraday|

@@ -1,8 +1,7 @@
-require 'mongo'
-
-include Mongo
-
 action :create do
+  require 'mongo'
+  include Mongo
+
   client = MongoClient.new(node[:graylog2][:mongodb][:host], node[:graylog2][:mongodb][:port])
   db     = client[node[:graylog2][:mongodb][:database]]
   if node[:graylog2][:mongodb][:useauth]
