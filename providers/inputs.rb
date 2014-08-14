@@ -20,7 +20,7 @@ action :create do
       parsed_input = JSON.parse(input)
 
       response = ""
-      tries    = 10
+      tries    = 30
       begin
         response = connection.get('/system/inputs')
       rescue
