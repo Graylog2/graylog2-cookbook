@@ -33,6 +33,9 @@ default.graylog2[:rest][:enable_cors]   = nil
 default.graylog2[:rest][:enable_gzip]   = nil
 default.graylog2[:rest][:admin_access_token] = "belh3j5vmanhnvjtl3o56lo8e1v2hurf5tkh3tm3vvq59cbk2uf"
 
+# Inputs
+default.graylog2[:inputs] = nil
+
 # Elasticsearch
 default.graylog2[:elasticsearch][:config_file]           = '/etc/graylog2-elasticsearch.yml'
 default.graylog2[:elasticsearch][:max_docs_per_index]    = 20000000
