@@ -18,8 +18,20 @@ action :create do
   if not inputs.nil?
     inputs.each do |input|
       parsed_input = JSON.parse(input)
-    
-      response = connection.get('/system/inputs')
+
+      response = ""
+      tries    = 10
+      begin
+        response = connection.get('/system/inputs')
+      rescue
+        sleep 1
+        unless (tries -= 1).zero?
+          retry
+        else
+          Chef::Application.fatal!("Can not access Graylog2 API")
+        end
+      end
+
       if !response.body.nil?
         parsed_response = JSON.parse(response.body)
         saved_inputs = parsed_response.fetch("inputs")
