@@ -16,6 +16,12 @@ remote_file "#{Chef::Config[:file_cache_path]}/#{repository_file}" do
   source "http://packages.graylog2.org/repo/packages/#{repository_file}"
 end
 
+execute 'apt-update' do
+  command 'apt-get update'
+  ignore_failure true
+  action :nothing
+end
+
 package repository_file do
   action :install
   source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
@@ -23,6 +29,6 @@ package repository_file do
     provider Chef::Provider::Package::Rpm
   elsif platform?('ubuntu', 'debian')
     provider Chef::Provider::Package::Dpkg
-    notifies :run, resources(:execute => "apt-get-update"), :immediately
+    notifies :run, resources(:execute => "apt-update"), :immediately
   end
 end
