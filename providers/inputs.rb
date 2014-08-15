@@ -1,12 +1,14 @@
 action :create do
   require 'json'
   require 'faraday'
+  require 'faraday/conductivity'
 
   resource_input new_resource.input if new_resource.input
   rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
   connection = Faraday.new(url: rest_uri) do |faraday|
     faraday.basic_auth(node[:graylog2][:rest][:admin_access_token], 'token')
     faraday.adapter(Faraday.default_adapter)
+    faraday.use :repeater, retries: 5, mode: :one
   end
  
   if new_resource.input
@@ -18,21 +20,9 @@ action :create do
   if not inputs.nil?
     inputs.each do |input|
       parsed_input = JSON.parse(input)
+      response = connection.get('/system/inputs')
 
-      response = ""
-      tries    = 30
-      begin
-        response = connection.get('/system/inputs')
-      rescue
-        sleep 1
-        unless (tries -= 1).zero?
-          retry
-        else
-          Chef::Application.fatal!("Can not access Graylog2 API")
-        end
-      end
-
-      if !response.body.nil?
+      if response.success?
         parsed_response = JSON.parse(response.body)
         saved_inputs = parsed_response.fetch("inputs")
         if existent_input?(saved_inputs, parsed_input)
