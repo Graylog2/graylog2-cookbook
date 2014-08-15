@@ -37,26 +37,26 @@ template "/etc/graylog2.conf" do
     :rest_listen_uri    => node.graylog2[:rest][:listen_uri] || default_rest_uri,
     :rest_transport_uri => node.graylog2[:rest][:transport_uri] || default_rest_uri
   })
-  notifies :restart, 'service[graylog2-server]'
+  notifies :restart, 'service[graylog2-server]', node.graylog2[:restart].to_sym
 end
 
 template "/etc/default/graylog2-server" do
   source "graylog2.server.default.erb"
   owner 'root'
   mode 0644
-  notifies :restart, 'service[graylog2-server]'
+  notifies :restart, 'service[graylog2-server]', node.graylog2[:restart].to_sym
 end
 
 template "/etc/graylog2/server/log4j.xml" do
   source "graylog2.server.log4j.xml.erb"
   owner 'root'
   mode 0644
-  notifies :restart, 'service[graylog2-server]'
+  notifies :restart, 'service[graylog2-server]', node.graylog2[:restart].to_sym
 end
 
 template "/etc/graylog2-elasticsearch.yml" do
   source "graylog2.server.elasticsearch.yml.erb"
   owner 'root'
   mode 0644
-  notifies :restart, 'service[graylog2-server]'
+  notifies :restart, 'service[graylog2-server]', node.graylog2[:restart].to_sym
 end

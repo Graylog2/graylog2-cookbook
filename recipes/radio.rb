@@ -32,12 +32,12 @@ template "/etc/graylog2-radio.conf" do
     :radio_rest_listen_uri => node.graylog2[:radio][:rest][:listen_uri] || default_rest_listen_uri
   })
 
-  notifies :restart, 'service[graylog2-radio]'
+  notifies :restart, 'service[graylog2-radio]', node.graylog2[:restart].to_sym
 end
 
 template "/etc/graylog2/radio/log4j.xml" do
   source "graylog2.radio.log4j.xml.erb"
   owner 'root'
   mode 0644
-  notifies :restart, 'service[graylog2-radio]'
+  notifies :restart, 'service[graylog2-radio]', node.graylog2[:restart].to_sym
 end

@@ -23,19 +23,19 @@ template "/etc/graylog2/web/graylog2-web-interface.conf" do
   variables({
     :web_server_backends => node.graylog2[:web][:server_backends] || default_backend_uri
   })
-  notifies :restart, 'service[graylog2-web]'
+  notifies :restart, 'service[graylog2-web]', node.graylog2[:restart].to_sym
 end
 
 template "/etc/default/graylog2-web" do
   source "graylog2.web.default.erb"
   owner 'root'
   mode 0644
-  notifies :restart, 'service[graylog2-web]'
+  notifies :restart, 'service[graylog2-web]', node.graylog2[:restart].to_sym
 end
 
 template "/etc/graylog2/web/logback.xml" do
   source "graylog2.web.logback.xml.erb"
   owner 'root'
   mode 0644
-  notifies :restart, 'service[graylog2-web]'
+  notifies :restart, 'service[graylog2-web]', node.graylog2[:restart].to_sym
 end

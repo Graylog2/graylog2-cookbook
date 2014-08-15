@@ -9,7 +9,7 @@ default.graylog2[:radio][:version]  = '0.20.6-1'
 default.graylog2[:user]             = 'graylog2'
 default.graylog2[:group]            = 'graylog2'
 default.graylog2[:root_username]    = 'admin'
-
+default.graylog2[:restart]          = "delayed"
 # SHAs
 default.graylog2[:password_secret]    = nil
 default.graylog2[:root_password_sha2] = nil
