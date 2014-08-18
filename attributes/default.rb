@@ -11,8 +11,8 @@ default.graylog2[:group]            = 'graylog2'
 default.graylog2[:root_username]    = 'admin'
 default.graylog2[:restart]          = "delayed"
 # SHAs
-default.graylog2[:password_secret]    = nil
-default.graylog2[:root_password_sha2] = nil
+default.graylog2[:password_secret]    = nil # pwgen -s 96
+default.graylog2[:root_password_sha2] = nil # echo -n yourpassword | shasum -a 256
 
 # Paths
 default.graylog2[:node_id_file] = '/etc/graylog2/server/node-id'
@@ -31,7 +31,7 @@ default.graylog2[:rest][:listen_uri]    = nil
 default.graylog2[:rest][:transport_uri] = nil
 default.graylog2[:rest][:enable_cors]   = nil
 default.graylog2[:rest][:enable_gzip]   = nil
-default.graylog2[:rest][:admin_access_token] = "belh3j5vmanhnvjtl3o56lo8e1v2hurf5tkh3tm3vvq59cbk2uf"
+default.graylog2[:rest][:admin_access_token] = nil # pwgen -s 96
 
 # Inputs
 default.graylog2[:inputs] = nil
@@ -113,7 +113,7 @@ default.graylog2[:server][:log_level_ldap]        = "error"
 default.graylog2[:server][:log_level_root]        = "warn" 
 
 # JVM
-default.graylog2[:server][:java_opts] = ''
+default.graylog2[:server][:java_opts] = '-Djava.net.preferIPv4Stack=true'
 default.graylog2[:server][:args]      = ''
 
 # Experimental
