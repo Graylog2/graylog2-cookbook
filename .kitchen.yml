@@ -14,11 +14,15 @@ provisioner:
   data_path: test
 
 platforms:
-- name: centos-6.5
+- name: centos-7.0
 - name: ubuntu-14.04
   run_list:
   - recipe[apt]
-- name: debian-7.4
+  - recipe[authbind]
+- name: debian-7.6
+  run_list:
+  - recipe[apt]
+  - recipe[authbind]
 
 suites:
   - name: default
@@ -30,16 +34,17 @@ suites:
         root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
         web:
           secret: "2jueVqZpwLLjaWxV"
+        restart: "immediately"
       elasticsearch:
         version: "0.90.10"
         cluster:
           name: "graylog2"
     run_list:
       - recipe[fqdn]
-      - recipe[apt]
       - recipe[elasticsearch]
       - recipe[mongodb]
       - recipe[torch-graylog2]
       - recipe[torch-graylog2::server]
       - recipe[torch-graylog2::web]
       - recipe[torch-graylog2::radio]
+      - recipe[torch-graylog2::authbind]

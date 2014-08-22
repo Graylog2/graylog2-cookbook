@@ -1,5 +1,7 @@
 DEPENDENCIES
-  apt (~> 2.4)
+  apt
+  authbind
+    path: ../../github/chef-authbind
   elasticsearch
   fqdn
   mongodb
@@ -10,12 +12,13 @@ DEPENDENCIES
 GRAPH
   7-zip (1.0.2)
     windows (>= 1.2.2)
-  apt (2.4.0)
+  apt (2.5.2)
   ark (0.9.0)
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
-  build-essential (2.0.4)
-  chef-sugar (2.0.0)
+  authbind (0.1.9)
+  build-essential (2.0.6)
+  chef-sugar (2.2.0)
   chef_handler (1.1.6)
   elasticsearch (0.3.10)
     ark (>= 0.2.4)
@@ -28,7 +31,7 @@ GRAPH
     line (>= 0.0.0)
     now (>= 0.0.0)
   hostsfile (2.4.5)
-  java (1.22.0)
+  java (1.26.0)
   line (0.5.1)
   mongodb (0.16.1)
     apt (>= 1.8.2)
@@ -46,14 +49,15 @@ GRAPH
     yum-epel (>= 0.0.0)
   torch-graylog2 (0.1.0)
     ark (>= 0.9.0)
+    authbind (>= 0.1.8)
     elasticsearch (>= 0.0.0)
     java (>= 0.0.0)
     mongodb (>= 0.0.0)
-  windows (1.31.0)
+  windows (1.34.2)
     chef_handler (>= 0.0.0)
   xml (1.2.6)
     build-essential (>= 0.0.0)
     chef-sugar (>= 0.0.0)
-  yum (3.2.2)
-  yum-epel (0.3.6)
+  yum (3.2.4)
+  yum-epel (0.4.0)
     yum (~> 3.0)

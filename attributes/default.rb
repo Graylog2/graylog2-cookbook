@@ -3,13 +3,14 @@ node.default[:mongodb]  ||= {}
 
 # General
 default.graylog2[:major_version]    = '0.20'
-default.graylog2[:server][:version] = '0.20.6-1'
-default.graylog2[:web][:version]    = '0.20.6-1'
-default.graylog2[:radio][:version]  = '0.20.6-1'
+default.graylog2[:server][:version] = '0.20.6-3'
+default.graylog2[:web][:version]    = '0.20.6-3'
+default.graylog2[:radio][:version]  = '0.20.6-3'
 default.graylog2[:user]             = 'graylog2'
 default.graylog2[:group]            = 'graylog2'
 default.graylog2[:root_username]    = 'admin'
-default.graylog2[:restart]          = "delayed"
+default.graylog2[:restart]          = 'delayed'
+
 # SHAs
 default.graylog2[:password_secret]    = nil # pwgen -s 96
 default.graylog2[:root_password_sha2] = nil # echo -n yourpassword | shasum -a 256
@@ -19,7 +20,8 @@ default.graylog2[:node_id_file] = '/etc/graylog2/server/node-id'
 default.graylog2[:plugin_dir]   = '/usr/share/graylog2-server/plugin'
 
 # Network
-default.graylog2[:http_proxy_uri] = nil
+default.graylog2[:http_proxy_uri]   = nil
+default.graylog2[:authorized_ports] = 514
 
 # Message cache
 default.graylog2[:message_cache_off_heap] = true
@@ -104,13 +106,13 @@ default.graylog2[:transport_email_from_email]        = 'graylog2@example.com'
 default.graylog2[:transport_email_web_interface_url] = nil
 
 # Logging
-default.graylog2[:server][:log_file]      = "/var/log/graylog2-server/server.log"
-default.graylog2[:server][:log_max_size]  = "10MB"
+default.graylog2[:server][:log_file]      = '/var/log/graylog2-server/server.log'
+default.graylog2[:server][:log_max_size]  = '10MB'
 default.graylog2[:server][:log_max_index] = 10
 default.graylog2[:server][:log_pattern]   = "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p [%c{1}] %m%n"
-default.graylog2[:server][:log_level_application] = "warn"
-default.graylog2[:server][:log_level_ldap]        = "error"
-default.graylog2[:server][:log_level_root]        = "warn" 
+default.graylog2[:server][:log_level_application] = 'warn'
+default.graylog2[:server][:log_level_ldap]        = 'error'
+default.graylog2[:server][:log_level_root]        = 'warn'
 
 # JVM
 default.graylog2[:server][:java_opts] = '-Djava.net.preferIPv4Stack=true'
@@ -122,22 +124,22 @@ default.graylog2[:dead_letters_enabled] = false
 # Web
 default.graylog2[:web][:server_backends]  = nil
 default.graylog2[:web][:secret]           = ''
-default.graylog2[:web][:timezone]         = "Europe/Berlin"
+default.graylog2[:web][:timezone]         = 'Europe/Berlin'
 default.graylog2[:web][:field_list_limit] = 100
 default.graylog2[:web][:context]          = nil
-default.graylog2[:web][:log_file]         = "/var/log/graylog2-web/application.log"
-default.graylog2[:web][:log_file_pattern] = "/var/log/graylog2-web/application.%d{yyyy-MM-dd}.log"
+default.graylog2[:web][:log_file]         = '/var/log/graylog2-web/application.log'
+default.graylog2[:web][:log_file_pattern] = '/var/log/graylog2-web/application.%d{yyyy-MM-dd}.log'
 default.graylog2[:web][:history]          = 30
 default.graylog2[:web][:log_pattern]      = "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} - [%level] - from %logger in %thread %n%message%n%xException%n"
-default.graylog2[:web][:log_level]        = "INFO"
+default.graylog2[:web][:log_level]        = 'INFO'
 
 # Radio
-default.graylog2[:radio][:node_id_file]              = "/etc/graylog2/radio/node-id"
-default.graylog2[:radio][:transport_type]            = "amqp"
+default.graylog2[:radio][:node_id_file]              = '/etc/graylog2/radio/node-id'
+default.graylog2[:radio][:transport_type]            = 'amqp'
 default.graylog2[:radio][:server_uri]                = nil
 default.graylog2[:radio][:rest][:listen_uri]         = nil
 default.graylog2[:radio][:rest][:transport_uri]      = nil
-default.graylog2[:radio][:amqp][:broker_hostname]    = "localhost"
+default.graylog2[:radio][:amqp][:broker_hostname]    = 'localhost'
 default.graylog2[:radio][:amqp][:broker_port]        = 5672
 default.graylog2[:radio][:amqp][:broker_vhost]       = nil
 default.graylog2[:radio][:amqp][:broker_username]    = nil
@@ -148,12 +150,12 @@ default.graylog2[:radio][:kafka][:batch_size]        = nil
 default.graylog2[:radio][:kafka][:batch_max_wait_ms] = nil
 default.graylog2[:radio][:kafka][:required_acks]     = nil
 default.graylog2[:radio][:processbuffer_processors]  = 5
-default.graylog2[:radio][:processor_wait_strategy]   = "blocking"
+default.graylog2[:radio][:processor_wait_strategy]   = 'blocking'
 default.graylog2[:radio][:processor_wait_strategy]   = 1024
-default.graylog2[:radio][:log_file]                  = "/var/log/graylog2-radio/radio.log"
-default.graylog2[:radio][:log_max_size]              = "10MB"
+default.graylog2[:radio][:log_file]                  = '/var/log/graylog2-radio/radio.log'
+default.graylog2[:radio][:log_max_size]              = '10MB'
 default.graylog2[:radio][:log_max_index]             = 10
 default.graylog2[:radio][:log_pattern]               = "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p [%c{1}] %m%n"
-default.graylog2[:radio][:log_level_application]     = "warn"
-default.graylog2[:radio][:log_level_ldap]            = "error"
-default.graylog2[:radio][:log_level_root]            = "warn"
+default.graylog2[:radio][:log_level_application]     = 'warn'
+default.graylog2[:radio][:log_level_ldap]            = 'error'
+default.graylog2[:radio][:log_level_root]            = 'warn'
