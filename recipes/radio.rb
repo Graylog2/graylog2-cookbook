@@ -35,6 +35,21 @@ template "/etc/graylog2-radio.conf" do
   notifies :restart, 'service[graylog2-radio]', node.graylog2[:restart].to_sym
 end
 
+if platform?("ubuntu", "debian")
+  args_file = "/etc/default/graylog2-radio"
+elsif platform?("redhat", "centos", "fedora")
+  args_file = "/etc/sysconfig/graylog2-radio"
+else
+  Chef::Log.error "Platform not supported."
+end
+
+template args_file do
+  source "graylog2.radio.default.erb"
+  owner 'root'
+  mode 0644
+  notifies :restart, 'service[graylog2-radio]', node.graylog2[:restart].to_sym
+end
+
 template "/etc/graylog2/radio/log4j.xml" do
   source "graylog2.radio.log4j.xml.erb"
   owner 'root'

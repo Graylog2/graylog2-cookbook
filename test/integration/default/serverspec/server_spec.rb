@@ -10,7 +10,13 @@ describe file('/etc/graylog2.conf') do
   its(:content) { should match /# Cluster settings/ }
 end
 
-describe file('/etc/default/graylog2-server') do
+case os[:family]
+when "Ubuntu", "Debian"
+  server_args = file('/etc/default/graylog2-server')
+else
+  server_args = file('/etc/sysconfig/graylog2-server')
+end
+describe server_args do
   it { should be_file }
   its(:content) { should match /GRAYLOG2_SERVER_ARGS/ }
 end

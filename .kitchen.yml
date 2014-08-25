@@ -14,7 +14,10 @@ provisioner:
   data_path: test
 
 platforms:
-- name: centos-7.0
+- name: centos-6.5
+  attributes:
+    mongodb:
+      reload_action: "reload"
 - name: ubuntu-14.04
   run_list:
   - recipe[apt]
@@ -41,8 +44,8 @@ suites:
           name: "graylog2"
     run_list:
       - recipe[fqdn]
-      - recipe[elasticsearch]
       - recipe[mongodb]
+      - recipe[elasticsearch]
       - recipe[torch-graylog2]
       - recipe[torch-graylog2::server]
       - recipe[torch-graylog2::web]

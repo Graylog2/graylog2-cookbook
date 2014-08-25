@@ -48,7 +48,6 @@ GRAPH
     yum (~> 3.0)
     yum-epel (>= 0.0.0)
   torch-graylog2 (0.1.0)
-    ark (>= 0.9.0)
     authbind (>= 0.1.8)
     elasticsearch (>= 0.0.0)
     java (>= 0.0.0)

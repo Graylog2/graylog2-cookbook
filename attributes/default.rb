@@ -3,9 +3,9 @@ node.default[:mongodb]  ||= {}
 
 # General
 default.graylog2[:major_version]    = '0.20'
-default.graylog2[:server][:version] = '0.20.6-3'
-default.graylog2[:web][:version]    = '0.20.6-3'
-default.graylog2[:radio][:version]  = '0.20.6-3'
+default.graylog2[:server][:version] = '0.20.6-4'
+default.graylog2[:web][:version]    = '0.20.6-4'
+default.graylog2[:radio][:version]  = '0.20.6-4'
 default.graylog2[:user]             = 'graylog2'
 default.graylog2[:group]            = 'graylog2'
 default.graylog2[:root_username]    = 'admin'
@@ -117,11 +117,19 @@ default.graylog2[:server][:log_level_root]        = 'warn'
 # JVM
 default.graylog2[:server][:java_opts] = '-Djava.net.preferIPv4Stack=true'
 default.graylog2[:server][:args]      = ''
+default.graylog2[:server][:wrapper]   = ''
+default.graylog2[:radio][:java_opts]  = '-Djava.net.preferIPv4Stack=true'
+default.graylog2[:radio][:args]       = ''
+default.graylog2[:radio][:wrapper]    = ''
+default.graylog2[:web][:java_opts]    = '-Djava.net.preferIPv4Stack=true'
+default.graylog2[:web][:args]         = ''
 
 # Experimental
 default.graylog2[:dead_letters_enabled] = false
 
 # Web
+default.graylog2[:web][:listen_address]   = '0.0.0.0'
+default.graylog2[:web][:listen_port]      = 9000
 default.graylog2[:web][:server_backends]  = nil
 default.graylog2[:web][:secret]           = ''
 default.graylog2[:web][:timezone]         = 'Europe/Berlin'

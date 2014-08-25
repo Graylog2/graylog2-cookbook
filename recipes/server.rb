@@ -40,7 +40,15 @@ template "/etc/graylog2.conf" do
   notifies :restart, 'service[graylog2-server]', node.graylog2[:restart].to_sym
 end
 
-template "/etc/default/graylog2-server" do
+if platform?("ubuntu", "debian")
+  args_file = "/etc/default/graylog2-server"
+elsif platform?("redhat", "centos", "fedora")
+  args_file = "/etc/sysconfig/graylog2-server"
+else
+  Chef::Log.error "Platform not supported."
+end
+
+template args_file do
   source "graylog2.server.default.erb"
   owner 'root'
   mode 0644
