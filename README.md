@@ -74,7 +74,7 @@ You can take a look into the attributes file under `attributes/default.rb` to ge
 what can be configured for Graylog2.
 
 ### Authbind
-Ubuntu/Debian systems allows a user to bind proccess to a certain privileged port below 1024.
+Ubuntu/Debian systems allow a user to bind a proccess to a certain privileged port below 1024.
 This is called authbind and is supported by this cookbook. So it is possible to let Graylog2 listen on port 514 and act like a normal syslog server. To enable this feature just include
 the authbind recipe to your run list `recipe[torch-graylog2::authbind]`. By default the recipe
 will give the Graylog2 user permission to bind to port 514 if you need more than that you can
