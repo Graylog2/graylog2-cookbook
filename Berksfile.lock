@@ -1,7 +1,8 @@
 DEPENDENCIES
   apt
   authbind
-    path: ../../github/chef-authbind
+    git: https://github.com/realityforge/chef-authbind.git
+    revision: a390eda31ff4a572f21efdcb39659f9037244291
   elasticsearch
   fqdn
   mongodb
@@ -12,7 +13,7 @@ DEPENDENCIES
 GRAPH
   7-zip (1.0.2)
     windows (>= 1.2.2)
-  apt (2.5.2)
+  apt (2.5.3)
   ark (0.9.0)
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
@@ -31,7 +32,7 @@ GRAPH
     line (>= 0.0.0)
     now (>= 0.0.0)
   hostsfile (2.4.5)
-  java (1.26.0)
+  java (1.27.0)
   line (0.5.1)
   mongodb (0.16.1)
     apt (>= 1.8.2)
