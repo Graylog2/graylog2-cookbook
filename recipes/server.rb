@@ -26,6 +26,10 @@ else
   is_master = false
 end
 
+if node.graylog2[:major_version] == '0.20'
+  node.override.graylog2[:output_module_timeout] = nil
+end
+
 default_rest_uri = "http://#{node['ipaddress']}:12900/"
 
 template "/etc/graylog2.conf" do

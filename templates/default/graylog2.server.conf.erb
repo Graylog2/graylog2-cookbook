@@ -48,6 +48,7 @@ elasticsearch_http_enabled = false
 <%= config_option 'processbuffer_processors', node.graylog2[:processbuffer_processors] -%>
 <%= config_option 'outputbuffer_processors', node.graylog2[:outputbuffer_processors] -%>
 <%= config_option 'processor_wait_strategy', node.graylog2[:processor_wait_strategy] -%>
+<%= config_option 'output_module_timeout', node.graylog2[:output_module_timeout] -%>
 
 # Ring buffers
 <%= config_option 'ring_size', node.graylog2[:ring_size] -%>

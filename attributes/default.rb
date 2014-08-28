@@ -12,7 +12,7 @@ default.graylog2[:root_username]    = 'admin'
 default.graylog2[:restart]          = 'delayed'
 
 # SHAs
-default.graylog2[:password_secret]    = nil # pwgen -s 96
+default.graylog2[:password_secret]    = nil # pwgen -s 96 1
 default.graylog2[:root_password_sha2] = nil # echo -n yourpassword | shasum -a 256
 
 # Paths
@@ -33,7 +33,7 @@ default.graylog2[:rest][:listen_uri]    = nil
 default.graylog2[:rest][:transport_uri] = nil
 default.graylog2[:rest][:enable_cors]   = nil
 default.graylog2[:rest][:enable_gzip]   = nil
-default.graylog2[:rest][:admin_access_token] = nil # pwgen -s 96
+default.graylog2[:rest][:admin_access_token] = nil # pwgen -s 96 1
 
 # Inputs
 default.graylog2[:inputs] = nil
@@ -87,6 +87,7 @@ default.graylog2[:processbuffer_processors] = 5
 default.graylog2[:outputbuffer_processors]  = 3
 default.graylog2[:processor_wait_strategy]  = 'blocking'
 default.graylog2[:ring_size]                = 1024
+default.graylog2[:output_module_timeout]    = 10000
 
 # Cluster
 default.graylog2[:ip_of_master] = node.ipaddress
