@@ -28,9 +28,9 @@ MongoDB and Elasticsearch, a run list might look like this:
 run_list "recipe[java]",
          "recipe[elasticsearch]",
          "recipe[mongodb]",
-         "recipe[torch-graylog2]",
-         "recipe[torch-graylog2::server]",
-         "recipe[torch-graylog2::web]"
+         "recipe[graylog2]",
+         "recipe[graylog2::server]",
+         "recipe[graylog2::web]"
 ```
 
 ### Attributes
@@ -76,7 +76,7 @@ what can be configured for Graylog2.
 ### Authbind
 Ubuntu/Debian systems allow a user to bind a proccess to a certain privileged port below 1024.
 This is called authbind and is supported by this cookbook. So it is possible to let Graylog2 listen on port 514 and act like a normal syslog server. To enable this feature just include
-the authbind recipe to your run list `recipe[torch-graylog2::authbind]`. By default the recipe
+the authbind recipe to your run list `recipe[graylog2::authbind]`. By default the recipe
 will give the Graylog2 user permission to bind to port 514 if you need more than that you can
 set the attribute `default.graylog2[:authorized_ports]` to an array of allowed ports.
 
@@ -85,10 +85,10 @@ In order to access the API of Graylog2 we provide a LWRP to do so. At the moment
 the creation of inputs but the LWRP is easy to extend. You can use the provider in your own
 recipe like this:
 
-Include `recipe[torch-graylog2::api_access]` to your run list.
+Include `recipe[graylog2::api_access]` to your run list.
 
 ```
-torch_graylog2_inputs "syslog udp" do
+graylog2_inputs "syslog udp" do
 input '{ "title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "creator_user_id":"admin", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 } }'
 end
 ```

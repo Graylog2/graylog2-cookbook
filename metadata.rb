@@ -1,4 +1,4 @@
-name             "torch-graylog2"
+name             "graylog2"
 
 maintainer       "Torch GmbH"
 maintainer_email "marius@torch.sh"
@@ -17,4 +17,4 @@ supports 'ubuntu'
 supports 'debian'
 supports 'centos'
 
-provides 'torch-graylog2'
+provides 'graylog2'
