@@ -27,6 +27,7 @@ default.graylog2[:authorized_ports] = 514
 default.graylog2[:message_cache_off_heap] = true
 default.graylog2[:message_cache_spool_dir] = '/var/lib/graylog2-server/message-cache-spool'
 default.graylog2[:message_cache_commit_interval] = 1000
+default.graylog2[:input_cache_max_size] = 0
 
 # Rest
 default.graylog2[:rest][:listen_uri]    = nil
