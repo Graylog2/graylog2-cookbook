@@ -38,6 +38,12 @@ suites:
         web:
           secret: "2jueVqZpwLLjaWxV"
         restart: "immediately"
+        rest:
+          admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
+        inputs:
+          - '{"title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "creator_user_id":"admin", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 }}'
+        streams: 
+          - '{"title":"Demo Stream","description":"Show all GETs", "creator_user_id":"local:admin", "rules": [{"field":"message","value":"GET.*","type":2,"inverted":false}, {"field":"message","value":".*/login.*","type":2,"inverted":false}]}'
       elasticsearch:
         version: "0.90.10"
         cluster:

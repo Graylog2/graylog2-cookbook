@@ -8,3 +8,4 @@ Chef::Log.info "Graylog2 API available, resume provision"
 
 graylog2_token "admin"
 graylog2_inputs "inputs_from_attributes"
+graylog2_streams "streams_from_attributes"
