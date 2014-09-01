@@ -4,6 +4,8 @@ action :create do
   require 'faraday/conductivity'
 
   rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
+
+  Chef::Application.fatal!("You need to set an access token in order to use the API.") if node[:graylog2][:rest][:admin_access_token].nil?
   connection = Faraday.new(url: rest_uri) do |faraday|
     faraday.basic_auth(node[:graylog2][:rest][:admin_access_token], 'token')
     faraday.adapter(Faraday.default_adapter)
@@ -11,7 +13,7 @@ action :create do
   end
  
   if new_resource.input
-    inputs = Array.new(new_resource.input)
+    inputs = [new_resource.input]
   else
     inputs = node[:graylog2][:inputs]
   end

@@ -1,6 +1,7 @@
 action :create do
   require 'mongo'
 
+  Chef::Application.fatal!("You need to set an access token in order to use the API.") if node[:graylog2][:rest][:admin_access_token].nil?
   client = Mongo::MongoClient.new(node[:graylog2][:mongodb][:host], node[:graylog2][:mongodb][:port])
   db     = client[node[:graylog2][:mongodb][:database]]
   if node[:graylog2][:mongodb][:useauth]
