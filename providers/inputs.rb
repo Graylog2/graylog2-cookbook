@@ -3,7 +3,6 @@ action :create do
   require 'faraday'
   require 'faraday/conductivity'
 
-  resource_input new_resource.input if new_resource.input
   rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
   connection = Faraday.new(url: rest_uri) do |faraday|
     faraday.basic_auth(node[:graylog2][:rest][:admin_access_token], 'token')
@@ -12,7 +11,7 @@ action :create do
   end
  
   if new_resource.input
-    inputs = Array.new(resource_input)
+    inputs = Array.new(new_resource.input)
   else
     inputs = node[:graylog2][:inputs]
   end
