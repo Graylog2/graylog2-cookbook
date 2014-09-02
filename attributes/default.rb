@@ -57,7 +57,7 @@ default.graylog2[:elasticsearch][:network_host]          = nil
 default.graylog2[:elasticsearch][:network_bind_host]     = nil
 default.graylog2[:elasticsearch][:network_publish_host]  = nil
 default.graylog2[:elasticsearch][:analyzer]              = 'standard'
-default.graylog2[:elasticsearch][:output_batch_size]     = 25
+default.graylog2[:elasticsearch][:output_batch_size]     = 1000
 default.graylog2[:elasticsearch][:output_flush_interval] = 1
 default.graylog2[:elasticsearch][:transport_tcp_port]    = 9350
 
