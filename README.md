@@ -44,6 +44,7 @@ OpenJDK and Oracle JDK is both fine for Graylog2
 
 You _have_ to use a  certain version of Elasticsearch for every Graylog2 Version, currently
 this is 0.90.10. The cluster name should be 'graylog2':
+
 ```
   "elasticsearch": {
     "version": "0.90.10",
@@ -52,11 +53,13 @@ this is 0.90.10. The cluster name should be 'graylog2':
     }
   }
 ```
+
 Graylog2 itself needs a secret for encryption and a hashed password for the root user. By default this user is called _admin_.
 
 You can create the secret with this shell command `pwgen -s 96 1`.
 
 The password can be generated with `echo -n yourpassword | shasum -a 256`
+
 ```
   "graylog2": {
     "password_secret": "ZxUahiN48EFVJgzRTzGO2olFRmjmsvzybSf4YwBvn5x1asLUBPe8GHbOQTZ0jzuAB7dzrNPk3wCEH57PCZm23MHAET0G653G",
@@ -92,6 +95,7 @@ graylog2_inputs "syslog udp" do
 input '{ "title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "creator_user_id":"admin", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 } }'
 end
 ```
+
 or you can put the same JSON into an array and set it as an attribute:
 
 ```
@@ -105,4 +109,4 @@ License
 
 Author: Marius Sturm (<marius@torch.sh>) and [contributors](http://github.com/graylog2/torch-graylog2-cookbook/graphs/contributors)
 
-License: Apache
+License: Apache 2.0
