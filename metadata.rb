@@ -5,7 +5,7 @@ maintainer_email "marius@torch.sh"
 license          "Apache"
 description      "Installs and configures Graylog2"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.1.0"
+version          "0.2.0"
 
 depends 'authbind', '>= 0.1.8'
 
