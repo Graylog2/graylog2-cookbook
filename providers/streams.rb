@@ -41,7 +41,6 @@ action :create do
 
       stream_id = create_stream(connection, parsed_stream)
 
-      puts rules.inspect
       rules.each do |rule|
         create_stream_rule(connection, stream_id, rule)
       end
