@@ -1,6 +1,12 @@
-chef_gem "mongo"
-chef_gem "faraday"
-chef_gem "faraday-conductivity"
+chef_gem "mongo" do
+  version '1.10.2'
+end
+chef_gem "faraday" do
+  version '0.9.0'
+end
+chef_gem "faraday-conductivity" do
+  version '0.3.0'
+end
 
 Chef::Log.info "Wait until the Graylog2 API is ready"
 graylog2_api_check "api_check"
