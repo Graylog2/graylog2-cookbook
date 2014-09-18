@@ -25,5 +25,10 @@
 # Use this to run Graylog2 with a path prefix
 <%= config_option 'application.context', node.graylog2[:web][:context] -%>
 
+# Gelf Logging
+<%= config_option 'graylog2.appender.host', node.graylog2[:web][:gelf_log][:host] -%>
+<%= config_option 'graylog2.appender.sourcehost', node.graylog2[:web][:gelf_log][:source] -%>
+<%= config_option 'graylog2.appender.send-access-log', node.graylog2[:web][:gelf_log][:send_access] -%>
+
 # You usually do not want to change this.
 application.global=lib.Global

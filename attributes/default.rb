@@ -130,18 +130,21 @@ default.graylog2[:web][:args]         = ''
 default.graylog2[:dead_letters_enabled] = false
 
 # Web
-default.graylog2[:web][:listen_address]   = '0.0.0.0'
-default.graylog2[:web][:listen_port]      = 9000
-default.graylog2[:web][:server_backends]  = nil
-default.graylog2[:web][:secret]           = ''
-default.graylog2[:web][:timezone]         = 'Europe/Berlin'
-default.graylog2[:web][:field_list_limit] = 100
-default.graylog2[:web][:context]          = nil
-default.graylog2[:web][:log_file]         = '/var/log/graylog2-web/application.log'
-default.graylog2[:web][:log_file_pattern] = '/var/log/graylog2-web/application.%d{yyyy-MM-dd}.log'
-default.graylog2[:web][:history]          = 30
-default.graylog2[:web][:log_pattern]      = "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} - [%level] - from %logger in %thread %n%message%n%xException%n"
-default.graylog2[:web][:log_level]        = 'INFO'
+default.graylog2[:web][:listen_address]    = '0.0.0.0'
+default.graylog2[:web][:listen_port]       = 9000
+default.graylog2[:web][:server_backends]   = nil
+default.graylog2[:web][:secret]            = ''
+default.graylog2[:web][:timezone]          = 'Europe/Berlin'
+default.graylog2[:web][:field_list_limit]  = 100
+default.graylog2[:web][:context]           = nil
+default.graylog2[:web][:log_file]          = '/var/log/graylog2-web/application.log'
+default.graylog2[:web][:log_file_pattern]  = '/var/log/graylog2-web/application.%d{yyyy-MM-dd}.log'
+default.graylog2[:web][:history]           = 30
+default.graylog2[:web][:log_pattern]       = "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} - [%level] - from %logger in %thread %n%message%n%xException%n"
+default.graylog2[:web][:log_level]         = 'INFO'
+default.graylog2[:web][:gelf_log][:host]   = nil
+default.graylog2[:web][:gelf_log][:source] = nil
+default.graylog2[:web][:gelf_log][:send_access] = nil
 
 # Radio
 default.graylog2[:radio][:node_id_file]              = '/etc/graylog2/radio/node-id'
