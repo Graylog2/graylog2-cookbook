@@ -4,7 +4,7 @@ Erubis::Context.send(:include, Extensions::Templates)
 version = node.graylog2[:major_version]
 
 if platform?('centos')
-  repository_file = "graylog2-#{version}-repository-centos6_latest.rpm"
+  repository_file = "graylog2-#{version}-repository-el6_latest.rpm"
 elsif platform?('ubuntu')
   repository_file = "graylog2-#{version}-repository-ubuntu14.04_latest.deb"
 elsif platform?('debian')
@@ -13,7 +13,7 @@ end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{repository_file}" do
   action :create_if_missing
-  source "http://packages.graylog2.org/repo/packages/#{repository_file}"
+  source "https://packages.graylog2.org/repo/packages/#{repository_file}"
 end
 
 execute 'apt-update' do
