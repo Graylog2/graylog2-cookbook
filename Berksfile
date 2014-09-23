@@ -5,7 +5,7 @@ metadata
 group :integration do
   cookbook 'fqdn'
   cookbook 'apt'
-  cookbook 'authbind', git: 'https://github.com/realityforge/chef-authbind.git'
+  cookbook 'authbind'
   cookbook 'mongodb'
   cookbook 'elasticsearch'
 end
