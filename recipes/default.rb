@@ -9,6 +9,7 @@ elsif platform?('ubuntu')
   repository_file = "graylog2-#{version}-repository-ubuntu14.04_latest.deb"
 elsif platform?('debian')
   repository_file = "graylog2-#{version}-repository-debian7_latest.deb"
+  package "apt-transport-https"
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{repository_file}" do
