@@ -3,7 +3,7 @@ Erubis::Context.send(:include, Extensions::Templates)
 
 version = node.graylog2[:major_version]
 
-if platform?('centos')
+if platform_family?('rhel')
   repository_file = "graylog2-#{version}-repository-el6_latest.rpm"
 elsif platform?('ubuntu')
   repository_file = "graylog2-#{version}-repository-ubuntu14.04_latest.deb"
