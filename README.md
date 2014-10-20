@@ -43,11 +43,11 @@ Graylog2 runs currently with Java 7. To install the correct version set this att
 OpenJDK and Oracle JDK is both fine for Graylog2
 
 You _have_ to use a  certain version of Elasticsearch for every Graylog2 Version, currently
-this is 0.90.10. The cluster name should be 'graylog2':
+this is 1.3.4. The cluster name should be 'graylog2':
 
 ```
   "elasticsearch": {
-    "version": "0.90.10",
+    "version": "1.3.4",
     "cluster": {
       "name": "graylog2"
     }

@@ -47,7 +47,7 @@ suites:
         dashboards:
           - '{"title": "Demo SSH Dashboard", "description": "SSH related widgets", "creator_user_id": "admin", "widgets": [ { "description": "SSH messages", "config": { "interval": "minute", "query": "*", "range_type": "relative", "range": "0" }, "type": "search_result_chart", "creator_user_id": "admin" }, { "description": "No. SSH logins", "config": { "query": "message:sshd AND message:opened", "range_type": "relative", "range": "0" }, "type": "search_result_count", "creator_user_id": "admin" } ] }'
       elasticsearch:
-        version: "0.90.10"
+        version: "1.3.4"
         cluster:
           name: "graylog2"
     run_list:
