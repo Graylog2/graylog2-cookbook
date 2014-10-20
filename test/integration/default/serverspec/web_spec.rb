@@ -10,13 +10,12 @@ describe file('/etc/graylog2/web/graylog2-web-interface.conf') do
   its(:content) { should match /graylog2-server.uris/ }
 end
 
-case os[:family]
-when "Ubuntu", "Debian"
-  web_args = file('/etc/default/graylog2-web')
-else
-  web_args = file('/etc/sysconfig/graylog2-web')
+describe file('/etc/sysconfig/graylog2-web'), :if => os[:family] == 'redhat' do
+  it { should be_file }
+  its(:content) { should match /GRAYLOG2_WEB_ARGS/ }
 end
-describe web_args do
+
+describe file('/etc/default/graylog2-web'), :if => ['debian', 'ubuntu'].include?(os[:family])do
   it { should be_file }
   its(:content) { should match /GRAYLOG2_WEB_ARGS/ }
 end
