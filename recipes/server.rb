@@ -44,9 +44,9 @@ template "/etc/graylog2.conf" do
   notifies :restart, 'service[graylog2-server]', node.graylog2[:restart].to_sym
 end
 
-if platform?("ubuntu", "debian")
+if platform_family?("debian")
   args_file = "/etc/default/graylog2-server"
-elsif platform?("redhat", "centos", "fedora")
+elsif platform_family?("rhel")
   args_file = "/etc/sysconfig/graylog2-server"
 else
   Chef::Log.error "Platform not supported."

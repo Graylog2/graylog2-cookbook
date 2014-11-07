@@ -35,9 +35,9 @@ template "/etc/graylog2-radio.conf" do
   notifies :restart, 'service[graylog2-radio]', node.graylog2[:restart].to_sym
 end
 
-if platform?("ubuntu", "debian")
+if platform_family?("debian")
   args_file = "/etc/default/graylog2-radio"
-elsif platform?("redhat", "centos", "fedora")
+elsif platform_family?("rhel")
   args_file = "/etc/sysconfig/graylog2-radio"
 else
   Chef::Log.error "Platform not supported."

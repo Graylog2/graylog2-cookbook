@@ -26,9 +26,9 @@ template "/etc/graylog2/web/graylog2-web-interface.conf" do
   notifies :restart, 'service[graylog2-web]', node.graylog2[:restart].to_sym
 end
 
-if platform?("ubuntu", "debian")
+if platform_family?("debian")
   args_file = "/etc/default/graylog2-web"
-elsif platform?("redhat", "centos", "fedora")
+elsif platform_family?("rhel")
   args_file = "/etc/sysconfig/graylog2-web"
 else
   Chef::Log.error "Platform not supported."
