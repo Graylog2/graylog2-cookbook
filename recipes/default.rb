@@ -3,7 +3,7 @@ Erubis::Context.send(:include, Extensions::Templates)
 
 version = node.graylog2[:major_version]
 
-if platform?('centos')
+if platform_family?('rhel')
   repository_file = "graylog2-#{version}-repository-el6_latest.rpm"
 elsif platform?('ubuntu')
   repository_file = "graylog2-#{version}-repository-ubuntu14.04_latest.deb"
@@ -26,7 +26,7 @@ end
 package repository_file do
   action :install
   source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
-  if platform?('centos')
+  if platform_family?('rhel')
     provider Chef::Provider::Package::Rpm
   elsif platform?('ubuntu', 'debian')
     provider Chef::Provider::Package::Dpkg
