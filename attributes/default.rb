@@ -10,6 +10,9 @@ default.graylog2[:user]             = 'graylog2'
 default.graylog2[:group]            = 'graylog2'
 default.graylog2[:root_username]    = 'admin'
 default.graylog2[:restart]          = 'delayed'
+default.graylog2[:server][:override_restart_command] = false
+default.graylog2[:web][:override_restart_command]    = false
+default.graylog2[:radio][:override_restart_command]  = false
 
 # SHAs
 default.graylog2[:password_secret]    = nil # pwgen -s 96 1

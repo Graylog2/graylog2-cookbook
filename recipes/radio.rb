@@ -15,6 +15,7 @@ end
 service "graylog2-radio" do
   action :nothing
   supports :status => true, :restart => true
+  restart_command node.graylog2[:radio][:override_restart_command] if node.graylog2[:radio][:override_restart_command]
   if platform?('ubuntu')
     provider Chef::Provider::Service::Upstart
   end

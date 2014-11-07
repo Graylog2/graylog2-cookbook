@@ -9,6 +9,7 @@ end
 service "graylog2-web" do
   action :nothing
   supports :status => true, :restart => true
+  restart_command node.graylog2[:web][:override_restart_command] if node.graylog2[:web][:override_restart_command]
   if platform?('ubuntu')
     provider Chef::Provider::Service::Upstart
   end
