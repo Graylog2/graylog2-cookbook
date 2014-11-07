@@ -9,7 +9,7 @@
 # The secret key is used to secure cryptographics functions. Set this to a long and randomly generated string.
 # If you deploy your application to several instances be sure to use the same key!
 # Generate for example with: pwgen -s 96
-<%= config_option 'application.secret', node.graylog2[:web][:secret] -%>
+<%= config_option 'application.secret', \"\"#{node.graylog2[:web][:secret]}\"\" -%>
 
 # Web interface timezone
 # Graylog2 stores all timestamps in UTC. To properly display times, set the default timezone of the interface.
