@@ -30,5 +30,8 @@
 <%= config_option 'graylog2.appender.sourcehost', node.graylog2[:web][:gelf_log][:source] -%>
 <%= config_option 'graylog2.appender.send-access-log', node.graylog2[:web][:gelf_log][:send_access] -%>
 
+# Additional options
+<%= node.graylog2[:web][:additional_options] -%>
+
 # You usually do not want to change this.
 application.global=lib.Global

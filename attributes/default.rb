@@ -10,9 +10,6 @@ default.graylog2[:user]             = 'graylog2'
 default.graylog2[:group]            = 'graylog2'
 default.graylog2[:root_username]    = 'admin'
 default.graylog2[:restart]          = 'delayed'
-default.graylog2[:server][:override_restart_command] = false
-default.graylog2[:web][:override_restart_command]    = false
-default.graylog2[:radio][:override_restart_command]  = false
 
 # SHAs
 default.graylog2[:password_secret]    = nil # pwgen -s 96 1
@@ -132,6 +129,10 @@ default.graylog2[:web][:args]         = ''
 # Experimental
 default.graylog2[:dead_letters_enabled] = false
 
+# Server
+default.graylog2[:server][:override_restart_command] = false
+default.graylog2[:server][:additional_options]       = nil
+
 # Web
 default.graylog2[:web][:listen_address]    = '0.0.0.0'
 default.graylog2[:web][:listen_port]       = 9000
@@ -147,7 +148,9 @@ default.graylog2[:web][:log_pattern]       = "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} -
 default.graylog2[:web][:log_level]         = 'INFO'
 default.graylog2[:web][:gelf_log][:host]   = nil
 default.graylog2[:web][:gelf_log][:source] = nil
-default.graylog2[:web][:gelf_log][:send_access] = nil
+default.graylog2[:web][:gelf_log][:send_access]   = nil
+default.graylog2[:web][:override_restart_command] = false
+default.graylog2[:web][:additional_options]       = nil
 
 # Radio
 default.graylog2[:radio][:node_id_file]              = '/etc/graylog2/radio/node-id'
@@ -175,3 +178,5 @@ default.graylog2[:radio][:log_pattern]               = "%d{yyyy-MM-dd'T'HH:mm:ss
 default.graylog2[:radio][:log_level_application]     = 'warn'
 default.graylog2[:radio][:log_level_ldap]            = 'error'
 default.graylog2[:radio][:log_level_root]            = 'warn'
+default.graylog2[:radio][:override_restart_command]  = false
+default.graylog2[:radio][:additional_options]        = nil

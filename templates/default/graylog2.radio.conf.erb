@@ -23,3 +23,6 @@
 <%= config_option 'processbuffer_processors', node.graylog2[:radio][:processbuffer_processors] -%>
 <%= config_option 'processor_wait_strategy',  node.graylog2[:radio][:processor_wait_strategy] -%>
 <%= config_option 'ring_size',                node.graylog2[:radio][:ring_size] -%>
+
+# Additional options
+<%= node.graylog2[:radio][:additional_options] -%>
