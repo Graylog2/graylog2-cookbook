@@ -1,3 +1,7 @@
+chef_gem "bson_ext" do
+  version '1.11.1'
+end
+
 chef_gem "mongo" do
   version '1.10.2'
 end
