@@ -2,10 +2,10 @@ node.default[:graylog2] ||= {}
 node.default[:mongodb]  ||= {}
 
 # General
-default.graylog2[:major_version]    = '0.91'
-default.graylog2[:server][:version] = '0.91.3-1'
-default.graylog2[:web][:version]    = '0.91.3-1'
-default.graylog2[:radio][:version]  = '0.91.3-1'
+default.graylog2[:major_version]    = '0.92'
+default.graylog2[:server][:version] = '0.92.0-4'
+default.graylog2[:web][:version]    = '0.92.0-4'
+default.graylog2[:radio][:version]  = '0.92.0-4'
 default.graylog2[:user]             = 'graylog2'
 default.graylog2[:group]            = 'graylog2'
 default.graylog2[:root_username]    = 'admin'
@@ -30,11 +30,19 @@ default.graylog2[:message_cache_commit_interval] = 1000
 default.graylog2[:input_cache_max_size] = 0
 
 # Rest
-default.graylog2[:rest][:listen_uri]    = nil
-default.graylog2[:rest][:transport_uri] = nil
-default.graylog2[:rest][:enable_cors]   = nil
-default.graylog2[:rest][:enable_gzip]   = nil
-default.graylog2[:rest][:admin_access_token] = nil # pwgen -s 96 1
+default.graylog2[:rest][:listen_uri]              = 'http://0.0.0.0:12900'
+default.graylog2[:rest][:transport_uri]           = nil
+default.graylog2[:rest][:enable_cors]             = nil
+default.graylog2[:rest][:enable_gzip]             = nil
+default.graylog2[:rest][:admin_access_token]      = nil # pwgen -s 96 1
+default.graylog2[:rest][:enable_tls]              = nil 
+default.graylog2[:rest][:tls_cert_file]           = nil
+default.graylog2[:rest][:tls_key_file]            = nil
+default.graylog2[:rest][:tls_key_password]        = nil
+default.graylog2[:rest][:max_chunk_size]          = nil
+default.graylog2[:rest][:max_header_size]         = nil
+default.graylog2[:rest][:max_initial_line_length] = nil
+default.graylog2[:rest][:thread_pool_size]        = nil
 
 # Inputs
 default.graylog2[:inputs] = nil
@@ -42,10 +50,13 @@ default.graylog2[:inputs] = nil
 # Elasticsearch
 default.graylog2[:elasticsearch][:config_file]           = '/etc/graylog2-elasticsearch.yml'
 default.graylog2[:elasticsearch][:max_docs_per_index]    = 20000000
+default.graylog2[:elasticsearch][:max_size_per_index]    = 1073741824
+default.graylog2[:elasticsearch][:max_time_per_index]    = '1d'
 default.graylog2[:elasticsearch][:max_number_of_indices] = 20
 default.graylog2[:elasticsearch][:shards]                = 4
 default.graylog2[:elasticsearch][:replicas]              = 0
 default.graylog2[:elasticsearch][:retention_strategy]    = 'delete'
+default.graylog2[:elasticsearch][:rotation_strategy]     = 'count'
 default.graylog2[:elasticsearch][:index_prefix]          = 'graylog2'
 default.graylog2[:elasticsearch][:cluster_name]          = 'graylog2'
 default.graylog2[:elasticsearch][:node_name]             = 'graylog2-server'
@@ -57,7 +68,7 @@ default.graylog2[:elasticsearch][:network_host]          = nil
 default.graylog2[:elasticsearch][:network_bind_host]     = nil
 default.graylog2[:elasticsearch][:network_publish_host]  = nil
 default.graylog2[:elasticsearch][:analyzer]              = 'standard'
-default.graylog2[:elasticsearch][:output_batch_size]     = 1000
+default.graylog2[:elasticsearch][:output_batch_size]     = 25
 default.graylog2[:elasticsearch][:output_flush_interval] = 1
 default.graylog2[:elasticsearch][:transport_tcp_port]    = 9350
 
@@ -90,6 +101,9 @@ default.graylog2[:processor_wait_strategy]  = 'blocking'
 default.graylog2[:ring_size]                = 1024
 default.graylog2[:output_module_timeout]    = 10000
 
+# Intervals
+default.graylog2[:server][:alert_check_interval] = nil
+
 # Cluster
 default.graylog2[:ip_of_master] = node.ipaddress
 default.graylog2[:lb_recognition_period_seconds] = 3
@@ -120,6 +134,8 @@ default.graylog2[:server][:log_level_root]        = 'warn'
 default.graylog2[:server][:java_opts] = '-Djava.net.preferIPv4Stack=true'
 default.graylog2[:server][:args]      = ''
 default.graylog2[:server][:wrapper]   = ''
+default.graylog2[:server][:gc_check_interval]    = nil
+default.graylog2[:server][:gc_warning_threshold] = nil
 default.graylog2[:radio][:java_opts]  = '-Djava.net.preferIPv4Stack=true'
 default.graylog2[:radio][:args]       = ''
 default.graylog2[:radio][:wrapper]    = ''
@@ -170,7 +186,6 @@ default.graylog2[:radio][:kafka][:batch_max_wait_ms] = nil
 default.graylog2[:radio][:kafka][:required_acks]     = nil
 default.graylog2[:radio][:processbuffer_processors]  = 5
 default.graylog2[:radio][:processor_wait_strategy]   = 'blocking'
-default.graylog2[:radio][:processor_wait_strategy]   = 1024
 default.graylog2[:radio][:log_file]                  = '/var/log/graylog2-radio/radio.log'
 default.graylog2[:radio][:log_max_size]              = '10MB'
 default.graylog2[:radio][:log_max_index]             = 10
