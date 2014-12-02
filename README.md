@@ -92,7 +92,7 @@ Include `recipe[graylog2::api_access]` to your run list.
 
 ```
 graylog2_inputs "syslog udp" do
-input '{ "title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "creator_user_id":"admin", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 } }'
+input '{ "title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 } }'
 end
 ```
 
@@ -100,7 +100,7 @@ or you can put the same JSON into an array and set it as an attribute:
 
 ```
 "graylog2": {
-    "inputs": ["{ \"title\": \"syslog\", \"type\":\"org.graylog2.inputs.syslog.udp.SyslogUDPInput\", \"creator_user_id\":\"admin\", \"global\": true, \"configuration\": { \"port\": 1514, \"allow_override_date\": true, \"bind_address\": \"0.0.0.0\", \"store_full_message\": true, \"recv_buffer_size\": 1048576 } }"]
+    "inputs": ["{ \"title\": \"syslog\", \"type\":\"org.graylog2.inputs.syslog.udp.SyslogUDPInput\", \"global\": true, \"configuration\": { \"port\": 1514, \"allow_override_date\": true, \"bind_address\": \"0.0.0.0\", \"store_full_message\": true, \"recv_buffer_size\": 1048576 } }"]
 }
 ```
 
