@@ -1,6 +1,10 @@
 Graylog2 Chef Cookbook Changes
 ==============================
 
+## 0.3.6 (2014-12-23)
+
+* Update Graylog2 version to 0.92.3
+
 ## 0.3.5 (2014-12-12)
 
 * Update Graylog2 version to 0.92.1
