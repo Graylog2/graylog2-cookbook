@@ -1,6 +1,10 @@
 Graylog2 Chef Cookbook Changes
 ==============================
 
+## 0.3.7 (2015-01-05)
+
+* Removed dependency on default.rb, you can now use only single parts of the cookbook
+
 ## 0.3.6 (2014-12-23)
 
 * Update Graylog2 version to 0.92.3
