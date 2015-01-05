@@ -1,6 +1,3 @@
-# load template extensions, look under libraries/ for more informations
-Erubis::Context.send(:include, Extensions::Templates)
-
 version = node.graylog2[:major_version]
 
 if platform_family?('rhel')

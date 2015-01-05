@@ -9,3 +9,6 @@ module Extensions
 
   end
 end
+
+# load template extensions
+Erubis::Context.send(:include, Extensions::Templates)
