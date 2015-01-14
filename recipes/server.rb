@@ -4,6 +4,7 @@ package "graylog2-server" do
   if platform?('debian')
     options "--force-yes"
   end
+  notifies :restart, 'service[graylog2-server]', node.graylog2[:restart].to_sym
 end
 
 directory "/var/run/graylog2" do
