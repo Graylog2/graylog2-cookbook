@@ -4,6 +4,7 @@ package "graylog2-web" do
   if platform?('debian')
     options "--force-yes"
   end
+  notifies :restart, 'service[graylog2-web]', node.graylog2[:restart].to_sym
 end
 
 service "graylog2-web" do
