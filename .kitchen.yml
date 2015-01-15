@@ -21,11 +21,9 @@ platforms:
 - name: ubuntu-14.04
   run_list:
   - recipe[apt]
-  - recipe[authbind]
 - name: debian-7.6
   run_list:
   - recipe[apt]
-  - recipe[authbind]
 
 suites:
   - name: default

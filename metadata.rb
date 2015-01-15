@@ -12,6 +12,7 @@ depends 'authbind', '>= 0.1.8'
 recommends 'java'
 recommends 'mongodb'
 recommends 'elasticsearch'
+recommends 'authbind'
 
 supports 'ubuntu'
 supports 'debian'

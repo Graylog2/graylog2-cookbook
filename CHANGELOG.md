@@ -1,6 +1,10 @@
 Graylog2 Chef Cookbook Changes
 ==============================
 
+## 0.3.9
+
+* explicit include of 'authbind' in graylog2::authbind
+
 ## 0.3.8 (2015-01-14)
 
 * Bump to 0.92.4

@@ -78,9 +78,10 @@ what can be configured for Graylog2.
 
 ### Authbind
 Ubuntu/Debian systems allow a user to bind a proccess to a certain privileged port below 1024.
-This is called authbind and is supported by this cookbook. So it is possible to let Graylog2 listen on port 514 and act like a normal syslog server. To enable this feature just include
-the authbind recipe to your run list `recipe[graylog2::authbind]`. By default the recipe
-will give the Graylog2 user permission to bind to port 514 if you need more than that you can
+This is called authbind and is supported by this cookbook. So it is possible to let Graylog2 listen on port 514 and act like a normal syslog server.
+To enable this feature include the [authbind](https://supermarket.chef.io/cookbooks/authbind) cookbook to your run list and also the recipe
+`recipe[graylog2::authbind]` from this cookbook.
+By default the recipe will give the Graylog2 user permission to bind to port 514 if you need more than that you can
 set the attribute `default.graylog2[:authorized_ports]` to an array of allowed ports.
 
 ### API access

@@ -1,3 +1,5 @@
+include_recipe "authbind::default"
+
 if platform?("ubuntu", "debian")
   node.default.graylog2[:server][:wrapper] = 'authbind'
   node.default.graylog2[:radio][:wrapper]  = 'authbind'
