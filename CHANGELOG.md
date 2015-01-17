@@ -4,6 +4,7 @@ Graylog2 Chef Cookbook Changes
 ## 0.3.9
 
 * explicit include of 'authbind' in graylog2::authbind
+* improve error handling for api access
 
 ## 0.3.8 (2015-01-14)
 
