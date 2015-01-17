@@ -23,6 +23,10 @@ action :create do
       parsed_stream = JSON.parse(stream)
       response = connection.get('/streams')
 
+      if parsed_stream['title'] != new_resource.name && new_resource.stream
+        Chef::Log.warn("Make sure that stream title and resource name are identical to prevent problems with duplicate streams.")
+      end
+
       if response.success?
         parsed_response = JSON.parse(response.body)
         saved_streams = parsed_response.fetch("streams")
@@ -55,8 +59,8 @@ def create_stream(connection, data)
     response = connection.post('/streams', data.to_json, { :'Content-Type' => 'application/json' })
     stream_id = JSON.parse(response.body).fetch('stream_id')
     Chef::Log.debug("Graylog2 API response: #{response.status}")
-  rescue Exception
-    Chef::Application.fatal!("Failed to create stream #{parsed_stream.fetch('title')}.")
+  rescue Exception => e
+    Chef::Application.fatal!("Failed to create stream #{data.fetch('title')}.\n#{e.message}")
   end
     
   return stream_id

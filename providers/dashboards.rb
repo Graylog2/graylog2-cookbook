@@ -23,6 +23,10 @@ action :create do
       parsed_dashboard = JSON.parse(dashboard)
       response = connection.get('/dashboards')
 
+      if parsed_dashboard['title'] != new_resource.name && new_resource.dashboard
+        Chef::Log.warn("Make sure that dashboard title and resource name are identical to prevent problems with duplicate dashboards.")
+      end
+
       if response.success?
         parsed_response = JSON.parse(response.body)
         saved_dashboards = parsed_response.fetch("dashboards")
@@ -53,8 +57,8 @@ def create_dashboard(connection, data)
     response = connection.post('/dashboards', data.to_json, { :'Content-Type' => 'application/json' })
     dashboard_id = JSON.parse(response.body).fetch('dashboard_id')
     Chef::Log.debug("Graylog2 API response: #{response.status}")
-  rescue Exception
-    Chef::Application.fatal!("Failed to create dashboard #{parsed_dashboard.fetch('title')}.")
+  rescue Exception => e
+    Chef::Application.fatal!("Failed to create dashboard #{data.fetch('title')}.\n#{e.message}")
   end
     
   return dashboard_id

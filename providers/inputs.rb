@@ -23,6 +23,10 @@ action :create do
       parsed_input = JSON.parse(input)
       response = connection.get('/system/inputs')
 
+      if parsed_input['title'] != new_resource.name && new_resource.input
+        Chef::Log.warn("Make sure that input title and resource name are identical to prevent problems with duplicate inputs.")
+      end
+
       if response.success?
         parsed_response = JSON.parse(response.body)
         saved_inputs = parsed_response.fetch("inputs")
@@ -31,8 +35,12 @@ action :create do
         end
       end
 
-      response = connection.post('/system/inputs', input, { :'Content-Type' => 'application/json' })
-      Chef::Log.debug("Graylog2 API response: #{response.status}")
+      begin
+        response = connection.post('/system/inputs', input, { :'Content-Type' => 'application/json' })
+        Chef::Log.debug("Graylog2 API response: #{response.status}")
+      rescue Exception => e
+        Chef::Application.fatal!("Failed to create input #{input.fetch('title')}.\n#{e.message}")
+      end
     end
   end
 end

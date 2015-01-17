@@ -39,11 +39,11 @@ suites:
         rest:
           admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
         inputs:
-          - '{"title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "creator_user_id":"admin", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 }}'
+          - '{"title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 }}'
         streams: 
-          - '{"title":"Demo Stream","description":"Show all GETs", "creator_user_id":"admin", "rules": [{"field":"message","value":"GET.*","type":2,"inverted":false}, {"field":"message","value":".*/login.*","type":2,"inverted":false}]}'
+          - '{"title":"Demo Stream","description":"Show all GETs", "rules": [{"field":"message","value":"GET.*","type":2,"inverted":false}, {"field":"message","value":".*/login.*","type":2,"inverted":false}]}'
         dashboards:
-          - '{"title": "Demo SSH Dashboard", "description": "SSH related widgets", "creator_user_id": "admin", "widgets": [ { "description": "SSH messages", "config": { "interval": "minute", "query": "*", "range_type": "relative", "range": "0" }, "type": "search_result_chart", "creator_user_id": "admin" }, { "description": "No. SSH logins", "config": { "query": "message:sshd AND message:opened", "range_type": "relative", "range": "0" }, "type": "search_result_count", "creator_user_id": "admin" } ] }'
+          - '{"title": "Demo SSH Dashboard", "description": "SSH related widgets", "widgets": [ { "description": "SSH messages", "config": { "interval": "minute", "query": "*", "range_type": "relative", "range": "0" }, "type": "search_result_chart", "creator_user_id": "admin" }, { "description": "No. SSH logins", "config": { "query": "message:sshd AND message:opened", "range_type": "relative", "range": "0" }, "type": "search_result_count", "creator_user_id": "admin" } ] }'
       elasticsearch:
         version: "1.4.1"
         cluster:
