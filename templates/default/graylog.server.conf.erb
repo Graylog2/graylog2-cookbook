@@ -2,9 +2,17 @@
 <%= config_option 'is_master', @is_master -%>
 <%= config_option 'node_id_file', node.graylog2[:node_id_file] -%>
 
+# General
+<%= config_option 'disable_sigar', node.graylog2[:disable_sigar] -%>
+<%= config_option 'groovy_shell_enable', node.graylog2[:groovy_shell_enable] -%>
+<%= config_option 'groovy_shell_port', node.graylog2[:groovy_shell_port] -%>
+<%= config_option 'enable_metrics_collection', node.graylog2[:enable_metrics_collection] -%>
+
 # Access secrets
 <%= config_option 'password_secret', "\"#{node.graylog2[:password_secret]}\"" -%>
 <%= config_option 'root_username', node.graylog2[:root_username] -%>
+<%= config_option 'root_email', node.graylog2[:root_email] -%>
+<%= config_option 'root_timezone', node.graylog2[:root_timezone] -%>
 <%= config_option 'root_password_sha2', node.graylog2[:root_password_sha2] -%>
 
 # Plugins
@@ -23,6 +31,7 @@
 <%= config_option 'rest_max_header_size', node.graylog2[:rest][:max_header_size] -%>
 <%= config_option 'rest_max_initial_line_length', node.graylog2[:rest][:max_initial_line_length] -%>
 <%= config_option 'rest_thread_pool_size', node.graylog2[:rest][:thread_pool_size] -%>
+<%= config_option 'rest_worker_threads_max_pool_size', node.graylog2[:rest][:worker_threads_max_pool_size] -%>
 
 # Search options
 <%= config_option 'allow_leading_wildcard_searches', node.graylog2[:allow_leading_wildcard_searches] -%>
@@ -52,14 +61,44 @@ elasticsearch_http_enabled = false
 <%= config_option 'elasticsearch_network_bind_host', node.graylog2[:elasticsearch][:network_bind_host] -%>
 <%= config_option 'elasticsearch_network_publish_host', node.graylog2[:elasticsearch][:network_publish_host] -%>
 <%= config_option 'elasticsearch_analyzer', node.graylog2[:elasticsearch][:analyzer] -%>
+<%= config_option 'elasticsearch_disable_version_check', node.graylog2[:elasticsearch][:disable_version_check] -%>
 <%= config_option 'output_batch_size', node.graylog2[:elasticsearch][:output_batch_size] -%>
 <%= config_option 'output_flush_interval', node.graylog2[:elasticsearch][:output_flush_interval] -%>
+<%= config_option 'output_fault_count_threshold', node.graylog2[:elasticsearch][:output_fault_count_threshold] -%>
+<%= config_option 'output_fault_penalty_seconds', node.graylog2[:elasticsearch][:output_fault_penalty_seconds] -%>
+<%= config_option 'no_retention', node.graylog2[:no_retention] -%>
+<%= config_option 'disable_index_optimization', node.graylog2[:disable_index_optimization] -%>
+<%= config_option 'index_optimization_max_num_segments', node.graylog2[:index_optimization_max_num_segments] -%>
+<%= config_option 'disable_index_range_calculation', node.graylog2[:disable_index_range_calculation] -%>
 
 # Processors
 <%= config_option 'processbuffer_processors', node.graylog2[:processbuffer_processors] -%>
 <%= config_option 'outputbuffer_processors', node.graylog2[:outputbuffer_processors] -%>
+<%= config_option 'async_eventbus_processors', node.graylog2[:async_eventbus_processors] -%>
+<%= config_option 'outputbuffer_processor_keep_alive_time', node.graylog2[:outputbuffer_processor_keep_alive_time] -%>
+<%= config_option 'outputbuffer_processor_threads_core_pool_size', node.graylog2[:outputbuffer_processor_threads_core_pool_size] -%>
+<%= config_option 'outputbuffer_processor_threads_max_pool_size', node.graylog2[:outputbuffer_processor_threads_max_pool_size] -%>
 <%= config_option 'processor_wait_strategy', node.graylog2[:processor_wait_strategy] -%>
+<%= config_option 'udp_recvbuffer_sizes', node.graylog2[:udp_recvbuffer_sizes] -%>
+<%= config_option 'inputbuffer_ring_size', node.graylog2[:inputbuffer_ring_size] -%>
+<%= config_option 'inputbuffer_processors', node.graylog2[:inputbuffer_processors] -%>
+<%= config_option 'inputbuffer_wait_strategy', node.graylog2[:inputbuffer_wait_strategy] -%>
+
+# Message journal
+<%= config_option 'message_journal_enabled', node.graylog2[:message_journal_enabled] -%>
+<%= config_option 'message_journal_dir', node.graylog2[:message_journal_dir] -%>
+<%= config_option 'message_journal_max_age', node.graylog2[:message_journal_max_age] -%>
+<%= config_option 'message_journal_max_size', node.graylog2[:message_journal_max_size] -%>
+<%= config_option 'message_journal_flush_age', node.graylog2[:message_journal_flush_age] -%>
+<%= config_option 'message_journal_flush_interval', node.graylog2[:message_journal_flush_interval] -%>
+<%= config_option 'message_journal_segment_age', node.graylog2[:message_journal_segment_age] -%>
+<%= config_option 'message_journal_segment_size', node.graylog2[:message_journal_segment_size] -%>
+
+# Timeouts
 <%= config_option 'output_module_timeout', node.graylog2[:output_module_timeout] -%>
+<%= config_option 'stale_master_timeout', node.graylog2[:stale_master_timeout] -%>
+<%= config_option 'shutdown_timeout', node.graylog2[:shutdown_timeout] -%>
+<%= config_option 'ldap_connection_timeout', node.graylog2[:ldap_connection_timeout] -%>
 
 # Ring buffers
 <%= config_option 'ring_size', node.graylog2[:ring_size] -%>
@@ -104,6 +143,17 @@ elasticsearch_http_enabled = false
 <%= config_option 'transport_email_subject_prefix', node.graylog2[:transport_email_subject_prefix] -%>
 <%= config_option 'transport_email_from_email', node.graylog2[:transport_email_from_email] -%>
 <%= config_option 'transport_email_web_interface_url', node.graylog2[:transport_email_web_interface_url] -%>
+
+# Telemetry
+<%= config_option 'telemetry_enabled', node.graylog2[:telemetry_enabled] -%>
+<%= config_option 'telemetry_url', node.graylog2[:telemetry_url] -%>
+<%= config_option 'telemetry_token', node.graylog2[:telemetry_token] -%>
+<%= config_option 'telemetry_report_interval', node.graylog2[:telemetry_report_interval] -%>
+<%= config_option 'telemetry_max_queue_size', node.graylog2[:telemetry_max_queue_size] -%>
+<%= config_option 'telemetry_cache_timeout', node.graylog2[:telemetry_cache_timeout] -%>
+<%= config_option 'telemetry_service_connect_timeout', node.graylog2[:telemetry_service_connect_timeout] -%>
+<%= config_option 'telemetry_service_write_timeout', node.graylog2[:telemetry_service_write_timeout] -%>
+<%= config_option 'telemetry_service_read_timeout', node.graylog2[:telemetry_service_read_timeout] -%>
 
 # HTTP proxy for outgoing HTTP calls
 <%= config_option 'http_proxy_uri', node.graylog2[:http_proxy_uri] -%>

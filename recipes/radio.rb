@@ -1,4 +1,4 @@
-package "graylog2-radio" do
+package "graylog-radio" do
   action :install
   version node.graylog2[:radio][:version]
   if platform?('debian')
@@ -6,13 +6,13 @@ package "graylog2-radio" do
   end
 end
 
-directory "/var/run/graylog2-radio" do
+directory "/var/run/graylog-radio" do
   action :create
-  owner 'graylog2-radio'
-  group node.graylog2[:group]
+  owner node.graylog2[:radio][:user]
+  group node.graylog2[:radio][:group]
 end
 
-service "graylog2-radio" do
+service "graylog-radio" do
   action :nothing
   supports :status => true, :restart => true
   restart_command node.graylog2[:radio][:override_restart_command] if node.graylog2[:radio][:override_restart_command]
@@ -24,8 +24,8 @@ end
 default_server_uri = "http://#{node['ipaddress']}:12900/"
 default_rest_listen_uri = "http://#{node['ipaddress']}:12950/"
 
-template "/etc/graylog2-radio.conf" do
-  source "graylog2.radio.conf.erb"
+template "/etc/graylog/radio/radio.conf" do
+  source "graylog.radio.conf.erb"
   owner 'root'
   mode 0644
   variables({
@@ -33,27 +33,27 @@ template "/etc/graylog2-radio.conf" do
     :radio_rest_listen_uri => node.graylog2[:radio][:rest][:listen_uri] || default_rest_listen_uri
   })
 
-  notifies :restart, 'service[graylog2-radio]', node.graylog2[:restart].to_sym
+  notifies :restart, 'service[graylog-radio]', node.graylog2[:restart].to_sym
 end
 
 if platform_family?("debian")
-  args_file = "/etc/default/graylog2-radio"
+  args_file = "/etc/default/graylog-radio"
 elsif platform_family?("rhel")
-  args_file = "/etc/sysconfig/graylog2-radio"
+  args_file = "/etc/sysconfig/graylog-radio"
 else
   Chef::Log.error "Platform not supported."
 end
 
 template args_file do
-  source "graylog2.radio.default.erb"
+  source "graylog.radio.default.erb"
   owner 'root'
   mode 0644
-  notifies :restart, 'service[graylog2-radio]', node.graylog2[:restart].to_sym
+  notifies :restart, 'service[graylog-radio]', node.graylog2[:restart].to_sym
 end
 
-template "/etc/graylog2/radio/log4j.xml" do
-  source "graylog2.radio.log4j.xml.erb"
+template "/etc/graylog/radio/log4j.xml" do
+  source "graylog.radio.log4j.xml.erb"
   owner 'root'
   mode 0644
-  notifies :restart, 'service[graylog2-radio]', node.graylog2[:restart].to_sym
+  notifies :restart, 'service[graylog-radio]', node.graylog2[:restart].to_sym
 end

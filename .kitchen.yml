@@ -4,7 +4,7 @@ driver:
 
 driver_config:
   customize:
-    memory: 3072
+    memory: 4096
 
 provisioner:
   name: chef_solo
@@ -14,28 +14,28 @@ provisioner:
   data_path: test
 
 platforms:
-- name: centos-6.5
+- name: centos-6.6
   attributes:
     mongodb:
       reload_action: "reload"
 - name: ubuntu-14.04
   run_list:
   - recipe[apt]
-- name: debian-7.6
+- name: debian-7.7
   run_list:
   - recipe[apt]
 
 suites:
   - name: default
     attributes:
-      machine_fqdn: graylog2.local
+      machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
         web:
           secret: "2jueVqZpwLLjaWxV"
-        restart: "immediately"
+        restart: "delayed"
         rest:
           admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
         inputs:
@@ -45,7 +45,7 @@ suites:
         dashboards:
           - '{"title": "Demo SSH Dashboard", "description": "SSH related widgets", "widgets": [ { "description": "SSH messages", "config": { "interval": "minute", "query": "*", "range_type": "relative", "range": "0" }, "type": "search_result_chart", "creator_user_id": "admin" }, { "description": "No. SSH logins", "config": { "query": "message:sshd AND message:opened", "range_type": "relative", "range": "0" }, "type": "search_result_count", "creator_user_id": "admin" } ] }'
       elasticsearch:
-        version: "1.4.1"
+        version: "1.4.2"
         cluster:
           name: "graylog2"
     run_list:

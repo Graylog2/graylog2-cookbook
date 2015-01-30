@@ -1,11 +1,11 @@
 version = node.graylog2[:major_version]
 
 if platform_family?('rhel')
-  repository_file = "graylog2-#{version}-repository-el6_latest.rpm"
+  repository_file = "graylog-#{version}-repository-el6_latest.rpm"
 elsif platform?('ubuntu')
-  repository_file = "graylog2-#{version}-repository-ubuntu14.04_latest.deb"
+  repository_file = "graylog-#{version}-repository-ubuntu14.04_latest.deb"
 elsif platform?('debian')
-  repository_file = "graylog2-#{version}-repository-debian7_latest.deb"
+  repository_file = "graylog-#{version}-repository-debian7_latest.deb"
   package "apt-transport-https"
 end
 

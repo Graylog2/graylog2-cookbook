@@ -1,0 +1,12 @@
+# Path to the java executable.
+JAVA=/usr/bin/java
+
+# HTTP server settings.
+GRAYLOG_WEB_HTTP_ADDRESS="<%= node.graylog2[:web][:listen_address] %>"
+GRAYLOG_WEB_HTTP_PORT="<%= node.graylog2[:web][:listen_port] %>"
+
+# Might be used to adjust the Java heap size. (i.e. "-Xms1024m -Xmx2048m")
+GRAYLOG_WEB_JAVA_OPTS="<%= node.graylog2[:web][:java_opts] %>"
+
+# Pass some extra args to graylog-web. (i.e. "-d" to enable debug mode)
+GRAYLOG_WEB_ARGS="<%= node.graylog2[:web][:args] %>"
