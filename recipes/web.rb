@@ -1,3 +1,12 @@
+if not node.graylog2[:web][:secret]
+  begin
+    secrets = Chef::EncryptedDataBagItem.load("secrets", "graylog")
+    node.set[:graylog2][:web][:secret] = secrets["web"]["secret"]
+  rescue
+    Chef::Application.fatal!("No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog")
+  end
+end
+
 package "graylog-web" do
   action :install
   version node.graylog2[:web][:version]

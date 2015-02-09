@@ -1,3 +1,21 @@
+if not node.graylog2[:password_secret]
+  begin
+    secrets = Chef::EncryptedDataBagItem.load("secrets", "graylog")
+    node.set[:graylog2][:password_secret] = secrets["server"]["password_secret"]
+  rescue
+    Chef::Application.fatal!("No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog")
+  end
+end
+
+if not node.graylog2[:root_password_sha2]
+  begin
+    secrets = Chef::EncryptedDataBagItem.load("secrets", "graylog")
+    node.set[:graylog2][:root_password_sha2] = secrets["server"]["root_password_sha2"]
+  rescue
+    Chef::Application.fatal!("No root_password_sha2 set, either set it via an attribute or in the encrypted data bag in secrets.graylog")
+  end
+end
+
 package "graylog-server" do
   action :install
   version node.graylog2[:server][:version]
@@ -29,6 +47,12 @@ else
 end
 
 default_rest_uri = "http://#{node['ipaddress']}:12900/"
+
+if node.graylog2[:elasticsearch][:unicast_search_query] and node.graylog2[:elasticsearch][:search_node_attribute]
+  nodes = search_for_nodes(node.graylog2[:elasticsearch][:unicast_search_query], node.graylog2[:elasticsearch][:search_node_attribute])
+  Chef::Log.debug("Found elasticsearch nodes at #{nodes.join(', ').inspect}")
+  node.set[:graylog2][:elasticsearch][:discovery_zen_ping_unicast_hosts] = nodes.join(',')
+end
 
 template "/etc/graylog/server/server.conf" do
   source "graylog.server.conf.erb"
