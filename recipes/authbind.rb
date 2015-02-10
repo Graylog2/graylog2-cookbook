@@ -1,6 +1,6 @@
-include_recipe "authbind::default"
-
 if platform?("ubuntu", "debian")
+  include_recipe "authbind::default"
+
   node.default.graylog2[:server][:wrapper] = 'authbind'
   node.default.graylog2[:radio][:wrapper]  = 'authbind'
   if node.graylog2[:authorized_ports].kind_of?(Array)
