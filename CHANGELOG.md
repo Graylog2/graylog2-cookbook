@@ -1,10 +1,13 @@
 Graylog2 Chef Cookbook Changes
 ==============================
 
-## 0.3.9
+## 0.x.x
 
 * explicit include of 'authbind' in graylog2::authbind
 * improve error handling for api access
+* mandatory secrets for server and web interrupt chef run if they are not set
+* allow secrets to be set through attributes or an encrypted data bag 'secrets/graylog'
+* support chef search for nodes to set up unicast discovery
 
 ## 0.3.8 (2015-01-14)
 

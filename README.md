@@ -73,8 +73,56 @@ The password can be generated with `echo -n yourpassword | shasum -a 256`
 
 ```
 
+Alternatively you can create an encrypted data bag and store the secrets there. The data should be called
+'secrets' with an item 'graylog'.
+
+```
+knife data bag create --secret-file ~/.chef/encrypted_data_bag_secret secrets graylog
+
+{
+  "id": "graylog",
+  "server": {
+    "root_password_sha2": "<root password as sha256>",
+    "password_secret": "<random string as encryption salt>"
+  },
+  "web": {
+    "secret": "<random string as encryption salt>"
+  }
+}
+```
+
 You can take a look into the attributes file under `attributes/default.rb` to get an idea
 what can be configured for Graylog2.
+
+### Node discovery
+The cookbook is able to use Chef's search to find Elasticsearch and other Graylog nodes. To configure
+a dynamic cluster set the following attributes:
+
+```
+Elasticsearch discovery
+
+'graylog2'=> {
+  'elasticsearch' => {
+    'unicast_search_query' => 'role:elasticsearch',
+    'search_node_attribute' => 'ipaddress'
+}
+```
+
+```
+Graylog server discovery
+
+'graylog2'=> {
+  'web' => {
+    'server_search_query' => 'role:graylog-server',
+    'search_node_attribute' => 'ipaddress'
+}
+```
+
+One server needs to be set as a master, use this attribute to do so
+
+```
+default.graylog2[:ip_of_master] = node.ipaddress
+```
 
 ### Authbind
 Ubuntu/Debian systems allow a user to bind a proccess to a certain privileged port below 1024.

@@ -45,6 +45,12 @@ else
   Chef::Log.error "Platform not supported."
 end
 
+if node.graylog2[:web][:server_search_query] and node.graylog2[:web][:search_node_attribute]
+  nodes = search_for_nodes(node.graylog2[:web][:server_search_query], node.graylog2[:web][:search_node_attribute])
+  Chef::Log.debug("Found Graylog server nodes at #{nodes.join(', ').inspect}")
+  node.set[:graylog2][:web][:discovery_zen_ping_unicast_hosts] = nodes.join(',')
+end
+
 template args_file do
   source "graylog.web.default.erb"
   owner 'root'

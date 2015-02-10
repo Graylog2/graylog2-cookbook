@@ -152,8 +152,10 @@ default.graylog2[:elasticsearch][:cluster_discovery_timeout] = 5000
 default.graylog2[:server][:alert_check_interval] = nil
 
 # Cluster
-default.graylog2[:ip_of_master] = node.ipaddress
+default.graylog2[:ip_of_master]                  = node.ipaddress
 default.graylog2[:lb_recognition_period_seconds] = 3
+default.graylog2[:web][:server_search_query]     = nil
+default.graylog2[:web][:search_node_attribute]   = nil
 
 # Email transport
 default.graylog2[:transport_email_enabled]  = false
