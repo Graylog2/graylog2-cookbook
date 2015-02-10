@@ -1,11 +1,7 @@
-if not node.graylog2[:web][:secret]
-  begin
-    secrets = Chef::EncryptedDataBagItem.load("secrets", "graylog")
-    node.set[:graylog2][:web][:secret] = secrets["web"]["secret"]
-  rescue
-    Chef::Application.fatal!("No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog")
-  end
-end
+# Override attributes from data bag's "web" section
+secrets = Chef::EncryptedDataBagItem.load("secrets", "graylog")["web"] rescue {}
+Chef::Mixin::DeepMerge.deep_merge!(secrets, node.override[:graylog2]) if not secrets.nil?
+Chef::Application.fatal!("No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog") if not node.graylog2[:web][:secret]
 
 package "graylog-web" do
   action :install

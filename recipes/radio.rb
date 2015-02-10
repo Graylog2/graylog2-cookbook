@@ -1,3 +1,7 @@
+# Override attributes from data bag's "radio" section
+secrets = Chef::EncryptedDataBagItem.load("secrets", "graylog")["radio"] rescue {}
+Chef::Mixin::DeepMerge.deep_merge!(secrets, node.override[:graylog2]) if not secrets.nil?
+
 package "graylog-radio" do
   action :install
   version node.graylog2[:radio][:version]
