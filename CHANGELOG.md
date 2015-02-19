@@ -1,8 +1,9 @@
-Graylog2 Chef Cookbook Changes
+Graylog Chef Cookbook Changes
 ==============================
 
-## 0.x.x
+## 1.0.0
 
+* Update Graylog version to 1.0.0
 * explicit include of 'authbind' in graylog2::authbind
 * improve error handling for api access
 * mandatory secrets for server and web interrupt chef run if they are not set

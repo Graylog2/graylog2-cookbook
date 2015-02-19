@@ -1,7 +1,7 @@
 Description
 -----------
 
-This _Chef_ cookbook installs and configures the [Graylog2](http://www.graylog2.org) log management system.
+This _Chef_ cookbook installs and configures the [Graylog](http://www.graylog.org) log management system.
 
 It is using the official installation packages provided by [_Torch_](http://www.torch.sh). It needs as requirement an installation of Java, [Elasticsearch](http://www.elasticsearch.org) and [MongoDB](https://www.mongodb.org).
 
@@ -15,11 +15,11 @@ you need for your environment.
 |Recipe     | Description |
 |:----------|:------------|
 |default    |Setup the Torch package repository|
-|server     |Install Graylog2 server|
-|web        |Install Graylog2 web interface|
-|radio      |Install a Graylog2 radio node|
-|authbind   |Give the Graylog2 user access to privileged ports like 514 (only on Ubuntu/Debian)|
-|api_access |Use Graylog2 API to setup inputs like 'Syslog UDP'|
+|server     |Install Graylog server|
+|web        |Install Graylog web interface|
+|radio      |Install a Graylog radio node|
+|authbind   |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
+|api_access |Use Graylog API to setup inputs like 'Syslog UDP'|
 
 In a minimal setup you need at least the _default_, _server_ and _web_ recipes. Combined with
 MongoDB and Elasticsearch, a run list might look like this:
@@ -34,27 +34,27 @@ run_list "recipe[java]",
 ```
 
 ### Attributes
-Graylog2 runs currently with Java 7. To install the correct version set this attribute:
+Graylog runs currently with Java 7. To install the correct version set this attribute:
 
 ```
   "java": {
     "jdk_version": "7"
 ```
-OpenJDK and Oracle JDK is both fine for Graylog2
+OpenJDK and Oracle JDK is both fine for Graylog
 
-You _have_ to use a  certain version of Elasticsearch for every Graylog2 Version, currently
-this is 1.3.4. The cluster name should be 'graylog2':
+You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
+this is 1.4.2. The cluster name should be 'graylog2':
 
 ```
   "elasticsearch": {
-    "version": "1.3.4",
+    "version": "1.4.2",
     "cluster": {
       "name": "graylog2"
     }
   }
 ```
 
-Graylog2 itself needs a secret for encryption and a hashed password for the root user. By default this user is called _admin_.
+Graylog itself needs a secret for encryption and a hashed password for the root user. By default this user is called _admin_.
 
 You can create the secret with this shell command `pwgen -s 96 1`.
 
@@ -92,7 +92,7 @@ knife data bag create --secret-file ~/.chef/encrypted_data_bag_secret secrets gr
 ```
 
 You can take a look into the attributes file under `attributes/default.rb` to get an idea
-what can be configured for Graylog2.
+what can be configured for Graylog.
 
 ### Node discovery
 The cookbook is able to use Chef's search to find Elasticsearch and other Graylog nodes. To configure
@@ -126,14 +126,14 @@ default.graylog2[:ip_of_master] = node.ipaddress
 
 ### Authbind
 Ubuntu/Debian systems allow a user to bind a proccess to a certain privileged port below 1024.
-This is called authbind and is supported by this cookbook. So it is possible to let Graylog2 listen on port 514 and act like a normal syslog server.
+This is called authbind and is supported by this cookbook. So it is possible to let Graylog listen on port 514 and act like a normal syslog server.
 To enable this feature include the [authbind](https://supermarket.chef.io/cookbooks/authbind) cookbook to your run list and also the recipe
 `recipe[graylog2::authbind]` from this cookbook.
-By default the recipe will give the Graylog2 user permission to bind to port 514 if you need more than that you can
+By default the recipe will give the Graylog user permission to bind to port 514 if you need more than that you can
 set the attribute `default.graylog2[:authorized_ports]` to an array of allowed ports.
 
 ### API access
-In order to access the API of Graylog2 we provide a LWRP to do so. At the moment we only support
+In order to access the API of Graylog we provide a LWRP to do so. At the moment we only support
 the creation of inputs but the LWRP is easy to extend. You can use the provider in your own
 recipe like this:
 
@@ -156,6 +156,6 @@ or you can put the same JSON into an array and set it as an attribute:
 License
 -------
 
-Author: Marius Sturm (<marius@torch.sh>) and [contributors](http://github.com/graylog2/torch-graylog2-cookbook/graphs/contributors)
+Author: Marius Sturm (<marius@torch.sh>) and [contributors](http://github.com/graylog2/graylog2-cookbook/graphs/contributors)
 
 License: Apache 2.0

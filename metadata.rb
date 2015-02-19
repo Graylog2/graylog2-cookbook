@@ -1,11 +1,11 @@
 name             "graylog2"
 
-maintainer       "Torch GmbH"
-maintainer_email "marius@torch.sh"
+maintainer       "Graylog, Inc."
+maintainer_email "marius@graylog.com"
 license          "Apache 2.0"
-description      "Installs and configures Graylog2"
+description      "Installs and configures Graylog"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.4.11"
+version          "1.0.0"
 
 depends 'authbind', '>= 0.1.8'
 
