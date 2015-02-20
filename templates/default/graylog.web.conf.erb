@@ -26,7 +26,9 @@
 <%= config_option 'application.context', node.graylog2[:web][:context] -%>
 
 # Gelf Logging
+<% unless node.graylog2[:web][:gelf_log][:host].nil? -%>
 <%= config_option 'graylog2.appender.host', "\"#{node.graylog2[:web][:gelf_log][:host]}\"" -%>
+<% end -%>
 <%= config_option 'graylog2.appender.sourcehost', node.graylog2[:web][:gelf_log][:source] -%>
 <%= config_option 'graylog2.appender.send-access-log', node.graylog2[:web][:gelf_log][:send_access] -%>
 
