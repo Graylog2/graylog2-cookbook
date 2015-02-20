@@ -4,6 +4,7 @@ Graylog Chef Cookbook Changes
 ## 1.0.1
 
 * reduce file permissions for Graylog config files
+* fix empty string for 'graylog2.appender.host' in web.conf
 
 ## 1.0.0
 
