@@ -3,8 +3,9 @@ module Extensions
 
     def config_option key, value=nil, options={}
       escaped_value = value.to_s.tr('"', '\"')
-      separator = options[:separator] || ' = '
-      [key, separator, escaped_value, "\n"].join unless value.nil?
+      separator     = options[:separator] || ' = '
+      enclose       = options[:enclose]   || ''
+      [key, separator, enclose, escaped_value, enclose, "\n"].join unless value.nil?
     end
 
   end
