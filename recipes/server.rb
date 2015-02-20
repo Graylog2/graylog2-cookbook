@@ -46,7 +46,8 @@ default_rest_uri = "http://#{node['ipaddress']}:12900/"
 template "/etc/graylog/server/server.conf" do
   source "graylog.server.conf.erb"
   owner 'root'
-  mode 0644
+  group node.graylog2[:server][:group]
+  mode 0640
   variables({
     :is_master          => is_master,
     :rest_listen_uri    => node.graylog2[:rest][:listen_uri] || default_rest_uri,
@@ -73,13 +74,15 @@ end
 template "/etc/graylog/server/log4j.xml" do
   source "graylog.server.log4j.xml.erb"
   owner 'root'
-  mode 0644
+  group node.graylog2[:server][:group]
+  mode 0640
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
 end
 
 template "/etc/graylog-elasticsearch.yml" do
   source "graylog.server.elasticsearch.yml.erb"
   owner 'root'
-  mode 0644
+  group node.graylog2[:server][:group]
+  mode 0640
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
 end

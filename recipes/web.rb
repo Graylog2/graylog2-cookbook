@@ -26,7 +26,8 @@ default_backend_uri = "http://#{node['ipaddress']}:12900/"
 template "/etc/graylog/web/web.conf" do
   source "graylog.web.conf.erb"
   owner 'root'
-  mode 0644
+  group node.graylog2[:web][:group]
+  mode 0640
   variables({
     :web_server_backends => node.graylog2[:web][:server_backends] || default_backend_uri
   })
@@ -57,6 +58,7 @@ end
 template "/etc/graylog/web/logback.xml" do
   source "graylog.web.logback.xml.erb"
   owner 'root'
-  mode 0644
+  group node.graylog2[:web][:group]
+  mode 0640
   notifies :restart, 'service[graylog-web]', node.graylog2[:restart].to_sym
 end

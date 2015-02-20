@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.0.1
+
+* reduce file permissions for Graylog config files
+
 ## 1.0.0
 
 * Update Graylog version to 1.0.0

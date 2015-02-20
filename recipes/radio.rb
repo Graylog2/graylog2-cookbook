@@ -31,7 +31,8 @@ default_rest_listen_uri = "http://#{node['ipaddress']}:12950/"
 template "/etc/graylog/radio/radio.conf" do
   source "graylog.radio.conf.erb"
   owner 'root'
-  mode 0644
+  group node.graylog2[:radio][:group]
+  mode 0640
   variables({
     :radio_server_uri => node.graylog2[:radio][:server_uri] || default_server_uri,
     :radio_rest_listen_uri => node.graylog2[:radio][:rest][:listen_uri] || default_rest_listen_uri
@@ -58,6 +59,7 @@ end
 template "/etc/graylog/radio/log4j.xml" do
   source "graylog.radio.log4j.xml.erb"
   owner 'root'
-  mode 0644
+  group node.graylog2[:radio][:group]
+  mode 0640
   notifies :restart, 'service[graylog-radio]', node.graylog2[:restart].to_sym
 end
