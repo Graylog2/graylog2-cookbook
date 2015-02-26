@@ -3,7 +3,7 @@ action :create do
   require 'faraday'
   require 'faraday/conductivity'
 
-  NO_RETRIES = 300 # 5 minutes, waiting a second to retry
+  NO_RETRIES = node[:graylog2][:api_client_timeout] || 300
 
   rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
   connection = Faraday.new(url: rest_uri) do |faraday|

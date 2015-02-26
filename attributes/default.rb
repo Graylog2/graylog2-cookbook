@@ -147,6 +147,7 @@ default.graylog2[:shutdown_timeout]          = 30000
 default.graylog2[:stream_processing_timeout] = 2000
 default.graylog2[:ldap_connection_timeout]   = 2000
 default.graylog2[:elasticsearch][:cluster_discovery_timeout] = 5000
+default.graylog2[:api_client_timeout]        = 300
 
 # Intervals
 default.graylog2[:server][:alert_check_interval] = nil
