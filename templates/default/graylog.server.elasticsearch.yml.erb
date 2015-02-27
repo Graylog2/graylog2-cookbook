@@ -1,8 +1,8 @@
 # this must be the same as for your elasticsearch cluster
-cluster.name: <%= node.graylog2[:elasticsearch][:cluster_name] %>
+<%= config_option 'cluster.name', node.graylog2[:elasticsearch][:cluster_name], separator: ': ' -%>
 
 # you could also leave this out, but makes it easier to identify the graylog2 client instance
-node.name: "<%= node.graylog2[:elasticsearch][:node_name] %>"
+<%= config_option 'node.name', node.graylog2[:elasticsearch][:node_name], separator: ': ', enclose: '"' -%>
 
 # we don't want the graylog2 client to store any data, or be master node
 node.master: false
@@ -11,10 +11,10 @@ node.data: false
 # you might need to bind to a certain IP address, do that here
 #network.host: 172.24.0.14
 # use a different port if you run multiple elasticsearch nodes on one machine
-transport.tcp.port: <%= node.graylog2[:elasticsearch][:transport_tcp_port] %>
+<%= config_option 'transport.tcp.port', node.graylog2[:elasticsearch][:transport_tcp_port], separator: ': ' -%>
 
 # we don't need to run the embedded HTTP server here
-http.enabled: <%= node.graylog2[:elasticsearch][:http_enabled] %>
+<%= config_option 'http.enabled', node.graylog2[:elasticsearch][:http_enabled], separator: ': ' -%>
 
 # adapt these for discovery to work in your network! multicast can be tricky
 #discovery.zen.ping.multicast.address: 172.24.0.14
@@ -47,12 +47,13 @@ http.enabled: <%= node.graylog2[:elasticsearch][:http_enabled] %>
 #
 # 1. Disable multicast discovery (enabled by default):
 #
-discovery.zen.ping.multicast.enabled: <%= node.graylog2[:elasticsearch][:discovery_zen_ping_multicast_enabled] %>
+<%= config_option 'discovery.zen.ping.multicast.enabled', node.graylog2[:elasticsearch][:discovery_zen_ping_multicast_enabled], separator: ': ' -%>
+
 #
 # 2. Configure an initial list of master nodes in the cluster
 # to perform discovery when new nodes (master or data) are started:
 #
-discovery.zen.ping.unicast.hosts: <%= node.graylog2[:elasticsearch][:discovery_zen_ping_unicast_hosts] %>
+<%= config_option 'discovery.zen.ping.unicast.hosts', node.graylog2[:elasticsearch][:discovery_zen_ping_unicast_hosts], separator: ': ' -%>
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #
