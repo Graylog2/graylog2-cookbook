@@ -30,8 +30,9 @@ default.graylog2[:streams] = nil
 default.graylog2[:dashboards] = nil
 
 # SHAs
-default.graylog2[:password_secret]    = nil # pwgen -s 96 1
-default.graylog2[:root_password_sha2] = nil # echo -n yourpassword | shasum -a 256
+default.graylog2[:password_secret]              = nil # pwgen -s 96 1
+default.graylog2[:password_secret_enclose_char] = '"'
+default.graylog2[:root_password_sha2]           = nil # echo -n yourpassword | shasum -a 256
 
 # Paths
 default.graylog2[:node_id_file] = '/etc/graylog/server/node-id'

@@ -8,7 +8,7 @@ Chef::Application.fatal!("No root_password_sha2 set, either set it via an attrib
 if node.graylog2[:elasticsearch][:unicast_search_query] and node.graylog2[:elasticsearch][:search_node_attribute]
   nodes = search_for_nodes(node.graylog2[:elasticsearch][:unicast_search_query], node.graylog2[:elasticsearch][:search_node_attribute])
   Chef::Log.debug("Found elasticsearch nodes at #{nodes.join(', ').inspect}")
-  node.set[:graylog2][:elasticsearch][:discovery_zen_ping_unicast_hosts] = nodes.join(',')
+  node.set[:graylog2][:elasticsearch][:discovery_zen_ping_unicast_hosts] = nodes.map{|ip| ip + ":9300"}.join(',')
 end
 
 package "graylog-server" do

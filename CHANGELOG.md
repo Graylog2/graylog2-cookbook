@@ -1,6 +1,12 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.0.2
+
+* elasticsearch-http-enabled is not fixed set to false anymore
+* configurable quotation marks for server secrets to allow full server replacement
+* append port 9300 to Elasticsearch lookups to minimize discovery failures
+
 ## 1.0.1
 
 * reduce file permissions for Graylog config files

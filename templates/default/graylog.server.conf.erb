@@ -9,7 +9,7 @@
 <%= config_option 'enable_metrics_collection', node.graylog2[:enable_metrics_collection] -%>
 
 # Access secrets
-<%= config_option 'password_secret', node.graylog2[:password_secret], enclose: '"' -%>
+<%= config_option 'password_secret', node.graylog2[:password_secret], enclose: node.graylog2[:password_secret_enclose_char] -%>
 <%= config_option 'root_username', node.graylog2[:root_username] -%>
 <%= config_option 'root_email', node.graylog2[:root_email] -%>
 <%= config_option 'root_timezone', node.graylog2[:root_timezone] -%>
