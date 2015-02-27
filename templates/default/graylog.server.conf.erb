@@ -40,7 +40,7 @@
 # Elasticsearch
 elasticsearch_node_master = false
 elasticsearch_node_data = false
-elasticsearch_http_enabled = false
+elasticsearch_http_enabled = <%= node.graylog2[:elasticsearch][:http_enabled] %>
 <%= config_option 'elasticsearch_config_file', node.graylog2[:elasticsearch][:config_file] -%>
 <%= config_option 'rotation_strategy', node.graylog2[:elasticsearch][:rotation_strategy] -%>
 <%= config_option 'elasticsearch_max_docs_per_index', node.graylog2[:elasticsearch][:max_docs_per_index] -%>
