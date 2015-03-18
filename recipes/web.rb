@@ -9,6 +9,9 @@ package "graylog-web" do
   if platform?('debian')
     options "--force-yes"
   end
+  if node.platform_family == 'debian'
+    options '-o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"'
+  end
   notifies :restart, 'service[graylog-web]', node.graylog2[:restart].to_sym
 end
 
