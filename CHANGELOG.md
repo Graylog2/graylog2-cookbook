@@ -1,6 +1,11 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.0.3
+
+* Update Graylog version to 1.0.1
+* Deal with updated configuration in graylog packages on Ubuntu/Debian
+
 ## 1.0.2
 
 * elasticsearch-http-enabled is not fixed set to false anymore
