@@ -128,7 +128,7 @@ elasticsearch_node_data = false
 <%= config_option 'mongodb_threads_allowed_to_block_multiplier', node.graylog2[:mongodb][:threads_allowed_to_block_multiplier] -%>
 
 # Drools Rule File (Use to rewrite incoming log messages)
-# See: http://support.torch.sh/help/kb/graylog2-server/custom-message-rewritingprocessing
+# See: http://docs.graylog.org/en/1.0/pages/drools.html
 <%= config_option 'rules_file', node.graylog2[:rules_file] -%>
 
 # Email transport

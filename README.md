@@ -3,7 +3,7 @@ Description
 
 This _Chef_ cookbook installs and configures the [Graylog](http://www.graylog.org) log management system.
 
-It is using the official installation packages provided by [_Torch_](http://www.torch.sh). It needs as requirement an installation of Java, [Elasticsearch](http://www.elasticsearch.org) and [MongoDB](https://www.mongodb.org).
+It is using the official installation packages provided by [_Graylog, Inc._](http://www.graylog.com). It needs as requirement an installation of Java, [Elasticsearch](http://www.elasticsearch.org) and [MongoDB](https://www.mongodb.org).
 
 Usage
 -----
@@ -14,7 +14,7 @@ you need for your environment.
 
 |Recipe     | Description |
 |:----------|:------------|
-|default    |Setup the Torch package repository|
+|default    |Setup the Graylog package repository|
 |server     |Install Graylog server|
 |web        |Install Graylog web interface|
 |radio      |Install a Graylog radio node|
@@ -156,6 +156,6 @@ or you can put the same JSON into an array and set it as an attribute:
 License
 -------
 
-Author: Marius Sturm (<marius@torch.sh>) and [contributors](http://github.com/graylog2/graylog2-cookbook/graphs/contributors)
+Author: Marius Sturm (<marius@graylog.com>) and [contributors](http://github.com/graylog2/graylog2-cookbook/graphs/contributors)
 
 License: Apache 2.0
