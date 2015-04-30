@@ -50,13 +50,11 @@ action :create do
         parsed_stream.delete('alert_conditions')
       end
 
-      if alert_conditions
-        if new_resource.alarm_callbacks
-          alarm_callbacks = JSON.parse(new_resource.alarm_callbacks)
-        else
-          alarm_callbacks = parsed_stream['alarm_callbacks']
-          parsed_stream.delete('alarm_callbacks')
-        end
+      if new_resource.alarm_callbacks
+        alarm_callbacks = JSON.parse(new_resource.alarm_callbacks)
+      else
+        alarm_callbacks = parsed_stream['alarm_callbacks']
+        parsed_stream.delete('alarm_callbacks')
       end
 
       stream_id = create_stream(connection, parsed_stream)
@@ -83,8 +81,8 @@ end
 def create_stream(connection, data)
   begin
     response = connection.post('/streams', data.to_json, { :'Content-Type' => 'application/json' })
-    stream_id = JSON.parse(response.body).fetch('stream_id')
     Chef::Log.debug("Graylog2 API response: #{response.status}")
+    stream_id = JSON.parse(response.body).fetch('stream_id')
   rescue Exception => e
     Chef::Application.fatal!("Failed to create stream #{data.fetch('title')}.\n#{e.message}")
   end
@@ -94,19 +92,19 @@ end
 
 def create_stream_rule(connection, stream_id, data)
   response = connection.post("/streams/#{stream_id}/rules", data.to_json, { :'Content-Type' => 'application/json' })
-  Chef::Log.info("Graylog2 API response: #{response.status}")
+  Chef::Log.debug("Graylog2 API response: #{response.status}")
 
   return response
 end
 
 def create_stream_alarm_callback(connection, stream_id, data)
   response = connection.post("/streams/#{stream_id}/alarmcallbacks", data.to_json, { :'Content-Type' => 'application/json' })
-  Chef::Log.info("Graylog2 API response: #{response.status}")
+  Chef::Log.debug("Graylog2 API response: #{response.status}")
 end
 
 def create_stream_alert_condition(connection, stream_id, data)
   response = connection.post("/streams/#{stream_id}/alerts/conditions", data.to_json, { :'Content-Type' => 'application/json' })
-  Chef::Log.info("Graylog2 API response: #{response.status}")
+  Chef::Log.debug("Graylog2 API response: #{response.status}")
 end
 
 def resume_stream(connection, stream_id)
