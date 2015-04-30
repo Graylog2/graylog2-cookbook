@@ -1,6 +1,13 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.0.4
+
+* Update Graylog version to 1.0.2
+* add parameters `alert_conditions` and `alarm_callbacks` to streams provider.
+  Both in combination can be used to create stream alerts automatically.
+  Take a look into `.kitchen.yml` for a working json example
+
 ## 1.0.3
 
 * Update Graylog version to 1.0.1
