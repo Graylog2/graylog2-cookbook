@@ -34,20 +34,20 @@ run_list "recipe[java]",
 ```
 
 ### Attributes
-Graylog runs currently with Java 7. To install the correct version set this attribute:
+Graylog runs currently with Java 8. To install the correct version set this attribute:
 
 ```
   "java": {
-    "jdk_version": "7"
+    "jdk_version": "8"
 ```
 OpenJDK and Oracle JDK is both fine for Graylog
 
 You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
-this is 1.4.2. The cluster name should be 'graylog2':
+this is 1.5.2. The cluster name should be 'graylog2':
 
 ```
   "elasticsearch": {
-    "version": "1.4.2",
+    "version": "1.5.2",
     "cluster": {
       "name": "graylog2"
     }
