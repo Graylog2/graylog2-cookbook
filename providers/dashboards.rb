@@ -11,7 +11,7 @@ action :create do
     faraday.adapter(Faraday.default_adapter)
     faraday.use :repeater, retries: 5, mode: :one
   end
- 
+
   if new_resource.dashboard
     dashboards = [new_resource.dashboard]
   else
@@ -45,9 +45,15 @@ action :create do
 
       dashboard_id = create_dashboard(connection, parsed_dashboard)
 
+      positions = []
+
       widgets.each do |widget|
-        create_dashboard_widget(connection, dashboard_id, widget)
+        position = widget.delete('position')
+        widget_id = create_dashboard_widget(connection, dashboard_id, widget)
+        positions << position.merge(id: widget_id) if position
       end
+
+      create_dashboard_widget_positions(connection, dashboard_id, positions) unless positions.empty?
     end
   end
 end
@@ -60,12 +66,25 @@ def create_dashboard(connection, data)
   rescue Exception => e
     Chef::Application.fatal!("Failed to create dashboard #{data.fetch('title')}.\n#{e.message}")
   end
-    
+
   return dashboard_id
 end
 
 def create_dashboard_widget(connection, dashboard_id, data)
-  response = connection.post("/dashboards/#{dashboard_id}/widgets", data.to_json, { :'Content-Type' => 'application/json' })
+  begin
+    response = connection.post("/dashboards/#{dashboard_id}/widgets", data.to_json, { :'Content-Type' => 'application/json' })
+    widget_id = JSON.parse(response.body).fetch('widget_id')
+    Chef::Log.info("Graylog2 API response: #{response.status}")
+  rescue Exception => e
+    Chef::Application.fatal!("Failed to create dashboard widget #{data.fetch('title')}.\n#{e.message}")
+  end
+
+  return widget_id
+end
+
+def create_dashboard_widget_positions(connection, dashboard_id, positions)
+  data = { positions: positions }
+  response = connection.put("/dashboards/#{dashboard_id}/positions", data.to_json, { :'Content-Type' => 'application/json' })
   Chef::Log.info("Graylog2 API response: #{response.status}")
 
   return response
