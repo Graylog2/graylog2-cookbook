@@ -45,7 +45,7 @@ suites:
         streams: 
           - '{"title":"Demo Stream","description":"Show all GETs", "rules": [{"field":"message","value":"GET.*","type":2,"inverted":false}, {"field":"message","value":".*/login.*","type":2,"inverted":false}], "alarm_callbacks": [{"configuration": { "sender": "graylog@example.org", "body": "Demo Alert", "subject": "Graylog alert for stream: ${stream.title}" }, "type": "org.graylog2.alarmcallbacks.EmailAlarmCallback"}], "alert_conditions": [{"type":"message_count", "parameters":{"grace":10,"time":5,"threshold_type":"more","backlog":1,"threshold":3}}]}'
         dashboards:
-          - '{"title": "Demo SSH Dashboard", "description": "SSH related widgets", "widgets": [ { "description": "SSH messages", "config": { "interval": "minute", "query": "*", "range_type": "relative", "range": "0" }, "type": "search_result_chart", "creator_user_id": "admin" }, { "description": "No. SSH logins", "config": { "query": "message:sshd AND message:opened", "range_type": "relative", "range": "0" }, "type": "search_result_count", "creator_user_id": "admin" } ] }'
+          - '{"title": "Demo SSH Dashboard", "description": "SSH related widgets", "widgets": [ { "description": "SSH messages", "config": { "interval": "minute", "query": "*", "range_type": "relative", "range": "0" },  "position": {"row": 1,"col": 2 }, "type": "search_result_chart" }, { "description": "No. SSH logins", "config": { "query": "message:sshd AND message:opened", "range_type": "relative", "range": "0" }, "type": "search_result_count" } ] }'
       elasticsearch:
         version: "1.5.2"
         cluster:
