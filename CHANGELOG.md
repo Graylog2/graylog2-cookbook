@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.0.5
+
+* add position parameter to dashboard provider
+
 ## 1.0.4
 
 * Update Graylog version to 1.0.2
