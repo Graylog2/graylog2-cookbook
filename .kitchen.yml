@@ -21,7 +21,7 @@ platforms:
 - name: ubuntu-14.04
   run_list:
   - recipe[apt]
-- name: debian-7.7
+- name: debian-7.8
   run_list:
   - recipe[apt]
 
@@ -58,4 +58,5 @@ suites:
       - recipe[graylog2::server]
       - recipe[graylog2::web]
       - recipe[graylog2::radio]
+      - recipe[graylog2::collector]
       - recipe[graylog2::authbind]

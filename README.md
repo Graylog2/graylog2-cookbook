@@ -20,6 +20,7 @@ you need for your environment.
 |radio      |Install a Graylog radio node|
 |authbind   |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
 |api_access |Use Graylog API to setup inputs like 'Syslog UDP'|
+|collector  |Install Graylog's collector (Experimental)|
 
 In a minimal setup you need at least the _default_, _server_ and _web_ recipes. Combined with
 MongoDB and Elasticsearch, a run list might look like this:

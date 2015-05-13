@@ -2,16 +2,17 @@ node.default[:graylog2] ||= {}
 node.default[:mongodb]  ||= {}
 
 # General
-default.graylog2[:major_version]    = '1.0'
-default.graylog2[:server][:version] = '1.0.2-1'
-default.graylog2[:web][:version]    = '1.0.2-1'
-default.graylog2[:radio][:version]  = '1.0.2-1'
-default.graylog2[:root_username]    = 'admin'
-default.graylog2[:root_email]       = nil
-default.graylog2[:root_timezone]    = nil
-default.graylog2[:restart]          = 'delayed'
-default.graylog2[:no_retention]     = nil
-default.graylog2[:disable_sigar]    = nil
+default.graylog2[:major_version]             = '1.0'
+default.graylog2[:server][:version]          = '1.0.2-1'
+default.graylog2[:web][:version]             = '1.0.2-1'
+default.graylog2[:radio][:version]           = '1.0.2-1'
+default.graylog2[:collector][:version]       = '0.2.0-SNAPSHOT-20150512141600'
+default.graylog2[:root_username]             = 'admin'
+default.graylog2[:root_email]                = nil
+default.graylog2[:root_timezone]             = nil
+default.graylog2[:restart]                   = 'delayed'
+default.graylog2[:no_retention]              = nil
+default.graylog2[:disable_sigar]             = nil
 default.graylog2[:groovy_shell_enable]       = nil
 default.graylog2[:groovy_shell_port]         = nil
 default.graylog2[:enable_metrics_collection] = nil
@@ -23,6 +24,8 @@ default.graylog2[:web][:user]     = 'graylog-web'
 default.graylog2[:web][:group]    = 'graylog-web'
 default.graylog2[:radio][:user]   = 'graylog-radio'
 default.graylog2[:radio][:group]  = 'graylog-radio'
+default.graylog2[:collector][:user]   = 'graylog-collector'
+default.graylog2[:collector][:group]  = 'graylog-collector'
 
 # Generated API resources
 default.graylog2[:inputs] = nil
@@ -258,3 +261,13 @@ default.graylog2[:radio][:log_level_ldap]            = 'error'
 default.graylog2[:radio][:log_level_root]            = 'warn'
 default.graylog2[:radio][:override_restart_command]  = false
 default.graylog2[:radio][:additional_options]        = nil
+
+# Collector
+default.graylog2[:collector][:package_url]              = "http://packages.graylog2.org/nightly-builds/graylog-collector-#{node.graylog2[:collector][:version]}.tar.gz"
+default.graylog2[:collector][:server_url]               = "http://localhost:12900"
+default.graylog2[:collector][:id]                       = "file:/etc/graylog/collector/collector-id"
+default.graylog2[:collector][:buffer_size]              = 128
+default.graylog2[:collector][:metrics][:enable_logging] = "false"
+default.graylog2[:collector][:metrics][:log_duration]   = "60s"
+default.graylog2[:collector][:inputs]                   = {"local-syslog" => {"type" => "file", "path" => "/var/log/syslog", "charset" => "utf-8", "content-splitter" => "newline"}}
+default.graylog2[:collector][:outputs]                  = {"gelf-tcp" => {"type" => "gelf", "protocol" => "tcp", "host" => "127.0.0.1", "port" => 12201}}
