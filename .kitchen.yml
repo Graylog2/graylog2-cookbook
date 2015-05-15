@@ -5,6 +5,19 @@ driver:
 driver_config:
   customize:
     memory: 4096
+  network:
+    - - forwarded_port
+      - guest: 9000
+        host: 9000
+        auto_correct: true 
+    - - forwarded_port
+      - guest: 12900
+        host: 12900
+        auto_correct: true 
+    - - forwarded_port
+      - guest: 12201
+        host: 12201
+        auto_correct: true 
 
 provisioner:
   name: chef_solo

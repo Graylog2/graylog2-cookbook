@@ -8,6 +8,15 @@ It is using the official installation packages provided by [_Graylog, Inc._](htt
 Usage
 -----
 
+### Quickstart
+To give this cookbook a try simply use the Kitchen test suite.
+
+```
+kitchen setup default-ubuntu-1404
+open http://localhost:9000
+Login with admin/admin
+```
+
 ### Recipes
 The cookbook contains several recipes for different installation setups. Pick only the recipes
 you need for your environment.
