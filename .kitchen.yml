@@ -9,11 +9,11 @@ driver_config:
     - - forwarded_port
       - guest: 9000
         host: 9000
-        auto_correct: true 
+        auto_correct: true
     - - forwarded_port
       - guest: 12900
         host: 12900
-        auto_correct: true 
+        auto_correct: true
     - - forwarded_port
       - guest: 12201
         host: 12201
@@ -40,8 +40,6 @@ platforms:
 
 suites:
   - name: default
-    data_bags_path: "test/integration/default/data_bags"
-    encrypted_data_bag_secret_key_path: "test/integration/default/encrypted_data_bag_secret"
     attributes:
       machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
