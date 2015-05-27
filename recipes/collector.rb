@@ -42,7 +42,7 @@ template '/etc/graylog/collector/collector.conf' do
   group node.graylog2[:collector][:group]
 end
 
-case node['platform']
+case node[:platform]
 when 'ubuntu'
   template '/etc/init/graylog-collector.conf' do
     action :create
@@ -53,7 +53,7 @@ when 'ubuntu'
 
   service 'graylog-collector' do
     action [:enable, :start]
-    provider Chef::Provider::Service::Upstart if node['platform_version'].to_f >= 9.10
+    provider Chef::Provider::Service::Upstart if node[:platform_version].to_f >= 9.10
   end
 
 when 'debian'

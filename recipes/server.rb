@@ -42,7 +42,7 @@ else
   is_master = false
 end
 
-default_rest_uri = "http://#{node['ipaddress']}:12900/"
+default_rest_uri = "http://#{node[:ipaddress]}:12900/"
 
 template '/etc/graylog/server/server.conf' do
   source 'graylog.server.conf.erb'

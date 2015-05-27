@@ -25,8 +25,8 @@ service 'graylog-radio' do
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
 end
 
-default_server_uri = "http://#{node['ipaddress']}:12900/"
-default_rest_listen_uri = "http://#{node['ipaddress']}:12950/"
+default_server_uri = "http://#{node[:ipaddress]}:12900/"
+default_rest_listen_uri = "http://#{node[:ipaddress]}:12950/"
 
 template '/etc/graylog/radio/radio.conf' do
   source 'graylog.radio.conf.erb'

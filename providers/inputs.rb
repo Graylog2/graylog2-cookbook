@@ -3,7 +3,7 @@ action :create do
   require 'faraday'
   require 'faraday/conductivity'
 
-  rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
+  rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node[:ipaddress]}:12900/"
 
   Chef::Application.fatal!('You need to set an access token in order to use the API.') if node[:graylog2][:rest][:admin_access_token].nil?
   connection = Faraday.new(url: rest_uri) do |faraday|
@@ -39,6 +39,7 @@ action :create do
       rescue StandardError => e
         Chef::Application.fatal!("Failed to create input #{input.fetch('title')}.\n#{e.message}")
       end
+      new_resource.updated_by_last_action(true)
     end
   end
 end

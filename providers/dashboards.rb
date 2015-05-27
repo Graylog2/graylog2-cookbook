@@ -5,7 +5,7 @@ action :create do
 
   Chef::Application.fatal!('You need to set an access token in order to use the API.') if node[:graylog2][:rest][:admin_access_token].nil?
 
-  rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
+  rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node[:ipaddress]}:12900/"
   connection = Faraday.new(url: rest_uri) do |faraday|
     faraday.basic_auth(node[:graylog2][:rest][:admin_access_token], 'token')
     faraday.adapter(Faraday.default_adapter)
@@ -52,6 +52,7 @@ action :create do
       end
 
       create_dashboard_widget_positions(connection, dashboard_id, positions) unless positions.empty?
+      new_resource.updated_by_last_action(true)
     end
   end
 end

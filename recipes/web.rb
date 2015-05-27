@@ -22,7 +22,7 @@ service 'graylog-web' do
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
 end
 
-default_backend_uri = "http://#{node['ipaddress']}:12900/"
+default_backend_uri = "http://#{node[:ipaddress]}:12900/"
 
 template '/etc/graylog/web/web.conf' do
   source 'graylog.web.conf.erb'

@@ -27,6 +27,6 @@ package repository_file do
     provider Chef::Provider::Package::Rpm
   elsif platform?('ubuntu', 'debian')
     provider Chef::Provider::Package::Dpkg
-    notifies :run, resources(:execute => 'apt-update'), :immediately
+    notifies :run, 'execute[apt-update]', :immediately
   end
 end

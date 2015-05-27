@@ -5,7 +5,7 @@ action :create do
 
   NO_RETRIES = node[:graylog2][:api_client_timeout] || 300
 
-  rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node['ipaddress']}:12900/"
+  rest_uri = node[:graylog2][:rest][:listen_uri] || "http://#{node[:ipaddress]}:12900/"
   connection = Faraday.new(url: rest_uri) do |faraday|
     faraday.adapter(Faraday.default_adapter)
     faraday.use :repeater, retries: NO_RETRIES, mode: :one
@@ -25,4 +25,5 @@ action :create do
     sleep 1
     retry
   end
+  new_resource.updated_by_last_action(true)
 end

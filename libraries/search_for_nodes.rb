@@ -48,7 +48,7 @@ module Extensions
     def select_attribute(node, attribute = nil)
       if attribute
         # iterates through keys seperated by '.', eg
-        # 'foo.bar.baz' => node['foo']['bar']['baz']
+        # 'foo.bar.baz' => node[:foo][:bar][:baz]
         keys = attribute.split('.')
         value = node
         keys.each do |key|
@@ -57,12 +57,12 @@ module Extensions
         Chef::Log.debug("Selected attribute: #{attribute.inspect} for node: #{node.name.inspect} with value: #{value.inspect}")
         value
       else
-        if node.key?('cloud') && node['cloud'].key?('local_ipv4')
-          value = node['cloud']['local_ipv4']
+        if node.key?('cloud') && node[:cloud].key?('local_ipv4')
+          value = node[:cloud][:local_ipv4]
           Chef::Log.debug("Selected attribute: \"cloud.local_ipv4\" for node: #{node.name.inspect} with value: #{value.inspect}")
           value
         else
-          value = node['ipaddress']
+          value = node[:ipaddress]
           Chef::Log.debug("Selected attribute: \"ipaddress\" for node: #{node.name.inspect} with value: #{value.inspect}")
           value
         end
