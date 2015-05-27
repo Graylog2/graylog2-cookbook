@@ -16,10 +16,8 @@ action :create do
 
   begin
     response = connection.get('/system/lbstatus')
-    if !response.success?
-      raise Exception "Response was not successful"
-    end
-  rescue Exception
+    raise Exception 'Response was not successful' unless response.success?
+  rescue StandardError
     open_connection_retries += 1
     if open_connection_retries >= NO_RETRIES
       Chef::Application.fatal!("Couldn't connect to the Graylog2 API #{rest_uri}")
@@ -28,4 +26,3 @@ action :create do
     retry
   end
 end
-

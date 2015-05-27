@@ -57,7 +57,7 @@ module Extensions
         Chef::Log.debug("Selected attribute: #{attribute.inspect} for node: #{node.name.inspect} with value: #{value.inspect}")
         value
       else
-        if node.has_key? 'cloud' and node['cloud'].has_key? 'local_ipv4'
+        if node.key?('cloud') && node['cloud'].key?('local_ipv4')
           value = node['cloud']['local_ipv4']
           Chef::Log.debug("Selected attribute: \"cloud.local_ipv4\" for node: #{node.name.inspect} with value: #{value.inspect}")
           value

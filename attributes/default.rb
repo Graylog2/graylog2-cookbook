@@ -1,5 +1,5 @@
 node.default[:graylog2] ||= {}
-node.default[:mongodb]  ||= {}
+node.default[:mongodb] ||= {}
 
 # General
 default.graylog2[:major_version]             = '1.0'
@@ -57,7 +57,7 @@ default.graylog2[:rest][:transport_uri]           = nil
 default.graylog2[:rest][:enable_cors]             = nil
 default.graylog2[:rest][:enable_gzip]             = nil
 default.graylog2[:rest][:admin_access_token]      = nil # pwgen -s 96 1
-default.graylog2[:rest][:enable_tls]              = nil 
+default.graylog2[:rest][:enable_tls]              = nil
 default.graylog2[:rest][:tls_cert_file]           = nil
 default.graylog2[:rest][:tls_key_file]            = nil
 default.graylog2[:rest][:tls_key_password]        = nil
@@ -264,10 +264,10 @@ default.graylog2[:radio][:additional_options]        = nil
 
 # Collector
 default.graylog2[:collector][:package_url]              = "http://packages.graylog2.org/nightly-builds/graylog-collector-#{node.graylog2[:collector][:version]}.tar.gz"
-default.graylog2[:collector][:server_url]               = "http://localhost:12900"
-default.graylog2[:collector][:id]                       = "file:/etc/graylog/collector/collector-id"
+default.graylog2[:collector][:server_url]               = 'http://localhost:12900'
+default.graylog2[:collector][:id]                       = 'file:/etc/graylog/collector/collector-id'
 default.graylog2[:collector][:buffer_size]              = 128
-default.graylog2[:collector][:metrics][:enable_logging] = "false"
-default.graylog2[:collector][:metrics][:log_duration]   = "60s"
-default.graylog2[:collector][:inputs]                   = {"local-syslog" => {"type" => "file", "path" => "/var/log/syslog", "charset" => "utf-8", "content-splitter" => "newline"}}
-default.graylog2[:collector][:outputs]                  = {"gelf-tcp" => {"type" => "gelf", "protocol" => "tcp", "host" => "127.0.0.1", "port" => 12201}}
+default.graylog2[:collector][:metrics][:enable_logging] = 'false'
+default.graylog2[:collector][:metrics][:log_duration]   = '60s'
+default.graylog2[:collector][:inputs]                   = { 'local-syslog' => { 'type' => 'file', 'path' => '/var/log/syslog', 'charset' => 'utf-8', 'content-splitter' => 'newline' } }
+default.graylog2[:collector][:outputs]                  = { 'gelf-tcp' => { 'type' => 'gelf', 'protocol' => 'tcp', 'host' => '127.0.0.1', 'port' => 12201 } }

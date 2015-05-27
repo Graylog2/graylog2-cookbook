@@ -6,7 +6,7 @@ elsif platform?('ubuntu')
   repository_file = "graylog-#{version}-repository-ubuntu14.04_latest.deb"
 elsif platform?('debian')
   repository_file = "graylog-#{version}-repository-debian7_latest.deb"
-  package "apt-transport-https"
+  package 'apt-transport-https'
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{repository_file}" do
@@ -27,6 +27,6 @@ package repository_file do
     provider Chef::Provider::Package::Rpm
   elsif platform?('ubuntu', 'debian')
     provider Chef::Provider::Package::Dpkg
-    notifies :run, resources(:execute => "apt-update"), :immediately
+    notifies :run, resources(:execute => 'apt-update'), :immediately
   end
 end
