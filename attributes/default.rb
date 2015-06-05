@@ -16,6 +16,7 @@ default.graylog2[:disable_sigar]             = nil
 default.graylog2[:groovy_shell_enable]       = nil
 default.graylog2[:groovy_shell_port]         = nil
 default.graylog2[:enable_metrics_collection] = nil
+default.graylog2[:dashboard_widget_default_cache_time] = '10s'
 
 # Users
 default.graylog2[:server][:user]  = 'graylog'
@@ -98,6 +99,7 @@ default.graylog2[:elasticsearch][:disable_version_check]        = nil
 default.graylog2[:elasticsearch][:disable_index_optimization]   = nil
 default.graylog2[:elasticsearch][:index_optimization_max_num_segments] = nil
 default.graylog2[:elasticsearch][:disable_index_range_calculation]     = nil
+default.graylog2[:elasticsearch][:elasticsearch_store_timestamps_as_doc_values] = true
 
 # MongoDb
 default.graylog2[:mongodb][:useauth]         = false
@@ -152,6 +154,9 @@ default.graylog2[:stream_processing_timeout] = 2000
 default.graylog2[:ldap_connection_timeout]   = 2000
 default.graylog2[:elasticsearch][:cluster_discovery_timeout] = 5000
 default.graylog2[:api_client_timeout]        = 300
+default.graylog2[:http_connect_timeout]      = '5s'
+default.graylog2[:http_read_timeout]         = '10s'
+default.graylog2[:http_write_timeout]        = '10s'
 
 # Intervals
 default.graylog2[:server][:alert_check_interval] = nil
@@ -174,17 +179,6 @@ default.graylog2[:transport_email_auth_password]     = 'secret'
 default.graylog2[:transport_email_subject_prefix]    = '[graylog]'
 default.graylog2[:transport_email_from_email]        = 'graylog@example.com'
 default.graylog2[:transport_email_web_interface_url] = nil
-
-# Telemetry
-default.graylog2[:telemetry_enabled]                 = false
-default.graylog2[:telemetry_url]                     = nil
-default.graylog2[:telemetry_token]                   = nil
-default.graylog2[:telemetry_report_interval]         = nil
-default.graylog2[:telemetry_max_queue_size]          = nil
-default.graylog2[:telemetry_cache_timeout]           = nil
-default.graylog2[:telemetry_service_connect_timeout] = nil
-default.graylog2[:telemetry_service_write_timeout]   = nil
-default.graylog2[:telemetry_service_read_timeout]    = nil
 
 # Logging
 default.graylog2[:server][:log_file]      = '/var/log/graylog-server/server.log'
@@ -263,11 +257,13 @@ default.graylog2[:radio][:override_restart_command]  = false
 default.graylog2[:radio][:additional_options]        = nil
 
 # Collector
-default.graylog2[:collector][:package_url]              = "http://packages.graylog2.org/nightly-builds/graylog-collector-#{node.graylog2[:collector][:version]}.tar.gz"
-default.graylog2[:collector][:server_url]               = 'http://localhost:12900'
-default.graylog2[:collector][:id]                       = 'file:/etc/graylog/collector/collector-id'
-default.graylog2[:collector][:buffer_size]              = 128
-default.graylog2[:collector][:metrics][:enable_logging] = 'false'
-default.graylog2[:collector][:metrics][:log_duration]   = '60s'
-default.graylog2[:collector][:inputs]                   = { 'local-syslog' => { 'type' => 'file', 'path' => '/var/log/syslog', 'charset' => 'utf-8', 'content-splitter' => 'newline' } }
-default.graylog2[:collector][:outputs]                  = { 'gelf-tcp' => { 'type' => 'gelf', 'protocol' => 'tcp', 'host' => '127.0.0.1', 'port' => 12201 } }
+default.graylog2[:collector][:package_url]                  = "http://packages.graylog2.org/nightly-builds/graylog-collector-#{node.graylog2[:collector][:version]}.tar.gz"
+default.graylog2[:collector][:server_url]                   = 'http://localhost:12900'
+default.graylog2[:collector][:id]                           = 'file:/etc/graylog/collector/collector-id'
+default.graylog2[:collector][:buffer_size]                  = 128
+default.graylog2[:collector][:metrics][:enable_logging]     = 'false'
+default.graylog2[:collector][:metrics][:log_duration]       = '60s'
+default.graylog2[:collector][:inputs]                       = { 'local-syslog' => { 'type' => 'file', 'path' => '/var/log/syslog', 'charset' => 'utf-8', 'content-splitter' => 'newline' } }
+default.graylog2[:collector][:outputs]                      = { 'gelf-tcp' => { 'type' => 'gelf', 'protocol' => 'tcp', 'host' => '127.0.0.1', 'port' => 12201 } }
+default.graylog2[:server][:collector_inactive_threshold]    = '1m'
+default.graylog2[:server][:collector_expiration_threshold]  = '14d'

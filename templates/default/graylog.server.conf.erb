@@ -7,6 +7,7 @@
 <%= config_option 'groovy_shell_enable', node.graylog2[:groovy_shell_enable] -%>
 <%= config_option 'groovy_shell_port', node.graylog2[:groovy_shell_port] -%>
 <%= config_option 'enable_metrics_collection', node.graylog2[:enable_metrics_collection] -%>
+<%= config_option 'dashboard_widget_default_cache_time', node.graylog2[:dashboard_widget_default_cache_time] -%>
 
 # Access secrets
 <%= config_option 'password_secret', node.graylog2[:password_secret], enclose: node.graylog2[:password_secret_enclose_char] -%>
@@ -70,6 +71,7 @@ elasticsearch_node_data = false
 <%= config_option 'disable_index_optimization', node.graylog2[:disable_index_optimization] -%>
 <%= config_option 'index_optimization_max_num_segments', node.graylog2[:index_optimization_max_num_segments] -%>
 <%= config_option 'disable_index_range_calculation', node.graylog2[:disable_index_range_calculation] -%>
+<%= config_option 'elasticsearch_store_timestamps_as_doc_values', node.graylog2[:elasticsearch_store_timestamps_as_doc_values] -%>
 
 # Processors
 <%= config_option 'processbuffer_processors', node.graylog2[:processbuffer_processors] -%>
@@ -99,6 +101,9 @@ elasticsearch_node_data = false
 <%= config_option 'stale_master_timeout', node.graylog2[:stale_master_timeout] -%>
 <%= config_option 'shutdown_timeout', node.graylog2[:shutdown_timeout] -%>
 <%= config_option 'ldap_connection_timeout', node.graylog2[:ldap_connection_timeout] -%>
+<%= config_option 'http_connect_timeout', node.graylog2[:http_connect_timeout] -%>
+<%= config_option 'http_read_timeout', node.graylog2[:http_read_timeout] -%>
+<%= config_option 'http_write_timeout', node.graylog2[:http_write_timeout] -%>
 
 # Ring buffers
 <%= config_option 'ring_size', node.graylog2[:ring_size] -%>
@@ -144,17 +149,6 @@ elasticsearch_node_data = false
 <%= config_option 'transport_email_from_email', node.graylog2[:transport_email_from_email] -%>
 <%= config_option 'transport_email_web_interface_url', node.graylog2[:transport_email_web_interface_url] -%>
 
-# Telemetry
-<%= config_option 'telemetry_enabled', node.graylog2[:telemetry_enabled] -%>
-<%= config_option 'telemetry_url', node.graylog2[:telemetry_url] -%>
-<%= config_option 'telemetry_token', node.graylog2[:telemetry_token] -%>
-<%= config_option 'telemetry_report_interval', node.graylog2[:telemetry_report_interval] -%>
-<%= config_option 'telemetry_max_queue_size', node.graylog2[:telemetry_max_queue_size] -%>
-<%= config_option 'telemetry_cache_timeout', node.graylog2[:telemetry_cache_timeout] -%>
-<%= config_option 'telemetry_service_connect_timeout', node.graylog2[:telemetry_service_connect_timeout] -%>
-<%= config_option 'telemetry_service_write_timeout', node.graylog2[:telemetry_service_write_timeout] -%>
-<%= config_option 'telemetry_service_read_timeout', node.graylog2[:telemetry_service_read_timeout] -%>
-
 # HTTP proxy for outgoing HTTP calls
 <%= config_option 'http_proxy_uri', node.graylog2[:http_proxy_uri] -%>
 
@@ -167,6 +161,10 @@ elasticsearch_node_data = false
 # GC
 <%= config_option 'gc_check_interval', node.graylog2[:server][:gc_check_interval] -%>
 <%= config_option 'gc_warning_threshold', node.graylog2[:server][:gc_warning_threshold] -%>
+
+# Collector
+<%= config_option 'collector_inactive_threshold ', node.graylog2[:server][:collector_inactive_threshold] -%>
+<%= config_option 'collector_expiration_threshold ', node.graylog2[:server][:collector_expiration_threshold] -%>
 
 # Additional options
 <%= node.graylog2[:server][:additional_options] -%>
