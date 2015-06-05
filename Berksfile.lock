@@ -6,6 +6,7 @@ DEPENDENCIES
   graylog2
     path: .
     metadata: true
+  java
   mongodb
 
 GRAPH
@@ -35,7 +36,7 @@ GRAPH
     java (>= 0.0.0)
     mongodb (>= 0.0.0)
   hostsfile (2.4.5)
-  java (1.28.0)
+  java (1.31.0)
   line (0.5.1)
   mongodb (0.16.1)
     apt (>= 1.8.2)

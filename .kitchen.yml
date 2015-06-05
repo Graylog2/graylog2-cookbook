@@ -43,6 +43,11 @@ suites:
     attributes:
       machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
+      java:
+        jdk_version: '8'
+        install_flavor: 'oracle'
+        oracle:
+          accept_oracle_download_terms: true
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
@@ -63,6 +68,7 @@ suites:
           name: "graylog2"
     run_list:
       - recipe[fqdn]
+      - recipe[java]
       - recipe[mongodb]
       - recipe[elasticsearch]
       - recipe[graylog2]

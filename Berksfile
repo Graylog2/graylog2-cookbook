@@ -8,4 +8,5 @@ group :integration do
   cookbook 'authbind'
   cookbook 'mongodb'
   cookbook 'elasticsearch'
+  cookbook 'java'
 end
