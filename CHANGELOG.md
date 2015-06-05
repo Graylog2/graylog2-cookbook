@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.1.1
+
+* Update to bug-fix release 1.1.1
+
 ## 1.1.0
 
 * Update to Graylog 1.1.0
