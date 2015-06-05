@@ -1,6 +1,12 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.1.0
+
+* Update to Graylog 1.1.0
+* add new attributes for 1.1.0
+* introduce foodcritic and rubocop
+
 ## 1.0.5
 
 * add position parameter to dashboard provider
