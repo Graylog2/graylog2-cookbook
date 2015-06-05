@@ -102,13 +102,7 @@ default.graylog2[:elasticsearch][:disable_index_range_calculation]     = nil
 default.graylog2[:elasticsearch][:elasticsearch_store_timestamps_as_doc_values] = true
 
 # MongoDb
-default.graylog2[:mongodb][:useauth]         = false
-default.graylog2[:mongodb][:user]            = nil
-default.graylog2[:mongodb][:password]        = nil
-default.graylog2[:mongodb][:host]            = '127.0.0.1'
-default.graylog2[:mongodb][:replica_set]     = nil
-default.graylog2[:mongodb][:database]        = 'graylog2'
-default.graylog2[:mongodb][:port]            = 27017
+default.graylog2[:mongodb][:uri] = 'mongodb://127.0.0.1:27017/graylog2'
 default.graylog2[:mongodb][:max_connections] = 100
 default.graylog2[:mongodb][:threads_allowed_to_block_multiplier] = 5
 
@@ -257,7 +251,7 @@ default.graylog2[:radio][:override_restart_command]  = false
 default.graylog2[:radio][:additional_options]        = nil
 
 # Collector
-default.graylog2[:collector][:package_url]                  = "http://packages.graylog2.org/nightly-builds/graylog-collector-#{node.graylog2[:collector][:version]}.tar.gz"
+default.graylog2[:collector][:package_url]                  = "http://packages.graylog2.org/releases/graylog-collector/graylog-collector-#{node.graylog2[:collector][:version]}.tgz"
 default.graylog2[:collector][:server_url]                   = 'http://localhost:12900'
 default.graylog2[:collector][:id]                           = 'file:/etc/graylog/collector/collector-id'
 default.graylog2[:collector][:buffer_size]                  = 128
