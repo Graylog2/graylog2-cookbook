@@ -46,16 +46,22 @@ run_list "recipe[java]",
 ### Attributes
 Graylog runs currently with Java 8. To install the correct version set this attribute:
 
-```
+```json
   "java": {
-    "jdk_version": "8"
+    "jdk_version": "8",
+    "install_flavor": "oracle",
+    "oracle": {
+      "accept_oracle_download_terms": true
+    }
+  }
 ```
-OpenJDK and Oracle JDK is both fine for Graylog
+
+OpenJDK and Oracle JDK are both fine for Graylog, but the [Java cookbook](https://supermarket.chef.io/cookbooks/java) only supports Oracle's Java 8. Note that you must accept Oracle's download terms.
 
 You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
 this is 1.5.2. The cluster name should be 'graylog2':
 
-```
+```json
   "elasticsearch": {
     "version": "1.5.2",
     "cluster": {
@@ -68,9 +74,9 @@ Graylog itself needs a secret for encryption and a hashed password for the root 
 
 You can create the secret with this shell command `pwgen -s 96 1`.
 
-The password can be generated with `echo -n yourpassword | shasum -a 256`
+The password can be generated with `echo -n yourpassword | shasum -a 256 | awk '{print $1}'`
 
-```
+```json
   "graylog2": {
     "password_secret": "ZxUahiN48EFVJgzRTzGO2olFRmjmsvzybSf4YwBvn5x1asLUBPe8GHbOQTZ0jzuAB7dzrNPk3wCEH57PCZm23MHAET0G653G",
     "root_password_sha2": "e3c652f0ba0b4801205814f8b6bc49672c4c74e25b497770bb89b22cdeb4e951",
@@ -80,13 +86,13 @@ The password can be generated with `echo -n yourpassword | shasum -a 256`
     "web": {
       "secret": "ZxUahiN48EFVJgzRTzGO2olFRmjmsvzybSf4YwBvn5x1asLUBPe8GHbOQTZ0jzuAB7dzrNPk3wCEH57PCZm23MHAET0G653G"
     }
-
+  }
 ```
 
 Alternatively you can create an encrypted data bag and store the secrets there. The data should be called
 'secrets' with an item 'graylog'.
 
-```
+```shell
 knife data bag create --secret-file ~/.chef/encrypted_data_bag_secret secrets graylog
 
 {
@@ -108,23 +114,23 @@ what can be configured for Graylog.
 The cookbook is able to use Chef's search to find Elasticsearch and other Graylog nodes. To configure
 a dynamic cluster set the following attributes:
 
-```
-Elasticsearch discovery
-
+#### Elasticsearch discovery
+```ruby
 'graylog2'=> {
   'elasticsearch' => {
     'unicast_search_query' => 'role:elasticsearch',
     'search_node_attribute' => 'ipaddress'
+  }
 }
 ```
 
-```
-Graylog server discovery
-
+#### Graylog server discovery
+```ruby
 'graylog2'=> {
   'web' => {
     'server_search_query' => 'role:graylog-server',
     'search_node_attribute' => 'ipaddress'
+  }
 }
 ```
 
@@ -135,6 +141,7 @@ default.graylog2[:ip_of_master] = node.ipaddress
 ```
 
 ### Authbind
+
 Ubuntu/Debian systems allow a user to bind a proccess to a certain privileged port below 1024.
 This is called authbind and is supported by this cookbook. So it is possible to let Graylog listen on port 514 and act like a normal syslog server.
 To enable this feature include the [authbind](https://supermarket.chef.io/cookbooks/authbind) cookbook to your run list and also the recipe
@@ -143,23 +150,24 @@ By default the recipe will give the Graylog user permission to bind to port 514 
 set the attribute `default.graylog2[:authorized_ports]` to an array of allowed ports.
 
 ### API access
+
 In order to access the API of Graylog we provide a LWRP to do so. At the moment we only support
 the creation of inputs but the LWRP is easy to extend. You can use the provider in your own
 recipe like this:
 
 Include `recipe[graylog2::api_access]` to your run list.
 
-```
+```ruby
 graylog2_inputs "syslog udp" do
-input '{ "title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 } }'
+  input '{ "title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 } }'
 end
 ```
 
 or you can put the same JSON into an array and set it as an attribute:
 
-```
+```json
 "graylog2": {
-    "inputs": ["{ \"title\": \"syslog\", \"type\":\"org.graylog2.inputs.syslog.udp.SyslogUDPInput\", \"global\": true, \"configuration\": { \"port\": 1514, \"allow_override_date\": true, \"bind_address\": \"0.0.0.0\", \"store_full_message\": true, \"recv_buffer_size\": 1048576 } }"]
+  "inputs": ["{ \"title\": \"syslog\", \"type\":\"org.graylog2.inputs.syslog.udp.SyslogUDPInput\", \"global\": true, \"configuration\": { \"port\": 1514, \"allow_override_date\": true, \"bind_address\": \"0.0.0.0\", \"store_full_message\": true, \"recv_buffer_size\": 1048576 } }"]
 }
 ```
 
