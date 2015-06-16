@@ -17,7 +17,7 @@ default.graylog2[:groovy_shell_enable]       = nil
 default.graylog2[:groovy_shell_port]         = nil
 default.graylog2[:enable_metrics_collection] = nil
 default.graylog2[:dashboard_widget_default_cache_time] = '10s'
-
+default.graylog2[:secrets_data_bag]          = 'secrets'
 # Users
 default.graylog2[:server][:user]  = 'graylog'
 default.graylog2[:server][:group] = 'graylog'

@@ -1,6 +1,6 @@
 # Override attributes from data bag's "web" section
 begin
-  secrets = Chef::EncryptedDataBagItem.load('secrets', 'graylog')['web']
+  secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['web']
 rescue
   Chef::Log.debug 'Can not merge web secrets from databag'
 end

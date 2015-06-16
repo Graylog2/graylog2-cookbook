@@ -1,6 +1,6 @@
 # Override attributes from data bag's "collector" section
 begin
-  secrets = Chef::EncryptedDataBagItem.load('secrets', 'graylog')['collector']
+  secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['collector']
 rescue
   Chef::Log.debug 'Can not merge collector secrets from databag'
 end
