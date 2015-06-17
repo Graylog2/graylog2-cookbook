@@ -1,6 +1,6 @@
 # Override attributes from data bag's "radio" section
 begin
-  secrets = Chef::EncryptedDataBagItem.load('secrets', 'graylog')['radio']
+  secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['radio']
 rescue
   Chef::Log.debug 'Can not merge radio secrets from databag'
 end
