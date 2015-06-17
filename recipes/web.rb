@@ -4,8 +4,8 @@ begin
 rescue
   Chef::Log.debug 'Can not merge web secrets from databag'
 end
-Chef::Mixin::DeepMerge.deep_merge!(secrets, node.override[:graylog2]) unless secrets.nil?
-Chef::Application.fatal!('No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless node.graylog2[:web][:secret]
+Chef::Mixin::DeepMerge.deep_merge!(secrets, node.override[:graylog2][:web]) unless secrets.nil?
+Chef::Application.fatal!('No web secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless node.graylog2[:web][:secret]
 
 package 'graylog-web' do
   action :install
