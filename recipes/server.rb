@@ -1,6 +1,6 @@
 # Override attributes from data bag's "server" section
 begin
-  secrets = Chef::EncryptedDataBagItem.load('secrets', 'graylog')['server']
+  secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['server']
 rescue
   Chef::Log.debug 'Can not merge server secrets from databag'
 end
