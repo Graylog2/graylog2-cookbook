@@ -102,6 +102,15 @@ default.graylog2[:elasticsearch][:disable_index_range_calculation]     = nil
 default.graylog2[:elasticsearch][:elasticsearch_store_timestamps_as_doc_values] = true
 
 # MongoDb
+# Use these settings for Graylog <= 1.0
+default.graylog2[:mongodb][:useauth]     = false
+default.graylog2[:mongodb][:user]        = nil
+default.graylog2[:mongodb][:password]    = nil
+default.graylog2[:mongodb][:host]        = '127.0.0.1'
+default.graylog2[:mongodb][:replica_set] = nil
+default.graylog2[:mongodb][:database]    = 'graylog2'
+default.graylog2[:mongodb][:port]        = 27017
+# Use a URI for Graylog >= 1.1
 default.graylog2[:mongodb][:uri] = 'mongodb://127.0.0.1:27017/graylog2'
 default.graylog2[:mongodb][:max_connections] = 100
 default.graylog2[:mongodb][:threads_allowed_to_block_multiplier] = 5

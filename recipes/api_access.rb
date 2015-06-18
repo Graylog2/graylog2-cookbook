@@ -1,10 +1,13 @@
 chef_gem 'mongo' do
-  version '1.10.2'
+  compile_time false if respond_to?(:compile_time)
+  version '1.12.3'
 end
 chef_gem 'faraday' do
+  compile_time false if respond_to?(:compile_time)
   version '0.9.0'
 end
 chef_gem 'faraday-conductivity' do
+  compile_time false if respond_to?(:compile_time)
   version '0.3.0'
 end
 
