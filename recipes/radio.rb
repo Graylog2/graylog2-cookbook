@@ -9,7 +9,7 @@ Chef::Mixin::DeepMerge.deep_merge!(secrets, node.override[:graylog2]) unless sec
 package 'graylog-radio' do
   action :install
   version node.graylog2[:radio][:version]
-  options '--force-yes' if platform?('debian')
+  options '--force-yes' if platform_family?('debian')
 end
 
 directory '/var/run/graylog-radio' do

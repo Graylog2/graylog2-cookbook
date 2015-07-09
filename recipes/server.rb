@@ -18,8 +18,7 @@ end
 package 'graylog-server' do
   action :install
   version node.graylog2[:server][:version]
-  options '--force-yes' if platform?('debian')
-  options '-o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if node.platform_family == 'debian'
+  options '--force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if platform_family?('debian')
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
 end
 
