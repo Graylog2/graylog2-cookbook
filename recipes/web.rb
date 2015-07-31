@@ -23,6 +23,12 @@ end
 
 default_backend_uri = "http://#{node[:ipaddress]}:12900/"
 
+if node.graylog2[:web][:server_search_query] && node.graylog2[:web][:search_node_attribute]
+  nodes = search_for_nodes(node.graylog2[:web][:server_search_query], node.graylog2[:web][:search_node_attribute])
+  Chef::Log.debug("Found Graylog server nodes at #{nodes.join(', ').inspect}")
+  node.set[:graylog2][:web][:server_backends] = nodes.map { |ip| 'http://' + ip + ':12900' }.join(',')
+end
+
 template '/etc/graylog/web/web.conf' do
   source 'graylog.web.conf.erb'
   owner 'root'
@@ -40,12 +46,6 @@ elsif platform_family?('rhel')
   args_file = '/etc/sysconfig/graylog-web'
 else
   Chef::Log.error 'Platform not supported.'
-end
-
-if node.graylog2[:web][:server_search_query] && node.graylog2[:web][:search_node_attribute]
-  nodes = search_for_nodes(node.graylog2[:web][:server_search_query], node.graylog2[:web][:search_node_attribute])
-  Chef::Log.debug("Found Graylog server nodes at #{nodes.join(', ').inspect}")
-  node.set[:graylog2][:web][:discovery_zen_ping_unicast_hosts] = nodes.join(',')
 end
 
 template args_file do
