@@ -26,7 +26,8 @@ default_backend_uri = "http://#{node[:ipaddress]}:12900/"
 if node.graylog2[:web][:server_search_query] && node.graylog2[:web][:search_node_attribute]
   nodes = search_for_nodes(node.graylog2[:web][:server_search_query], node.graylog2[:web][:search_node_attribute])
   Chef::Log.debug("Found Graylog server nodes at #{nodes.join(', ').inspect}")
-  node.set[:graylog2][:web][:server_backends] = nodes.map { |ip| 'http://' + ip + ':12900' }.join(',')
+  node.set[:graylog2][:web][:server_backends] = nodes.map { |ip|
+    "#{node.graylog2[:web][:server_search_protocol]}://#{ip}:#{node.graylog2[:web][:server_search_port]}" }.join(',')
 end
 
 template '/etc/graylog/web/web.conf' do

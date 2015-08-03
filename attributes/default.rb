@@ -3,10 +3,10 @@ node.default[:mongodb] ||= {}
 
 # General
 default.graylog2[:major_version]             = '1.1'
-default.graylog2[:server][:version]          = '1.1.1-1'
-default.graylog2[:web][:version]             = '1.1.1-1'
-default.graylog2[:radio][:version]           = '1.1.1-1'
-default.graylog2[:collector][:version]       = '0.2.2'
+default.graylog2[:server][:version]          = '1.1.5-1'
+default.graylog2[:web][:version]             = '1.1.5-1'
+default.graylog2[:radio][:version]           = '1.1.5-1'
+default.graylog2[:collector][:version]       = '0.4.0'
 default.graylog2[:root_username]             = 'admin'
 default.graylog2[:root_email]                = nil
 default.graylog2[:root_timezone]             = nil
@@ -168,6 +168,8 @@ default.graylog2[:server][:alert_check_interval] = nil
 default.graylog2[:ip_of_master]                  = node.ipaddress
 default.graylog2[:lb_recognition_period_seconds] = 3
 default.graylog2[:web][:server_search_query]     = nil
+default.graylog2[:web][:server_search_protocol]  = 'http'
+default.graylog2[:web][:server_search_port]      = 12900
 default.graylog2[:web][:search_node_attribute]   = nil
 
 # Email transport
