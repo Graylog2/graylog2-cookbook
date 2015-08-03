@@ -1,6 +1,11 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.1.5
+
+* fix web cluster search
+* bump to GL 1.1.5
+
 ## 1.1.2
 
 * fix backwards compartibility with Graylog 1.0
