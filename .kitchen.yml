@@ -20,10 +20,8 @@ driver_config:
         auto_correct: true 
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
   require_chef_omnibus: latest
-
-provisioner:
   data_path: test
 
 platforms:
