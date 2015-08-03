@@ -1,0 +1,9 @@
+{
+  "id": "server2",
+  "run_list": ["role[graylog-server]"],
+  "automatic": {
+    "ipaddress": "10.0.2.15",
+    "roles": ["graylog-server"]
+  }
+}
+
