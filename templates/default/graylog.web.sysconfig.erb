@@ -1,5 +1,6 @@
 # Path to the java executable.
-JAVA=/usr/bin/java
+JAVA="<%= node.graylog2[:server][:java_bin] %>"
+JAVA_HOME="<%= node.graylog2[:server][:java_home] %>"
 
 # HTTP server settings.
 GRAYLOG_WEB_HTTP_ADDRESS="<%= node.graylog2[:web][:listen_address] %>"

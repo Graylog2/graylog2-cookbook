@@ -195,6 +195,8 @@ default.graylog2[:server][:log_level_ldap]        = 'error'
 default.graylog2[:server][:log_level_root]        = 'warn'
 
 # JVM
+default.graylog2[:server][:java_bin] = '/usr/bin/java'
+default.graylog2[:server][:java_home] = ''
 default.graylog2[:server][:java_opts] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -XX:PermSize=128m -XX:MaxPermSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
 default.graylog2[:server][:args]      = ''
 default.graylog2[:server][:wrapper]   = ''
@@ -214,6 +216,8 @@ default.graylog2[:server][:override_restart_command] = false
 default.graylog2[:server][:additional_options]       = nil
 
 # Web
+default.graylog2[:web][:java_bin] = '/usr/bin/java'
+default.graylog2[:web][:java_home] = ''
 default.graylog2[:web][:listen_address]    = '0.0.0.0'
 default.graylog2[:web][:listen_port]       = 9000
 default.graylog2[:web][:server_backends]   = nil
