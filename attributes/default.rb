@@ -3,9 +3,9 @@ node.default[:mongodb] ||= {}
 
 # General
 default.graylog2[:major_version]             = '1.1'
-default.graylog2[:server][:version]          = '1.1.5-1'
-default.graylog2[:web][:version]             = '1.1.5-1'
-default.graylog2[:radio][:version]           = '1.1.5-1'
+default.graylog2[:server][:version]          = '1.1.6-1'
+default.graylog2[:web][:version]             = '1.1.6-1'
+default.graylog2[:radio][:version]           = '1.1.6-1'
 default.graylog2[:collector][:version]       = '0.4.0'
 default.graylog2[:root_username]             = 'admin'
 default.graylog2[:root_email]                = nil
@@ -238,6 +238,8 @@ default.graylog2[:web][:wrapper]                  = ''
 default.graylog2[:web][:additional_options]       = nil
 
 # Radio
+default.graylog2[:radio][:java_bin]                  = '/usr/bin/java'
+default.graylog2[:radio][:java_home]                 = ''
 default.graylog2[:radio][:node_id_file]              = '/etc/graylog/radio/node-id'
 default.graylog2[:radio][:transport_type]            = 'amqp'
 default.graylog2[:radio][:server_uri]                = nil
@@ -266,6 +268,8 @@ default.graylog2[:radio][:override_restart_command]  = false
 default.graylog2[:radio][:additional_options]        = nil
 
 # Collector
+default.graylog2[:collector][:java_bin]                     = '/usr/bin/java'
+default.graylog2[:collector][:java_home]                    = ''
 default.graylog2[:collector][:package_url]                  = "http://packages.graylog2.org/releases/graylog-collector/graylog-collector-#{node.graylog2[:collector][:version]}.tgz"
 default.graylog2[:collector][:server_url]                   = 'http://localhost:12900'
 default.graylog2[:collector][:id]                           = 'file:/etc/graylog/collector/collector-id'

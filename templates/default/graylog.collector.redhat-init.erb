@@ -24,7 +24,8 @@ DESC="Graylog Collector"
 NAME=graylog-collector
 COLLECTOR_BIN=/usr/share/graylog-collector/bin/graylog-collector
 COLLECTOR_ARGS="run -f /etc/graylog/collector/collector.conf"
-JAVA=/usr/bin/java
+JAVA=<%= node.graylog2[:collector][:java_bin] %>
+JAVA_HOME=<%= node.graylog2[:collector][:java_home] %>
 PID_DIR=/var/run/graylog-collector
 PID_FILE=$PID_DIR/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME

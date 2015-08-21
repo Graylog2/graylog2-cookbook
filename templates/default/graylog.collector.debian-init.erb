@@ -17,6 +17,8 @@ PIDFILE=$PIDDIR/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 COLLECTOR_USER=graylog-collector
 COLLECTOR_BIN=/usr/share/graylog-collector/bin/graylog-collector
+JAVA=<%= node.graylog2[:collector][:java_bin] %>
+JAVA_HOME=<%= node.graylog2[:collector][:java_home] %>
 DAEMON=${JAVA:=/usr/bin/java}
 DAEMON_ARGS="run -f /etc/graylog/collector/collector.conf"
 RUN=yes
