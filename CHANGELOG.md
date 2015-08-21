@@ -1,6 +1,11 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.1.6
+
+* make JAVA path configurable
+* bump to GL 1.1.6
+
 ## 1.1.5
 
 * fix web cluster search
