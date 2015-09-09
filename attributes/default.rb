@@ -2,22 +2,21 @@ node.default[:graylog2] ||= {}
 node.default[:mongodb] ||= {}
 
 # General
-default.graylog2[:major_version]             = '1.1'
-default.graylog2[:server][:version]          = '1.1.6-1'
-default.graylog2[:web][:version]             = '1.1.6-1'
-default.graylog2[:radio][:version]           = '1.1.6-1'
-default.graylog2[:collector][:version]       = '0.4.0'
+default.graylog2[:major_version]             = '1.2'
+default.graylog2[:server][:version]          = '1.2.0-4.rc.4'
+default.graylog2[:web][:version]             = '1.2.0-4.rc.4'
+default.graylog2[:radio][:version]           = '1.2.0-4.rc.4'
+default.graylog2[:collector][:version]       = '0.4.1'
 default.graylog2[:root_username]             = 'admin'
 default.graylog2[:root_email]                = nil
 default.graylog2[:root_timezone]             = nil
 default.graylog2[:restart]                   = 'delayed'
 default.graylog2[:no_retention]              = nil
 default.graylog2[:disable_sigar]             = nil
-default.graylog2[:groovy_shell_enable]       = nil
-default.graylog2[:groovy_shell_port]         = nil
 default.graylog2[:enable_metrics_collection] = nil
 default.graylog2[:dashboard_widget_default_cache_time] = '10s'
 default.graylog2[:secrets_data_bag]          = 'secrets'
+
 # Users
 default.graylog2[:server][:user]  = 'graylog'
 default.graylog2[:server][:group] = 'graylog'
@@ -45,12 +44,6 @@ default.graylog2[:plugin_dir]   = '/usr/share/graylog-server/plugin'
 # Network
 default.graylog2[:http_proxy_uri]   = nil
 default.graylog2[:authorized_ports] = 514
-
-# Message cache
-default.graylog2[:message_cache_off_heap] = true
-default.graylog2[:message_cache_spool_dir] = '/var/lib/graylog-server/message-cache-spool'
-default.graylog2[:message_cache_commit_interval] = 1000
-default.graylog2[:input_cache_max_size] = 0
 
 # Rest
 default.graylog2[:rest][:listen_uri]              = 'http://0.0.0.0:12900'
@@ -99,7 +92,6 @@ default.graylog2[:elasticsearch][:disable_version_check]        = nil
 default.graylog2[:elasticsearch][:disable_index_optimization]   = nil
 default.graylog2[:elasticsearch][:index_optimization_max_num_segments] = nil
 default.graylog2[:elasticsearch][:disable_index_range_calculation]     = nil
-default.graylog2[:elasticsearch][:elasticsearch_store_timestamps_as_doc_values] = true
 
 # MongoDb
 # Use these settings for Graylog <= 1.0
@@ -155,11 +147,13 @@ default.graylog2[:stale_master_timeout]      = 2000
 default.graylog2[:shutdown_timeout]          = 30000
 default.graylog2[:stream_processing_timeout] = 2000
 default.graylog2[:ldap_connection_timeout]   = 2000
-default.graylog2[:elasticsearch][:cluster_discovery_timeout] = 5000
 default.graylog2[:api_client_timeout]        = 300
 default.graylog2[:http_connect_timeout]      = '5s'
 default.graylog2[:http_read_timeout]         = '10s'
 default.graylog2[:http_write_timeout]        = '10s'
+default.graylog2[:elasticsearch][:cluster_discovery_timeout]       = 5000
+default.graylog2[:elasticsearch][:discovery_initial_state_timeout] = '3s'
+default.graylog2[:elasticsearch][:request_timeout]                 = '1m'
 
 # Intervals
 default.graylog2[:server][:alert_check_interval] = nil
@@ -200,7 +194,6 @@ default.graylog2[:server][:java_home] = ''
 default.graylog2[:server][:java_opts] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -XX:PermSize=128m -XX:MaxPermSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
 default.graylog2[:server][:args]      = ''
 default.graylog2[:server][:wrapper]   = ''
-default.graylog2[:server][:gc_check_interval]    = nil
 default.graylog2[:server][:gc_warning_threshold] = nil
 default.graylog2[:radio][:java_opts]  = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -XX:PermSize=128m -XX:MaxPermSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
 default.graylog2[:radio][:args]       = ''

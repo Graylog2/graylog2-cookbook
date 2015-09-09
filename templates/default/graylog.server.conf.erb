@@ -4,8 +4,6 @@
 
 # General
 <%= config_option 'disable_sigar', node.graylog2[:disable_sigar] -%>
-<%= config_option 'groovy_shell_enable', node.graylog2[:groovy_shell_enable] -%>
-<%= config_option 'groovy_shell_port', node.graylog2[:groovy_shell_port] -%>
 <%= config_option 'enable_metrics_collection', node.graylog2[:enable_metrics_collection] -%>
 <%= config_option 'dashboard_widget_default_cache_time', node.graylog2[:dashboard_widget_default_cache_time] -%>
 
@@ -53,7 +51,6 @@ elasticsearch_node_data = false
 <%= config_option 'elasticsearch_replicas', node.graylog2[:elasticsearch][:replicas] -%>
 <%= config_option 'elasticsearch_index_prefix', node.graylog2[:elasticsearch][:index_prefix] -%>
 <%= config_option 'elasticsearch_cluster_name', node.graylog2[:elasticsearch][:cluster_name] -%>
-<%= config_option 'elasticsearch_cluster_discovery_timeout', node.graylog2[:elasticsearch][:cluster_discovery_timeout] -%>
 <%= config_option 'elasticsearch_node_name', node.graylog2[:elasticsearch][:node_name] -%>
 <%= config_option 'elasticsearch_transport_tcp_port', node.graylog2[:elasticsearch][:transport_tcp_port] -%>
 <%= config_option 'elasticsearch_discovery_zen_ping_multicast_enabled', node.graylog2[:elasticsearch][:discovery_zen_ping_multicast_enabled] -%>
@@ -71,7 +68,6 @@ elasticsearch_node_data = false
 <%= config_option 'disable_index_optimization', node.graylog2[:disable_index_optimization] -%>
 <%= config_option 'index_optimization_max_num_segments', node.graylog2[:index_optimization_max_num_segments] -%>
 <%= config_option 'disable_index_range_calculation', node.graylog2[:disable_index_range_calculation] -%>
-<%= config_option 'elasticsearch_store_timestamps_as_doc_values', node.graylog2[:elasticsearch_store_timestamps_as_doc_values] -%>
 
 # Processors
 <%= config_option 'processbuffer_processors', node.graylog2[:processbuffer_processors] -%>
@@ -104,6 +100,10 @@ elasticsearch_node_data = false
 <%= config_option 'http_connect_timeout', node.graylog2[:http_connect_timeout] -%>
 <%= config_option 'http_read_timeout', node.graylog2[:http_read_timeout] -%>
 <%= config_option 'http_write_timeout', node.graylog2[:http_write_timeout] -%>
+<%= config_option 'stream_processing_timeout', node.graylog2[:stream_processing_timeout] -%>
+<%= config_option 'elasticsearch_cluster_discovery_timeout', node.graylog2[:elasticsearch][:cluster_discovery_timeout] -%>
+<%= config_option 'elasticsearch_discovery_initial_state_timeout', node.graylog2[:elasticsearch][:cluster_discovery_timeout] -%>
+<%= config_option 'elasticsearch_request_timeout', node.graylog2[:elasticsearch][:request_timeout] -%>
 
 # Ring buffers
 <%= config_option 'ring_size', node.graylog2[:ring_size] -%>
@@ -115,7 +115,6 @@ elasticsearch_node_data = false
 <%= config_option 'lb_recognition_period_seconds', node.graylog2[:lb_recognition_period_seconds] -%>
 
 # Stream processing
-<%= config_option 'stream_processing_timeout', node.graylog2[:stream_processing_timeout] -%>
 <%= config_option 'stream_processing_max_faults', node.graylog2[:stream_processing_max_faults] -%>
 
 # Intervals
@@ -156,14 +155,7 @@ elasticsearch_node_data = false
 # HTTP proxy for outgoing HTTP calls
 <%= config_option 'http_proxy_uri', node.graylog2[:http_proxy_uri] -%>
 
-# Message cache options
-<%= config_option 'message_cache_off_heap', node.graylog2[:message_cache_off_heap] -%>
-<%= config_option 'message_cache_spool_dir', node.graylog2[:message_cache_spool_dir] -%>
-<%= config_option 'message_cache_commit_interval', node.graylog2[:message_cache_commit_interval] -%>
-<%= config_option 'input_cache_max_size', node.graylog2[:input_cache_max_size] -%>
-
 # GC
-<%= config_option 'gc_check_interval', node.graylog2[:server][:gc_check_interval] -%>
 <%= config_option 'gc_warning_threshold', node.graylog2[:server][:gc_warning_threshold] -%>
 
 # Collector

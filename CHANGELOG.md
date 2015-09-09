@@ -1,6 +1,11 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.2.0
+
+* bump ro GL 1.2.0
+* update server configuration attributes
+
 ## 1.1.6
 
 * make JAVA path configurable
