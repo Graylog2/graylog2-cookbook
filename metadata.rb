@@ -7,8 +7,8 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '1.1.6'
 
 depends 'authbind', '>= 0.1.8'
+depends 'java'
 
-recommends 'java'
 recommends 'mongodb'
 recommends 'elasticsearch'
 recommends 'authbind'

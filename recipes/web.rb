@@ -10,7 +10,7 @@ Chef::Application.fatal!('No web secret set, either set it via an attribute or i
 package 'graylog-web' do
   action :install
   version node.graylog2[:web][:version]
-  options '--force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if node.platform_family?('debian')
+  options '--no-install-recommends --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if node.platform_family?('debian')
   notifies :restart, 'service[graylog-web]', node.graylog2[:restart].to_sym
 end
 

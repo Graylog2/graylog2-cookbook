@@ -21,11 +21,11 @@ driver_config:
 
 provisioner:
   name: chef_zero
-  require_chef_omnibus: latest
+  require_chef_omnibus: '12.4.1'
   data_path: test
 
 platforms:
-- name: centos-6.6
+- name: centos-6.7
   attributes:
     mongodb:
       reload_action: "reload"
@@ -42,6 +42,7 @@ suites:
       machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
       java:
+        set_default: true
         jdk_version: '8'
         install_flavor: 'oracle'
         oracle:
@@ -61,13 +62,13 @@ suites:
         dashboards:
           - '{"title": "Demo SSH Dashboard", "description": "SSH related widgets", "widgets": [ { "description": "SSH messages", "config": { "interval": "minute", "query": "*", "range_type": "relative", "range": "0" },  "position": {"row": 1,"col": 2 }, "type": "search_result_chart" }, { "description": "No. SSH logins", "config": { "query": "message:sshd AND message:opened", "range_type": "relative", "range": "0" }, "type": "search_result_count" } ] }'
       elasticsearch:
-        version: "1.5.2"
+        version: "1.7.1"
         cluster:
           name: "graylog2"
     run_list:
       - recipe[fqdn]
-      - recipe[java]
       - recipe[mongodb]
+      - recipe[java]
       - recipe[elasticsearch]
       - recipe[graylog2]
       - recipe[graylog2::server]

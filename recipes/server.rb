@@ -15,10 +15,11 @@ if node.graylog2[:elasticsearch][:unicast_search_query] && node.graylog2[:elasti
   node.set[:graylog2][:elasticsearch][:discovery_zen_ping_unicast_hosts] = nodes.map { |ip| ip + ':9300' }.join(',')
 end
 
+package 'tzdata-java'
 package 'graylog-server' do
   action :install
   version node.graylog2[:server][:version]
-  options '--force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if platform_family?('debian')
+  options '--no-install-recommends --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if platform_family?('debian')
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
 end
 

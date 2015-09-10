@@ -5,6 +5,7 @@ Graylog Chef Cookbook Changes
 
 * bump ro GL 1.2.0
 * update server configuration attributes
+* add hard dependency to `java` cookbook to cleanly manage Java version
 
 ## 1.1.6
 
