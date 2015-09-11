@@ -1,5 +1,5 @@
 version = node.graylog2[:major_version]
-Chef::Application.fatal!("Java version needs to be >= 7") if node[:java][:jdk_version].to_i < 7
+Chef::Application.fatal!('Java version needs to be >= 7') if node[:java][:jdk_version].to_i < 7
 
 if platform_family?('rhel')
   repository_file = "graylog-#{version}-repository-el6_latest.rpm"
