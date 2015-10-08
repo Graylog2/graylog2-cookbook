@@ -31,6 +31,7 @@ end
 
 directory '/etc/graylog/collector' do
   action :create
+  recursive true
   owner node.graylog2[:collector][:user]
   group node.graylog2[:collector][:group]
 end

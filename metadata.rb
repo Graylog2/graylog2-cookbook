@@ -8,6 +8,7 @@ version '1.2.0'
 
 depends 'authbind', '>= 0.1.8'
 depends 'java'
+depends 'ark'
 
 recommends 'mongodb'
 recommends 'elasticsearch'
