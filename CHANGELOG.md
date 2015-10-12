@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.2.2
+
+* Fix collector standalone mode
+
 ## 1.2.1
 
 * bump to GL 1.2.1
