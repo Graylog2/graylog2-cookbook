@@ -29,6 +29,13 @@ directory '/var/run/graylog' do
   group node.graylog2[:server][:group]
 end
 
+directory File.dirname(node.graylog2[:server][:log_file]) do
+  action :create
+  recursive true
+  owner node.graylog2[:server][:user]
+  group node.graylog2[:server][:group]
+end
+
 service 'graylog-server' do
   action :nothing
   supports :status => true, :restart => true

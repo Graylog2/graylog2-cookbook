@@ -14,6 +14,13 @@ package 'graylog-web' do
   notifies :restart, 'service[graylog-web]', node.graylog2[:restart].to_sym
 end
 
+directory File.dirname(node.graylog2[:web][:log_file]) do
+  action :create
+  recursive true
+  owner node.graylog2[:web][:user]
+  group node.graylog2[:web][:group]
+end
+
 service 'graylog-web' do
   action :nothing
   supports :status => true, :restart => true

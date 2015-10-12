@@ -26,8 +26,10 @@ package repository_file do
   source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
   if platform_family?('rhel')
     provider Chef::Provider::Package::Rpm
+    options '--force'
   elsif platform?('ubuntu', 'debian')
     provider Chef::Provider::Package::Dpkg
+    options '--force-confold'
     notifies :run, 'execute[apt-update]', :immediately
   end
 end

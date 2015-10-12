@@ -1,9 +1,15 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 1.2.1
+
+* bump to GL 1.2.1
+* create recursive directories for log files
+* force repo package installation
+
 ## 1.2.0
 
-* bump ro GL 1.2.0
+* bump to GL 1.2.0
 * update server configuration attributes
 * add hard dependency to `java` cookbook to cleanly manage Java version
 
