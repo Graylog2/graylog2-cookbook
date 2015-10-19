@@ -15,7 +15,8 @@ if node.graylog2[:elasticsearch][:unicast_search_query] && node.graylog2[:elasti
   node.set[:graylog2][:elasticsearch][:discovery_zen_ping_unicast_hosts] = nodes.map { |ip| ip + ':9300' }.join(',')
 end
 
-package 'tzdata-java'
+package 'tzdata-java' if node.graylog2[:server][:install_tzdata_java]
+
 package 'graylog-server' do
   action :install
   version node.graylog2[:server][:version]

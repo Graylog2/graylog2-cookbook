@@ -207,6 +207,7 @@ default.graylog2[:dead_letters_enabled] = false
 # Server
 default.graylog2[:server][:override_restart_command] = false
 default.graylog2[:server][:additional_options]       = nil
+default.graylog2[:server][:install_tzdata_java]      = true
 
 # Web
 default.graylog2[:web][:java_bin] = '/usr/bin/java'
