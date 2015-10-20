@@ -1,6 +1,7 @@
 # Path to the java executable.
 JAVA="<%= node.graylog2[:server][:java_bin] %>"
-JAVA_HOME="<%= node.graylog2[:server][:java_home] %>" ; export JAVA_HOME
+JAVA_HOME="<%= node.graylog2[:server][:java_home] %>"
+export JAVA_HOME
 
 # Might be used to adjust the Java heap size. (i.e. "-Xms1024m -Xmx2048m")
 GRAYLOG_SERVER_JAVA_OPTS="<%= node.graylog2[:server][:java_opts] %>"
