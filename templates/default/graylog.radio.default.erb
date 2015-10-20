@@ -1,6 +1,6 @@
 # Path to the java executable.
 JAVA="<%= node.graylog2[:radio][:java_bin] %>"
-JAVA_HOME="<%= node.graylog2[:radio][:java_home] %>"
+JAVA_HOME="<%= node.graylog2[:radio][:java_home] %>" ; export JAVA_HOME
 
 # Might be used to adjust the Java heap size. (i.e. "-Xms1024m -Xmx2048m")
 GRAYLOG_RADIO_JAVA_OPTS="<%= node.graylog2[:radio][:java_opts] %>"
