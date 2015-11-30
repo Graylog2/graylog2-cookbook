@@ -3,9 +3,9 @@ node.default[:mongodb] ||= {}
 
 # General
 default.graylog2[:major_version]             = '1.2'
-default.graylog2[:server][:version]          = '1.2.1-1'
-default.graylog2[:web][:version]             = '1.2.1-1'
-default.graylog2[:radio][:version]           = '1.2.1-1'
+default.graylog2[:server][:version]          = '1.2.2-1'
+default.graylog2[:web][:version]             = '1.2.2-1'
+default.graylog2[:radio][:version]           = '1.2.2-1'
 default.graylog2[:collector][:version]       = '0.4.1'
 default.graylog2[:root_username]             = 'admin'
 default.graylog2[:root_email]                = nil
@@ -91,7 +91,7 @@ default.graylog2[:elasticsearch][:transport_tcp_port]           = 9350
 default.graylog2[:elasticsearch][:disable_version_check]        = nil
 default.graylog2[:elasticsearch][:disable_index_optimization]   = nil
 default.graylog2[:elasticsearch][:index_optimization_max_num_segments] = nil
-default.graylog2[:elasticsearch][:disable_index_range_calculation]     = nil
+default.graylog2[:elasticsearch][:index_ranges_cleanup_interval]       = nil
 
 # MongoDb
 # Use these settings for Graylog <= 1.0
@@ -201,9 +201,6 @@ default.graylog2[:radio][:wrapper]    = ''
 default.graylog2[:web][:java_opts]    = '-Djava.net.preferIPv4Stack=true'
 default.graylog2[:web][:args]         = ''
 
-# Experimental
-default.graylog2[:dead_letters_enabled] = false
-
 # Server
 default.graylog2[:server][:override_restart_command] = false
 default.graylog2[:server][:additional_options]       = nil
@@ -274,3 +271,9 @@ default.graylog2[:collector][:inputs]                       = { 'local-syslog' =
 default.graylog2[:collector][:outputs]                      = { 'gelf-tcp' => { 'type' => 'gelf', 'protocol' => 'tcp', 'host' => '127.0.0.1', 'port' => 12201 } }
 default.graylog2[:server][:collector_inactive_threshold]    = '1m'
 default.graylog2[:server][:collector_expiration_threshold]  = '14d'
+
+# Content packs
+default.graylog2[:server][:content_packs_loader_enabled] = false
+default.graylog2[:server][:content_packs_dir] = '/usr/share/graylog-server/data/contentpacks'
+default.graylog2[:server][:content_packs_auto_load] = 'grok-patterns.json'
+

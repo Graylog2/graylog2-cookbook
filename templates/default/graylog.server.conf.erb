@@ -65,9 +65,9 @@ elasticsearch_node_data = false
 <%= config_option 'output_fault_count_threshold', node.graylog2[:elasticsearch][:output_fault_count_threshold] -%>
 <%= config_option 'output_fault_penalty_seconds', node.graylog2[:elasticsearch][:output_fault_penalty_seconds] -%>
 <%= config_option 'no_retention', node.graylog2[:no_retention] -%>
-<%= config_option 'disable_index_optimization', node.graylog2[:disable_index_optimization] -%>
-<%= config_option 'index_optimization_max_num_segments', node.graylog2[:index_optimization_max_num_segments] -%>
-<%= config_option 'disable_index_range_calculation', node.graylog2[:disable_index_range_calculation] -%>
+<%= config_option 'disable_index_optimization', node.graylog2[:elasticsearch][:disable_index_optimization] -%>
+<%= config_option 'index_optimization_max_num_segments', node.graylog2[:elasticsearch][:index_optimization_max_num_segments] -%>
+<%= config_option 'index_ranges_cleanup_interval', node.graylog2[:elasticsearch][:index_ranges_cleanup_interval] -%>
 
 # Processors
 <%= config_option 'processbuffer_processors', node.graylog2[:processbuffer_processors] -%>
@@ -107,9 +107,6 @@ elasticsearch_node_data = false
 
 # Ring buffers
 <%= config_option 'ring_size', node.graylog2[:ring_size] -%>
-
-# EXPERIMENTAL: Dead Letters
-<%= config_option 'dead_letters_enabled', node.graylog2[:dead_letters_enabled] -%>
 
 # Load balancing
 <%= config_option 'lb_recognition_period_seconds', node.graylog2[:lb_recognition_period_seconds] -%>
@@ -161,6 +158,11 @@ elasticsearch_node_data = false
 # Collector
 <%= config_option 'collector_inactive_threshold ', node.graylog2[:server][:collector_inactive_threshold] -%>
 <%= config_option 'collector_expiration_threshold ', node.graylog2[:server][:collector_expiration_threshold] -%>
+
+# Content packs
+<%= config_option 'content_packs_loader_enabled', node.graylog2[:server][:content_packs_loader_enabled] -%>
+<%= config_option 'content_packs_dir', node.graylog2[:server][:content_packs_dir] -%>
+<%= config_option 'content_packs_auto_load', node.graylog2[:server][:content_packs_auto_load] -%>
 
 # Additional options
 <%= node.graylog2[:server][:additional_options] -%>
