@@ -46,6 +46,8 @@ run_list "recipe[java]",
 ### Attributes
 Graylog runs currently with Java 8. To install the correct version set this attribute:
 
+#### Oracle
+
 ```json
   "java": {
     "jdk_version": "8",
@@ -56,7 +58,23 @@ Graylog runs currently with Java 8. To install the correct version set this attr
   }
 ```
 
-OpenJDK and Oracle JDK are both fine for Graylog, but the [Java cookbook](https://supermarket.chef.io/cookbooks/java) only supports Oracle's Java 8. Note that you must accept Oracle's download terms.
+#### OpenJDK
+
+```json
+  "java": {
+    "jdk_version": "8",
+    "install_flavor": "openjdk"
+  }
+```
+
+OpenJDK and Oracle JDK are both fine for Graylog. Note that you must accept
+Oracle's download terms if you select the oracle install flavor.
+
+The java cookbook can install OpenJDK 8 since version 1.35.
+
+On some platform you need to accept terms to install OpenJDK too. See the [java
+cookbook's README](https://supermarket.chef.io/cookbooks/java) for more
+information.
 
 You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
 this is 1.7.1. The cluster name should be 'graylog2':
