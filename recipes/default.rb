@@ -21,12 +21,19 @@ execute 'apt-update' do
   action :nothing
 end
 
+execute 'yum-clean' do
+  command 'yum clean all'
+  ignore_failure true
+  action :nothing
+end
+
 package repository_file do
   action :install
   source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
   if platform_family?('rhel')
     provider Chef::Provider::Package::Rpm
     options '--force'
+    notifies :run, 'execute[yum-clean]', :immediately
   elsif platform?('ubuntu', 'debian')
     provider Chef::Provider::Package::Dpkg
     options '--force-confold'
