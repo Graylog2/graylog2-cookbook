@@ -12,3 +12,6 @@ GRAYLOG_SERVER_ARGS="<%= node.graylog2[:server][:args] %>"
 # Program that will be used to wrap the graylog-server command. Useful to
 # support programs like authbind.
 GRAYLOG_COMMAND_WRAPPER="<%= node.graylog2[:server][:wrapper] %>"
+
+# Additional environment variables
+<%= node.graylog2[:server][:additional_env_vars] -%>
