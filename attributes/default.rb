@@ -274,6 +274,6 @@ default.graylog2[:server][:collector_expiration_threshold]  = '14d'
 
 # Content packs
 default.graylog2[:server][:content_packs_loader_enabled] = false
-default.graylog2[:server][:content_packs_dir] = '/usr/share/graylog-server/data/contentpacks'
+default.graylog2[:server][:content_packs_dir] = '/usr/share/graylog-server/contentpacks'
 default.graylog2[:server][:content_packs_auto_load] = 'grok-patterns.json'
 
