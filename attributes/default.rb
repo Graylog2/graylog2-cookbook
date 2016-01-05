@@ -204,6 +204,7 @@ default.graylog2[:web][:args]         = ''
 # Server
 default.graylog2[:server][:override_restart_command] = false
 default.graylog2[:server][:additional_options]       = nil
+default.graylog2[:server][:additional_env_vars]      = nil
 default.graylog2[:server][:install_tzdata_java]      = true
 
 # Web
@@ -276,4 +277,3 @@ default.graylog2[:server][:collector_expiration_threshold]  = '14d'
 default.graylog2[:server][:content_packs_loader_enabled] = false
 default.graylog2[:server][:content_packs_dir] = '/usr/share/graylog-server/contentpacks'
 default.graylog2[:server][:content_packs_auto_load] = 'grok-patterns.json'
-
