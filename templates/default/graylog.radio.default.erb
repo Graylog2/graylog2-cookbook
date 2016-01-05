@@ -12,3 +12,6 @@ GRAYLOG_RADIO_ARGS="<%= node.graylog2[:radio][:args] %>"
 # Program that will be used to wrap the graylog2-server command. Useful to
 # support programs like authbind.
 GRAYLOG_COMMAND_WRAPPER="<%= node.graylog2[:radio][:wrapper] %>"
+
+# Additional environment variables
+<%= node.graylog2[:radio][:additional_env_vars] -%>

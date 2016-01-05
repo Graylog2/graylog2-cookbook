@@ -16,3 +16,6 @@ GRAYLOG_WEB_ARGS="<%= node.graylog2[:web][:args] %>"
 # Program that will be used to wrap the graylog-web command. Useful to
 # support programs like authbind.
 GRAYLOG_COMMAND_WRAPPER="<%= node.graylog2[:web][:wrapper] %>"
+
+# Additional environment variables
+<%= node.graylog2[:web][:additional_env_vars] -%>

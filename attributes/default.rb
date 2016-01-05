@@ -228,6 +228,7 @@ default.graylog2[:web][:gelf_log][:send_access]   = nil
 default.graylog2[:web][:override_restart_command] = false
 default.graylog2[:web][:wrapper]                  = ''
 default.graylog2[:web][:additional_options]       = nil
+default.graylog2[:web][:additional_env_vars]      = nil
 
 # Radio
 default.graylog2[:radio][:java_bin]                  = '/usr/bin/java'
@@ -258,6 +259,7 @@ default.graylog2[:radio][:log_level_ldap]            = 'error'
 default.graylog2[:radio][:log_level_root]            = 'warn'
 default.graylog2[:radio][:override_restart_command]  = false
 default.graylog2[:radio][:additional_options]        = nil
+default.graylog2[:radio][:additional_env_vars]       = nil
 
 # Collector
 default.graylog2[:collector][:java_bin]                     = '/usr/bin/java'
