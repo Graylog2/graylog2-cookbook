@@ -1,5 +1,6 @@
 Description
 -----------
+[![Build Status](https://travis-ci.org/Graylog2/graylog2-cookbook.svg)](https://travis-ci.org/Graylog2/graylog2-cookbook)
 
 This _Chef_ cookbook installs and configures the [Graylog](http://www.graylog.org) log management system.
 
