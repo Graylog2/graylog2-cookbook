@@ -4,9 +4,10 @@ begin
 rescue
   Chef::Log.debug 'Can not merge server secrets from databag'
 end
-Chef::Mixin::DeepMerge.deep_merge!(secrets, node.override[:graylog2]) unless secrets.nil?
-Chef::Application.fatal!('No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless node.graylog2[:password_secret]
-Chef::Application.fatal!('No root_password_sha2 set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless node.graylog2[:root_password_sha2]
+password_secret = node.graylog2[:password_secret] || secrets['password_secret']
+root_password_sha2 = node.graylog2[:root_password_sha2] || secrets['root_password_sha2']
+Chef::Application.fatal!('No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless password_secret
+Chef::Application.fatal!('No root_password_sha2 set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless root_password_sha2
 
 # Search ES cluster
 if node.graylog2[:elasticsearch][:unicast_search_query] && node.graylog2[:elasticsearch][:search_node_attribute]
@@ -59,6 +60,8 @@ template '/etc/graylog/server/server.conf' do
   mode 0640
   variables(
     :is_master          => is_master,
+    :password_secret    => password_secret,
+    :root_password_sha2 => root_password_sha2,
     :rest_listen_uri    => node.graylog2[:rest][:listen_uri] || default_rest_uri,
     :rest_transport_uri => node.graylog2[:rest][:transport_uri] || default_rest_uri
   )
@@ -80,8 +83,8 @@ template args_file do
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
 end
 
-template '/etc/graylog/server/log4j.xml' do
-  source 'graylog.server.log4j.xml.erb'
+template '/etc/graylog/server/log4j2.xml' do
+  source 'graylog.server.log4j2.xml.erb'
   owner 'root'
   group node.graylog2[:server][:group]
   mode 0640

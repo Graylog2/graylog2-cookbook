@@ -39,3 +39,8 @@ end
 describe port(9_350) do
   it { should be_listening }
 end
+
+# Web UI
+describe port(9_000) do
+  it { should be_listening }
+end

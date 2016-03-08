@@ -26,13 +26,11 @@ you need for your environment.
 |:----------|:------------|
 |default    |Setup the Graylog package repository|
 |server     |Install Graylog server|
-|web        |Install Graylog web interface|
-|radio      |Install a Graylog radio node|
 |authbind   |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
 |api_access |Use Graylog API to setup inputs like 'Syslog UDP'|
-|collector  |Install Graylog's collector (Experimental)|
+|collector  |Install Graylog's collector|
 
-In a minimal setup you need at least the _default_, _server_ and _web_ recipes. Combined with
+In a minimal setup you need at least the _default_ and _server_ recipes. Combined with
 MongoDB and Elasticsearch, a run list might look like this:
 
 ```
@@ -40,8 +38,7 @@ run_list "recipe[java]",
          "recipe[elasticsearch]",
          "recipe[mongodb]",
          "recipe[graylog2]",
-         "recipe[graylog2::server]",
-         "recipe[graylog2::web]"
+         "recipe[graylog2::server]"
 ```
 
 ### Attributes
@@ -71,20 +68,18 @@ Graylog runs currently with Java 8. To install the correct version set this attr
 OpenJDK and Oracle JDK are both fine for Graylog. Note that you must accept
 Oracle's download terms if you select the oracle install flavor.
 
-The java cookbook can install OpenJDK 8 since version 1.35.
-
-On some platform you need to accept terms to install OpenJDK too. See the [java
+On some platforms you need to accept terms to install OpenJDK too. See the [java
 cookbook's README](https://supermarket.chef.io/cookbooks/java) for more
 information.
 
 You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
-this is 1.7.1. The cluster name should be 'graylog2':
+this is 2.2.0. The cluster name should be 'graylog':
 
 ```json
   "elasticsearch": {
-    "version": "1.7.1",
+    "version": "2.2.0",
     "cluster": {
-      "name": "graylog2"
+      "name": "graylog"
     }
   }
 ```
@@ -101,9 +96,6 @@ The password can be generated with `echo -n yourpassword | shasum -a 256 | awk '
     "root_password_sha2": "e3c652f0ba0b4801205814f8b6bc49672c4c74e25b497770bb89b22cdeb4e951",
     "server": {
       "java_opts": "-Djava.net.preferIPv4Stack=true"
-    },
-    "web": {
-      "secret": "ZxUahiN48EFVJgzRTzGO2olFRmjmsvzybSf4YwBvn5x1asLUBPe8GHbOQTZ0jzuAB7dzrNPk3wCEH57PCZm23MHAET0G653G"
     }
   }
 ```
@@ -119,9 +111,6 @@ knife data bag create --secret-file ~/.chef/encrypted_data_bag_secret secrets gr
   "server": {
     "root_password_sha2": "<root password as sha256>",
     "password_secret": "<random string as encryption salt>"
-  },
-  "web": {
-    "secret": "<random string as encryption salt>"
   }
 }
 ```
@@ -143,17 +132,7 @@ a dynamic cluster set the following attributes:
 }
 ```
 
-#### Graylog server discovery
-```ruby
-'graylog2'=> {
-  'web' => {
-    'server_search_query' => 'role:graylog-server',
-    'search_node_attribute' => 'ipaddress'
-  }
-}
-```
-
-One server needs to be set as a master, use this attribute to do so
+If you have multiple server one need to be set as a master, use this attribute to do so
 
 ```
 default.graylog2[:ip_of_master] = node.ipaddress
