@@ -2,7 +2,7 @@
 begin
   secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['server']
 rescue
-  Chef::Log.debug 'Can not merge server secrets from databag'
+  Chef::Log.debug 'Can not load server secrets from databag'
 end
 password_secret = node.graylog2[:password_secret] || secrets['password_secret']
 root_password_sha2 = node.graylog2[:root_password_sha2] || secrets['root_password_sha2']
@@ -23,6 +23,13 @@ package 'graylog-server' do
   version node.graylog2[:server][:version]
   options '--no-install-recommends --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if platform_family?('debian')
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
+end
+
+ruby_block 'create node-id if needed' do
+  block do
+    File.write(node.graylog2[:node_id_file], SecureRandom.uuid)
+  end
+  not_if { ::File.exists?(node.graylog2[:node_id_file]) }
 end
 
 directory '/var/run/graylog' do
@@ -59,11 +66,15 @@ template '/etc/graylog/server/server.conf' do
   group node.graylog2[:server][:group]
   mode 0640
   variables(
-    :is_master          => is_master,
-    :password_secret    => password_secret,
-    :root_password_sha2 => root_password_sha2,
-    :rest_listen_uri    => node.graylog2[:rest][:listen_uri] || default_rest_uri,
-    :rest_transport_uri => node.graylog2[:rest][:transport_uri] || default_rest_uri
+    :is_master             => is_master,
+    :password_secret       => password_secret,
+    :root_password_sha2    => root_password_sha2,
+    :rest_listen_uri       => node.graylog2[:rest][:listen_uri] || default_rest_uri,
+    :rest_transport_uri    => node.graylog2[:rest][:transport_uri] || default_rest_uri,
+    :rest_tls_key_password => node.graylog2[:rest][:tls_key_password] || secrets['rest_tls_key_password'],
+    :web_tls_key_password  => node.graylog2[:web][:tls_key_password] || secrets['web_tls_key_password'],
+    :mongodb_uri           => node.graylog2[:mongodb][:uri] || secrets['mongodb_uri'],
+    :transport_email_auth_password => node.graylog2[:transport_email_auth_password] || secrets['transport_email_auth_password']
   )
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
 end
@@ -91,7 +102,7 @@ template '/etc/graylog/server/log4j2.xml' do
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
 end
 
-template '/etc/graylog-elasticsearch.yml' do
+template '/etc/graylog/server/graylog-elasticsearch.yml' do
   source 'graylog.server.elasticsearch.yml.erb'
   owner 'root'
   group node.graylog2[:server][:group]

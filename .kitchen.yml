@@ -21,7 +21,7 @@ driver_config:
 
 provisioner:
   name: chef_zero
-  require_chef_omnibus: '12.7.2'
+  require_chef_omnibus: '12.8.1'
   data_path: test
 
 platforms:
@@ -56,6 +56,7 @@ suites:
           secret: "2jueVqZpwLLjaWxV"
         restart: "delayed"
         rest:
+          transport_uri: 'http://127.0.0.1:12900'
           admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
         inputs:
           - '{"title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 }}'

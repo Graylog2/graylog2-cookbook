@@ -145,6 +145,3 @@ DEPENDENCIES
   foodcritic
   rake
   rubocop
-
-BUNDLED WITH
-   1.10.6

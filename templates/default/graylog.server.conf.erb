@@ -25,7 +25,7 @@
 <%= config_option 'rest_enable_tls', node.graylog2[:rest][:enable_tls] -%>
 <%= config_option 'rest_tls_cert_file', node.graylog2[:rest][:tls_cert_file] -%>
 <%= config_option 'rest_tls_key_file', node.graylog2[:rest][:tls_key_file] -%>
-<%= config_option 'rest_tls_key_password', node.graylog2[:rest][:tls_key_password] -%>
+<%= config_option 'rest_tls_key_password', @rest_tls_key_password -%>
 <%= config_option 'rest_max_chunk_size', node.graylog2[:rest][:max_chunk_size] -%>
 <%= config_option 'rest_max_header_size', node.graylog2[:rest][:max_header_size] -%>
 <%= config_option 'rest_max_initial_line_length', node.graylog2[:rest][:max_initial_line_length] -%>
@@ -40,7 +40,7 @@
 <%= config_option 'web_enable_tls', node.graylog2[:web][:enable_tls] -%>
 <%= config_option 'web_tls_cert_file', node.graylog2[:web][:tls_cert_file] -%>
 <%= config_option 'web_tls_key_file', node.graylog2[:web][:tls_key_file] -%>
-<%= config_option 'web_tls_key_password', node.graylog2[:web][:tls_key_password] -%>
+<%= config_option 'web_tls_key_password', @web_tls_key_password -%>
 <%= config_option 'web_max_header_size', node.graylog2[:web][:max_header_size] -%>
 <%= config_option 'web_max_initial_line_length', node.graylog2[:web][:max_initial_line_length] -%>
 <%= config_option 'web_thread_pool_size', node.graylog2[:web][:thread_pool_size] -%>
@@ -133,7 +133,7 @@ elasticsearch_node_data = false
 <%= config_option 'alert_check_interval', node.graylog2[:server][:alert_check_interval] -%>
 
 # MongoDB Configuration
-<%= config_option 'mongodb_uri', node.graylog2[:mongodb][:uri] -%>
+<%= config_option 'mongodb_uri', @mongodb_uri -%>
 <%= config_option 'mongodb_max_connections', node.graylog2[:mongodb][:max_connections] -%>
 <%= config_option 'mongodb_threads_allowed_to_block_multiplier', node.graylog2[:mongodb][:threads_allowed_to_block_multiplier] -%>
 
@@ -149,7 +149,7 @@ elasticsearch_node_data = false
 <%= config_option 'transport_email_use_tls', node.graylog2[:transport_email_use_tls] -%>
 <%= config_option 'transport_email_use_ssl', node.graylog2[:transport_email_use_ssl] -%>
 <%= config_option 'transport_email_auth_username', node.graylog2[:transport_email_auth_username] -%>
-<%= config_option 'transport_email_auth_password', node.graylog2[:transport_email_auth_password] -%>
+<%= config_option 'transport_email_auth_password', @transport_email_auth_password -%>
 <%= config_option 'transport_email_subject_prefix', node.graylog2[:transport_email_subject_prefix] -%>
 <%= config_option 'transport_email_from_email', node.graylog2[:transport_email_from_email] -%>
 <%= config_option 'transport_email_web_interface_url', node.graylog2[:transport_email_web_interface_url] -%>

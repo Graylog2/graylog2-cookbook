@@ -2,8 +2,9 @@ node.default[:graylog2] ||= {}
 node.default[:mongodb] ||= {}
 
 # General
-default.graylog2[:major_version]             = '1.3'
-default.graylog2[:server][:version]          = '1.3.2-1'
+default.graylog2[:repo_version]              = '1-1'
+default.graylog2[:major_version]             = '2.0'
+default.graylog2[:server][:version]          = '2.0.0-2.beta.1'
 default.graylog2[:collector][:version]       = '0.4.2'
 default.graylog2[:root_username]             = 'admin'
 default.graylog2[:root_email]                = nil
@@ -56,7 +57,7 @@ default.graylog2[:rest][:thread_pool_size]        = nil
 default.graylog2[:rest][:worker_threads_max_pool_size] = nil
 
 # Elasticsearch
-default.graylog2[:elasticsearch][:config_file]                          = '/etc/graylog-elasticsearch.yml'
+default.graylog2[:elasticsearch][:config_file]                          = '/etc/graylog/server/graylog-elasticsearch.yml'
 default.graylog2[:elasticsearch][:max_docs_per_index]                   = 20000000
 default.graylog2[:elasticsearch][:max_size_per_index]                   = 1073741824
 default.graylog2[:elasticsearch][:max_time_per_index]                   = '1d'
@@ -182,7 +183,7 @@ default.graylog2[:server][:additional_env_vars]      = nil
 default.graylog2[:server][:install_tzdata_java]      = true
 
 # Web
-default.graylgo2[:web][:enable] = true
+default.graylog2[:web][:enable] = true
 default.graylog2[:web][:listen_uri] = 'http://0.0.0.0:9000'
 default.graylog2[:web][:enable_cors] = nil
 default.graylog2[:web][:enable_gzip] = nil

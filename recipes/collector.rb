@@ -2,9 +2,8 @@
 begin
   secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['collector']
 rescue
-  Chef::Log.debug 'Can not merge collector secrets from databag'
+  Chef::Log.debug 'Can not load collector secrets from databag'
 end
-Chef::Mixin::DeepMerge.deep_merge!(secrets, node.override[:graylog2]) unless secrets.nil?
 
 if (node['platform'] == 'debian' && node['platform_version'] == '8') || (node['platform'] == 'ubuntu' && (node['platform_version'] == '14.04' || node['platform_version'] == '12.04'))
   apt_repository 'graylog-collector' do

@@ -20,14 +20,14 @@ describe file('/etc/default/graylog-server'), :if => ['debian', 'ubuntu'].includ
   its(:content) { should match(/GRAYLOG_SERVER_ARGS/) }
 end
 
-describe file('/etc/graylog/server/log4j.xml') do
+describe file('/etc/graylog/server/log4j2.xml') do
   it { should be_file }
   its(:content) { should match(/server.log/) }
 end
 
-describe file('/etc/graylog-elasticsearch.yml') do
+describe file('/etc/graylog/server/graylog-elasticsearch.yml') do
   it { should be_file }
-  its(:content) { should match(/cluster.name: graylog2/) }
+  its(:content) { should match(/cluster.name: graylog/) }
 end
 
 # REST API
