@@ -58,17 +58,10 @@ default.graylog2[:rest][:worker_threads_max_pool_size] = nil
 
 # Elasticsearch
 default.graylog2[:elasticsearch][:config_file]                          = '/etc/graylog/server/graylog-elasticsearch.yml'
-default.graylog2[:elasticsearch][:max_docs_per_index]                   = 20000000
-default.graylog2[:elasticsearch][:max_size_per_index]                   = 1073741824
-default.graylog2[:elasticsearch][:max_time_per_index]                   = '1d'
-default.graylog2[:elasticsearch][:max_number_of_indices]                = 20
 default.graylog2[:elasticsearch][:shards]                               = 4
 default.graylog2[:elasticsearch][:replicas]                             = 0
-default.graylog2[:elasticsearch][:retention_strategy]                   = 'delete'
-default.graylog2[:elasticsearch][:rotation_strategy]                    = 'count'
 default.graylog2[:elasticsearch][:index_prefix]                         = 'graylog'
 default.graylog2[:elasticsearch][:cluster_name]                         = 'graylog'
-default.graylog2[:elasticsearch][:node_name]                            = 'graylog-server'
 default.graylog2[:elasticsearch][:http_enabled]                         = false
 default.graylog2[:elasticsearch][:discovery_zen_ping_multicast_enabled] = false
 default.graylog2[:elasticsearch][:discovery_zen_ping_unicast_hosts]     = '127.0.0.1:9300'
