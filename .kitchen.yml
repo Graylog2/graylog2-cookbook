@@ -42,7 +42,6 @@ suites:
       machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
       java:
-        set_default: true
         jdk_version: '8'
         install_flavor: 'oracle'
         oracle:
