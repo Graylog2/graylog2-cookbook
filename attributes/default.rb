@@ -191,11 +191,11 @@ default.graylog2[:server][:log_level_root]        = 'warn'
 # JVM
 default.graylog2[:server][:java_bin] = '/usr/bin/java'
 default.graylog2[:server][:java_home] = ''
-default.graylog2[:server][:java_opts] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -XX:PermSize=128m -XX:MaxPermSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
+default.graylog2[:server][:java_opts] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
 default.graylog2[:server][:args]      = ''
 default.graylog2[:server][:wrapper]   = ''
 default.graylog2[:server][:gc_warning_threshold] = nil
-default.graylog2[:radio][:java_opts]  = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -XX:PermSize=128m -XX:MaxPermSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
+default.graylog2[:radio][:java_opts]  = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
 default.graylog2[:radio][:args]       = ''
 default.graylog2[:radio][:wrapper]    = ''
 default.graylog2[:web][:java_opts]    = '-Djava.net.preferIPv4Stack=true'
