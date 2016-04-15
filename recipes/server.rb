@@ -58,8 +58,6 @@ else
   is_master = false
 end
 
-default_rest_uri = "http://#{node[:ipaddress]}:12900/"
-
 template '/etc/graylog/server/server.conf' do
   source 'graylog.server.conf.erb'
   owner 'root'
@@ -69,11 +67,11 @@ template '/etc/graylog/server/server.conf' do
     :is_master             => is_master,
     :password_secret       => password_secret,
     :root_password_sha2    => root_password_sha2,
-    :rest_listen_uri       => node.graylog2[:rest][:listen_uri] || default_rest_uri,
-    :rest_transport_uri    => node.graylog2[:rest][:transport_uri] || default_rest_uri,
-    :rest_tls_key_password => node.graylog2[:rest][:tls_key_password] || secrets['rest_tls_key_password'],
-    :web_tls_key_password  => node.graylog2[:web][:tls_key_password] || secrets['web_tls_key_password'],
-    :mongodb_uri           => node.graylog2[:mongodb][:uri] || secrets['mongodb_uri'],
+    :rest_listen_uri       => node.graylog2[:rest][:listen_uri],
+    :rest_transport_uri    => node.graylog2[:rest][:transport_uri],
+    :rest_tls_key_password => secrets['rest_tls_key_password'] || node.graylog2[:rest][:tls_key_password],
+    :web_tls_key_password  => secrets['web_tls_key_password'] || node.graylog2[:web][:tls_key_password],
+    :mongodb_uri           => secrets['mongodb_uri'] || node.graylog2[:mongodb][:uri],
     :transport_email_auth_password => node.graylog2[:transport_email_auth_password] || secrets['transport_email_auth_password']
   )
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
