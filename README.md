@@ -118,6 +118,16 @@ knife data bag create --secret-file ~/.chef/encrypted_data_bag_secret secrets gr
 You can take a look into the attributes file under `attributes/default.rb` to get an idea
 what can be configured for Graylog.
 
+### Remote Elasticsearch hosts
+In order to connect Graylog to a remote Elasticsearch node you have to make it listen on the public network interface:
+```ruby
+'graylog2'=> {
+  'elasticsearch' => {
+		'network_host'=> '0.0.0.0'
+	}
+}
+```
+
 ### Node discovery
 The cookbook is able to use Chef's search to find Elasticsearch and other Graylog nodes. To configure
 a dynamic cluster set the following attributes:
