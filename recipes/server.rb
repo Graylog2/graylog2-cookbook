@@ -4,8 +4,8 @@ begin
 rescue
   Chef::Log.debug 'Can not load server secrets from databag'
 end
-password_secret = node.graylog2[:password_secret] || secrets['password_secret']
-root_password_sha2 = node.graylog2[:root_password_sha2] || secrets['root_password_sha2']
+password_secret = secrets['password_secret'] || node.graylog2[:password_secret]
+root_password_sha2 = secrets['root_password_sha2'] || node.graylog2[:root_password_sha2]
 Chef::Application.fatal!('No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless password_secret
 Chef::Application.fatal!('No root_password_sha2 set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless root_password_sha2
 
@@ -72,7 +72,7 @@ template '/etc/graylog/server/server.conf' do
     :rest_tls_key_password => secrets['rest_tls_key_password'] || node.graylog2[:rest][:tls_key_password],
     :web_tls_key_password  => secrets['web_tls_key_password'] || node.graylog2[:web][:tls_key_password],
     :mongodb_uri           => secrets['mongodb_uri'] || node.graylog2[:mongodb][:uri],
-    :transport_email_auth_password => node.graylog2[:transport_email_auth_password] || secrets['transport_email_auth_password']
+    :transport_email_auth_password => secrets['transport_email_auth_password'] || node.graylog2[:transport_email_auth_password]
   )
   notifies :restart, 'service[graylog-server]', node.graylog2[:restart].to_sym
 end
