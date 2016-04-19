@@ -15,7 +15,7 @@ To give this cookbook a try simply use the Kitchen test suite.
 ```
 kitchen setup default-ubuntu-1404
 open http://localhost:9000
-Login with admin/admin
+Login with admin/root
 ```
 
 ### Recipes
