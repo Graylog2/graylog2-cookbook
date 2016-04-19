@@ -27,8 +27,7 @@ you need for your environment.
 |default    |Setup the Graylog package repository|
 |server     |Install Graylog server|
 |authbind   |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
-|api_access |Use Graylog API to setup inputs like 'Syslog UDP'|
-|collector  |Install Graylog's collector|
+|collector  |Install Graylog's collector (deprecated)|
 
 In a minimal setup you need at least the _default_ and _server_ recipes. Combined with
 MongoDB and Elasticsearch, a run list might look like this:
@@ -156,28 +155,6 @@ To enable this feature include the [authbind](https://supermarket.chef.io/cookbo
 `recipe[graylog2::authbind]` from this cookbook.
 By default the recipe will give the Graylog user permission to bind to port 514 if you need more than that you can
 set the attribute `default.graylog2[:authorized_ports]` to an array of allowed ports.
-
-### API access
-
-In order to access the API of Graylog we provide a LWRP to do so. At the moment we only support
-the creation of inputs but the LWRP is easy to extend. You can use the provider in your own
-recipe like this:
-
-Include `recipe[graylog2::api_access]` to your run list.
-
-```ruby
-graylog2_inputs "syslog udp" do
-  input '{ "title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 } }'
-end
-```
-
-or you can put the same JSON into an array and set it as an attribute:
-
-```json
-"graylog2": {
-  "inputs": ["{ \"title\": \"syslog\", \"type\":\"org.graylog2.inputs.syslog.udp.SyslogUDPInput\", \"global\": true, \"configuration\": { \"port\": 1514, \"allow_override_date\": true, \"bind_address\": \"0.0.0.0\", \"store_full_message\": true, \"recv_buffer_size\": 1048576 } }"]
-}
-```
 
 License
 -------
