@@ -1,4 +1,5 @@
 # Override attributes from data bag's "collector" section
+secrets = {}
 begin
   secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['collector']
 rescue
