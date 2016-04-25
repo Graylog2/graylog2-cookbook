@@ -1,6 +1,6 @@
 version = node.graylog2[:major_version]
 repo_version = node.graylog2[:repo_version]
-Chef::Application.fatal!('Java version needs to be >= 8') if node[:java][:jdk_version].to_i < 8
+raise('Java version needs to be >= 8') if node[:java][:jdk_version].to_i < 8
 
 if platform_family?('rhel')
   repository_file = "graylog-#{version}-repository-#{repo_version}.noarch.rpm"

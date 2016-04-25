@@ -7,8 +7,8 @@ rescue
 end
 password_secret = secrets['password_secret'] || node.graylog2[:password_secret]
 root_password_sha2 = secrets['root_password_sha2'] || node.graylog2[:root_password_sha2]
-Chef::Application.fatal!('No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless password_secret
-Chef::Application.fatal!('No root_password_sha2 set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless root_password_sha2
+raise('No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless password_secret
+raise('No root_password_sha2 set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless root_password_sha2
 
 # Search ES cluster
 if node.graylog2[:elasticsearch][:unicast_search_query] && node.graylog2[:elasticsearch][:search_node_attribute]
