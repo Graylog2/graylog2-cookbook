@@ -1,6 +1,7 @@
 require 'foodcritic'
 require 'foodcritic/rake_task'
 require 'rubocop/rake_task'
+require 'rspec/core/rake_task'
 
 desc 'Run RuboCop'
 RuboCop::RakeTask.new(:rubocop) do |task|
@@ -20,11 +21,16 @@ FoodCritic::Rake::LintTask.new(:lint) do |t|
       '~FC009',
       '~FC015',
       '~FC019',
-      '~FC046'
+      '~FC046',
+      '~FC053'
     ]
   }
 end
 
+# Rspec and ChefSpec
+desc "Run ChefSpec examples"
+  RSpec::Core::RakeTask.new(:spec)
+
 desc 'Run all tests'
-task :test => [:lint, :rubocop]
+task :test => [:lint, :rubocop, :spec]
 task :default => :test
