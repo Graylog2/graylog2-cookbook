@@ -34,7 +34,7 @@ describe 'graylog2::server' do
     end
 
     it 'restart Graylog server service' do
-      expect(chef_run).to_not disable_service "graylog-server"
+      expect(chef_run).to enable_service "graylog-server"
     end
 
     it 'creates a server configuration file' do

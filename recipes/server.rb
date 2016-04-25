@@ -47,7 +47,7 @@ directory File.dirname(node.graylog2[:server][:log_file]) do
 end
 
 service 'graylog-server' do
-  action :nothing
+  action :enable
   supports :status => true, :restart => true
   restart_command node.graylog2[:server][:override_restart_command] if node.graylog2[:server][:override_restart_command]
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
