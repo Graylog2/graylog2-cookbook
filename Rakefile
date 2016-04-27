@@ -5,9 +5,11 @@ require 'rspec/core/rake_task'
 
 desc 'Run RuboCop'
 RuboCop::RakeTask.new(:rubocop) do |task|
-  task.patterns = ['**/*.rb']
-  # only show the files with failures
-  task.formatters = ['files']
+  task.patterns = ['attributes/**/*.rb',
+                   'libraries/**/*.rb',
+                   'recipes/**/*.rb',
+                   'spec/**/*.rb',
+                   'test/integration/**/*.rb']
   # don't abort rake on failure
   task.fail_on_error = false
 end

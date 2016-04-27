@@ -30,7 +30,7 @@ ruby_block 'create node-id if needed' do
   block do
     File.write(node.graylog2[:node_id_file], SecureRandom.uuid)
   end
-  not_if { ::File.exists?(node.graylog2[:node_id_file]) }
+  not_if { ::File.exist?(node.graylog2[:node_id_file]) }
 end
 
 directory '/var/run/graylog' do
@@ -53,11 +53,11 @@ service 'graylog-server' do
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
 end
 
-if node.graylog2[:ip_of_master] == node.ipaddress
-  is_master = true
-else
-  is_master = false
-end
+is_master = if node.graylog2[:ip_of_master] == node.ipaddress
+              true
+            else
+              false
+            end
 
 template '/etc/graylog/server/server.conf' do
   source 'graylog.server.conf.erb'

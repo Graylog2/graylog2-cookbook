@@ -1,11 +1,3 @@
-# Override attributes from data bag's "collector" section
-secrets = {}
-begin
-  secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['collector']
-rescue
-  Chef::Log.debug 'Can not load collector secrets from databag'
-end
-
 if (node['platform'] == 'debian' && node['platform_version'] == '8') || (node['platform'] == 'ubuntu' && (node['platform_version'] == '14.04' || node['platform_version'] == '12.04'))
   apt_repository 'graylog-collector' do
     uri 'https://packages.graylog2.org/repo/debian/'

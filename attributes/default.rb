@@ -14,7 +14,7 @@ default.graylog2[:no_retention]              = nil
 default.graylog2[:disable_sigar]             = nil
 default.graylog2[:enable_metrics_collection] = nil
 default.graylog2[:dashboard_widget_default_cache_time] = '10s'
-default.graylog2[:secrets_data_bag]          = 'secrets'
+default.graylog2[:secrets_data_bag]                    = 'secrets'
 
 # Users
 default.graylog2[:server][:user]  = 'graylog'
@@ -157,7 +157,7 @@ default.graylog2[:transport_email_web_interface_url] = nil
 default.graylog2[:server][:log_file]              = '/var/log/graylog-server/server.log'
 default.graylog2[:server][:log_max_size]          = '100MB'
 default.graylog2[:server][:log_max_index]         = 10
-default.graylog2[:server][:log_pattern]           = "%d %-5p: %c - %m%n"
+default.graylog2[:server][:log_pattern]           = '%d %-5p: %c - %m%n'
 default.graylog2[:server][:log_level_application] = 'info'
 default.graylog2[:server][:log_level_root]        = 'warn'
 
