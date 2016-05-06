@@ -17,7 +17,7 @@ driver_config:
     - - forwarded_port
       - guest: 12201
         host: 12201
-        auto_correct: true 
+        auto_correct: true
 
 provisioner:
   name: chef_zero
@@ -37,7 +37,7 @@ platforms:
   - recipe[apt]
 
 suites:
-  - name: default
+  - name: oracle
     attributes:
       machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
@@ -46,6 +46,36 @@ suites:
         install_flavor: 'oracle'
         oracle:
           accept_oracle_download_terms: true
+      graylog2:
+        password_secret: "2jueVqZpwLLjaWxV"
+        # Credentials are admin:admin
+        root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+        web:
+          secret: "2jueVqZpwLLjaWxV"
+        restart: "delayed"
+        rest:
+          transport_uri: 'http://127.0.0.1:12900'
+          admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
+      elasticsearch:
+        version: "2.2.0"
+        cluster:
+          name: "graylog"
+    run_list:
+      - recipe[fqdn]
+      - recipe[mongodb]
+      - recipe[java]
+      - recipe[elasticsearch_test]
+      - recipe[graylog2]
+      - recipe[graylog2::server]
+      - recipe[graylog2::collector]
+      - recipe[graylog2::authbind]
+  - name: openjdk
+    attributes:
+      machine_fqdn: graylog.local
+      machine_fqdn_as_hostname: true
+      java:
+        jdk_version: '8'
+        install_flavor: 'openjdk'
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         # Credentials are admin:admin
