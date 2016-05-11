@@ -156,6 +156,37 @@ To enable this feature include the [authbind](https://supermarket.chef.io/cookbo
 By default the recipe will give the Graylog user permission to bind to port 514 if you need more than that you can
 set the attribute `default.graylog2[:authorized_ports]` to an array of allowed ports.
 
+### Development and testing
+
+The cookbook comes with unit and integration tests for Ubuntu/Debian/CentOS. You can run them by using Rake and Test Kitchen.
+
+Unit tests:
+
+```
+  $ bundle exec rake spec
+```
+
+Integration tests:
+
+```
+  $ kitchen list
+  $ kitchen test oracle-ubuntu-1404
+```
+
+Additionally you can verify the coding style by running RoboCop and Foodcritic.
+
+Verify Ruby syntax with RuboCop:
+
+```
+  $ bundle exec rake style:ruby
+```
+
+Verify Chef syntax with Foodcritic:
+
+```
+  $ bundle exec rake style:chef
+```
+
 License
 -------
 
