@@ -13,7 +13,7 @@ Usage
 To give this cookbook a try simply use the Kitchen test suite.
 
 ```
-kitchen setup default-ubuntu-1404
+kitchen setup oracle-ubuntu-1404
 open http://localhost:9000
 Login with admin/admin
 ```
@@ -170,7 +170,8 @@ Integration tests:
 
 ```
   $ kitchen list
-  $ kitchen test oracle-ubuntu-1404
+  $ kitchen converge oracle-ubuntu-1404
+  $ kitchen verify oracle-ubuntu-1404
 ```
 
 Additionally you can verify the coding style by running RoboCop and Foodcritic.
