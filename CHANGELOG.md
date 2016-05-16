@@ -1,6 +1,15 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.0.0
+
+* Major update, please read the Graylog upgrade guide before applying this version
+  http://docs.graylog.org/en/2.0/pages/upgrade.html
+* The web interface cookbook was removed due to architectual changes in Graylog
+* The collector is now deprecated and will be replaced by the Graylog Sidecar in the future
+  https://github.com/Graylog2/collector-sidecar
+* Added unit tests
+
 ## 1.2.2
 
 * Fix collector standalone mode

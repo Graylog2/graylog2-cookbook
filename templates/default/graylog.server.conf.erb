@@ -8,11 +8,11 @@
 <%= config_option 'dashboard_widget_default_cache_time', node.graylog2[:dashboard_widget_default_cache_time] -%>
 
 # Access secrets
-<%= config_option 'password_secret', node.graylog2[:password_secret], enclose: node.graylog2[:password_secret_enclose_char] -%>
+<%= config_option 'password_secret', @password_secret, enclose: node.graylog2[:password_secret_enclose_char] -%>
 <%= config_option 'root_username', node.graylog2[:root_username] -%>
 <%= config_option 'root_email', node.graylog2[:root_email] -%>
 <%= config_option 'root_timezone', node.graylog2[:root_timezone] -%>
-<%= config_option 'root_password_sha2', node.graylog2[:root_password_sha2] -%>
+<%= config_option 'root_password_sha2', @root_password_sha2 -%>
 
 # Plugins
 <%= config_option 'plugin_dir', node.graylog2[:plugin_dir] -%> 
@@ -25,12 +25,25 @@
 <%= config_option 'rest_enable_tls', node.graylog2[:rest][:enable_tls] -%>
 <%= config_option 'rest_tls_cert_file', node.graylog2[:rest][:tls_cert_file] -%>
 <%= config_option 'rest_tls_key_file', node.graylog2[:rest][:tls_key_file] -%>
-<%= config_option 'rest_tls_key_password', node.graylog2[:rest][:tls_key_password] -%>
+<%= config_option 'rest_tls_key_password', @rest_tls_key_password -%>
 <%= config_option 'rest_max_chunk_size', node.graylog2[:rest][:max_chunk_size] -%>
 <%= config_option 'rest_max_header_size', node.graylog2[:rest][:max_header_size] -%>
 <%= config_option 'rest_max_initial_line_length', node.graylog2[:rest][:max_initial_line_length] -%>
 <%= config_option 'rest_thread_pool_size', node.graylog2[:rest][:thread_pool_size] -%>
 <%= config_option 'rest_worker_threads_max_pool_size', node.graylog2[:rest][:worker_threads_max_pool_size] -%>
+
+# Web interface
+<%= config_option 'web_enable', node.graylog2[:web][:enable] -%>
+<%= config_option 'web_listen_uri', node.graylog2[:web][:listen_uri] -%>
+<%= config_option 'web_enable_cors', node.graylog2[:web][:enable_cors] -%>
+<%= config_option 'web_enable_gzip', node.graylog2[:web][:enable_gzip] -%>
+<%= config_option 'web_enable_tls', node.graylog2[:web][:enable_tls] -%>
+<%= config_option 'web_tls_cert_file', node.graylog2[:web][:tls_cert_file] -%>
+<%= config_option 'web_tls_key_file', node.graylog2[:web][:tls_key_file] -%>
+<%= config_option 'web_tls_key_password', @web_tls_key_password -%>
+<%= config_option 'web_max_header_size', node.graylog2[:web][:max_header_size] -%>
+<%= config_option 'web_max_initial_line_length', node.graylog2[:web][:max_initial_line_length] -%>
+<%= config_option 'web_thread_pool_size', node.graylog2[:web][:thread_pool_size] -%>
 
 # Search options
 <%= config_option 'allow_leading_wildcard_searches', node.graylog2[:allow_leading_wildcard_searches] -%>
@@ -41,17 +54,10 @@ elasticsearch_node_master = false
 elasticsearch_node_data = false
 <%= config_option 'elasticsearch_http_enabled', node.graylog2[:elasticsearch][:http_enabled] -%>
 <%= config_option 'elasticsearch_config_file', node.graylog2[:elasticsearch][:config_file] -%>
-<%= config_option 'rotation_strategy', node.graylog2[:elasticsearch][:rotation_strategy] -%>
-<%= config_option 'elasticsearch_max_docs_per_index', node.graylog2[:elasticsearch][:max_docs_per_index] -%>
-<%= config_option 'elasticsearch_max_size_per_index', node.graylog2[:elasticsearch][:max_size_per_index] -%>
-<%= config_option 'elasticsearch_max_time_per_index', node.graylog2[:elasticsearch][:max_time_per_index] -%>
-<%= config_option 'elasticsearch_max_number_of_indices', node.graylog2[:elasticsearch][:max_number_of_indices] -%>
-<%= config_option 'retention_strategy', node.graylog2[:elasticsearch][:retention_strategy] -%>
 <%= config_option 'elasticsearch_shards', node.graylog2[:elasticsearch][:shards] -%>
 <%= config_option 'elasticsearch_replicas', node.graylog2[:elasticsearch][:replicas] -%>
 <%= config_option 'elasticsearch_index_prefix', node.graylog2[:elasticsearch][:index_prefix] -%>
 <%= config_option 'elasticsearch_cluster_name', node.graylog2[:elasticsearch][:cluster_name] -%>
-<%= config_option 'elasticsearch_node_name', node.graylog2[:elasticsearch][:node_name] -%>
 <%= config_option 'elasticsearch_transport_tcp_port', node.graylog2[:elasticsearch][:transport_tcp_port] -%>
 <%= config_option 'elasticsearch_discovery_zen_ping_multicast_enabled', node.graylog2[:elasticsearch][:discovery_zen_ping_multicast_enabled] -%>
 <%= config_option 'elasticsearch_discovery_zen_ping_unicast_hosts', node.graylog2[:elasticsearch][:discovery_zen_ping_unicast_hosts] -%>
@@ -60,6 +66,8 @@ elasticsearch_node_data = false
 <%= config_option 'elasticsearch_network_publish_host', node.graylog2[:elasticsearch][:network_publish_host] -%>
 <%= config_option 'elasticsearch_analyzer', node.graylog2[:elasticsearch][:analyzer] -%>
 <%= config_option 'elasticsearch_disable_version_check', node.graylog2[:elasticsearch][:disable_version_check] -%>
+<%= config_option 'elasticsearch_template_name', node.graylog2[:elasticsearch][:template_name] -%>
+<%= config_option 'elasticsearch_node_name_prefix', node.graylog2[:elasticsearch][:node_name_prefix] -%>
 <%= config_option 'output_batch_size', node.graylog2[:elasticsearch][:output_batch_size] -%>
 <%= config_option 'output_flush_interval', node.graylog2[:elasticsearch][:output_flush_interval] -%>
 <%= config_option 'output_fault_count_threshold', node.graylog2[:elasticsearch][:output_fault_count_threshold] -%>
@@ -118,17 +126,7 @@ elasticsearch_node_data = false
 <%= config_option 'alert_check_interval', node.graylog2[:server][:alert_check_interval] -%>
 
 # MongoDB Configuration
-<% if node.graylog2[:major_version].to_f <= 1.0 -%>
-<%= config_option 'mongodb_useauth', node.graylog2[:mongodb][:useauth] -%>
-<%= config_option 'mongodb_user', node.graylog2[:mongodb][:user] -%>
-<%= config_option 'mongodb_password', node.graylog2[:mongodb][:password] -%>
-<%= config_option 'mongodb_host', node.graylog2[:mongodb][:host] -%>
-<%= config_option 'mongodb_replica_set', node.graylog2[:mongodb][:replica_set] -%>
-<%= config_option 'mongodb_database', node.graylog2[:mongodb][:database] -%>
-<%= config_option 'mongodb_port', node.graylog2[:mongodb][:port] -%>
-<% else -%>
-<%= config_option 'mongodb_uri', node.graylog2[:mongodb][:uri] -%>
-<% end -%>
+<%= config_option 'mongodb_uri', @mongodb_uri -%>
 <%= config_option 'mongodb_max_connections', node.graylog2[:mongodb][:max_connections] -%>
 <%= config_option 'mongodb_threads_allowed_to_block_multiplier', node.graylog2[:mongodb][:threads_allowed_to_block_multiplier] -%>
 
@@ -144,7 +142,7 @@ elasticsearch_node_data = false
 <%= config_option 'transport_email_use_tls', node.graylog2[:transport_email_use_tls] -%>
 <%= config_option 'transport_email_use_ssl', node.graylog2[:transport_email_use_ssl] -%>
 <%= config_option 'transport_email_auth_username', node.graylog2[:transport_email_auth_username] -%>
-<%= config_option 'transport_email_auth_password', node.graylog2[:transport_email_auth_password] -%>
+<%= config_option 'transport_email_auth_password', @transport_email_auth_password -%>
 <%= config_option 'transport_email_subject_prefix', node.graylog2[:transport_email_subject_prefix] -%>
 <%= config_option 'transport_email_from_email', node.graylog2[:transport_email_from_email] -%>
 <%= config_option 'transport_email_web_interface_url', node.graylog2[:transport_email_web_interface_url] -%>

@@ -7,6 +7,7 @@ group :integration do
   cookbook 'apt'
   cookbook 'authbind'
   cookbook 'mongodb'
-  cookbook 'elasticsearch'
   cookbook 'java'
+
+  cookbook "elasticsearch_test", :path => "./test/fixtures/cookbooks/elasticsearch_test"
 end

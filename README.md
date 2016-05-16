@@ -13,7 +13,7 @@ Usage
 To give this cookbook a try simply use the Kitchen test suite.
 
 ```
-kitchen setup default-ubuntu-1404
+kitchen setup oracle-ubuntu-1404
 open http://localhost:9000
 Login with admin/admin
 ```
@@ -26,13 +26,10 @@ you need for your environment.
 |:----------|:------------|
 |default    |Setup the Graylog package repository|
 |server     |Install Graylog server|
-|web        |Install Graylog web interface|
-|radio      |Install a Graylog radio node|
 |authbind   |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
-|api_access |Use Graylog API to setup inputs like 'Syslog UDP'|
-|collector  |Install Graylog's collector (Experimental)|
+|collector  |Install Graylog's collector (deprecated)|
 
-In a minimal setup you need at least the _default_, _server_ and _web_ recipes. Combined with
+In a minimal setup you need at least the _default_ and _server_ recipes. Combined with
 MongoDB and Elasticsearch, a run list might look like this:
 
 ```
@@ -40,8 +37,7 @@ run_list "recipe[java]",
          "recipe[elasticsearch]",
          "recipe[mongodb]",
          "recipe[graylog2]",
-         "recipe[graylog2::server]",
-         "recipe[graylog2::web]"
+         "recipe[graylog2::server]"
 ```
 
 ### Attributes
@@ -71,20 +67,18 @@ Graylog runs currently with Java 8. To install the correct version set this attr
 OpenJDK and Oracle JDK are both fine for Graylog. Note that you must accept
 Oracle's download terms if you select the oracle install flavor.
 
-The java cookbook can install OpenJDK 8 since version 1.35.
-
-On some platform you need to accept terms to install OpenJDK too. See the [java
+On some platforms you need to accept terms to install OpenJDK too. See the [java
 cookbook's README](https://supermarket.chef.io/cookbooks/java) for more
 information.
 
 You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
-this is 1.7.1. The cluster name should be 'graylog2':
+this is 2.2.0. The cluster name should be 'graylog':
 
 ```json
   "elasticsearch": {
-    "version": "1.7.1",
+    "version": "2.2.0",
     "cluster": {
-      "name": "graylog2"
+      "name": "graylog"
     }
   }
 ```
@@ -101,9 +95,6 @@ The password can be generated with `echo -n yourpassword | shasum -a 256 | awk '
     "root_password_sha2": "e3c652f0ba0b4801205814f8b6bc49672c4c74e25b497770bb89b22cdeb4e951",
     "server": {
       "java_opts": "-Djava.net.preferIPv4Stack=true"
-    },
-    "web": {
-      "secret": "ZxUahiN48EFVJgzRTzGO2olFRmjmsvzybSf4YwBvn5x1asLUBPe8GHbOQTZ0jzuAB7dzrNPk3wCEH57PCZm23MHAET0G653G"
     }
   }
 ```
@@ -119,15 +110,22 @@ knife data bag create --secret-file ~/.chef/encrypted_data_bag_secret secrets gr
   "server": {
     "root_password_sha2": "<root password as sha256>",
     "password_secret": "<random string as encryption salt>"
-  },
-  "web": {
-    "secret": "<random string as encryption salt>"
   }
 }
 ```
 
 You can take a look into the attributes file under `attributes/default.rb` to get an idea
 what can be configured for Graylog.
+
+### Remote Elasticsearch hosts
+In order to connect Graylog to a remote Elasticsearch node you have to make it listen on the public network interface:
+```ruby
+'graylog2'=> {
+  'elasticsearch' => {
+		'network_host'=> '0.0.0.0'
+	}
+}
+```
 
 ### Node discovery
 The cookbook is able to use Chef's search to find Elasticsearch and other Graylog nodes. To configure
@@ -143,17 +141,7 @@ a dynamic cluster set the following attributes:
 }
 ```
 
-#### Graylog server discovery
-```ruby
-'graylog2'=> {
-  'web' => {
-    'server_search_query' => 'role:graylog-server',
-    'search_node_attribute' => 'ipaddress'
-  }
-}
-```
-
-One server needs to be set as a master, use this attribute to do so
+If you have multiple server one need to be set as a master, use this attribute to do so
 
 ```
 default.graylog2[:ip_of_master] = node.ipaddress
@@ -168,26 +156,36 @@ To enable this feature include the [authbind](https://supermarket.chef.io/cookbo
 By default the recipe will give the Graylog user permission to bind to port 514 if you need more than that you can
 set the attribute `default.graylog2[:authorized_ports]` to an array of allowed ports.
 
-### API access
+### Development and testing
 
-In order to access the API of Graylog we provide a LWRP to do so. At the moment we only support
-the creation of inputs but the LWRP is easy to extend. You can use the provider in your own
-recipe like this:
+The cookbook comes with unit and integration tests for Ubuntu/Debian/CentOS. You can run them by using Rake and Test Kitchen.
 
-Include `recipe[graylog2::api_access]` to your run list.
+Unit tests:
 
-```ruby
-graylog2_inputs "syslog udp" do
-  input '{ "title": "syslog", "type":"org.graylog2.inputs.syslog.udp.SyslogUDPInput", "global": true, "configuration": { "port": 1514, "allow_override_date": true, "bind_address": "0.0.0.0", "store_full_message": true, "recv_buffer_size": 1048576 } }'
-end
+```
+  $ bundle exec rake spec
 ```
 
-or you can put the same JSON into an array and set it as an attribute:
+Integration tests:
 
-```json
-"graylog2": {
-  "inputs": ["{ \"title\": \"syslog\", \"type\":\"org.graylog2.inputs.syslog.udp.SyslogUDPInput\", \"global\": true, \"configuration\": { \"port\": 1514, \"allow_override_date\": true, \"bind_address\": \"0.0.0.0\", \"store_full_message\": true, \"recv_buffer_size\": 1048576 } }"]
-}
+```
+  $ kitchen list
+  $ kitchen converge oracle-ubuntu-1404
+  $ kitchen verify oracle-ubuntu-1404
+```
+
+Additionally you can verify the coding style by running RoboCop and Foodcritic.
+
+Verify Ruby syntax with RuboCop:
+
+```
+  $ bundle exec rake style:ruby
+```
+
+Verify Chef syntax with Foodcritic:
+
+```
+  $ bundle exec rake style:chef
 ```
 
 License

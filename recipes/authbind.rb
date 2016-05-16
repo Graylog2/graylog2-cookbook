@@ -5,11 +5,6 @@ if platform?('ubuntu', 'debian')
   node.default.graylog2[:radio][:wrapper]  = 'authbind'
   if node.graylog2[:authorized_ports].is_a?(Array)
     node.graylog2[:authorized_ports].each do |authorized_port|
-      authbind_port "AuthBind graylog-radio port #{authorized_port}" do
-        port authorized_port
-        user node.graylog2[:radio][:user]
-        only_if "getent passwd #{node.graylog2[:radio][:user]}"
-      end
       authbind_port "AuthBind graylog-server port #{authorized_port}" do
         port authorized_port
         user node.graylog2[:server][:user]
@@ -17,11 +12,6 @@ if platform?('ubuntu', 'debian')
       end
     end
   elsif !node.graylog2[:authorized_ports].nil?
-    authbind_port "AuthBind graylog-radio port #{node.graylog2[:authorized_ports]}" do
-      port node.graylog2[:authorized_ports]
-      user node.graylog2[:radio][:user]
-      only_if "getent passwd #{node.graylog2[:radio][:user]}"
-    end
     authbind_port "AuthBind graylog-server port #{node.graylog2[:authorized_ports]}" do
       port node.graylog2[:authorized_ports]
       user node.graylog2[:server][:user]

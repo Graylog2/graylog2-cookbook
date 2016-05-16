@@ -1,11 +1,3 @@
-# Override attributes from data bag's "collector" section
-begin
-  secrets = Chef::EncryptedDataBagItem.load(node.graylog2[:secrets_data_bag], 'graylog')['collector']
-rescue
-  Chef::Log.debug 'Can not merge collector secrets from databag'
-end
-Chef::Mixin::DeepMerge.deep_merge!(secrets, node.override[:graylog2]) unless secrets.nil?
-
 if (node['platform'] == 'debian' && node['platform_version'] == '8') || (node['platform'] == 'ubuntu' && (node['platform_version'] == '14.04' || node['platform_version'] == '12.04'))
   apt_repository 'graylog-collector' do
     uri 'https://packages.graylog2.org/repo/debian/'
@@ -20,7 +12,7 @@ if (node['platform'] == 'debian' && node['platform_version'] == '8') || (node['p
   end
   package 'graylog-collector' do
     action :install
-    options '--force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if platform_family?('debian')
+    options '--no-install-recommends --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if platform_family?('debian')
     notifies :restart, 'service[graylog-collector]', node.graylog2[:restart].to_sym
   end
 
