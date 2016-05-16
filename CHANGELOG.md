@@ -1,8 +1,11 @@
 Graylog Chef Cookbook Changes
 ==============================
-## 2.0.1
+## 2.0.2
 
 * Bump to Graylog 2.0.1
+
+## 2.0.1
+
 * Extend tests suite
 
 ## 2.0.0
