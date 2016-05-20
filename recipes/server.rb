@@ -53,11 +53,8 @@ service 'graylog-server' do
   provider Chef::Provider::Service::Upstart if platform?('ubuntu')
 end
 
-is_master = if node.graylog2[:ip_of_master] == node.ipaddress
-              true
-            else
-              false
-            end
+is_master = node.graylog2[:is_master]
+is_master ||= node.graylog2[:ip_of_master] == node.ipaddress
 
 template '/etc/graylog/server/server.conf' do
   source 'graylog.server.conf.erb'
