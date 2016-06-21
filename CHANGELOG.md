@@ -1,5 +1,12 @@
 Graylog Chef Cookbook Changes
 ==============================
+
+## 2.0.3
+
+* Bump to Graylog 2.0.3
+* cluster master is now explicitly configurable
+* Fixed server start after reboot on Ubuntu systems
+
 ## 2.0.2
 
 * Bump to Graylog 2.0.1
