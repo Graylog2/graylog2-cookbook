@@ -51,8 +51,8 @@ service 'graylog-server' do
   restart_command node.graylog2[:server][:override_restart_command] if node.graylog2[:server][:override_restart_command]
 end
 
-file "/etc/init/graylog-server.override" do
-	action :delete
+file '/etc/init/graylog-server.override' do
+  action :delete
 end if node[:platform] == 'ubuntu' && node[:platform_version].to_f >= 9.10
 
 is_master = node.graylog2[:is_master]
