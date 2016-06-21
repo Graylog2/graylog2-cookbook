@@ -47,11 +47,13 @@ directory File.dirname(node.graylog2[:server][:log_file]) do
 end
 
 service 'graylog-server' do
-  action :enable
-  supports :status => true, :restart => true
+  action [:enable, :start]
   restart_command node.graylog2[:server][:override_restart_command] if node.graylog2[:server][:override_restart_command]
-  provider Chef::Provider::Service::Upstart if platform?('ubuntu')
 end
+
+file "/etc/init/graylog-server.override" do
+	action :delete
+end if node[:platform] == 'ubuntu' && node[:platform_version].to_f >= 9.10
 
 is_master = node.graylog2[:is_master]
 is_master = node.graylog2[:ip_of_master] == node.ipaddress if is_master.nil?
