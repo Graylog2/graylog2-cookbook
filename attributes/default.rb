@@ -22,11 +22,6 @@ default.graylog2[:server][:group] = 'graylog'
 default.graylog2[:collector][:user]   = 'graylog-collector'
 default.graylog2[:collector][:group]  = 'graylog-collector'
 
-# Generated API resources
-default.graylog2[:inputs] = nil
-default.graylog2[:streams] = nil
-default.graylog2[:dashboards] = nil
-
 # SHAs
 default.graylog2[:password_secret]              = nil # pwgen -s 96 1
 default.graylog2[:password_secret_enclose_char] = '"'
