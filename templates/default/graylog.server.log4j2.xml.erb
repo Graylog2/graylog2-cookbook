@@ -6,7 +6,7 @@
         </Console>
 
         <RollingFile name="graylog-rolling-file" fileName="<%= node.graylog2[:server][:log_file] %>"
-                 filePattern="<%= node.graylog2[:server][:log_file] %>-%d{yyyy-MM-dd-HH}-%i.gz">
+                 filePattern="<%= node.graylog2[:server][:log_file] %>-%i.gz">
             <PatternLayout>
               <Pattern><%= node.graylog2[:server][:log_pattern] %></Pattern>
             </PatternLayout>
