@@ -58,7 +58,6 @@ default.graylog2[:elasticsearch][:replicas]                             = 0
 default.graylog2[:elasticsearch][:index_prefix]                         = 'graylog'
 default.graylog2[:elasticsearch][:cluster_name]                         = 'graylog'
 default.graylog2[:elasticsearch][:http_enabled]                         = false
-default.graylog2[:elasticsearch][:discovery_zen_ping_multicast_enabled] = false
 default.graylog2[:elasticsearch][:discovery_zen_ping_unicast_hosts]     = '127.0.0.1:9300'
 default.graylog2[:elasticsearch][:unicast_search_query]                 = nil
 default.graylog2[:elasticsearch][:search_node_attribute]                = nil

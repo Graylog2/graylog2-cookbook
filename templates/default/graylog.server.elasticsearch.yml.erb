@@ -44,15 +44,6 @@ node.data: false
 # Unicast discovery allows to explicitly control which nodes will be used
 # to discover the cluster. It can be used when multicast is not present,
 # or to restrict the cluster communication-wise.
-#
-# 1. Disable multicast discovery (enabled by default):
-#
-<%= config_option 'discovery.zen.ping.multicast.enabled', node.graylog2[:elasticsearch][:discovery_zen_ping_multicast_enabled], separator: ': ' -%>
-
-#
-# 2. Configure an initial list of master nodes in the cluster
-# to perform discovery when new nodes (master or data) are started:
-#
 <%= config_option 'discovery.zen.ping.unicast.hosts', node.graylog2[:elasticsearch][:discovery_zen_ping_unicast_hosts], separator: ': ' -%>
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.

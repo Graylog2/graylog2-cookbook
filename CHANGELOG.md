@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.0.4
+
+* Remove unused ES property elasticsearch_discovery_zen_ping_multicast_enabled
+
 ## 2.0.3
 
 * Bump to Graylog 2.0.3
