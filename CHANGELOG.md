@@ -4,6 +4,7 @@ Graylog Chef Cookbook Changes
 ## 2.0.4
 
 * Remove unused ES property elasticsearch_discovery_zen_ping_multicast_enabled
+* Server log file pattern changed to keep the correct number of rotated files
 
 ## 2.0.3
 
