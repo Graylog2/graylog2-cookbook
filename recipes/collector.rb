@@ -12,6 +12,7 @@ if (node['platform'] == 'debian' && node['platform_version'] == '8') || (node['p
   end
   package 'graylog-collector' do
     action :install
+    version node.graylog2[:collector][:version] + "-" + node.graylog2[:collector][:build]
     options '--no-install-recommends --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if platform_family?('debian')
     notifies :restart, 'service[graylog-collector]', node.graylog2[:restart].to_sym
   end
@@ -60,7 +61,6 @@ else
   ark 'graylog-collector' do
     action :put
     url node.graylog2[:collector][:package_url]
-    version node.graylog2[:collector][:version]
     path '/usr/share'
     owner node.graylog2[:collector][:user]
   end
