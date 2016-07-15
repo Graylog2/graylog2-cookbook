@@ -1,7 +1,7 @@
 if (node['platform'] == 'debian' && node['platform_version'] == '8') || (node['platform'] == 'ubuntu' && (node['platform_version'] == '14.04' || node['platform_version'] == '12.04'))
   apt_repository 'graylog-collector' do
     uri 'https://packages.graylog2.org/repo/debian/'
-    distribution node['lsb']['codename']
+    distribution 'stable'
     components ['collector-latest']
     key 'https://packages.graylog2.org/repo/debian/keyring.gpg'
   end
@@ -12,7 +12,7 @@ if (node['platform'] == 'debian' && node['platform_version'] == '8') || (node['p
   end
   package 'graylog-collector' do
     action :install
-    version node.graylog2[:collector][:version] + "-" + node.graylog2[:collector][:build]
+    version node.graylog2[:collector][:version] + '-' + node.graylog2[:collector][:build]
     options '--no-install-recommends --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"' if platform_family?('debian')
     notifies :restart, 'service[graylog-collector]', node.graylog2[:restart].to_sym
   end
