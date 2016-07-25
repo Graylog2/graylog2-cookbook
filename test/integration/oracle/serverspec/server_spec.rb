@@ -29,18 +29,3 @@ describe file('/etc/graylog/server/graylog-elasticsearch.yml') do
   it { should be_file }
   its(:content) { should match(/cluster.name: graylog/) }
 end
-
-# REST API
-describe port(12_900) do
-  it { should be_listening }
-end
-
-# Transport
-describe port(9_350) do
-  it { should be_listening }
-end
-
-# Web UI
-describe port(9_000) do
-  it { should be_listening }
-end
