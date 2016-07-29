@@ -31,16 +31,16 @@ describe file('/etc/graylog/server/graylog-elasticsearch.yml') do
 end
 
 # REST API
-describe port(12_900) do
-  it { should be_listening }
+describe command('timeout 60 bash -c "until curl -s http://127.0.0.1:12900; do sleep 1; done"') do
+  its(:stdout) { should match 'HTTP' }
 end
 
 # Transport
-describe port(9_350) do
-  it { should be_listening }
+describe command('timeout 60 bash -c "until curl -s http://127.0.0.1:9350; do sleep 1; done"') do
+  its(:stdout) { should match 'HTTP' }
 end
 
 # Web UI
-describe port(9_000) do
-  it { should be_listening }
+describe command('timeout 60 bash -c "until curl -s http://127.0.0.1:9000; do sleep 1; done"') do
+  its(:stdout) { should match 'html' }
 end
