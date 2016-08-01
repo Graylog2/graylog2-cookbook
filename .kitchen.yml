@@ -62,6 +62,7 @@ suites:
           name: "graylog"
     run_list:
       - recipe[fqdn]
+      - recipe[curl]
       - recipe[mongodb]
       - recipe[java]
       - recipe[elasticsearch_test]
