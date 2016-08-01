@@ -4,6 +4,7 @@ metadata
 
 group :integration do
   cookbook 'fqdn'
+  cookbook 'curl'
   cookbook 'apt'
   cookbook 'authbind'
   cookbook 'mongodb'
