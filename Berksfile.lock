@@ -1,5 +1,7 @@
 DEPENDENCIES
   apt
+  apt_backports
+    path: test/fixtures/cookbooks/apt_backports
   authbind
   curl
   elasticsearch_test
@@ -14,6 +16,8 @@ DEPENDENCIES
 GRAPH
   apt (4.0.1)
     compat_resource (>= 12.10)
+  apt_backports (0.0.1)
+    apt (>= 0.0.0)
   ark (1.2.0)
     build-essential (>= 0.0.0)
     seven_zip (>= 0.0.0)
@@ -49,7 +53,7 @@ GRAPH
   homebrew (2.1.0)
     build-essential (>= 2.1.2)
   hostsfile (2.4.5)
-  java (1.41.0)
+  java (1.42.0)
     apt (>= 0.0.0)
     homebrew (>= 0.0.0)
     windows (>= 0.0.0)

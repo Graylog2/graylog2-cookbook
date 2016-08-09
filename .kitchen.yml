@@ -1,6 +1,6 @@
 ---
 driver:
-   name: vagrant
+  name: vagrant
 
 driver_config:
   customize:
@@ -25,16 +25,17 @@ provisioner:
   data_path: test
 
 platforms:
-- name: centos-6.7
+- name: centos-7.2
   attributes:
     mongodb:
       reload_action: "reload"
 - name: ubuntu-14.04
   run_list:
   - recipe[apt]
-- name: debian-7.8
+- name: debian-8.5
   run_list:
   - recipe[apt]
+  - recipe[apt_backports]
 
 suites:
   - name: oracle
