@@ -1,0 +1,20 @@
+server_url: <%= node.graylog2[:sidecar][:server_url] %>
+update_interval: <%= node.graylog2[:sidecar][:update_interval] %>
+tls_skip_verify: <%= node.graylog2[:sidecar][:tls_skip_verify] %>
+send_status: <%= node.graylog2[:sidecar][:send_status] %>
+list_log_files: <%= node.graylog2[:sidecar][:list_log_files] %>
+node_id: <%= node.graylog2[:sidecar][:name] %>
+collector_id: <%= node.graylog2[:sidecar][:id] %>
+log_path: <%= node.graylog2[:sidecar][:log_path] %>
+log_rotation_time: <%= node.graylog2[:sidecar][:log_rotation_time] %>
+log_max_age: <%= node.graylog2[:sidecar][:log_max_age] %>
+tags: <%= node.graylog2[:sidecar][:tags] %>
+backends:
+    - name: nxlog
+      enabled: <%= node.graylog2[:sidecar][:backends][:nxlog][:enabled] %>
+      binary_path: <%= node.graylog2[:sidecar][:backends][:nxlog][:binary_path] %>
+      configuration_path: <%= node.graylog2[:sidecar][:backends][:nxlog][:configuration_path] %>
+    - name: filebeat
+      enabled: <%= node.graylog2[:sidecar][:backends][:filebeat][:enabled] %>
+      binary_path: <%= node.graylog2[:sidecar][:backends][:filebeat][:binary_path] %>
+      configuration_path: <%= node.graylog2[:sidecar][:backends][:filebeat][:configuration_path] %>

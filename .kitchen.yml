@@ -69,7 +69,7 @@ suites:
       - recipe[elasticsearch_test]
       - recipe[graylog2]
       - recipe[graylog2::server]
-      - recipe[graylog2::collector]
+      - recipe[graylog2::collector_sidecar]
       - recipe[graylog2::authbind]
   - name: openjdk
     attributes:
@@ -100,5 +100,5 @@ suites:
       - recipe[elasticsearch_test]
       - recipe[graylog2]
       - recipe[graylog2::server]
-      - recipe[graylog2::collector]
+      - recipe[graylog2::collector_sidecar]
       - recipe[graylog2::authbind]

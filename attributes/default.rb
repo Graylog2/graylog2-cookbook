@@ -5,8 +5,6 @@ node.default[:mongodb] ||= {}
 default.graylog2[:repo_version]              = '1-1'
 default.graylog2[:major_version]             = '2.0'
 default.graylog2[:server][:version]          = '2.0.3-1'
-default.graylog2[:collector][:version]       = '0.5.0'
-default.graylog2[:collector][:build]         = '1'
 default.graylog2[:root_username]             = 'admin'
 default.graylog2[:root_email]                = nil
 default.graylog2[:root_timezone]             = nil
@@ -19,8 +17,6 @@ default.graylog2[:secrets_data_bag]                    = 'secrets'
 # Users
 default.graylog2[:server][:user]  = 'graylog'
 default.graylog2[:server][:group] = 'graylog'
-default.graylog2[:collector][:user]   = 'graylog-collector'
-default.graylog2[:collector][:group]  = 'graylog-collector'
 
 # SHAs
 default.graylog2[:password_secret]              = nil # pwgen -s 96 1
@@ -182,17 +178,29 @@ default.graylog2[:web][:max_header_size] = nil
 default.graylog2[:web][:max_initial_line_length] = nil
 default.graylog2[:web][:thread_pool_size] = nil
 
-# Collector
-default.graylog2[:collector][:java_bin]                     = '/usr/bin/java'
-default.graylog2[:collector][:java_home]                    = ''
-default.graylog2[:collector][:package_url]                  = "http://packages.graylog2.org/releases/graylog-collector/graylog-collector-#{node.graylog2[:collector][:version]}.tgz"
-default.graylog2[:collector][:server_url]                   = 'http://localhost:12900'
-default.graylog2[:collector][:id]                           = 'file:/etc/graylog/collector/collector-id'
-default.graylog2[:collector][:buffer_size]                  = 128
-default.graylog2[:collector][:metrics][:enable_logging]     = 'false'
-default.graylog2[:collector][:metrics][:log_duration]       = '60s'
-default.graylog2[:collector][:inputs]                       = { 'local-syslog' => { 'type' => 'file', 'path' => '/var/log/syslog', 'charset' => 'utf-8', 'content-splitter' => 'newline' } }
-default.graylog2[:collector][:outputs]                      = { 'gelf-tcp' => { 'type' => 'gelf', 'protocol' => 'tcp', 'host' => '127.0.0.1', 'port' => 12201 } }
+# Collector Sidecar
+default.graylog2[:sidecar][:release]                        = '0.0.9-beta.1'
+default.graylog2[:sidecar][:version]                        = '0.0.9'
+default.graylog2[:sidecar][:build]                          = 1
+default.graylog2[:sidecar][:arch]                           = 'amd64'
+default.graylog2[:sidecar][:package_base_url]               = "https://github.com/Graylog2/collector-sidecar/releases/download/#{node.graylog2[:sidecar][:release]}"
+default.graylog2[:sidecar][:server_url]                     = 'http://localhost:12900'
+default.graylog2[:sidecar][:update_interval]                = 10
+default.graylog2[:sidecar][:tls_skip_verify]                = false
+default.graylog2[:sidecar][:send_status]                    = false
+default.graylog2[:sidecar][:list_log_files]                 = nil # single directory or '[dir1, dir2, dir3]'
+default.graylog2[:sidecar][:name]                           = 'graylog-collector-sidecar'
+default.graylog2[:sidecar][:id]                             = 'file:/etc/graylog/collector-sidecar/collector-id'
+default.graylog2[:sidecar][:log_path]                       = '/var/log/graylog/collector-sidecar'
+default.graylog2[:sidecar][:log_rotation_time]              = 86400
+default.graylog2[:sidecar][:log_max_age]                    = 604800
+default.graylog2[:sidecar][:tags]                           = 'linux' # multiple tags '[tag1, tag2, tag3]'
+default.graylog2[:sidecar][:backends][:nxlog][:enabled]               = false
+default.graylog2[:sidecar][:backends][:nxlog][:binary_path]           = '/usr/bin/nxlog'
+default.graylog2[:sidecar][:backends][:nxlog][:configuration_path]    = '/etc/graylog/collector-sidecar/generated/nxlog.conf'
+default.graylog2[:sidecar][:backends][:filebeat][:enabled]            = true
+default.graylog2[:sidecar][:backends][:filebeat][:binary_path]        = '/usr/bin/filebeat'
+default.graylog2[:sidecar][:backends][:filebeat][:configuration_path] = '/etc/graylog/collector-sidecar/generated/filebeat.yml'
 default.graylog2[:server][:collector_inactive_threshold]    = '1m'
 default.graylog2[:server][:collector_expiration_threshold]  = '14d'
 
