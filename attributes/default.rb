@@ -150,9 +150,9 @@ default.graylog2[:transport_email_web_interface_url] = nil
 
 # Logging
 default.graylog2[:server][:log_file]              = '/var/log/graylog-server/server.log'
-default.graylog2[:server][:log_max_size]          = '100MB'
+default.graylog2[:server][:log_max_size]          = '50MB'
 default.graylog2[:server][:log_max_index]         = 10
-default.graylog2[:server][:log_pattern]           = '%d %-5p: %c - %m%n'
+default.graylog2[:server][:log_pattern]           = "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p [%c{1}] %m%n"
 default.graylog2[:server][:log_level_application] = 'info'
 default.graylog2[:server][:log_level_root]        = 'warn'
 
