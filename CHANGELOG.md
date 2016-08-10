@@ -1,6 +1,12 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.1.0
+
+* Replace collector recipe with collector_sidecar
+* Update log4j configuration
+* Test against Centos 7 and Dedian 8
+
 ## 2.0.5
 
 * Fix collector installation
