@@ -16,25 +16,28 @@ remote_file "#{Chef::Config['file_cache_path'] || '/tmp'}/#{package_name}" do
 end
 
 package 'graylog-collector-sidecar' do
-  source "#{Chef::Config['file_cache_path'] || '/tmp'}/#{package_name}"
   action :install
+  source "#{Chef::Config['file_cache_path'] || '/tmp'}/#{package_name}"
+  version "#{node.graylog2[:sidecar][:version]}-#{node.graylog2[:sidecar]['build']}"
   case node[:platform]
   when 'ubuntu', 'debian'
     provider Chef::Provider::Package::Dpkg
+    options '--force-confold'
   when 'redhat', 'centos'
     provider Chef::Provider::Package::Rpm
   end
+  notifies :restart, 'service[collector-sidecar]'
 end
 
 template '/etc/graylog/collector-sidecar/collector_sidecar.yml' do
   action :create
   source 'graylog.collector-sidecar.yml.erb'
-  notifies :restart, 'service[collector-sidecar]', node.graylog2[:restart].to_sym
+  notifies :restart, 'service[collector-sidecar]'
 end
 
 execute 'install service graylog-collector-sidecar' do
   command '/usr/bin/graylog-collector-sidecar -service install'
-  notifies :restart, 'service[collector-sidecar]', node.graylog2[:restart].to_sym
+  notifies :restart, 'service[collector-sidecar]'
   case node[:platform]
   when 'ubuntu'
     not_if { File.exists?('/etc/init/collector-sidecar.conf') }

@@ -88,6 +88,10 @@ suites:
         rest:
           transport_uri: 'http://127.0.0.1:12900'
           admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
+        sidecar:
+          release: '0.0.9-beta.1'
+          version: '0.0.9'
+          build: 1
       elasticsearch:
         version: "2.2.0"
         cluster:
