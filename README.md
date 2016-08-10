@@ -22,12 +22,12 @@ Login with admin/admin
 The cookbook contains several recipes for different installation setups. Pick only the recipes
 you need for your environment.
 
-|Recipe     | Description |
-|:----------|:------------|
-|default    |Setup the Graylog package repository|
-|server     |Install Graylog server|
-|authbind   |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
-|collector  |Install Graylog's collector (deprecated)|
+|Recipe             | Description |
+|:------------------|:------------|
+|default            |Setup the Graylog package repository|
+|server             |Install Graylog server|
+|authbind           |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
+|collector_sidecar  |Install Graylog's collector sidecar|
 
 In a minimal setup you need at least the _default_ and _server_ recipes. Combined with
 MongoDB and Elasticsearch, a run list might look like this:
