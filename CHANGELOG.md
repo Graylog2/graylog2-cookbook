@@ -1,6 +1,12 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.1.1
+
+* Bump to GL 2.1.0
+* Add web_endpoint_uri
+* Fix tests
+
 ## 2.1.0
 
 * Replace collector recipe with collector_sidecar

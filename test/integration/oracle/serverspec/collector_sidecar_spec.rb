@@ -7,5 +7,5 @@ end
 
 describe file('/etc/graylog/collector-sidecar/collector_sidecar.yml') do
   it { should be_file }
-  its(:content) { should match(/server_url: http:\/\/localhost:12900/) }
+  its(:content) { should match(/server_url: http:\/\/localhost:9000\/api/) }
 end

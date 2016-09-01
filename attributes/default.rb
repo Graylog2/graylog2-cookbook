@@ -3,8 +3,8 @@ node.default[:mongodb] ||= {}
 
 # General
 default.graylog2[:repo_version]              = '1-1'
-default.graylog2[:major_version]             = '2.0'
-default.graylog2[:server][:version]          = '2.0.3-1'
+default.graylog2[:major_version]             = '2.1'
+default.graylog2[:server][:version]          = '2.1.0-9'
 default.graylog2[:root_username]             = 'admin'
 default.graylog2[:root_email]                = nil
 default.graylog2[:root_timezone]             = nil
@@ -32,7 +32,7 @@ default.graylog2[:http_proxy_uri]   = nil
 default.graylog2[:authorized_ports] = 514
 
 # Rest
-default.graylog2[:rest][:listen_uri]              = 'http://0.0.0.0:12900'
+default.graylog2[:rest][:listen_uri]              = 'http://0.0.0.0:9000/api'
 default.graylog2[:rest][:transport_uri]           = nil
 default.graylog2[:rest][:enable_cors]             = nil
 default.graylog2[:rest][:enable_gzip]             = nil
@@ -168,6 +168,7 @@ default.graylog2[:server][:install_tzdata_java]      = true
 # Web
 default.graylog2[:web][:enable] = true
 default.graylog2[:web][:listen_uri] = 'http://0.0.0.0:9000'
+default.graylog2[:web][:endpoint_uri] = nil
 default.graylog2[:web][:enable_cors] = nil
 default.graylog2[:web][:enable_gzip] = nil
 default.graylog2[:web][:enable_tls] = nil
@@ -179,12 +180,12 @@ default.graylog2[:web][:max_initial_line_length] = nil
 default.graylog2[:web][:thread_pool_size] = nil
 
 # Collector Sidecar
-default.graylog2[:sidecar][:release]                        = '0.0.9-beta.1'
+default.graylog2[:sidecar][:release]                        = '0.0.9'
 default.graylog2[:sidecar][:version]                        = '0.0.9'
 default.graylog2[:sidecar][:build]                          = 1
 default.graylog2[:sidecar][:arch]                           = 'amd64'
 default.graylog2[:sidecar][:package_base_url]               = "https://github.com/Graylog2/collector-sidecar/releases/download/#{node.graylog2[:sidecar][:release]}"
-default.graylog2[:sidecar][:server_url]                     = 'http://localhost:12900'
+default.graylog2[:sidecar][:server_url]                     = 'http://localhost:9000/api'
 default.graylog2[:sidecar][:update_interval]                = 10
 default.graylog2[:sidecar][:tls_skip_verify]                = false
 default.graylog2[:sidecar][:send_status]                    = false

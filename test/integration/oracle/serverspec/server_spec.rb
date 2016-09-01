@@ -31,8 +31,8 @@ describe file('/etc/graylog/server/graylog-elasticsearch.yml') do
 end
 
 # REST API
-describe command('timeout 60 bash -c "until curl -s http://127.0.0.1:12900; do sleep 1; done"') do
-  its(:stdout) { should match 'HTTP' }
+describe command('timeout 60 bash -c "until curl -s http://127.0.0.1:9000/api; do sleep 1; done"') do
+  its(:stdout) { should match 'node_id' }
 end
 
 # Transport

@@ -34,6 +34,7 @@
 # Web interface
 <%= config_option 'web_enable', node.graylog2[:web][:enable] -%>
 <%= config_option 'web_listen_uri', node.graylog2[:web][:listen_uri] -%>
+<%= config_option 'web_endpoint_uri', node.graylog2[:web][:endpoint_uri] -%>
 <%= config_option 'web_enable_cors', node.graylog2[:web][:enable_cors] -%>
 <%= config_option 'web_enable_gzip', node.graylog2[:web][:enable_gzip] -%>
 <%= config_option 'web_enable_tls', node.graylog2[:web][:enable_tls] -%>

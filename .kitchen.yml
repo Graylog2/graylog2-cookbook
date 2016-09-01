@@ -10,9 +10,6 @@ driver_config:
       - guest: 9000
         host: 9000
         auto_correct: true
-    - - forwarded_port
-      - guest: 12900
-        host: 12900
         auto_correct: true
     - - forwarded_port
       - guest: 12201
@@ -52,11 +49,15 @@ suites:
         # Credentials are admin:admin
         root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
         web:
+          endpoint_uri: 'http://127.0.0.1:9000/api'
           secret: "2jueVqZpwLLjaWxV"
         restart: "delayed"
         rest:
-          transport_uri: 'http://127.0.0.1:12900'
           admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
+        sidecar:
+          release: '0.0.9'
+          version: '0.0.9'
+          build: 1
       elasticsearch:
         version: "2.2.0"
         cluster:
@@ -83,13 +84,13 @@ suites:
         # Credentials are admin:admin
         root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
         web:
+          endpoint_uri: 'http://127.0.0.1:9000/api'
           secret: "2jueVqZpwLLjaWxV"
         restart: "delayed"
         rest:
-          transport_uri: 'http://127.0.0.1:12900'
           admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
         sidecar:
-          release: '0.0.9-beta.1'
+          release: '0.0.9'
           version: '0.0.9'
           build: 1
       elasticsearch:
