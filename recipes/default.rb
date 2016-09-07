@@ -4,7 +4,7 @@ raise('Java version needs to be >= 8') if node[:java][:jdk_version].to_i < 8
 
 if platform_family?('rhel')
   repository_file = "graylog-#{version}-repository-#{repo_version}.noarch.rpm"
-  repository_url = "http://packages.graylog2.org/repo/el/stable/#{version}/x86_64/#{repository_file}"
+  repository_url = "https://packages.graylog2.org/repo/el/stable/#{version}/x86_64/#{repository_file}"
 elsif platform_family?('debian')
   repository_file = "graylog-#{version}-repository_#{repo_version}_all.deb"
   repository_url = "https://packages.graylog2.org/repo/debian/pool/stable/#{version}/g/graylog-#{version}-repository/#{repository_file}"
@@ -37,7 +37,7 @@ package repository_file do
     notifies :run, 'execute[yum-clean]', :immediately
   elsif platform?('ubuntu', 'debian')
     provider Chef::Provider::Package::Dpkg
-    options '--force-confold'
+    options '--force-confold --force-overwrite'
     notifies :run, 'execute[apt-update]', :immediately
   end
 end

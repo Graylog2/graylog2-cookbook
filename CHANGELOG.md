@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.1.2
+
+* Fix repository update on Debian/Ubuntu systems
+
 ## 2.1.1
 
 * Bump to GL 2.1.0
