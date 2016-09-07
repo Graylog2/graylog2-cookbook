@@ -5,6 +5,20 @@ node.default[:mongodb] ||= {}
 default.graylog2[:repo_version]              = '1-1'
 default.graylog2[:major_version]             = '2.1'
 default.graylog2[:server][:version]          = '2.1.0-9'
+## By default the cookbook installs a meta package containing the key and URL for the current Graylog repository. To disable
+## this behavior set your own repository informations here.
+default.graylog2[:server][:repos]            = {
+#  'rhel' => {
+#    'url' => "https://packages.graylog2.org/repo/el/stable/#{node.graylog2[:major_version]}/x86_64/",
+#    'key' => 'https://raw.githubusercontent.com/Graylog2/fpm-recipes/master/recipes/graylog-repository/files/rpm/RPM-GPG-KEY-graylog'
+#  },
+#  'debian' => {
+#    'url' => "https://packages.graylog2.org/repo/debian/",
+#    'distribution' => '',
+#    'components' => ['stable', node.graylog2[:major_version]],
+#    'key' => 'https://raw.githubusercontent.com/Graylog2/fpm-recipes/master/recipes/graylog-repository/files/deb/graylog-keyring.gpg'
+#  }
+}
 default.graylog2[:root_username]             = 'admin'
 default.graylog2[:root_email]                = nil
 default.graylog2[:root_timezone]             = nil

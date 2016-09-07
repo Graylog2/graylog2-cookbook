@@ -28,16 +28,33 @@ execute 'yum-clean' do
   action :nothing
 end
 
-package repository_file do
-  action :install
-  source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
+if node.graylog2[:server][:repos].empty?
+  package repository_file do
+    action :install
+    source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
+    if platform_family?('rhel')
+      provider Chef::Provider::Package::Rpm
+      options '--force'
+      notifies :run, 'execute[yum-clean]', :immediately
+    elsif platform?('ubuntu', 'debian')
+      provider Chef::Provider::Package::Dpkg
+      options '--force-confold --force-overwrite'
+      notifies :run, 'execute[apt-update]', :immediately
+    end
+  end
+else
   if platform_family?('rhel')
-    provider Chef::Provider::Package::Rpm
-    options '--force'
-    notifies :run, 'execute[yum-clean]', :immediately
+    yum_repository 'graylog' do
+      description "Graylog repository"
+      baseurl     node.graylog2[:server][:repos]['rhel']['url']
+      gpgkey      node.graylog2[:server][:repos]['rhel']['key']
+    end
   elsif platform?('ubuntu', 'debian')
-    provider Chef::Provider::Package::Dpkg
-    options '--force-confold --force-overwrite'
-    notifies :run, 'execute[apt-update]', :immediately
+    apt_repository 'graylog' do
+      uri          node.graylog2[:server][:repos]['debian']['url']
+      distribution node.graylog2[:server][:repos]['debian']['distribution'] 
+      components   node.graylog2[:server][:repos]['debian']['components']
+      key          node.graylog2[:server][:repos]['debian']['key']
+    end
   end
 end

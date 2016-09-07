@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.1.3
+
+* Allow to configure alternative repository
+
 ## 2.1.2
 
 * Fix repository update on Debian/Ubuntu systems
