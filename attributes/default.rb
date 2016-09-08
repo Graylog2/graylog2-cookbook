@@ -42,6 +42,7 @@ default.graylog2[:node_id_file] = '/etc/graylog/server/node-id'
 default.graylog2[:plugin_dir]   = '/usr/share/graylog-server/plugin'
 
 # Network
+default.graylog2[:trusted_proxies]  = nil
 default.graylog2[:http_proxy_uri]   = nil
 default.graylog2[:authorized_ports] = 514
 
@@ -86,6 +87,7 @@ default.graylog2[:elasticsearch][:index_optimization_max_num_segments]  = nil
 default.graylog2[:elasticsearch][:index_ranges_cleanup_interval]        = nil
 default.graylog2[:elasticsearch][:template_name]                        = nil
 default.graylog2[:elasticsearch][:node_name_prefix]                     = nil
+default.graylog2[:elasticsearch][:template_name]                        = nil
 
 # MongoDb
 default.graylog2[:mongodb][:uri] = 'mongodb://127.0.0.1:27017/graylog'

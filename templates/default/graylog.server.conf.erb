@@ -31,6 +31,9 @@
 <%= config_option 'rest_thread_pool_size', node.graylog2[:rest][:thread_pool_size] -%>
 <%= config_option 'rest_worker_threads_max_pool_size', node.graylog2[:rest][:worker_threads_max_pool_size] -%>
 
+# Proxies
+<%= config_option 'trusted_proxies', node.graylog2[:trusted_proxies] -%>
+
 # Web interface
 <%= config_option 'web_enable', node.graylog2[:web][:enable] -%>
 <%= config_option 'web_listen_uri', node.graylog2[:web][:listen_uri] -%>
@@ -75,6 +78,7 @@ elasticsearch_node_data = false
 <%= config_option 'disable_index_optimization', node.graylog2[:elasticsearch][:disable_index_optimization] -%>
 <%= config_option 'index_optimization_max_num_segments', node.graylog2[:elasticsearch][:index_optimization_max_num_segments] -%>
 <%= config_option 'index_ranges_cleanup_interval', node.graylog2[:elasticsearch][:index_ranges_cleanup_interval] -%>
+<%= config_option 'elasticsearch_template_name', node.graylog2[:elasticsearch][:template_name] -%>
 
 # Processors
 <%= config_option 'processbuffer_processors', node.graylog2[:processbuffer_processors] -%>
