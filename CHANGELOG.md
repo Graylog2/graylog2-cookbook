@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.1.4
+
+* Bump to Graylog 2.1.1
+
 ## 2.1.3
 
 * Allow to configure alternative repository
