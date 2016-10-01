@@ -10,11 +10,15 @@ driver_config:
       - guest: 9000
         host: 9000
         auto_correct: true
+    - - forwarded_port
+      - guest: 12201
+        host: 12201
         auto_correct: true
     - - forwarded_port
       - guest: 12201
         host: 12201
         auto_correct: true
+        protocol: udp
 
 provisioner:
   name: chef_zero
