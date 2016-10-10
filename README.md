@@ -1,6 +1,7 @@
 Description
 -----------
 [![Build Status](https://travis-ci.org/Graylog2/graylog2-cookbook.svg)](https://travis-ci.org/Graylog2/graylog2-cookbook)
+[![Build Status](https://jenkins-01.eastus.cloudapp.azure.com/job/graylog2-cookbook/badge/icon)](https://jenkins-01.eastus.cloudapp.azure.com/job/graylog2-cookbook/)
 
 This _Chef_ cookbook installs and configures the [Graylog](http://www.graylog.org) log management system.
 
