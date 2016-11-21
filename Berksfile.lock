@@ -44,7 +44,7 @@ GRAPH
     hostsfile (>= 0.0.0)
     line (>= 0.0.0)
     now (>= 0.0.0)
-  graylog2 (2.1.3)
+  graylog2 (2.1.4)
     ark (>= 0.0.0)
     authbind (>= 0.1.8)
     elasticsearch (>= 0.0.0)
