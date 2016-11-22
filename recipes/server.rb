@@ -56,7 +56,7 @@ file '/etc/init/graylog-server.override' do
 end if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 9.10
 
 is_master = node['graylog2']['is_master']
-is_master = node['graylog2']['ip_of_master'] == node.ipaddress if is_master.nil?
+is_master = node['graylog2']['ip_of_master'] == node['ipaddress'] if is_master.nil?
 
 template '/etc/graylog/server/server.conf' do
   source 'graylog.server.conf.erb'
