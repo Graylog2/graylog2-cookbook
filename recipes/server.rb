@@ -14,7 +14,7 @@ raise('No root_password_sha2 set, either set it via an attribute or in the encry
 if node['graylog2']['elasticsearch']['unicast_search_query'] && node['graylog2']['elasticsearch']['search_node_attribute']
   nodes = search_for_nodes(node['graylog2']['elasticsearch']['unicast_search_query'], node['graylog2']['elasticsearch']['search_node_attribute'])
   Chef::Log.debug("Found elasticsearch nodes at #{nodes.join(', ').inspect}")
-  node.set['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts'] = nodes.map { |ip| ip + ':9300' }.join(',')
+  node.default['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts'] = nodes.map { |ip| ip + ':9300' }.join(',')
 end
 
 package 'tzdata-java' if node['graylog2']['server']['install_tzdata_java']
@@ -56,7 +56,7 @@ file '/etc/init/graylog-server.override' do
 end if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 9.10
 
 is_master = node['graylog2']['is_master']
-is_master = node['graylog2']['ip_of_master'] == node.ipaddress if is_master.nil?
+is_master = node['graylog2']['ip_of_master'] == node['ipaddress'] if is_master.nil?
 
 template '/etc/graylog/server/server.conf' do
   source 'graylog.server.conf.erb'

@@ -8,8 +8,8 @@ describe 'graylog2::collector_sidecar' do
         version: '14.04',
         file_cache_path: '/tmp'
       ) do |node|
-        node.set['graylog2']['sidecar']['version'] = '0.0.8'
-        node.set['graylog2']['sidecar']['build'] = 1
+        node.normal['graylog2']['sidecar']['version'] = '0.0.8'
+        node.normal['graylog2']['sidecar']['build'] = 1
       end.converge('graylog2::collector_sidecar')
     end
 

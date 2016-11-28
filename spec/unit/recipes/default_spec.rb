@@ -7,9 +7,9 @@ describe 'graylog2::default' do
         platform: 'ubuntu',
         version: '14.04'
       ) do |node|
-        node.set['java']['jdk_version'] = '8'
-        node.set['graylog2']['major_version'] = '2.0'
-        node.set['graylog2']['repo_version'] = '1-1'
+        node.normal['java']['jdk_version'] = '8'
+        node.normal['graylog2']['major_version'] = '2.0'
+        node.normal['graylog2']['repo_version'] = '1-1'
       end.converge('graylog2::default')
     end
 
@@ -28,9 +28,9 @@ describe 'graylog2::default' do
         platform: 'centos',
         version: '6.7'
       ) do |node|
-        node.set['java']['jdk_version'] = '8'
-        node.set['graylog2']['major_version'] = '2.0'
-        node.set['graylog2']['repo_version'] = '1-1'
+        node.normal['java']['jdk_version'] = '8'
+        node.normal['graylog2']['major_version'] = '2.0'
+        node.normal['graylog2']['repo_version'] = '1-1'
       end.converge('graylog2::default')
     end
 
@@ -42,7 +42,7 @@ describe 'graylog2::default' do
   context 'when the Java installation is not compatible' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new do |node|
-        node.set['java']['jdk_version'] = '7'
+        node.normal['java']['jdk_version'] = '7'
       end.converge('graylog2::default')
     end
 

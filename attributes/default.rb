@@ -143,7 +143,7 @@ default['graylog2']['elasticsearch']['request_timeout']                 = '1m'
 default['graylog2']['server']['alert_check_interval'] = nil
 
 # Cluster
-default['graylog2']['ip_of_master']                  = node.ipaddress
+default['graylog2']['ip_of_master']                  = node['ipaddress']
 default['graylog2']['lb_recognition_period_seconds'] = 3
 
 # Email transport
