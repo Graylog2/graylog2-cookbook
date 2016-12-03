@@ -53,7 +53,8 @@ end
 
 file '/etc/init/graylog-server.override' do
   action :delete
-end if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 9.10
+  only_if { node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 9.10 }
+end
 
 is_master = node['graylog2']['is_master']
 is_master = node['graylog2']['ip_of_master'] == node['ipaddress'] if is_master.nil?
@@ -62,7 +63,7 @@ template '/etc/graylog/server/server.conf' do
   source 'graylog.server.conf.erb'
   owner 'root'
   group node['graylog2']['server']['group']
-  mode 0640
+  mode '0640'
   variables(
     :is_master             => is_master,
     :password_secret       => password_secret,
@@ -88,7 +89,7 @@ end
 template args_file do
   source 'graylog.server.default.erb'
   owner 'root'
-  mode 0644
+  mode '0644'
   notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
 end
 
@@ -96,7 +97,7 @@ template '/etc/graylog/server/log4j2.xml' do
   source 'graylog.server.log4j2.xml.erb'
   owner 'root'
   group node['graylog2']['server']['group']
-  mode 0640
+  mode '0640'
   notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
 end
 
@@ -104,6 +105,6 @@ template '/etc/graylog/server/graylog-elasticsearch.yml' do
   source 'graylog.server.elasticsearch.yml.erb'
   owner 'root'
   group node['graylog2']['server']['group']
-  mode 0640
+  mode '0640'
   notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
 end

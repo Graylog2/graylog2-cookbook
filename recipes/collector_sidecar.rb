@@ -1,12 +1,19 @@
-package_name = String.new
-arch = String.new
+package_name = ''
 
 case node['platform']
 when 'ubuntu', 'debian'
-  arch = (['amd64', 'x64', 'x86_64'].include? node['graylog2']['sidecar']['arch']) ? 'amd64' : 'i386'
+  arch = if ['amd64', 'x64', 'x86_64'].include? node['graylog2']['sidecar']['arch']
+           'amd64'
+         else
+           'i386'
+         end
   package_name = "collector-sidecar_#{node['graylog2']['sidecar']['version']}-#{node['graylog2']['sidecar']['build']}_#{arch}.deb"
 when 'redhat', 'centos'
-  arch = (['amd64', 'x64', 'x86_64'].include? node['graylog2']['sidecar']['arch']) ? 'x86_64' : 'i386'
+  arch = if ['amd64', 'x64', 'x86_64'].include? node['graylog2']['sidecar']['arch']
+           'x86_64'
+         else
+           'i386'
+         end
   package_name = "collector-sidecar-#{node['graylog2']['sidecar']['version']}-#{node['graylog2']['sidecar']['build']}.#{arch}.rpm"
 end
 
@@ -40,9 +47,9 @@ execute 'install service graylog-collector-sidecar' do
   notifies :restart, 'service[collector-sidecar]'
   case node['platform']
   when 'ubuntu'
-    not_if { File.exists?('/etc/init/collector-sidecar.conf') }
+    not_if { File.exist?('/etc/init/collector-sidecar.conf') }
   when 'debian', 'redhat', 'centos'
-    not_if { File.exists?('/etc/systemd/system/collector-sidecar.service') }
+    not_if { File.exist?('/etc/systemd/system/collector-sidecar.service') }
   end
 end
 

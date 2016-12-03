@@ -50,7 +50,7 @@ GRAPH
     elasticsearch (>= 0.0.0)
     java (>= 0.0.0)
     mongodb (>= 0.0.0)
-  homebrew (2.1.0)
+  homebrew (2.1.2)
     build-essential (>= 2.1.2)
   hostsfile (2.4.5)
   java (1.42.0)

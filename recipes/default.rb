@@ -42,19 +42,17 @@ if node['graylog2']['server']['repos'].empty?
       notifies :run, 'execute[apt-update]', :immediately
     end
   end
-else
-  if platform_family?('rhel')
-    yum_repository 'graylog' do
-      description "Graylog repository"
-      baseurl     node['graylog2']['server']['repos']['rhel']['url']
-      gpgkey      node['graylog2']['server']['repos']['rhel']['key']
-    end
-  elsif platform?('ubuntu', 'debian')
-    apt_repository 'graylog' do
-      uri          node['graylog2']['server']['repos']['debian']['url']
-      distribution node['graylog2']['server']['repos']['debian']['distribution']
-      components   node['graylog2']['server']['repos']['debian']['components']
-      key          node['graylog2']['server']['repos']['debian']['key']
-    end
+elsif platform_family?('rhel')
+  yum_repository 'graylog' do
+    description 'Graylog repository'
+    baseurl     node['graylog2']['server']['repos']['rhel']['url']
+    gpgkey      node['graylog2']['server']['repos']['rhel']['key']
+  end
+elsif platform?('ubuntu', 'debian')
+  apt_repository 'graylog' do
+    uri          node['graylog2']['server']['repos']['debian']['url']
+    distribution node['graylog2']['server']['repos']['debian']['distribution']
+    components   node['graylog2']['server']['repos']['debian']['components']
+    key          node['graylog2']['server']['repos']['debian']['key']
   end
 end
