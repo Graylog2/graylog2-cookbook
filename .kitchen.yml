@@ -26,7 +26,7 @@ provisioner:
   data_path: test
 
 platforms:
-- name: centos-7.2
+- name: centos-7.1
   attributes:
     mongodb:
       reload_action: "reload"
