@@ -17,8 +17,8 @@ describe 'graylog2::server' do
         platform: 'ubuntu',
         version: '14.04'
       ) do |node|
-        node.default['graylog2']['password_secret'] = 'password_hash'
-        node.default['graylog2']['root_password_sha2'] = 'salt'
+        node.normal['graylog2']['password_secret'] = 'password_hash'
+        node.normal['graylog2']['root_password_sha2'] = 'salt'
       end.converge('graylog2::server')
     end
 
@@ -58,8 +58,8 @@ describe 'graylog2::server' do
         platform: 'centos',
         version: '6.7'
       ) do |node|
-        node.default['graylog2']['password_secret'] = 'password_hash'
-        node.default['graylog2']['root_password_sha2'] = 'salt'
+        node.normal['graylog2']['password_secret'] = 'password_hash'
+        node.normal['graylog2']['root_password_sha2'] = 'salt'
       end.converge('graylog2::server')
     end
 
