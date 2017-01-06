@@ -47,9 +47,9 @@ execute 'install service graylog-collector-sidecar' do
   notifies :restart, 'service[collector-sidecar]'
   case node['platform']
   when 'ubuntu'
-    not_if { File.exist?('/etc/init/collector-sidecar.conf') }
+    not_if { File.exist?('/etc/systemd/system/collector-sidecar.service') || File.exist?('/etc/init/collector-sidecar.conf') }
   when 'debian', 'redhat', 'centos'
-    not_if { File.exist?('/etc/systemd/system/collector-sidecar.service') }
+    not_if { File.exist?('/etc/systemd/system/collector-sidecar.service') || File.exist?('/etc/init.d/collector-sidecar') }
   end
 end
 
