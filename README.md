@@ -41,6 +41,8 @@ run_list "recipe[java]",
          "recipe[graylog2::server]"
 ```
 
+Keep in mind that Graylog needs Elasticsearch 2.x, what can be installed with the Elasticsearch cookbook version < 3.0.0
+
 ### Attributes
 Graylog runs currently with Java 8. To install the correct version set this attribute:
 

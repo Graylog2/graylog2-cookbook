@@ -13,7 +13,7 @@ depends 'java'
 depends 'ark'
 
 recommends 'mongodb'
-recommends 'elasticsearch'
+recommends 'elasticsearch', '< 3.0.0'
 recommends 'authbind'
 
 supports 'ubuntu'
