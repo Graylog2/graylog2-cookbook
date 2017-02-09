@@ -2,12 +2,11 @@ node.default['graylog2'] ||= {}
 node.default['mongodb'] ||= {}
 
 # General
-default['graylog2']['repo_version']              = '1-1'
-default['graylog2']['major_version']             = '2.1'
-default['graylog2']['server']['version']          = '2.1.2-1'
+default['graylog2']['major_version']     = '2.2'
+default['graylog2']['server']['version'] = '2.2.0-11'
 ## By default the cookbook installs a meta package containing the key and URL for the current Graylog repository. To disable
 ## this behavior set your own repository informations here.
-default['graylog2']['server']['repos']            = {
+default['graylog2']['server']['repos']   = {
   # 'rhel' => {
   #   'url' => "https://packages.graylog2.org/repo/el/stable/#{node['graylog2']['major_version']}/x86_64/",
   #   'key' => 'https://raw.githubusercontent.com/Graylog2/fpm-recipes/master/recipes/graylog-repository/files/rpm/RPM-GPG-KEY-graylog'
@@ -47,7 +46,7 @@ default['graylog2']['http_proxy_uri']   = nil
 default['graylog2']['authorized_ports'] = 514
 
 # Rest
-default['graylog2']['rest']['listen_uri']              = 'http://0.0.0.0:9000/api'
+default['graylog2']['rest']['listen_uri']              = 'http://0.0.0.0:9000/api/'
 default['graylog2']['rest']['transport_uri']           = nil
 default['graylog2']['rest']['enable_cors']             = nil
 default['graylog2']['rest']['enable_gzip']             = nil

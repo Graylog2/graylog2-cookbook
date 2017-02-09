@@ -8,8 +8,7 @@ describe 'graylog2::default' do
         version: '14.04'
       ) do |node|
         node.normal['java']['jdk_version'] = '8'
-        node.normal['graylog2']['major_version'] = '2.0'
-        node.normal['graylog2']['repo_version'] = '1-1'
+        node.normal['graylog2']['major_version'] = '2.2'
       end.converge('graylog2::default')
     end
 
@@ -18,7 +17,7 @@ describe 'graylog2::default' do
     end
 
     it 'installs the repository package' do
-      expect(chef_run).to install_package 'graylog-2.0-repository_1-1_all.deb'
+      expect(chef_run).to install_package 'graylog-2.2-repository_latest.deb'
     end
   end
 
@@ -29,13 +28,12 @@ describe 'graylog2::default' do
         version: '6.7'
       ) do |node|
         node.normal['java']['jdk_version'] = '8'
-        node.normal['graylog2']['major_version'] = '2.0'
-        node.normal['graylog2']['repo_version'] = '1-1'
+        node.normal['graylog2']['major_version'] = '2.2'
       end.converge('graylog2::default')
     end
 
     it 'installs the repository package' do
-      expect(chef_run).to install_package 'graylog-2.0-repository-1-1.noarch.rpm'
+      expect(chef_run).to install_package 'graylog-2.2-repository_latest.rpm'
     end
   end
 

@@ -1,13 +1,12 @@
 version = node['graylog2']['major_version']
-repo_version = node['graylog2']['repo_version']
 raise('Java version needs to be >= 8') if node['java']['jdk_version'].to_i < 8
 
 if platform_family?('rhel')
-  repository_file = "graylog-#{version}-repository-#{repo_version}.noarch.rpm"
-  repository_url = "https://packages.graylog2.org/repo/el/stable/#{version}/x86_64/#{repository_file}"
+  repository_file = "graylog-#{version}-repository_latest.rpm"
+  repository_url = "https://packages.graylog2.org/repo/packages/#{repository_file}"
 elsif platform_family?('debian')
-  repository_file = "graylog-#{version}-repository_#{repo_version}_all.deb"
-  repository_url = "https://packages.graylog2.org/repo/debian/pool/stable/#{version}/g/graylog-#{version}-repository/#{repository_file}"
+  repository_file = "graylog-#{version}-repository_latest.deb"
+  repository_url = "https://packages.graylog2.org/repo/packages/#{repository_file}"
   package 'apt-transport-https'
 end
 

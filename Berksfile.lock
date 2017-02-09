@@ -47,7 +47,7 @@ GRAPH
   graylog2 (2.1.4)
     ark (>= 0.0.0)
     authbind (>= 0.1.8)
-    elasticsearch (>= 0.0.0)
+    elasticsearch (< 3.0.0)
     java (>= 0.0.0)
     mongodb (>= 0.0.0)
   homebrew (2.1.2)
