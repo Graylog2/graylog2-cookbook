@@ -10,11 +10,6 @@ elsif platform_family?('debian')
   package 'apt-transport-https'
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/#{repository_file}" do
-  action :create_if_missing
-  source repository_url
-end
-
 execute 'apt-update' do
   command 'apt-get update'
   ignore_failure true
@@ -28,6 +23,11 @@ execute 'yum-clean' do
 end
 
 if node['graylog2']['server']['repos'].empty?
+  remote_file "#{Chef::Config[:file_cache_path]}/#{repository_file}" do
+    action :create_if_missing
+    source repository_url
+  end
+
   package repository_file do
     action :install
     source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
