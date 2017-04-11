@@ -8,7 +8,7 @@ when 'ubuntu', 'debian'
            'i386'
          end
   package_name = "collector-sidecar_#{node['graylog2']['sidecar']['version']}-#{node['graylog2']['sidecar']['build']}_#{arch}.deb"
-when 'redhat', 'centos'
+when 'redhat', 'centos', 'oracle'
   arch = if ['amd64', 'x64', 'x86_64'].include? node['graylog2']['sidecar']['arch']
            'x86_64'
          else
@@ -30,7 +30,7 @@ package 'graylog-collector-sidecar' do
   when 'ubuntu', 'debian'
     provider Chef::Provider::Package::Dpkg
     options '--force-confold'
-  when 'redhat', 'centos'
+  when 'redhat', 'centos', 'oracle'
     provider Chef::Provider::Package::Rpm
   end
   notifies :restart, 'service[collector-sidecar]'
@@ -48,7 +48,7 @@ execute 'install service graylog-collector-sidecar' do
   case node['platform']
   when 'ubuntu'
     not_if { File.exist?('/etc/systemd/system/collector-sidecar.service') || File.exist?('/etc/init/collector-sidecar.conf') }
-  when 'debian', 'redhat', 'centos'
+  when 'debian', 'redhat', 'centos', 'oracle'
     not_if { File.exist?('/etc/systemd/system/collector-sidecar.service') || File.exist?('/etc/init.d/collector-sidecar') }
   end
 end
