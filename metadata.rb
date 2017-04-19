@@ -12,9 +12,9 @@ depends 'authbind', '>= 0.1.8'
 depends 'java'
 depends 'ark'
 
-recommends 'mongodb'
-recommends 'elasticsearch', '< 3.0.0'
-recommends 'authbind'
+suggests 'mongodb'
+suggests 'elasticsearch', '< 3.0.0'
+suggests 'authbind'
 
 supports 'ubuntu'
 supports 'debian'
