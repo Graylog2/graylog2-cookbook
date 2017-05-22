@@ -211,6 +211,7 @@ default['graylog2']['sidecar']['log_path']                       = '/var/log/gra
 default['graylog2']['sidecar']['log_rotation_time']              = 86400
 default['graylog2']['sidecar']['log_max_age']                    = 604800
 default['graylog2']['sidecar']['tags']                           = 'linux' # multiple tags '[tag1, tag2, tag3]'
+default['graylog2']['sidecar']['cache_path']                     = '/var/cache/graylog/collector-sidecar'
 default['graylog2']['sidecar']['backends']['nxlog']['enabled']               = false
 default['graylog2']['sidecar']['backends']['nxlog']['binary_path']           = '/usr/bin/nxlog'
 default['graylog2']['sidecar']['backends']['nxlog']['configuration_path']    = '/etc/graylog/collector-sidecar/generated/nxlog.conf'
