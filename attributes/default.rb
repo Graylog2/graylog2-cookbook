@@ -178,7 +178,7 @@ default['graylog2']['server']['gc_warning_threshold'] = nil
 default['graylog2']['server']['override_restart_command'] = false
 default['graylog2']['server']['additional_options']       = nil
 default['graylog2']['server']['additional_env_vars']      = nil
-default['graylog2']['server']['install_tzdata_java']      = true
+default['graylog2']['server']['install_tzdata_java']      = false
 
 # Web
 default['graylog2']['web']['enable'] = true
