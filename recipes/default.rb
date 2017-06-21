@@ -1,7 +1,7 @@
 version = node['graylog2']['major_version']
 raise('Java version needs to be >= 8') if node['java']['jdk_version'].to_i < 8
 
-if platform_family?('rhel')
+if platform_family?('rhel', 'amazon')
   repository_file = "graylog-#{version}-repository_latest.rpm"
   repository_url = "https://packages.graylog2.org/repo/packages/#{repository_file}"
 elsif platform_family?('debian')
@@ -31,7 +31,7 @@ if node['graylog2']['server']['repos'].empty?
   package repository_file do
     action :install
     source "#{Chef::Config[:file_cache_path]}/#{repository_file}"
-    if platform_family?('rhel')
+    if platform_family?('rhel', 'amazon')
       provider Chef::Provider::Package::Rpm
       options '--force'
       notifies :run, 'execute[yum-clean]', :immediately
@@ -41,7 +41,7 @@ if node['graylog2']['server']['repos'].empty?
       notifies :run, 'execute[apt-update]', :immediately
     end
   end
-elsif platform_family?('rhel')
+elsif platform_family?('rhel', 'amazon')
   yum_repository 'graylog' do
     description 'Graylog repository'
     baseurl     node['graylog2']['server']['repos']['rhel']['url']

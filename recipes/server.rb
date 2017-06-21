@@ -80,7 +80,7 @@ end
 
 if platform_family?('debian')
   args_file = '/etc/default/graylog-server'
-elsif platform_family?('rhel')
+elsif platform_family?('rhel', 'amazon')
   args_file = '/etc/sysconfig/graylog-server'
 else
   Chef::Log.error 'Platform not supported.'
