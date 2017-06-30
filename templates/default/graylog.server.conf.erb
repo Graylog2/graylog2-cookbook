@@ -53,23 +53,10 @@
 <%= config_option 'allow_highlighting', node['graylog2']['allow_highlighting'] -%>
 
 # Elasticsearch
-elasticsearch_node_master = false
-elasticsearch_node_data = false
-<%= config_option 'elasticsearch_http_enabled', node['graylog2']['elasticsearch']['http_enabled'] -%>
-<%= config_option 'elasticsearch_config_file', node['graylog2']['elasticsearch']['config_file'] -%>
-<%= config_option 'elasticsearch_shards', node['graylog2']['elasticsearch']['shards'] -%>
-<%= config_option 'elasticsearch_replicas', node['graylog2']['elasticsearch']['replicas'] -%>
 <%= config_option 'elasticsearch_index_prefix', node['graylog2']['elasticsearch']['index_prefix'] -%>
-<%= config_option 'elasticsearch_cluster_name', node['graylog2']['elasticsearch']['cluster_name'] -%>
-<%= config_option 'elasticsearch_transport_tcp_port', node['graylog2']['elasticsearch']['transport_tcp_port'] -%>
-<%= config_option 'elasticsearch_discovery_zen_ping_unicast_hosts', node['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts'] -%>
-<%= config_option 'elasticsearch_network_host', node['graylog2']['elasticsearch']['network_host'] -%>
-<%= config_option 'elasticsearch_network_bind_host', node['graylog2']['elasticsearch']['network_bind_host'] -%>
-<%= config_option 'elasticsearch_network_publish_host', node['graylog2']['elasticsearch']['network_publish_host'] -%>
 <%= config_option 'elasticsearch_analyzer', node['graylog2']['elasticsearch']['analyzer'] -%>
 <%= config_option 'elasticsearch_disable_version_check', node['graylog2']['elasticsearch']['disable_version_check'] -%>
 <%= config_option 'elasticsearch_template_name', node['graylog2']['elasticsearch']['template_name'] -%>
-<%= config_option 'elasticsearch_node_name_prefix', node['graylog2']['elasticsearch']['node_name_prefix'] -%>
 <%= config_option 'output_batch_size', node['graylog2']['elasticsearch']['output_batch_size'] -%>
 <%= config_option 'output_flush_interval', node['graylog2']['elasticsearch']['output_flush_interval'] -%>
 <%= config_option 'output_fault_count_threshold', node['graylog2']['elasticsearch']['output_fault_count_threshold'] -%>
@@ -79,6 +66,36 @@ elasticsearch_node_data = false
 <%= config_option 'index_optimization_max_num_segments', node['graylog2']['elasticsearch']['index_optimization_max_num_segments'] -%>
 <%= config_option 'index_ranges_cleanup_interval', node['graylog2']['elasticsearch']['index_ranges_cleanup_interval'] -%>
 <%= config_option 'elasticsearch_template_name', node['graylog2']['elasticsearch']['template_name'] -%>
+
+<% if node['graylog2']['major_version'].to_f <= 2.2 -%>
+# Elasticsearch node client (GL <= 2.2)
+elasticsearch_node_master = false
+elasticsearch_node_data = false
+<%= config_option 'elasticsearch_cluster_name', node['graylog2']['elasticsearch']['cluster_name'] -%>
+<%= config_option 'elasticsearch_config_file', node['graylog2']['elasticsearch']['config_file'] -%>
+<%= config_option 'elasticsearch_discovery_zen_ping_unicast_hosts', node['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts'] -%>
+<%= config_option 'elasticsearch_http_enabled', node['graylog2']['elasticsearch']['http_enabled'] -%>
+<%= config_option 'elasticsearch_network_host', node['graylog2']['elasticsearch']['network_host'] -%>
+<%= config_option 'elasticsearch_network_bind_host', node['graylog2']['elasticsearch']['network_bind_host'] -%>
+<%= config_option 'elasticsearch_network_publish_host', node['graylog2']['elasticsearch']['network_publish_host'] -%>
+<%= config_option 'elasticsearch_node_name_prefix', node['graylog2']['elasticsearch']['node_name_prefix'] -%>
+<%= config_option 'elasticsearch_transport_tcp_port', node['graylog2']['elasticsearch']['transport_tcp_port'] -%>
+# Timeouts
+<%= config_option 'elasticsearch_cluster_discovery_timeout', node['graylog2']['elasticsearch']['cluster_discovery_timeout'] -%>
+<%= config_option 'elasticsearch_discovery_initial_state_timeout', node['graylog2']['elasticsearch']['discovery_initial_state_timeout'] -%>
+<%= config_option 'elasticsearch_request_timeout', node['graylog2']['elasticsearch']['request_timeout'] -%>
+<% else -%>
+# Elasticsearch http client (GL >= 2.3)
+<%= config_option 'elasticsearch_connect_timeout', node['graylog2']['elasticsearch']['connect_timeout'] -%>
+<%= config_option 'elasticsearch_hosts', node['graylog2']['elasticsearch']['hosts'] -%>
+<%= config_option 'elasticsearch_idle_timeout', node['graylog2']['elasticsearch']['idle_timeout'] -%>
+<%= config_option 'elasticsearch_max_total_connections', node['graylog2']['elasticsearch']['max_total_connections'] -%>
+<%= config_option 'elasticsearch_max_total_connections_per_route', node['graylog2']['elasticsearch']['max_total_connections_per_route'] -%>
+<%= config_option 'elasticsearch_socket_timeout', node['graylog2']['elasticsearch']['socket_timeout'] -%>
+<%= config_option 'elasticsearch_discovery_enabled', node['graylog2']['elasticsearch']['discovery_enabled'] -%>
+<%= config_option 'elasticsearch_discovery_filter', node['graylog2']['elasticsearch']['discovery_filter'] -%>
+<%= config_option 'elasticsearch_discovery_frequency', node['graylog2']['elasticsearch']['discovery_frequency'] -%>
+<% end -%>
 
 # Processors
 <%= config_option 'processbuffer_processors', node['graylog2']['processbuffer_processors'] -%>
@@ -112,9 +129,6 @@ elasticsearch_node_data = false
 <%= config_option 'http_read_timeout', node['graylog2']['http_read_timeout'] -%>
 <%= config_option 'http_write_timeout', node['graylog2']['http_write_timeout'] -%>
 <%= config_option 'stream_processing_timeout', node['graylog2']['stream_processing_timeout'] -%>
-<%= config_option 'elasticsearch_cluster_discovery_timeout', node['graylog2']['elasticsearch']['cluster_discovery_timeout'] -%>
-<%= config_option 'elasticsearch_discovery_initial_state_timeout', node['graylog2']['elasticsearch']['discovery_initial_state_timeout'] -%>
-<%= config_option 'elasticsearch_request_timeout', node['graylog2']['elasticsearch']['request_timeout'] -%>
 
 # Ring buffers
 <%= config_option 'ring_size', node['graylog2']['ring_size'] -%>

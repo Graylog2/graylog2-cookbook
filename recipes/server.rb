@@ -11,10 +11,15 @@ raise('No password_secret set, either set it via an attribute or in the encrypte
 raise('No root_password_sha2 set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless root_password_sha2
 
 # Search ES cluster
-if node['graylog2']['elasticsearch']['unicast_search_query'] && node['graylog2']['elasticsearch']['search_node_attribute']
-  nodes = search_for_nodes(node['graylog2']['elasticsearch']['unicast_search_query'], node['graylog2']['elasticsearch']['search_node_attribute'])
+if node['graylog2']['elasticsearch']['node_search_query'] && node['graylog2']['elasticsearch']['node_search_attribute']
+  nodes = search_for_nodes(node['graylog2']['elasticsearch']['node_search_query'], node['graylog2']['elasticsearch']['node_search_attribute'])
   Chef::Log.debug("Found elasticsearch nodes at #{nodes.join(', ').inspect}")
-  node.default['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts'] = nodes.map { |ip| ip + ':9300' }.join(',')
+
+  if node['graylog2']['major_version'].to_f <= 2.2
+    node.default['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts'] = nodes.map { |ip| ip + ':9300' }.join(',')
+  else
+    node.default['graylog2']['elasticsearch']['hosts'] = nodes.map { |ip| node.default['graylog2']['elasticsearch']['node_search_protocol'] + '://' + ip + ':9200' }.join(',')
+  end
 end
 
 package 'tzdata-java' if node['graylog2']['server']['install_tzdata_java']
@@ -107,4 +112,5 @@ template '/etc/graylog/server/graylog-elasticsearch.yml' do
   group node['graylog2']['server']['group']
   mode '0640'
   notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
+  only_if { node.default['graylog2']['major_version'].to_f <= 2.2 }
 end

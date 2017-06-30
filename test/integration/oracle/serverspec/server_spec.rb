@@ -25,19 +25,9 @@ describe file('/etc/graylog/server/log4j2.xml') do
   its(:content) { should match(/server.log/) }
 end
 
-describe file('/etc/graylog/server/graylog-elasticsearch.yml') do
-  it { should be_file }
-  its(:content) { should match(/cluster.name: graylog/) }
-end
-
 # REST API
 describe command('timeout 60 bash -c "until curl -s -H \'Accept: application/json\' http://127.0.0.1:9000/api/; do sleep 1; done"') do
   its(:stdout) { should match 'node_id' }
-end
-
-# Transport
-describe command('timeout 60 bash -c "until curl -s http://127.0.0.1:9350; do sleep 1; done"') do
-  its(:stdout) { should match 'HTTP' }
 end
 
 # Web UI

@@ -2,8 +2,11 @@ node.default['graylog2'] ||= {}
 node.default['mongodb'] ||= {}
 
 # General
-default['graylog2']['major_version']     = '2.2'
-default['graylog2']['server']['version'] = '2.2.3-1'
+#default['graylog2']['major_version']     = '2.2'
+#default['graylog2']['server']['version'] = '2.2.3-1'
+default['graylog2']['major_version']     = '2.3'
+default['graylog2']['server']['version'] = '2.3.0-4.beta.1'
+
 ## By default the cookbook installs a meta package containing the key and URL for the current Graylog repository. To disable
 ## this behavior set your own repository informations here.
 default['graylog2']['server']['repos']   = {
@@ -62,31 +65,49 @@ default['graylog2']['rest']['thread_pool_size']        = nil
 default['graylog2']['rest']['worker_threads_max_pool_size'] = nil
 
 # Elasticsearch
-default['graylog2']['elasticsearch']['config_file']                          = '/etc/graylog/server/graylog-elasticsearch.yml'
-default['graylog2']['elasticsearch']['shards']                               = 4
-default['graylog2']['elasticsearch']['replicas']                             = 0
+#  Optional node discovery by Chef search
+default['graylog2']['elasticsearch']['node_search_query']                    = nil
+default['graylog2']['elasticsearch']['node_search_attribute']                = nil
+default['graylog2']['elasticsearch']['node_search_protocol']                 = 'http'
+
 default['graylog2']['elasticsearch']['index_prefix']                         = 'graylog'
-default['graylog2']['elasticsearch']['cluster_name']                         = 'graylog'
-default['graylog2']['elasticsearch']['http_enabled']                         = false
-default['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts']     = '127.0.0.1:9300'
-default['graylog2']['elasticsearch']['unicast_search_query']                 = nil
-default['graylog2']['elasticsearch']['search_node_attribute']                = nil
-default['graylog2']['elasticsearch']['network_host']                         = nil
-default['graylog2']['elasticsearch']['network_bind_host']                    = nil
-default['graylog2']['elasticsearch']['network_publish_host']                 = nil
 default['graylog2']['elasticsearch']['analyzer']                             = 'standard'
 default['graylog2']['elasticsearch']['output_batch_size']                    = 500
 default['graylog2']['elasticsearch']['output_flush_interval']                = 1
 default['graylog2']['elasticsearch']['output_fault_count_threshold']         = 5
 default['graylog2']['elasticsearch']['output_fault_penalty_seconds']         = 30
-default['graylog2']['elasticsearch']['transport_tcp_port']                   = 9350
 default['graylog2']['elasticsearch']['disable_version_check']                = nil
 default['graylog2']['elasticsearch']['disable_index_optimization']           = nil
 default['graylog2']['elasticsearch']['index_optimization_max_num_segments']  = nil
 default['graylog2']['elasticsearch']['index_ranges_cleanup_interval']        = nil
 default['graylog2']['elasticsearch']['template_name']                        = nil
+
+# Elasticsearch node client (GL <= 2.2)
+default['graylog2']['elasticsearch']['config_file']                          = '/etc/graylog/server/graylog-elasticsearch.yml'
+default['graylog2']['elasticsearch']['cluster_name']                         = 'graylog'
+default['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts']     = '127.0.0.1:9300'
+default['graylog2']['elasticsearch']['http_enabled']                         = false
+default['graylog2']['elasticsearch']['network_host']                         = nil
+default['graylog2']['elasticsearch']['network_bind_host']                    = nil
+default['graylog2']['elasticsearch']['network_publish_host']                 = nil
 default['graylog2']['elasticsearch']['node_name_prefix']                     = nil
-default['graylog2']['elasticsearch']['template_name']                        = nil
+default['graylog2']['elasticsearch']['transport_tcp_port']                   = 9350
+# Timeouts
+default['graylog2']['elasticsearch']['cluster_discovery_timeout']       = 5000
+default['graylog2']['elasticsearch']['discovery_initial_state_timeout'] = '3s'
+default['graylog2']['elasticsearch']['request_timeout']                 = '1m'
+
+# Elasticsearch http client (GL >= 2.3)
+default['graylog2']['elasticsearch']['hosts']                           = 'http://127.0.0.1:9200'
+default['graylog2']['elasticsearch']['max_total_connections']           = 20
+default['graylog2']['elasticsearch']['max_total_connections_per_route'] = 2
+default['graylog2']['elasticsearch']['connect_timeout']                 = nil # '10s'
+default['graylog2']['elasticsearch']['socket_timeout']                  = nil # '60s'
+default['graylog2']['elasticsearch']['idle_timeout']                    = nil # '-1s'
+# WARNING: Automatic node discovery does not work if Elasticsearch requires authentication, e. g. with Shield.
+default['graylog2']['elasticsearch']['discovery_enabled']               = true
+default['graylog2']['elasticsearch']['discovery_filter']                = nil
+default['graylog2']['elasticsearch']['discovery_frequency']             = nil # '30s'
 
 # MongoDb
 default['graylog2']['mongodb']['uri'] = 'mongodb://127.0.0.1:27017/graylog'
@@ -134,9 +155,6 @@ default['graylog2']['api_client_timeout']        = 300
 default['graylog2']['http_connect_timeout']      = '5s'
 default['graylog2']['http_read_timeout']         = '10s'
 default['graylog2']['http_write_timeout']        = '10s'
-default['graylog2']['elasticsearch']['cluster_discovery_timeout']       = 5000
-default['graylog2']['elasticsearch']['discovery_initial_state_timeout'] = '3s'
-default['graylog2']['elasticsearch']['request_timeout']                 = '1m'
 
 # Intervals
 default['graylog2']['server']['alert_check_interval'] = nil
