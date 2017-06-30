@@ -24,6 +24,7 @@ namespace :style do
         '~FC015',
         '~FC019',
         '~FC046',
+        '~FC052',
         '~FC053'
       ]
     }
