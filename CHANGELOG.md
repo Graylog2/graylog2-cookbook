@@ -1,6 +1,12 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.2.7
+
+* Bump to Graylog 2.3.0
+* Added ES HTTP parameter
+* Renamed ES discovery search attributes
+
 ## 2.1.4
 
 * Bump to Graylog 2.1.1
