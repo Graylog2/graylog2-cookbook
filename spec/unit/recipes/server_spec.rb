@@ -22,10 +22,6 @@ describe 'graylog2::server' do
       end.converge('graylog2::server')
     end
 
-    it 'installs the tzdata by default' do
-      expect(chef_run).to install_package 'tzdata-java'
-    end
-
     it 'installs the graylog-server package' do
       expect(chef_run).to install_package 'graylog-server'
     end
@@ -46,9 +42,6 @@ describe 'graylog2::server' do
     end
     it 'creates a logging configuration' do
       expect(chef_run).to render_file('/etc/graylog/server/log4j2.xml')
-    end
-    it 'creates a Elasticsearch configuration' do
-      expect(chef_run).to render_file('/etc/graylog/server/graylog-elasticsearch.yml')
     end
   end
 
