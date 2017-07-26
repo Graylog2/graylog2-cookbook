@@ -1,7 +1,7 @@
 Graylog Chef Cookbook Changes
 ==============================
 
-## 2.2.7
+## 2.3.0
 
 * Bump to Graylog 2.3.0
 * Added ES HTTP parameter
