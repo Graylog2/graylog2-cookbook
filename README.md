@@ -43,6 +43,21 @@ run_list "recipe[java]",
 
 Keep in mind that Graylog needs Elasticsearch 2.x, what can be installed with the Elasticsearch cookbook version < 3.0.0
 
+### Running behind a NAT'ed public IP
+
+If you are running Graylog behind a NAT, you will need to set:
+
+```
+"graylog2":{
+    "rest":{
+      "transport_uri": "http://<public facing IP>:12900/",
+      "listen_uri": "http://0.0.0.0:12900/"
+    }
+  },
+```
+
+See [graylog docs](http://docs.graylog.org/en/2.2/pages/configuration/web_interface.html#single-or-separate-listeners-for-web-interface-and-rest-api) for more info.
+
 ### Attributes
 Graylog runs currently with Java 8. To install the correct version set this attribute:
 
