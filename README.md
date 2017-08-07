@@ -41,22 +41,7 @@ run_list "recipe[java]",
          "recipe[graylog2::server]"
 ```
 
-Keep in mind that Graylog needs Elasticsearch 2.x, what can be installed with the Elasticsearch cookbook version < 3.0.0
-
-### Running behind a NAT'ed public IP
-
-If you are running Graylog behind a NAT, you will need to set:
-
-```
-"graylog2":{
-    "rest":{
-      "transport_uri": "http://<public facing IP>:12900/",
-      "listen_uri": "http://0.0.0.0:12900/"
-    }
-  },
-```
-
-See [graylog docs](http://docs.graylog.org/en/2.2/pages/configuration/web_interface.html#single-or-separate-listeners-for-web-interface-and-rest-api) for more info.
+Keep in mind that Graylog needs Elasticsearch 2.x+, what can be installed with the Elasticsearch cookbook version < 3.0.0
 
 ### Attributes
 Graylog runs currently with Java 8. To install the correct version set this attribute:
@@ -90,11 +75,11 @@ cookbook's README](https://supermarket.chef.io/cookbooks/java) for more
 information.
 
 You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
-this is 2.2.0. The cluster name should be 'graylog':
+this is 5.5.1. The cluster name should be 'graylog':
 
 ```json
   "elasticsearch": {
-    "version": "2.2.0",
+    "version": "5.5.1",
     "cluster": {
       "name": "graylog"
     }
@@ -135,16 +120,6 @@ knife data bag create --secret-file ~/.chef/encrypted_data_bag_secret secrets gr
 You can take a look into the attributes file under `attributes/default.rb` to get an idea
 what can be configured for Graylog.
 
-### Remote Elasticsearch hosts
-In order to connect Graylog to a remote Elasticsearch node you have to make it listen on the public network interface:
-```ruby
-'graylog2'=> {
-  'elasticsearch' => {
-		'network_host'=> '0.0.0.0'
-	}
-}
-```
-
 ### Node discovery
 The cookbook is able to use Chef's search to find Elasticsearch and other Graylog nodes. To configure
 a dynamic cluster set the following attributes:
@@ -153,8 +128,8 @@ a dynamic cluster set the following attributes:
 ```ruby
 'graylog2'=> {
   'elasticsearch' => {
-    'unicast_search_query' => 'role:elasticsearch',
-    'search_node_attribute' => 'ipaddress'
+    'node_search_query' => 'role:elasticsearch',
+    'node_search_attribute' => 'ipaddress'
   }
 }
 ```
@@ -164,6 +139,23 @@ If you have multiple server one need to be set as a master, use this attribute t
 ```
 default.graylog2[:ip_of_master] = node.ipaddress
 ```
+
+### Running behind a NAT'ed public IP
+
+If you are running Graylog behind a NAT, you will need to forward port 9000 to the outside as well as:
+
+```
+"graylog2":{
+    "rest":{
+      "listen_uri": "http://0.0.0.0:9000/api/"
+    },
+    "web":{
+      "listen_uri": "http://0.0.0.0:9000/",
+      "endpoint_uri: "http://<public facing IP>:9000/api"
+  },
+```
+
+See [graylog docs](http://docs.graylog.org/en/2.3/pages/configuration/web_interface.html#single-or-separate-listeners-for-web-interface-and-rest-api) for more info.
 
 ### Authbind
 
