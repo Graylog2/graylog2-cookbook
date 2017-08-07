@@ -125,13 +125,14 @@ The cookbook is able to use Chef's search to find Elasticsearch and other Graylo
 a dynamic cluster set the following attributes:
 
 #### Elasticsearch discovery
-```ruby
-'graylog2'=> {
-  'elasticsearch' => {
-    'node_search_query' => 'role:elasticsearch',
-    'node_search_attribute' => 'ipaddress'
+
+```json
+  "graylog2": {
+    "elasticsearch": {
+      "node_search_query": "role:elasticsearch",
+      "node_search_attribute": "ipaddress"
+    }
   }
-}
 ```
 
 If you have multiple server one need to be set as a master, use this attribute to do so
@@ -144,15 +145,16 @@ default.graylog2[:ip_of_master] = node.ipaddress
 
 If you are running Graylog behind a NAT, you will need to forward port 9000 to the outside as well as:
 
-```
-"graylog2":{
-    "rest":{
-      "listen_uri": "http://0.0.0.0:9000/api/"
-    },
-    "web":{
-      "listen_uri": "http://0.0.0.0:9000/",
-      "endpoint_uri: "http://<public facing IP>:9000/api"
-  },
+```json
+  "graylog2":{
+      "rest":{
+        "listen_uri": "http://0.0.0.0:9000/api/"
+      },
+      "web":{
+        "listen_uri": "http://0.0.0.0:9000/",
+        "endpoint_uri: "http://<public facing IP>:9000/api"
+      }
+  }
 ```
 
 See [graylog docs](http://docs.graylog.org/en/2.3/pages/configuration/web_interface.html#single-or-separate-listeners-for-web-interface-and-rest-api) for more info.
