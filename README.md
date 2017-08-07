@@ -146,13 +146,13 @@ default.graylog2[:ip_of_master] = node.ipaddress
 If you are running Graylog behind a NAT, you will need to forward port 9000 to the outside as well as:
 
 ```json
-  "graylog2":{
-      "rest":{
+  "graylog2": {
+      "rest": {
         "listen_uri": "http://0.0.0.0:9000/api/"
       },
-      "web":{
+      "web": {
         "listen_uri": "http://0.0.0.0:9000/",
-        "endpoint_uri: "http://<public facing IP>:9000/api"
+        "endpoint_uri": "http://<public facing IP>:9000/api"
       }
   }
 ```
