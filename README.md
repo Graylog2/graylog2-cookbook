@@ -152,7 +152,7 @@ If you are running Graylog behind a NAT, you will need to forward port 9000 to t
       },
       "web":{
         "listen_uri": "http://0.0.0.0:9000/",
-        "endpoint_uri: "http://[public facing IP]:9000/api"
+        "endpoint_uri": "http://[public facing IP]:9000/api"
       }
   }
 ```
