@@ -19,6 +19,14 @@ describe 'graylog2::default' do
     it 'installs the repository package' do
       expect(chef_run).to install_package 'graylog-2.2-repository_latest.deb'
     end
+
+    it 'installs build-essential' do
+      expect(chef_run).to install_build_essential ''
+    end
+
+    it 'installs the mongo gem' do
+      expect(chef_run).to install_chef_gem 'mongo'
+    end
   end
 
   context 'when the cookbook prepares a Centos system' do
@@ -34,6 +42,14 @@ describe 'graylog2::default' do
 
     it 'installs the repository package' do
       expect(chef_run).to install_package 'graylog-2.2-repository_latest.rpm'
+    end
+
+    it 'installs build-essential' do
+      expect(chef_run).to install_build_essential ''
+    end
+
+    it 'installs the mongo gem' do
+      expect(chef_run).to install_chef_gem 'mongo'
     end
   end
 

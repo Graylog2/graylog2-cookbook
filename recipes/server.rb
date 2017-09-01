@@ -5,6 +5,7 @@ begin
 rescue
   Chef::Log.debug 'Can not load server secrets from databag'
 end
+access_token = node['graylog2']['rest']['admin_access_token'] || secrets['rest']['admin_access_token']
 password_secret = secrets['password_secret'] || node['graylog2']['password_secret']
 root_password_sha2 = secrets['root_password_sha2'] || node['graylog2']['root_password_sha2']
 raise('No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog') unless password_secret
@@ -113,4 +114,25 @@ template '/etc/graylog/server/graylog-elasticsearch.yml' do
   mode '0640'
   notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
   only_if { node.default['graylog2']['major_version'].to_f <= 2.2 }
+end
+
+ruby_block 'set access token' do
+  block do
+    require 'mongo'
+
+    client = Mongo::Client.new(node['graylog2']['mongodb']['uri'])
+    coll = client[:access_tokens]
+    params = { username: node['graylog2']['root_username'],
+               NAME: 'graylogapi' }
+
+    tokens = coll.find(params).limit(1)
+
+    if tokens.first.nil?
+      coll.insert_one(params.merge(token: access_token))
+    elsif tokens.first['token'] != access_token
+      tokens.update_one('$set' => { token: access_token })
+    end
+  end
+
+  not_if { access_token.nil? }
 end
