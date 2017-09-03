@@ -19,6 +19,7 @@ describe 'graylog2::server' do
       ) do |node|
         node.normal['graylog2']['password_secret'] = 'password_hash'
         node.normal['graylog2']['root_password_sha2'] = 'salt'
+        node.normal['graylog2']['rest']['admin_access_token'] = 'sometoken'
       end.converge('graylog2::server')
     end
 
@@ -53,6 +54,7 @@ describe 'graylog2::server' do
       ) do |node|
         node.normal['graylog2']['password_secret'] = 'password_hash'
         node.normal['graylog2']['root_password_sha2'] = 'salt'
+        node.normal['graylog2']['rest']['admin_access_token'] = 'sometoken'
       end.converge('graylog2::server')
     end
 
