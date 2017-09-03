@@ -55,3 +55,9 @@ elsif platform?('ubuntu', 'debian')
     key          node['graylog2']['server']['repos']['debian']['key']
   end
 end
+
+build_essential '' do
+  compile_time true
+end
+
+chef_gem 'mongo'

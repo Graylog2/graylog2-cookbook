@@ -11,6 +11,7 @@ version '2.3.0'
 depends 'authbind', '>= 0.1.8'
 depends 'java'
 depends 'ark'
+depends 'build-essential'
 
 suggests 'mongodb'
 suggests 'elasticsearch', '< 3.0.0'
