@@ -6,7 +6,7 @@ action :create do
   client = Mongo::Client.new(node['graylog2']['mongodb']['uri'])
 
   if client.cluster.servers.empty?
-    Chef::Application.fatal! "Can`t connect to mongodb, please check url #{node['graylog2']['mongodb']['uri']}"
+    raise "Can`t connect to mongodb, please check url #{node['graylog2']['mongodb']['uri']}"
   end
 
   coll = client[:access_tokens]
