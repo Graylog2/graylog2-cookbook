@@ -18,7 +18,7 @@ action :create do
   if tokens.first.nil?
     coll.insert_one(params.merge(token: token))
   elsif tokens.first['token'] != token
-    tokens.update_one('$set' => { token: access_token })
+    tokens.update_one('$set' => { token: token })
 
     Chef::Log.debug('Graylog admin access token was updated')
   else
