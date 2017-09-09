@@ -1,5 +1,7 @@
 property :token, name_property: true
 
+default_action :create
+
 action :create do
   require 'mongo'
 
