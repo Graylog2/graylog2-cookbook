@@ -13,3 +13,5 @@ end
 token = node['graylog2']['rest']['admin_access_token']
 raise 'You should set admin_access_token attribute' if token.nil?
 graylog2_admin_token token
+
+graylog2_check_api node['graylog2']['rest']['listen_uri']

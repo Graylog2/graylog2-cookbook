@@ -23,6 +23,10 @@ describe 'graylog2::api' do
     it 'set token' do
       expect(chef_run).to create_admin_token 'testtoken'
     end
+
+    it 'check api' do
+      expect(chef_run).to check_api 'http://0.0.0.0:9000/api/'
+    end
   end
 
   context 'when the recipe run on a Ubuntu system' do
@@ -30,6 +34,8 @@ describe 'graylog2::api' do
 
     let(:chef_run) do
       runner.node.normal['graylog2']['rest']['admin_access_token'] = 'testtoken'
+      runner.node.normal['graylog2']['rest']['listen_url'] = 'http://0.0.0.0:9000/api/'
+
       runner.converge('graylog2::api')
     end
 
@@ -45,6 +51,8 @@ describe 'graylog2::api' do
 
     let(:chef_run) do
       runner.node.normal['graylog2']['rest']['admin_access_token'] = 'testtoken'
+      runner.node.normal['graylog2']['rest']['listen_url'] = 'http://0.0.0.0:9000/api/'
+
       runner.converge('graylog2::api')
     end
 
