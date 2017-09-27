@@ -12,4 +12,5 @@ group :integration do
 
   cookbook "apt_backports", :path => "./test/fixtures/cookbooks/apt_backports"
   cookbook "elasticsearch_test", :path => "./test/fixtures/cookbooks/elasticsearch_test"
+  cookbook "api_resources_test", :path => "./test/fixtures/cookbooks/api_resources_test"
 end
