@@ -18,27 +18,9 @@ action :create do
   options = {
     title: new_resource.title,
     global: new_resource.hostname.nil?,
+    node: hostname_to_node_id(graylogapi, new_resource.hostname),
+    type: type_to_type_id(graylogapi, new_resource.type),
   }.merge(new_resource.settings)
-
-  options[:type] =
-    begin
-      graylogapi.system.inputs.types.name_to_type(new_resource.type)
-    rescue
-      raise "Can't find inpyt type: #{new_resource.type}"
-    end
-
-  options[:node] =
-    if new_resource.hostname.nil?
-      nil
-    else
-      begin
-        graylogapi.system.cluster.nodes['nodes'].find do |i|
-          i['hostname'] == new_resource.hostname
-        end['node_id']
-      rescue
-        raise "Can't find node with hostname: #{new_resource.hostname}"
-      end
-    end
 
   response = graylogapi.system.inputs.create(options)
 
@@ -47,4 +29,20 @@ action :create do
     level :fatal
     only_if { response.fail? }
   end
+end
+
+def hostname_to_node_id(graylogapi, hostname)
+  return nil if hostname.nil?
+
+  node_id = graylogapi.system.cluster.nodes['nodes'].find do |i|
+    i['hostname'] == hostname
+  end
+
+  raise "Can't find node with hostname '#{hostname}'" if node_id.nil?
+
+  node_id['node_id']
+end
+
+def type_to_type_id(graylogapi, type)
+  graylogapi.system.inputs.types.name_to_type(type)
 end
