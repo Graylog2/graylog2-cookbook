@@ -18,7 +18,6 @@ action :create do
   options = {
     title: new_resource.title,
     global: new_resource.hostname.nil?,
-    node: new_resource.hostname.nil? ? nil : new_resource.hostname,
   }.merge(new_resource.settings)
 
   options[:type] =
@@ -26,6 +25,19 @@ action :create do
       graylogapi.system.inputs.types.name_to_type(new_resource.type)
     rescue
       raise "Can't find inpyt type: #{new_resource.type}"
+    end
+
+  options[:node] =
+    if new_resource.hostname.nil?
+      nil
+    else
+      begin
+        graylogapi.system.cluster.nodes['nodes'].find do |i|
+          i['hostname'] == 'graylog.local'
+        end['node_id']
+      rescue
+        raise "Can't find node with hostname: #{new_resource.hostname}"
+      end
     end
 
   response = graylogapi.system.inputs.create(options)

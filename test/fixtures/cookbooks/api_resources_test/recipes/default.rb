@@ -4,7 +4,7 @@ graylog2_input 'global beats input' do
 end
 
 graylog2_input 'local syslog tcp input' do
-  hostname 'f594fbd6-9277-4e8f-9eba-e8d318f41872'
+  hostname 'graylog.local'
   type 'Syslog TCP'
   settings(configuration: { bind_address: '0.0.0.0', port: 5015 })
 end
