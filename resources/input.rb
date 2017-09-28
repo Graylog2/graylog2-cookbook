@@ -33,7 +33,7 @@ action :create do
     else
       begin
         graylogapi.system.cluster.nodes['nodes'].find do |i|
-          i['hostname'] == 'graylog.local'
+          i['hostname'] == new_resource.hostname
         end['node_id']
       rescue
         raise "Can't find node with hostname: #{new_resource.hostname}"
