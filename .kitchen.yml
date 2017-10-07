@@ -67,16 +67,16 @@ suites:
         cluster:
           name: "graylog"
     run_list:
-      # - recipe[fqdn]
-      # - recipe[curl]
-      # - recipe[mongodb]
-      # - recipe[java]
-      # - recipe[elasticsearch_test]
-      # - recipe[graylog2]
-      # - recipe[graylog2::server]
-      # - recipe[graylog2::collector_sidecar]
-      # - recipe[graylog2::authbind]
-      # - recipe[graylog2::api]
+      - recipe[fqdn]
+      - recipe[curl]
+      - recipe[mongodb]
+      - recipe[java]
+      - recipe[elasticsearch_test]
+      - recipe[graylog2]
+      - recipe[graylog2::server]
+      - recipe[graylog2::collector_sidecar]
+      - recipe[graylog2::authbind]
+      - recipe[graylog2::api]
       - recipe[api_resources_test]
   - name: openjdk
     attributes:
