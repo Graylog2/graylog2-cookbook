@@ -59,6 +59,22 @@ action :create do
   end
 end
 
+action :delete do
+  require 'graylogapi'
+  extend Extensions::ApiHelper
+  graylogapi = GraylogAPI.new(auth_params(new_resource))
+
+  input = graylogapi.system.inputs.all['inputs'].find { |i| i['title'] == 'global beats input' }
+
+  if input.nil?
+    log 'Input already deleted' do
+      level :info
+    end
+  else
+    graylogapi.system.inputs.delete(input['id'])
+  end
+end
+
 def hostname_to_node_id(graylogapi, hostname)
   return nil if hostname.nil?
 
