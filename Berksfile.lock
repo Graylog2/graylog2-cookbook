@@ -1,4 +1,6 @@
 DEPENDENCIES
+  api_resources_test
+    path: test/fixtures/cookbooks/api_resources_test
   apt
   apt_backports
     path: test/fixtures/cookbooks/apt_backports
@@ -14,6 +16,8 @@ DEPENDENCIES
   mongodb
 
 GRAPH
+  api_resources_test (0.0.1)
+    graylog2 (>= 0.0.0)
   apt (4.0.1)
     compat_resource (>= 12.10)
   apt_backports (0.0.1)

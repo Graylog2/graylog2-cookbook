@@ -77,6 +77,7 @@ suites:
       - recipe[graylog2::collector_sidecar]
       - recipe[graylog2::authbind]
       - recipe[graylog2::api]
+      - recipe[api_resources_test]
   - name: openjdk
     attributes:
       machine_fqdn: graylog.local
