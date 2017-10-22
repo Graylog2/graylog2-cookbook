@@ -17,14 +17,17 @@ load_current_value do
   extend Extensions::ApiHelper
   graylogapi = GraylogAPI.new(auth_params(self))
 
-  inputs = graylogapi.system.inputs.all['inputs']
+  graylog_inputs = graylogapi.system.inputs
+  inputs = graylog_inputs.all['inputs']
   current_input = inputs.find { |i| i['title'] == title }
 
   current_value_does_not_exist! if current_input.nil?
 
+  node = graylogapi.system.cluster.node_by_id(current_input['node'])
+
   title current_input['title']
-  type type_id_to_type(graylogapi, current_input['type'])
-  hostname current_input['global'] ? nil : node_id_to_hostname(graylogapi, current_input['node'])
+  type graylog_inputs.types.type_to_name(current_input['type'])
+  hostname current_input['global'] ? nil : node['hostname']
   settings(configuration: keys_to_symbols(current_input['attributes']))
 
   # this use for update request
@@ -36,19 +39,23 @@ action :create do
     require 'graylogapi'
     extend Extensions::ApiHelper
     graylogapi = GraylogAPI.new(auth_params(new_resource))
+    graylogapi_inputs = graylogapi.system.inputs
 
     options = {
       title: new_resource.title,
       global: new_resource.hostname.nil?,
-      node: hostname_to_node_id(graylogapi, new_resource.hostname),
-      type: type_to_type_id(graylogapi, new_resource.type),
+      type: graylogapi_inputs.types.name_to_type(new_resource.type),
     }.merge(new_resource.settings)
+
+    unless new_resource.hostname.nil?
+      options[:node] = graylogapi.system.cluster.node_by_hostname(new_resource.hostname)['node_id']
+    end
 
     response =
       if current_resource.nil?
-        graylogapi.system.inputs.create(options)
+        graylogapi_inputs.create(options)
       else
-        graylogapi.system.inputs.update(current_resource.input_id, options)
+        graylogapi_inputs.update(current_resource.input_id, options)
       end
 
     log 'Can`t create input' do
@@ -72,40 +79,5 @@ action :delete do
     end
   else
     graylogapi.system.inputs.delete(input['id'])
-  end
-end
-
-def hostname_to_node_id(graylogapi, hostname)
-  return nil if hostname.nil?
-
-  node_id = graylogapi.system.cluster.nodes['nodes'].find do |i|
-    i['hostname'] == hostname
-  end
-
-  raise "Can't find node with hostname '#{hostname}'" if node_id.nil?
-
-  node_id['node_id']
-end
-
-def node_id_to_hostname(graylogapi, node_id)
-  graylogapi.system.cluster.nodes['nodes'].find do |node|
-    node['node_id'] == node_id
-  end['hostname']
-end
-
-def type_to_type_id(graylogapi, type)
-  graylogapi.system.inputs.types.name_to_type(type)
-end
-
-def type_id_to_type(graylogapi, type_id)
-  graylogapi.system.inputs.types.all.body.find do |_, type|
-    type['type'].casecmp(type_id).zero?
-  end.last['name']
-end
-
-def keys_to_symbols(hash)
-  hash.each_with_object({}) do |(k, v), new_hash|
-    new_hash[k.to_sym] = v
-    new_hash
   end
 end
