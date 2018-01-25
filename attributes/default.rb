@@ -2,8 +2,8 @@ node.default['graylog2'] ||= {}
 node.default['mongodb'] ||= {}
 
 # General
-default['graylog2']['major_version']     = '2.3'
-default['graylog2']['server']['version'] = '2.3.1-1'
+default['graylog2']['major_version']     = '2.4'
+default['graylog2']['server']['version'] = '2.4.3-1'
 
 ## By default the cookbook installs a meta package containing the key and URL for the current Graylog repository. To disable
 ## this behavior set your own repository informations here.
@@ -211,8 +211,8 @@ default['graylog2']['web']['max_initial_line_length'] = nil
 default['graylog2']['web']['thread_pool_size'] = nil
 
 # Collector Sidecar
-default['graylog2']['sidecar']['release']                        = '0.1.3'
-default['graylog2']['sidecar']['version']                        = '0.1.3'
+default['graylog2']['sidecar']['release']                        = '0.1.4'
+default['graylog2']['sidecar']['version']                        = '0.1.4'
 default['graylog2']['sidecar']['build']                          = 1
 default['graylog2']['sidecar']['arch']                           = 'amd64'
 default['graylog2']['sidecar']['package_base_url']               = "https://github.com/Graylog2/collector-sidecar/releases/download/#{node['graylog2']['sidecar'][:release]}"
