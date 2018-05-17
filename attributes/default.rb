@@ -3,7 +3,7 @@ node.default['mongodb'] ||= {}
 
 # General
 default['graylog2']['major_version']     = '2.4'
-default['graylog2']['server']['version'] = '2.4.3-1'
+default['graylog2']['server']['version'] = '2.4.4-1'
 
 ## By default the cookbook installs a meta package containing the key and URL for the current Graylog repository. To disable
 ## this behavior set your own repository informations here.

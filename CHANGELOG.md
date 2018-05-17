@@ -1,6 +1,11 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.4.4
+
+* Bump to Graylog 2.4.4
+* Fix `elasticsearch_request_timeout` attribute
+
 ## 2.3.1
 
 * Bump to Graylog 2.3.1
