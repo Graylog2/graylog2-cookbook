@@ -83,7 +83,6 @@ elasticsearch_node_data = false
 # Timeouts
 <%= config_option 'elasticsearch_cluster_discovery_timeout', node['graylog2']['elasticsearch']['cluster_discovery_timeout'] -%>
 <%= config_option 'elasticsearch_discovery_initial_state_timeout', node['graylog2']['elasticsearch']['discovery_initial_state_timeout'] -%>
-<%= config_option 'elasticsearch_request_timeout', node['graylog2']['elasticsearch']['request_timeout'] -%>
 <% else -%>
 # Elasticsearch http client (GL >= 2.3)
 <%= config_option 'elasticsearch_connect_timeout', node['graylog2']['elasticsearch']['connect_timeout'] -%>
@@ -121,6 +120,7 @@ elasticsearch_node_data = false
 <%= config_option 'message_journal_segment_size', node['graylog2']['message_journal_segment_size'] -%>
 
 # Timeouts
+<%= config_option 'elasticsearch_request_timeout', node['graylog2']['elasticsearch']['request_timeout'] -%>
 <%= config_option 'output_module_timeout', node['graylog2']['output_module_timeout'] -%>
 <%= config_option 'stale_master_timeout', node['graylog2']['stale_master_timeout'] -%>
 <%= config_option 'shutdown_timeout', node['graylog2']['shutdown_timeout'] -%>
