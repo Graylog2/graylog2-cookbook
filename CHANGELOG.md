@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 2.4.5
+
+* Make data bag usage more flexiable
+
 ## 2.4.4
 
 * Bump to Graylog 2.4.4
