@@ -27,6 +27,7 @@ default['graylog2']['no_retention']              = nil
 default['graylog2']['disable_sigar']             = nil
 default['graylog2']['dashboard_widget_default_cache_time'] = '10s'
 default['graylog2']['secrets_data_bag']                    = 'secrets'
+default['graylog2']['secrets_data_bag_item']               = 'graylog'
 
 # Users
 default['graylog2']['server']['user']  = 'graylog'
