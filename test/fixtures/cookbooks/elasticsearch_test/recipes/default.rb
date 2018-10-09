@@ -1,6 +1,6 @@
 elasticsearch_user 'elasticsearch'
 elasticsearch_install 'elasticsearch' do
-  type node['elasticsearch']['install_type'].to_sym
+  type 'package'
 end
 elasticsearch_configure 'elasticsearch' do
   allocated_memory '512m'

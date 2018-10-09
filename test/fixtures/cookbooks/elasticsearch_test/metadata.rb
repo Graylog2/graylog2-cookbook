@@ -8,4 +8,4 @@ version          '0.0.1'
 
 depends 'apt'
 depends 'yum'
-depends 'elasticsearch'
+depends 'elasticsearch', '~>3.4.7'
