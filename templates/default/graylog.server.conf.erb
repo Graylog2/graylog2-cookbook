@@ -3,6 +3,9 @@
 <%= config_option 'node_id_file', node['graylog2']['node_id_file'] -%>
 
 # General
+<%= config_option 'bin_dir', node['graylog2']['bin_dir'] -%>
+<%= config_option 'data_dir', node['graylog2']['data_dir'] -%>
+<%= config_option 'plugin_dir', node['graylog2']['plugin_dir'] -%>
 <%= config_option 'disable_sigar', node['graylog2']['disable_sigar'] -%>
 <%= config_option 'dashboard_widget_default_cache_time', node['graylog2']['dashboard_widget_default_cache_time'] -%>
 
@@ -13,46 +16,39 @@
 <%= config_option 'root_timezone', node['graylog2']['root_timezone'] -%>
 <%= config_option 'root_password_sha2', @root_password_sha2 -%>
 
-# Plugins
-<%= config_option 'plugin_dir', node['graylog2']['plugin_dir'] -%> 
-
-# REST interface
-<%= config_option 'rest_listen_uri', @rest_listen_uri -%>
-<%= config_option 'rest_transport_uri', @rest_transport_uri -%>
-<%= config_option 'rest_enable_cors', node['graylog2']['rest']['enable_cors'] -%>
-<%= config_option 'rest_enable_gzip', node['graylog2']['rest']['enable_gzip'] -%>
-<%= config_option 'rest_enable_tls', node['graylog2']['rest']['enable_tls'] -%>
-<%= config_option 'rest_tls_cert_file', node['graylog2']['rest']['tls_cert_file'] -%>
-<%= config_option 'rest_tls_key_file', node['graylog2']['rest']['tls_key_file'] -%>
-<%= config_option 'rest_tls_key_password', @rest_tls_key_password -%>
-<%= config_option 'rest_max_chunk_size', node['graylog2']['rest']['max_chunk_size'] -%>
-<%= config_option 'rest_max_header_size', node['graylog2']['rest']['max_header_size'] -%>
-<%= config_option 'rest_max_initial_line_length', node['graylog2']['rest']['max_initial_line_length'] -%>
-<%= config_option 'rest_thread_pool_size', node['graylog2']['rest']['thread_pool_size'] -%>
-<%= config_option 'rest_worker_threads_max_pool_size', node['graylog2']['rest']['worker_threads_max_pool_size'] -%>
+# Web interface
+<%= config_option 'http_bind_address', node['graylog2']['http']['bind_address'] -%>
+<%= config_option 'http_publish_uri', node['graylog2']['http']['publish_uri'] -%>
+<%= config_option 'http_external_uri', node['graylog2']['http']['external_uri'] -%>
+<%= config_option 'http_enable_cors', node['graylog2']['http']['enable_cors'] -%>
+<%= config_option 'http_enable_gzip', node['graylog2']['http']['enable_gzip'] -%>
+<%= config_option 'http_max_header_size', node['graylog2']['http']['max_header_size'] -%>
+<%= config_option 'http_thread_pool_size', node['graylog2']['http']['thread_pool_size'] -%>
+<%= config_option 'http_enable_tls', node['graylog2']['http']['enable_tls'] -%>
+<%= config_option 'http_tls_cert_file', node['graylog2']['http']['tls_cert_file'] -%>
+<%= config_option 'http_tls_key_file', node['graylog2']['http']['tls_key_file'] -%>
+<%= config_option 'http_tls_key_password', @http_tls_key_password -%>
 
 # Proxies
 <%= config_option 'trusted_proxies', node['graylog2']['trusted_proxies'] -%>
-
-# Web interface
-<%= config_option 'web_enable', node['graylog2']['web']['enable'] -%>
-<%= config_option 'web_listen_uri', node['graylog2']['web']['listen_uri'] -%>
-<%= config_option 'web_endpoint_uri', node['graylog2']['web']['endpoint_uri'] -%>
-<%= config_option 'web_enable_cors', node['graylog2']['web']['enable_cors'] -%>
-<%= config_option 'web_enable_gzip', node['graylog2']['web']['enable_gzip'] -%>
-<%= config_option 'web_enable_tls', node['graylog2']['web']['enable_tls'] -%>
-<%= config_option 'web_tls_cert_file', node['graylog2']['web']['tls_cert_file'] -%>
-<%= config_option 'web_tls_key_file', node['graylog2']['web']['tls_key_file'] -%>
-<%= config_option 'web_tls_key_password', @web_tls_key_password -%>
-<%= config_option 'web_max_header_size', node['graylog2']['web']['max_header_size'] -%>
-<%= config_option 'web_max_initial_line_length', node['graylog2']['web']['max_initial_line_length'] -%>
-<%= config_option 'web_thread_pool_size', node['graylog2']['web']['thread_pool_size'] -%>
 
 # Search options
 <%= config_option 'allow_leading_wildcard_searches', node['graylog2']['allow_leading_wildcard_searches'] -%>
 <%= config_option 'allow_highlighting', node['graylog2']['allow_highlighting'] -%>
 
 # Elasticsearch
+<%= config_option 'elasticsearch_hosts', node['graylog2']['elasticsearch']['hosts'] -%>
+<%= config_option 'elasticsearch_connect_timeout', node['graylog2']['elasticsearch']['connect_timeout'] -%>
+<%= config_option 'elasticsearch_socket_timeout', node['graylog2']['elasticsearch']['socket_timeout'] -%>
+<%= config_option 'elasticsearch_idle_timeout', node['graylog2']['elasticsearch']['idle_timeout'] -%>
+<%= config_option 'elasticsearch_max_total_connections', node['graylog2']['elasticsearch']['max_total_connections'] -%>
+<%= config_option 'elasticsearch_max_total_connections_per_route', node['graylog2']['elasticsearch']['max_total_connections_per_route'] -%>
+<%= config_option 'elasticsearch_max_retries', node['graylog2']['elasticsearch']['max_retries'] -%>
+<%= config_option 'elasticsearch_discovery_enabled', node['graylog2']['elasticsearch']['discovery_enabled'] -%>
+<%= config_option 'elasticsearch_discovery_filter', node['graylog2']['elasticsearch']['discovery_filter'] -%>
+<%= config_option 'elasticsearch_discovery_frequency', node['graylog2']['elasticsearch']['discovery_frequency'] -%>
+<%= config_option 'elasticsearch_compression_enabled', node['graylog2']['elasticsearch']['compression_enabled'] -%>
+
 <%= config_option 'elasticsearch_index_prefix', node['graylog2']['elasticsearch']['index_prefix'] -%>
 <%= config_option 'elasticsearch_analyzer', node['graylog2']['elasticsearch']['analyzer'] -%>
 <%= config_option 'elasticsearch_disable_version_check', node['graylog2']['elasticsearch']['disable_version_check'] -%>
@@ -63,38 +59,10 @@
 <%= config_option 'output_fault_penalty_seconds', node['graylog2']['elasticsearch']['output_fault_penalty_seconds'] -%>
 <%= config_option 'no_retention', node['graylog2']['no_retention'] -%>
 <%= config_option 'disable_index_optimization', node['graylog2']['elasticsearch']['disable_index_optimization'] -%>
+<%= config_option 'elasticsearch_index_optimization_jobs', node['graylog2']['elasticsearch']['elasticsearch_index_optimization_jobs'] -%>
 <%= config_option 'index_optimization_max_num_segments', node['graylog2']['elasticsearch']['index_optimization_max_num_segments'] -%>
 <%= config_option 'index_ranges_cleanup_interval', node['graylog2']['elasticsearch']['index_ranges_cleanup_interval'] -%>
-<%= config_option 'elasticsearch_template_name', node['graylog2']['elasticsearch']['template_name'] -%>
-
-<% if node['graylog2']['major_version'].to_f <= 2.2 -%>
-# Elasticsearch node client (GL <= 2.2)
-elasticsearch_node_master = false
-elasticsearch_node_data = false
-<%= config_option 'elasticsearch_cluster_name', node['graylog2']['elasticsearch']['cluster_name'] -%>
-<%= config_option 'elasticsearch_config_file', node['graylog2']['elasticsearch']['config_file'] -%>
-<%= config_option 'elasticsearch_discovery_zen_ping_unicast_hosts', node['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts'] -%>
-<%= config_option 'elasticsearch_http_enabled', node['graylog2']['elasticsearch']['http_enabled'] -%>
-<%= config_option 'elasticsearch_network_host', node['graylog2']['elasticsearch']['network_host'] -%>
-<%= config_option 'elasticsearch_network_bind_host', node['graylog2']['elasticsearch']['network_bind_host'] -%>
-<%= config_option 'elasticsearch_network_publish_host', node['graylog2']['elasticsearch']['network_publish_host'] -%>
-<%= config_option 'elasticsearch_node_name_prefix', node['graylog2']['elasticsearch']['node_name_prefix'] -%>
-<%= config_option 'elasticsearch_transport_tcp_port', node['graylog2']['elasticsearch']['transport_tcp_port'] -%>
-# Timeouts
-<%= config_option 'elasticsearch_cluster_discovery_timeout', node['graylog2']['elasticsearch']['cluster_discovery_timeout'] -%>
-<%= config_option 'elasticsearch_discovery_initial_state_timeout', node['graylog2']['elasticsearch']['discovery_initial_state_timeout'] -%>
-<% else -%>
-# Elasticsearch http client (GL >= 2.3)
-<%= config_option 'elasticsearch_connect_timeout', node['graylog2']['elasticsearch']['connect_timeout'] -%>
-<%= config_option 'elasticsearch_hosts', node['graylog2']['elasticsearch']['hosts'] -%>
-<%= config_option 'elasticsearch_idle_timeout', node['graylog2']['elasticsearch']['idle_timeout'] -%>
-<%= config_option 'elasticsearch_max_total_connections', node['graylog2']['elasticsearch']['max_total_connections'] -%>
-<%= config_option 'elasticsearch_max_total_connections_per_route', node['graylog2']['elasticsearch']['max_total_connections_per_route'] -%>
-<%= config_option 'elasticsearch_socket_timeout', node['graylog2']['elasticsearch']['socket_timeout'] -%>
-<%= config_option 'elasticsearch_discovery_enabled', node['graylog2']['elasticsearch']['discovery_enabled'] -%>
-<%= config_option 'elasticsearch_discovery_filter', node['graylog2']['elasticsearch']['discovery_filter'] -%>
-<%= config_option 'elasticsearch_discovery_frequency', node['graylog2']['elasticsearch']['discovery_frequency'] -%>
-<% end -%>
+<%= config_option 'index_field_type_periodical_interval', node['graylog2']['elasticsearch']['index_field_type_periodical_interval'] -%>
 
 # Processors
 <%= config_option 'processbuffer_processors', node['graylog2']['processbuffer_processors'] -%>
@@ -121,6 +89,7 @@ elasticsearch_node_data = false
 
 # Timeouts
 <%= config_option 'elasticsearch_request_timeout', node['graylog2']['elasticsearch']['request_timeout'] -%>
+<%= config_option 'elasticsearch_index_optimization_timeout', node['graylog2']['elasticsearch']['index_optimization_timeout'] -%>
 <%= config_option 'output_module_timeout', node['graylog2']['output_module_timeout'] -%>
 <%= config_option 'stale_master_timeout', node['graylog2']['stale_master_timeout'] -%>
 <%= config_option 'shutdown_timeout', node['graylog2']['shutdown_timeout'] -%>
@@ -135,6 +104,7 @@ elasticsearch_node_data = false
 
 # Load balancing
 <%= config_option 'lb_recognition_period_seconds', node['graylog2']['lb_recognition_period_seconds'] -%>
+<%= config_option 'lb_throttle_threshold_percentage', node['graylog2']['lb_throttle_threshold_percentage'] -%>
 
 # Stream processing
 <%= config_option 'stream_processing_max_faults', node['graylog2']['stream_processing_max_faults'] -%>
@@ -146,10 +116,6 @@ elasticsearch_node_data = false
 <%= config_option 'mongodb_uri', @mongodb_uri -%>
 <%= config_option 'mongodb_max_connections', node['graylog2']['mongodb']['max_connections'] -%>
 <%= config_option 'mongodb_threads_allowed_to_block_multiplier', node['graylog2']['mongodb']['threads_allowed_to_block_multiplier'] -%>
-
-# Drools Rule File (Use to rewrite incoming log messages)
-# See: http://docs.graylog.org/en/1.0/pages/drools.html
-<%= config_option 'rules_file', node['graylog2']['rules_file'] -%>
 
 # Email transport
 <%= config_option 'transport_email_enabled', node['graylog2']['transport_email_enabled'] -%>
@@ -166,18 +132,11 @@ elasticsearch_node_data = false
 
 # HTTP proxy for outgoing HTTP calls
 <%= config_option 'http_proxy_uri', node['graylog2']['http_proxy_uri'] -%>
+<%= config_option 'http_non_proxy_hosts', node['graylog2']['http_non_proxy_hosts'] -%>
+<%= config_option 'proxied_requests_thread_pool_size', node['graylog2']['proxied_requests_thread_pool_size'] -%>
 
 # GC
 <%= config_option 'gc_warning_threshold', node['graylog2']['server']['gc_warning_threshold'] -%>
-
-# Collector
-<%= config_option 'collector_inactive_threshold ', node['graylog2']['server']['collector_inactive_threshold'] -%>
-<%= config_option 'collector_expiration_threshold ', node['graylog2']['server']['collector_expiration_threshold'] -%>
-
-# Content packs
-<%= config_option 'content_packs_loader_enabled', node['graylog2']['server']['content_packs_loader_enabled'] -%>
-<%= config_option 'content_packs_dir', node['graylog2']['server']['content_packs_dir'] -%>
-<%= config_option 'content_packs_auto_load', node['graylog2']['server']['content_packs_auto_load'] -%>
 
 # Additional options
 <%= node['graylog2']['server']['additional_options'] -%>

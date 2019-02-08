@@ -22,54 +22,54 @@ driver_config:
 
 provisioner:
   name: chef_zero
-  require_chef_omnibus: '13.8.5'
+  product_name: chef
+  product_version: 14.10.9
+  install_strategy: once
   data_path: test
 
 platforms:
-- name: centos-7.2
+- name: centos-7.6
   attributes:
     mongodb:
-      reload_action: "reload"
-- name: ubuntu-14.04
+      reload_action: "restart"
+- name: ubuntu-16.04
   run_list:
   - recipe[apt]
-- name: debian-8.5
+- name: debian-9
   run_list:
   - recipe[apt]
-  - recipe[apt_backports]
 
 suites:
   - name: oracle
     attributes:
       machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
+      apt:
+        compile_time_update: true
       java:
         jdk_version: '8'
         install_flavor: 'oracle'
         oracle:
           accept_oracle_download_terms: true
+      mongodb:
+        package_version: '4.0.6'
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         # Credentials are admin:admin
         root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
-        web:
-          endpoint_uri: 'http://127.0.0.1:9000/api'
-          secret: "2jueVqZpwLLjaWxV"
         restart: "delayed"
-        rest:
-          admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
         sidecar:
-          release: '0.0.9'
-          version: '0.0.9'
+          release: '0.1.8'
+          version: '0.1.8'
           build: 1
       elasticsearch:
-        version: "2.2.0"
+        version: "5.6.14"
         cluster:
           name: "graylog"
     run_list:
       - recipe[fqdn]
       - recipe[curl]
-      - recipe[mongodb]
+      - recipe[sc-mongodb]
       - recipe[java]
       - recipe[elasticsearch_test]
       - recipe[graylog2]
@@ -80,31 +80,30 @@ suites:
     attributes:
       machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
+      apt:
+        compile_time_update: true
       java:
         jdk_version: '8'
         install_flavor: 'openjdk'
+      mongodb:
+        package_version: '4.0.6'
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         # Credentials are admin:admin
         root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
-        web:
-          endpoint_uri: 'http://127.0.0.1:9000/api'
-          secret: "2jueVqZpwLLjaWxV"
         restart: "delayed"
-        rest:
-          admin_access_token: "F3DenL9HXW12KECdLmrfQ8HNGW4zwbwlJSyo7PxlsgHvgeay5F3tQhnoH6T2G7X3iiy2bcYPClsjCWi1PIY48sCSSyoW4H64"
         sidecar:
-          release: '0.0.9'
-          version: '0.0.9'
+          release: '0.1.8'
+          version: '0.1.8'
           build: 1
       elasticsearch:
-        version: "2.2.0"
+        version: "5.6.14"
         cluster:
           name: "graylog"
     run_list:
       - recipe[fqdn]
       - recipe[curl]
-      - recipe[mongodb]
+      - recipe[sc-mongodb]
       - recipe[java]
       - recipe[elasticsearch_test]
       - recipe[graylog2]

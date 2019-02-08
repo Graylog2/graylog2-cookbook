@@ -7,9 +7,8 @@ group :integration do
   cookbook 'curl'
   cookbook 'apt'
   cookbook 'authbind'
-  cookbook 'mongodb'
+  cookbook 'sc-mongodb'
   cookbook 'java'
 
-  cookbook "apt_backports", :path => "./test/fixtures/cookbooks/apt_backports"
   cookbook "elasticsearch_test", :path => "./test/fixtures/cookbooks/elasticsearch_test"
 end

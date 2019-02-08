@@ -2,8 +2,8 @@ node.default['graylog2'] ||= {}
 node.default['mongodb'] ||= {}
 
 # General
-default['graylog2']['major_version']     = '2.4'
-default['graylog2']['server']['version'] = '2.4.4-1'
+default['graylog2']['major_version']     = '3.0'
+default['graylog2']['server']['version'] = '3.0.0-11.rc.2'
 
 ## By default the cookbook installs a meta package containing the key and URL for the current Graylog repository. To disable
 ## this behavior set your own repository informations here.
@@ -19,12 +19,12 @@ default['graylog2']['server']['repos']   = {
   #   'key' => 'https://raw.githubusercontent.com/Graylog2/fpm-recipes/master/recipes/graylog-repository/files/deb/graylog-keyring.gpg'
   # }
 }
-default['graylog2']['root_username']             = 'admin'
-default['graylog2']['root_email']                = nil
-default['graylog2']['root_timezone']             = nil
-default['graylog2']['restart']                   = 'delayed'
-default['graylog2']['no_retention']              = nil
-default['graylog2']['disable_sigar']             = nil
+default['graylog2']['root_username']                       = 'admin'
+default['graylog2']['root_email']                          = nil
+default['graylog2']['root_timezone']                       = nil
+default['graylog2']['restart']                             = 'delayed'
+default['graylog2']['no_retention']                        = nil
+default['graylog2']['disable_sigar']                       = nil
 default['graylog2']['dashboard_widget_default_cache_time'] = '10s'
 default['graylog2']['secrets_data_bag']                    = 'secrets'
 default['graylog2']['secrets_data_bag_item']               = 'graylog'
@@ -39,32 +39,45 @@ default['graylog2']['password_secret_enclose_char'] = '"'
 default['graylog2']['root_password_sha2']           = nil # echo -n yourpassword | shasum -a 256
 
 # Paths
-default['graylog2']['node_id_file'] = '/etc/graylog/server/node-id'
-default['graylog2']['plugin_dir']   = '/usr/share/graylog-server/plugin'
+default['graylog2']['node_id_file']        = '/etc/graylog/server/node-id'
+default['graylog2']['plugin_dir']          = '/usr/share/graylog-server/plugin'
+default['graylog2']['bin_dir']             = '/usr/share/graylog-server/bin'
+default['graylog2']['data_dir']            = '/var/lib/graylog-server'
+default['graylog2']['message_journal_dir'] = '/var/lib/graylog-server/journal'
 
 # Network
-default['graylog2']['trusted_proxies']  = nil
-default['graylog2']['http_proxy_uri']   = nil
-default['graylog2']['authorized_ports'] = 514
+default['graylog2']['trusted_proxies']                    = nil
+default['graylog2']['http_proxy_uri']                     = nil
+default['graylog2']['non_proxy_hosts']                    = nil
+default['graylog2']['proxied_requests_thread_pool_size']  = 32
+default['graylog2']['authorized_ports']                   = 514
 
-# Rest
-default['graylog2']['rest']['listen_uri']              = 'http://0.0.0.0:9000/api/'
-default['graylog2']['rest']['transport_uri']           = nil
-default['graylog2']['rest']['enable_cors']             = nil
-default['graylog2']['rest']['enable_gzip']             = nil
-default['graylog2']['rest']['admin_access_token']      = nil # pwgen -s 96 1
-default['graylog2']['rest']['enable_tls']              = nil
-default['graylog2']['rest']['tls_cert_file']           = nil
-default['graylog2']['rest']['tls_key_file']            = nil
-default['graylog2']['rest']['tls_key_password']        = nil
-default['graylog2']['rest']['max_chunk_size']          = nil
-default['graylog2']['rest']['max_header_size']         = nil
-default['graylog2']['rest']['max_initial_line_length'] = nil
-default['graylog2']['rest']['thread_pool_size']        = nil
-default['graylog2']['rest']['worker_threads_max_pool_size'] = nil
+# HTTP interface
+default['graylog2']['http']['bind_address'] = '0.0.0.0:9000'
+default['graylog2']['http']['publish_uri'] = nil
+default['graylog2']['http']['external_uri'] = nil
+default['graylog2']['http']['enable_cors'] = nil
+default['graylog2']['http']['enable_gzip'] = nil
+default['graylog2']['http']['max_header_size'] = nil
+default['graylog2']['http']['thread_pool_size'] = nil
+default['graylog2']['http']['enable_tls'] = nil
+default['graylog2']['http']['tls_cert_file'] = nil
+default['graylog2']['http']['tls_key_file'] = nil
+default['graylog2']['http']['tls_key_password'] = nil
 
 # Elasticsearch
-#  Optional node discovery by Chef search
+# Elasticsearch http client (GL >= 2.3)
+default['graylog2']['elasticsearch']['hosts']                           = 'http://127.0.0.1:9200'
+default['graylog2']['elasticsearch']['max_total_connections']           = 20
+default['graylog2']['elasticsearch']['max_total_connections_per_route'] = 2
+default['graylog2']['elasticsearch']['max_retries']                     = 2
+# WARNING: Automatic node discovery does not work if Elasticsearch requires authentication, e. g. with Shield.
+default['graylog2']['elasticsearch']['discovery_enabled']               = true
+default['graylog2']['elasticsearch']['discovery_filter']                = nil
+default['graylog2']['elasticsearch']['discovery_frequency']             = nil # '30s'
+default['graylog2']['elasticsearch']['compression_enabled']             = nil # true
+
+# Optional node discovery by Chef search
 default['graylog2']['elasticsearch']['node_search_query']                    = nil
 default['graylog2']['elasticsearch']['node_search_attribute']                = nil
 default['graylog2']['elasticsearch']['node_search_protocol']                 = 'http'
@@ -77,36 +90,12 @@ default['graylog2']['elasticsearch']['output_fault_count_threshold']         = 5
 default['graylog2']['elasticsearch']['output_fault_penalty_seconds']         = 30
 default['graylog2']['elasticsearch']['disable_version_check']                = nil
 default['graylog2']['elasticsearch']['disable_index_optimization']           = nil
+default['graylog2']['elasticsearch']['index_optimization_jobs']              = nil
 default['graylog2']['elasticsearch']['index_optimization_max_num_segments']  = nil
 default['graylog2']['elasticsearch']['index_ranges_cleanup_interval']        = nil
+default['graylog2']['elasticsearch']['index_field_type_periodical_interval'] = nil
 default['graylog2']['elasticsearch']['template_name']                        = nil
 
-# Elasticsearch node client (GL <= 2.2)
-default['graylog2']['elasticsearch']['config_file']                          = '/etc/graylog/server/graylog-elasticsearch.yml'
-default['graylog2']['elasticsearch']['cluster_name']                         = 'graylog'
-default['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts']     = '127.0.0.1:9300'
-default['graylog2']['elasticsearch']['http_enabled']                         = false
-default['graylog2']['elasticsearch']['network_host']                         = nil
-default['graylog2']['elasticsearch']['network_bind_host']                    = nil
-default['graylog2']['elasticsearch']['network_publish_host']                 = nil
-default['graylog2']['elasticsearch']['node_name_prefix']                     = nil
-default['graylog2']['elasticsearch']['transport_tcp_port']                   = 9350
-# Timeouts
-default['graylog2']['elasticsearch']['cluster_discovery_timeout']       = 5000
-default['graylog2']['elasticsearch']['discovery_initial_state_timeout'] = '3s'
-default['graylog2']['elasticsearch']['request_timeout']                 = '1m'
-
-# Elasticsearch http client (GL >= 2.3)
-default['graylog2']['elasticsearch']['hosts']                           = 'http://127.0.0.1:9200'
-default['graylog2']['elasticsearch']['max_total_connections']           = 20
-default['graylog2']['elasticsearch']['max_total_connections_per_route'] = 2
-default['graylog2']['elasticsearch']['connect_timeout']                 = nil # '10s'
-default['graylog2']['elasticsearch']['socket_timeout']                  = nil # '60s'
-default['graylog2']['elasticsearch']['idle_timeout']                    = nil # '-1s'
-# WARNING: Automatic node discovery does not work if Elasticsearch requires authentication, e. g. with Shield.
-default['graylog2']['elasticsearch']['discovery_enabled']               = true
-default['graylog2']['elasticsearch']['discovery_filter']                = nil
-default['graylog2']['elasticsearch']['discovery_frequency']             = nil # '30s'
 
 # MongoDb
 default['graylog2']['mongodb']['uri'] = 'mongodb://127.0.0.1:27017/graylog'
@@ -136,7 +125,6 @@ default['graylog2']['inputbuffer_wait_strategy'] = 'blocking'
 
 # Message journal
 default['graylog2']['message_journal_enabled']        = true
-default['graylog2']['message_journal_dir']            = '/var/lib/graylog-server/journal'
 default['graylog2']['message_journal_max_age']        = '12h'
 default['graylog2']['message_journal_max_size']       = '5gb'
 default['graylog2']['message_journal_flush_age']      = '1m'
@@ -145,22 +133,27 @@ default['graylog2']['message_journal_segment_age']    = '1h'
 default['graylog2']['message_journal_segment_size']   = '100mb'
 
 # Timeouts
-default['graylog2']['output_module_timeout']     = 10000
-default['graylog2']['stale_master_timeout']      = 2000
-default['graylog2']['shutdown_timeout']          = 30000
-default['graylog2']['stream_processing_timeout'] = 2000
-default['graylog2']['ldap_connection_timeout']   = 2000
-default['graylog2']['api_client_timeout']        = 300
-default['graylog2']['http_connect_timeout']      = '5s'
-default['graylog2']['http_read_timeout']         = '10s'
-default['graylog2']['http_write_timeout']        = '10s'
+default['graylog2']['elasticsearch']['connect_timeout']                 = nil # '10s'
+default['graylog2']['elasticsearch']['socket_timeout']                  = nil # '60s'
+default['graylog2']['elasticsearch']['idle_timeout']                    = nil # '-1s'
+default['graylog2']['elasticsearch']['index_optimization_timeout']      = nil # '1h'
+default['graylog2']['output_module_timeout']                            = 10000
+default['graylog2']['stale_master_timeout']                             = 2000
+default['graylog2']['shutdown_timeout']                                 = 30000
+default['graylog2']['stream_processing_timeout']                        = 2000
+default['graylog2']['ldap_connection_timeout']                          = 2000
+default['graylog2']['api_client_timeout']                               = 300
+default['graylog2']['http_connect_timeout']                             = '5s'
+default['graylog2']['http_read_timeout']                                = '10s'
+default['graylog2']['http_write_timeout']                               = '10s'
 
 # Intervals
 default['graylog2']['server']['alert_check_interval'] = nil
 
 # Cluster
-default['graylog2']['ip_of_master']                  = node['ipaddress']
-default['graylog2']['lb_recognition_period_seconds'] = 3
+default['graylog2']['ip_of_master']                     = node['ipaddress']
+default['graylog2']['lb_recognition_period_seconds']    = 3
+default['graylog2']['lb_throttle_threshold_percentage'] = 95
 
 # Email transport
 default['graylog2']['transport_email_enabled']           = false
@@ -168,7 +161,7 @@ default['graylog2']['transport_email_hostname']          = 'mail.example.com'
 default['graylog2']['transport_email_port']              = 587
 default['graylog2']['transport_email_use_auth']          = true
 default['graylog2']['transport_email_use_tls']           = true
-default['graylog2']['transport_email_use_ssl']           = true
+default['graylog2']['transport_email_use_ssl']           = false
 default['graylog2']['transport_email_auth_username']     = 'you@example.com'
 default['graylog2']['transport_email_auth_password']     = 'secret'
 default['graylog2']['transport_email_subject_prefix']    = '[graylog]'
@@ -196,20 +189,6 @@ default['graylog2']['server']['override_restart_command'] = false
 default['graylog2']['server']['additional_options']       = nil
 default['graylog2']['server']['additional_env_vars']      = nil
 default['graylog2']['server']['install_tzdata_java']      = false
-
-# Web
-default['graylog2']['web']['enable'] = true
-default['graylog2']['web']['listen_uri'] = 'http://0.0.0.0:9000'
-default['graylog2']['web']['endpoint_uri'] = nil
-default['graylog2']['web']['enable_cors'] = nil
-default['graylog2']['web']['enable_gzip'] = nil
-default['graylog2']['web']['enable_tls'] = nil
-default['graylog2']['web']['tls_cert_file'] = nil
-default['graylog2']['web']['tls_key_file'] = nil
-default['graylog2']['web']['tls_key_password'] = nil
-default['graylog2']['web']['max_header_size'] = nil
-default['graylog2']['web']['max_initial_line_length'] = nil
-default['graylog2']['web']['thread_pool_size'] = nil
 
 # Collector Sidecar
 default['graylog2']['sidecar']['release']                        = '0.1.4'

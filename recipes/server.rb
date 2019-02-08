@@ -14,12 +14,7 @@ raise('No root_password_sha2 set, either set it via an attribute or in the encry
 if node['graylog2']['elasticsearch']['node_search_query'] && node['graylog2']['elasticsearch']['node_search_attribute']
   nodes = search_for_nodes(node['graylog2']['elasticsearch']['node_search_query'], node['graylog2']['elasticsearch']['node_search_attribute'])
   Chef::Log.debug("Found elasticsearch nodes at #{nodes.join(', ').inspect}")
-
-  if node['graylog2']['major_version'].to_f <= 2.2
-    node.default['graylog2']['elasticsearch']['discovery_zen_ping_unicast_hosts'] = nodes.map { |ip| ip + ':9300' }.join(',')
-  else
-    node.default['graylog2']['elasticsearch']['hosts'] = nodes.map { |ip| node.default['graylog2']['elasticsearch']['node_search_protocol'] + '://' + ip + ':9200' }.join(',')
-  end
+  node.default['graylog2']['elasticsearch']['hosts'] = nodes.map { |ip| node.default['graylog2']['elasticsearch']['node_search_protocol'] + '://' + ip + ':9200' }.join(',')
 end
 
 package 'tzdata-java' if node['graylog2']['server']['install_tzdata_java']
@@ -73,10 +68,7 @@ template '/etc/graylog/server/server.conf' do
     :is_master             => is_master,
     :password_secret       => password_secret,
     :root_password_sha2    => root_password_sha2,
-    :rest_listen_uri       => node['graylog2']['rest']['listen_uri'],
-    :rest_transport_uri    => node['graylog2']['rest']['transport_uri'],
-    :rest_tls_key_password => secrets['rest_tls_key_password'] || node['graylog2']['rest']['tls_key_password'],
-    :web_tls_key_password  => secrets['web_tls_key_password'] || node['graylog2']['web']['tls_key_password'],
+    :http_tls_key_password => secrets['http_tls_key_password'] || node['graylog2']['http']['tls_key_password'],
     :mongodb_uri           => secrets['mongodb_uri'] || node['graylog2']['mongodb']['uri'],
     :transport_email_auth_password => secrets['transport_email_auth_password'] || node['graylog2']['transport_email_auth_password']
   )
@@ -104,13 +96,4 @@ template '/etc/graylog/server/log4j2.xml' do
   group node['graylog2']['server']['group']
   mode '0640'
   notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
-end
-
-template '/etc/graylog/server/graylog-elasticsearch.yml' do
-  source 'graylog.server.elasticsearch.yml.erb'
-  owner 'root'
-  group node['graylog2']['server']['group']
-  mode '0640'
-  notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
-  only_if { node.default['graylog2']['major_version'].to_f <= 2.2 }
 end
