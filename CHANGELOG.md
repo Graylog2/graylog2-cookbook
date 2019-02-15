@@ -1,6 +1,14 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 3.0.1
+
+* Include default Graylog plugins
+
+## 3.0.0
+
+* Update attrbutes to Graylog 3.0
+
 ## 2.4.5
 
 * Make data bag usage more flexiable
