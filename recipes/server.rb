@@ -26,6 +26,20 @@ package 'graylog-server' do
   notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
 end
 
+package 'graylog-enterprise-plugins' do
+  action :install
+  version node['graylog2']['server']['version']
+  notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
+  only_if { node['graylog2']['install_enterprise_plugins'] }
+end
+
+package 'graylog-integrations-plugins' do
+  action :install
+  version node['graylog2']['server']['version']
+  notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
+  only_if { node['graylog2']['install_integrations_plugins'] }
+end
+
 ruby_block 'create node-id if needed' do
   block do
     File.write(node['graylog2']['node_id_file'], SecureRandom.uuid)

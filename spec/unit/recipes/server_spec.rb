@@ -26,6 +26,14 @@ describe 'graylog2::server' do
       expect(chef_run).to install_package 'graylog-server'
     end
 
+    it 'installs the graylog-enterprise-plugins package' do
+      expect(chef_run).to install_package 'graylog-enterprise-plugins'
+    end
+
+    it 'installs the graylog-integrations-plugins  package' do
+      expect(chef_run).to install_package 'graylog-integrations-plugins'
+    end
+
     it 'create node-id file' do
       expect(chef_run).to run_ruby_block 'create node-id if needed'
     end
