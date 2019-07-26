@@ -177,6 +177,7 @@ default['graylog2']['server']['log_max_index']         = 10
 default['graylog2']['server']['log_pattern']           = "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p [%c{1}] %m%n"
 default['graylog2']['server']['log_level_application'] = 'info'
 default['graylog2']['server']['log_level_root']        = 'warn'
+default['graylog2']['server']['log_level_streams']     = 'warn'
 
 # JVM
 default['graylog2']['server']['java_bin'] = '/usr/bin/java'
