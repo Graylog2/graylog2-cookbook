@@ -30,6 +30,10 @@ describe 'graylog2::server' do
       expect(chef_run).to install_package 'graylog-enterprise-plugins'
     end
 
+    it 'installs the graylog-enterprise-integrations-plugins package' do
+      expect(chef_run).to install_package 'graylog-enterprise-integrations-plugins'
+    end
+
     it 'installs the graylog-integrations-plugins  package' do
       expect(chef_run).to install_package 'graylog-integrations-plugins'
     end
