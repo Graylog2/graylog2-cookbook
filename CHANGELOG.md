@@ -1,6 +1,11 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 3.0.2
+
+* Bump to Graylog 3.0.2
+* Install `graylog-enterprise-integrations-plugins` by default
+
 ## 3.0.1
 
 * Include default Graylog plugins
