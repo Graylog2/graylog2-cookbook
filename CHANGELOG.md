@@ -1,6 +1,10 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 3.1.1
+
+* Bump to Graylog 3.1.1
+
 ## 3.0.2
 
 * Bump to Graylog 3.0.2
