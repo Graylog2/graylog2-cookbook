@@ -71,8 +71,8 @@ default['graylog2']['http']['tls_key_password'] = nil
 # Elasticsearch
 # Elasticsearch http client (GL >= 2.3)
 default['graylog2']['elasticsearch']['hosts']                           = 'http://127.0.0.1:9200'
-default['graylog2']['elasticsearch']['max_total_connections']           = 20
-default['graylog2']['elasticsearch']['max_total_connections_per_route'] = 2
+default['graylog2']['elasticsearch']['max_total_connections']           = 200
+default['graylog2']['elasticsearch']['max_total_connections_per_route'] = 20
 default['graylog2']['elasticsearch']['max_retries']                     = 2
 # WARNING: Automatic node discovery does not work if Elasticsearch requires authentication, e. g. with Shield.
 default['graylog2']['elasticsearch']['discovery_enabled']               = true
