@@ -145,7 +145,7 @@ GEM
     powerpack (0.1.2)
     proxifier (1.0.3)
     public_suffix (3.0.3)
-    rack (2.0.6)
+    rack (2.2.3)
     rainbow (3.0.0)
     rake (12.3.2)
     retryable (2.0.4)
