@@ -13,13 +13,13 @@ default['graylog2']['install_integrations_plugins'] = true
 default['graylog2']['server']['repos']   = {
   # 'rhel' => {
   #   'url' => "https://packages.graylog2.org/repo/el/stable/#{node['graylog2']['major_version']}/x86_64/",
-  #   'key' => 'https://raw.githubusercontent.com/Graylog2/fpm-recipes/master/recipes/graylog-repository/files/rpm/RPM-GPG-KEY-graylog'
+  #   'key' => 'https://raw.githubusercontent.com/Graylog2/fpm-recipes/4.0/recipes/graylog-repository/files/rpm/RPM-GPG-KEY-graylog'
   # },
   # 'debian' => {
   #   'url' => "https://packages.graylog2.org/repo/debian/",
   #   'distribution' => '',
   #   'components' => ['stable', node['graylog2']['major_version']],
-  #   'key' => 'https://raw.githubusercontent.com/Graylog2/fpm-recipes/master/recipes/graylog-repository/files/deb/graylog-keyring.gpg'
+  #   'key' => 'https://packages.graylog2.org/repo/debian/keyring.gpg'
   # }
 }
 default['graylog2']['root_username']                       = 'admin'
