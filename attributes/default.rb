@@ -13,7 +13,7 @@ default['graylog2']['install_integrations_plugins'] = true
 default['graylog2']['server']['repos']   = {
   # 'rhel' => {
   #   'url' => "https://packages.graylog2.org/repo/el/stable/#{node['graylog2']['major_version']}/x86_64/",
-  #   'key' => 'https://raw.githubusercontent.com/Graylog2/fpm-recipes/4.0/recipes/graylog-repository/files/rpm/RPM-GPG-KEY-graylog'
+  #   'key' => 'https://packages.graylog2.org/repo/el/stable/GPG-KEY-graylog'
   # },
   # 'debian' => {
   #   'url' => "https://packages.graylog2.org/repo/debian/",
