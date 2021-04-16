@@ -1,6 +1,11 @@
 Graylog Chef Cookbook Changes
 ==============================
 
+## 3.1.2
+
+* Added lazy server attribute evaluation. Thanks to @edgarasg
+* Gem upgrades
+
 ## 3.1.1
 
 * Bump to Graylog 3.1.1
