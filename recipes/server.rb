@@ -85,13 +85,19 @@ template '/etc/graylog/server/server.conf' do
   owner 'root'
   group node['graylog2']['server']['group']
   mode '0640'
+# Lazy evaluation is needed for attributes which are known during Chef runtime.
+# For example, secrets are gathered from external systems, like Vault.
   variables(
-    :is_master             => is_master,
-    :password_secret       => password_secret,
-    :root_password_sha2    => root_password_sha2,
-    :http_tls_key_password => secrets['http_tls_key_password'] || node['graylog2']['http']['tls_key_password'],
-    :mongodb_uri           => secrets['mongodb_uri'] || node['graylog2']['mongodb']['uri'],
-    :transport_email_auth_password => secrets['transport_email_auth_password'] || node['graylog2']['transport_email_auth_password']
+    lazy do
+      {
+        :is_master             => is_master,
+        :password_secret       => secrets['password_secret'] || node['graylog2']['password_secret'],
+        :root_password_sha2    => secrets['root_password_sha2'] || node['graylog2']['root_password_sha2'],
+        :http_tls_key_password => secrets['http_tls_key_password'] || node['graylog2']['http']['tls_key_password'],
+        :mongodb_uri           => secrets['mongodb_uri'] || node['graylog2']['mongodb']['uri'],
+        :transport_email_auth_password => secrets['transport_email_auth_password'] || node['graylog2']['transport_email_auth_password']
+      }
+    end
   )
   notifies :restart, 'service[graylog-server]', node['graylog2']['restart'].to_sym
 end
