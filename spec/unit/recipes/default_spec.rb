@@ -5,10 +5,10 @@ describe 'graylog2::default' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(
         platform: 'ubuntu',
-        version: '14.04'
+        version: '20.04'
       ) do |node|
         node.normal['java']['jdk_version'] = '8'
-        node.normal['graylog2']['major_version'] = '2.2'
+        node.normal['graylog2']['major_version'] = '4.1'
       end.converge('graylog2::default')
     end
 
@@ -17,7 +17,7 @@ describe 'graylog2::default' do
     end
 
     it 'installs the repository package' do
-      expect(chef_run).to install_package 'graylog-2.2-repository_latest.deb'
+      expect(chef_run).to install_package 'graylog-4.1-repository_latest.deb'
     end
   end
 
@@ -25,27 +25,30 @@ describe 'graylog2::default' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(
         platform: 'centos',
-        version: '6.7'
+        version: '8'
       ) do |node|
         node.normal['java']['jdk_version'] = '8'
-        node.normal['graylog2']['major_version'] = '2.2'
+        node.normal['graylog2']['major_version'] = '4.1'
       end.converge('graylog2::default')
     end
 
     it 'installs the repository package' do
-      expect(chef_run).to install_package 'graylog-2.2-repository_latest.rpm'
+      expect(chef_run).to install_package 'graylog-4.1-repository_latest.rpm'
     end
   end
 
   context 'when the Java installation is not compatible' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new do |node|
+      ChefSpec::ServerRunner.new(
+        platform: 'centos',
+        version: '8'
+      ) do |node|
         node.normal['java']['jdk_version'] = '7'
       end.converge('graylog2::default')
     end
 
     it 'raise an error and inform the user about the wrong version' do
-      expect { chef_run }.to raise_error
+      expect { chef_run }.to raise_error("Java version needs to be >= 8")
     end
   end
 end

@@ -5,7 +5,7 @@ describe 'graylog2::collector_sidecar' do
     let(:chef_run) do
       ChefSpec::ServerRunner.new(
         platform: 'ubuntu',
-        version: '14.04',
+        version: '20.04',
         file_cache_path: '/tmp'
       ) do |node|
         node.normal['graylog2']['sidecar']['version'] = '0.0.8'
