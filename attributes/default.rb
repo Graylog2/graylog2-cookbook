@@ -2,8 +2,8 @@ node.default['graylog2'] ||= {}
 node.default['mongodb'] ||= {}
 
 # General
-default['graylog2']['major_version']     = '3.1'
-default['graylog2']['server']['version'] = '3.1.1-1'
+default['graylog2']['major_version']     = '4.1'
+default['graylog2']['server']['version'] = '4.1.3-1'
 default['graylog2']['install_enterprise_plugins']   = true
 default['graylog2']['install_enterprise_integrations_plugins'] = true
 default['graylog2']['install_integrations_plugins'] = true

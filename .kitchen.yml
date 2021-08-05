@@ -28,14 +28,14 @@ provisioner:
   data_path: test
 
 platforms:
-- name: centos-7.6
+- name: centos-8.3
   attributes:
     mongodb:
       reload_action: "restart"
-- name: ubuntu-16.04
+- name: ubuntu-20.04
   run_list:
   - recipe[apt]
-- name: debian-9
+- name: debian-10.10
   run_list:
   - recipe[apt]
 
@@ -50,7 +50,7 @@ suites:
         jdk_version: '8'
         install_flavor: 'openjdk'
       mongodb:
-        package_version: '4.0.6'
+        package_version: '4.2.15'
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         # Credentials are admin:admin
@@ -61,14 +61,14 @@ suites:
           version: '0.1.8'
           build: 1
       elasticsearch:
-        version: "5.6.14"
+        version: "7.10.2"
         cluster:
           name: "graylog"
     run_list:
       - recipe[fqdn]
       - recipe[curl]
       - recipe[sc-mongodb]
-      - recipe[java]
+      - recipe[graylog2::java]
       - recipe[elasticsearch_test]
       - recipe[graylog2]
       - recipe[graylog2::server]
