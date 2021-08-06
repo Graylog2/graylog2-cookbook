@@ -13,7 +13,7 @@ depends 'java'
 depends 'ark'
 
 suggests 'sc-mongodb'
-suggests 'elasticsearch', '> 6.8.0'
+suggests 'elasticsearch', '~> 4.3.0'
 suggests 'authbind'
 
 supports 'ubuntu'

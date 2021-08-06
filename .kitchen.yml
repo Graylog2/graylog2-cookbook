@@ -31,12 +31,23 @@ provisioner:
 platforms:
 - name: centos-8.3
   attributes:
+    elasticsearch:
+      download_url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-%s-x86_64.rpm"
+      download_checksum: "aa10954329d659d7d3a2f8f1abfe3be764b09c44a6248b7a25d6b95c38c03fe3"
     mongodb:
       reload_action: "restart"
 - name: ubuntu-20.04
+  attributes:
+    elasticsearch:
+      download_url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-%s-amd64.deb"
+      download_checksum: "b91564a4ebf926c7634b5817e7b8a9f82335a0554a2a15740b3a8f42d2bfff8f"
   run_list:
   - recipe[apt]
 - name: debian-10.10
+  attributes:
+    elasticsearch:
+      download_url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-%s-amd64.deb"
+      download_checksum: "b91564a4ebf926c7634b5817e7b8a9f82335a0554a2a15740b3a8f42d2bfff8f"
   run_list:
   - recipe[apt]
 
