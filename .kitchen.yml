@@ -51,7 +51,7 @@ suites:
         jdk_version: '8'
         install_flavor: 'openjdk'
       mongodb:
-        package_version: '4.2'
+        package_version: '4.4.0'
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         # Credentials are admin:admin
