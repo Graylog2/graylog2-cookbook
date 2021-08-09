@@ -1,1 +1,1 @@
-openjdk_install '8'
+openjdk_install '11'

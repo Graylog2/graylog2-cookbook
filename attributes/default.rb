@@ -182,7 +182,7 @@ default['graylog2']['server']['log_level_root']        = 'warn'
 # JVM
 default['graylog2']['server']['java_bin'] = '/usr/bin/java'
 default['graylog2']['server']['java_home'] = ''
-default['graylog2']['server']['java_opts'] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
+default['graylog2']['server']['java_opts'] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:-OmitStackTraceInFastThrow'
 default['graylog2']['server']['args']      = ''
 default['graylog2']['server']['wrapper']   = ''
 default['graylog2']['server']['gc_warning_threshold'] = nil
