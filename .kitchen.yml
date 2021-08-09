@@ -58,9 +58,6 @@ suites:
       machine_fqdn_as_hostname: true
       apt:
         compile_time_update: true
-      java:
-        jdk_version: '8'
-        install_flavor: 'openjdk'
       mongodb:
         package_version: '4.4.0'
       graylog2:
