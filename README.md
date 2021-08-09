@@ -41,28 +41,11 @@ run_list "recipe[graylog2::java]",
          "recipe[graylog2::server]"
 ```
 
-Keep in mind that Graylog needs Elasticsearch 2.x+, what can be installed with the Elasticsearch cookbook version < 3.0.0
+Please refer to Graylog's [System Requirements](https://docs.graylog.org/en/latest/pages/installation.html#system-requirements) for the appropriate versions of MongoDB and Elasticsearch.
 
 ### Attributes
-Graylog runs currently with Java 8. To install the correct version set this attribute:
 
-#### OpenJDK
-
-```json
-  "java": {
-    "jdk_version": "8",
-    "install_flavor": "openjdk"
-  }
-```
-
-OpenJDK and Oracle JDK are both fine for Graylog. Note that you must accept
-Oracle's download terms if you select the oracle install flavor.
-
-On some platforms you need to accept terms to install OpenJDK too. See the [java
-cookbook's README](https://supermarket.chef.io/cookbooks/java) for more
-information.
-
-You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
+You _have_ to use a certain version of Elasticsearch for every Graylog Version, currently
 this is 7.10.2. The cluster name should be 'graylog':
 
 ```json
@@ -90,7 +73,7 @@ The password can be generated with `echo -n yourpassword | shasum -a 256 | awk '
   }
 ```
 
-Alternatively you can create an encrypted data bag and store the secrets there. The data should be called
+Alternatively, you can create an encrypted data bag and store the secrets there. The data should be called
 'secrets' with an item 'graylog'.
 
 ```shell
