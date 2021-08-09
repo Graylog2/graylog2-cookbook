@@ -121,6 +121,8 @@ graylog2:
   node['graylog2']['http']['external_uri']: "http://yourgraylogserver.com:9000/"
 ```
 
+The trailing slash is necessary and Graylog won't start without it.
+
 See the [Graylog documentation](https://docs.graylog.org/en/latest/pages/configuration/web_interface.html) for more info.
 
 ### Authbind
