@@ -1,5 +1,4 @@
 version = node['graylog2']['major_version']
-raise('Java version needs to be >= 8') if node['java']['jdk_version'].to_i < 8
 
 if platform_family?('rhel', 'amazon')
   repository_file = "graylog-#{version}-repository_latest.rpm"
