@@ -1,5 +1,7 @@
 version = node['graylog2']['major_version']
 
+raise('Java version needs to be >= 8') if node['languages']['java']['version'].split('.')[0].to_i < 8
+
 if platform_family?('rhel', 'amazon')
   repository_file = "graylog-#{version}-repository_latest.rpm"
   repository_url = "https://packages.graylog2.org/repo/packages/#{repository_file}"
