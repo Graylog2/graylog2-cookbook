@@ -1,8 +1,12 @@
 version = node['graylog2']['major_version']
 
-java_major_version = node['languages']['java']['version'].split('.')[0].to_i
-if java_major_version < 8 || java_major_version > 11
-  raise('Java version needs to be >= 8 and <= 11')
+if (node['languages'].nil? || node['languages'].empty?) && (node['languages']['java'].nil? || node['languages']['java'].empty?) && (node['languages']['java']['version'].nil? || node['languages']['java']['version'].empty?)
+  java_major_version = node['languages']['java']['version'].split('.')[0].to_i
+  if java_major_version < 8 || java_major_version > 11
+    raise('Java version needs to be >= 8 and <= 11')
+  end
+else
+    raise('Java is not installed.')
 end
 
 if platform_family?('rhel', 'amazon')
