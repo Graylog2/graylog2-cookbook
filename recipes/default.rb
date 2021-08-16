@@ -2,7 +2,7 @@ version = node['graylog2']['major_version']
 
 java_major_version = node['languages']['java']['version'].split('.')[0].to_i
 if java_major_version < 8 || java_major_version > 11
-  raise('Java version needs to be >= 8')
+  raise('Java version needs to be >= 8 and <= 11')
 end
 
 if platform_family?('rhel', 'amazon')
