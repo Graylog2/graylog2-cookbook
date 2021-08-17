@@ -53,7 +53,7 @@ end
 
 template '/etc/graylog/sidecar/sidecar.yml' do
   action :create
-  source 'graylog.collector-sidecar.yml.erb'
+  source 'graylog.sidecar.yml.erb'
   notifies :restart, 'service[graylog-sidecar]'
 end
 
