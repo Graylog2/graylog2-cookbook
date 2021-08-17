@@ -199,6 +199,7 @@ default['graylog2']['sidecar']['release']                        = '1'
 default['graylog2']['sidecar']['repository']['version']          = '1'
 default['graylog2']['sidecar']['repository']['release']          = '2'
 default['graylog2']['sidecar']['server_url']                     = 'http://localhost:9000/api'
+default['graylog2']['sidecar']['server_api_token']               = nil 
 default['graylog2']['sidecar']['update_interval']                = 10
 default['graylog2']['sidecar']['tls_skip_verify']                = false
 default['graylog2']['sidecar']['send_status']                    = false
