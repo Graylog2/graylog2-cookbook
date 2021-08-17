@@ -33,7 +33,7 @@ GRAPH
     hostsfile (>= 0.0.0)
     line (>= 0.0.0)
     now (>= 0.0.0)
-  graylog2 (3.1.3)
+  graylog2 (4.0.0)
     ark (>= 0.0.0)
     authbind (>= 0.1.8)
     java (>= 0.0.0)

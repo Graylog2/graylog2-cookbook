@@ -28,14 +28,13 @@ you need for your environment.
 |default            |Setup the Graylog package repository|
 |server             |Install Graylog server|
 |authbind           |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
-|collector_sidecar  |Install Graylog's collector sidecar|
+|sidecar            |Install Graylog sidecar|
 
 In a minimal setup you need at least the _default_ and _server_ recipes. Combined with
 MongoDB and Elasticsearch, a run list might look like this:
 
 ```
-run_list "recipe[graylog2::java]",
-         "recipe[elasticsearch]",
+run_list "recipe[elasticsearch]",
          "recipe[mongodb]",
          "recipe[graylog2]",
          "recipe[graylog2::server]"
