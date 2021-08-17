@@ -9,6 +9,8 @@ DEPENDENCIES
     path: .
     metadata: true
   java
+  java_test
+    path: test/fixtures/cookbooks/java_test
   sc-mongodb
 
 GRAPH
@@ -38,8 +40,12 @@ GRAPH
   hostsfile (3.0.1)
   java (9.0.0)
     line (>= 0.0.0)
+  java_test (0.0.1)
+    apt (>= 0.0.0)
+    java (~> 9.0.0)
+    yum (>= 0.0.0)
   line (4.0.1)
   now (1.0.0)
   sc-mongodb (4.1.1)
   seven_zip (4.2.1)
-  yum (6.1.1)
+  yum (7.0.0)
