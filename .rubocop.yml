@@ -22,7 +22,7 @@ SignalException:
   Enabled: false
 Style/NumericLiterals:
   Enabled: false
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
   Enabled: false
 WordArray:
   Enabled: false
