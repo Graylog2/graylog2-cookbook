@@ -8,7 +8,7 @@ describe 'graylog2::default' do
         version: '20.04'
       ) do |node|
         node.normal['graylog2']['major_version'] = '4.1'
-      end.converge('graylog2::java').converge('graylog2::default')
+      end.converge('java_test').converge('graylog2::default')
     end
 
     it 'installs https support for apt' do
@@ -27,7 +27,7 @@ describe 'graylog2::default' do
         version: '8'
       ) do |node|
         node.normal['graylog2']['major_version'] = '4.1'
-      end.converge('graylog2::java').converge('graylog2::default')
+      end.converge('java_test').converge('graylog2::default')
     end
 
     it 'installs the repository package' do
@@ -42,11 +42,12 @@ describe 'graylog2::default' do
         version: '8'
       ) do |node|
         node.normal['graylog2']['major_version'] = '4.1'
-      end.converge('graylog2::java').converge('graylog2::default')
+        node.normal['java_version'] = '7'
+      end.converge('java_test').converge('graylog2::default')
     end
 
     it 'raise an error and inform the user about the wrong version' do
-      expect { chef_run }.to raise_error("Java version needs to be >= 8")
+      expect { chef_run }.to raise_error("Java version needs to be >= 8 and <= 11")
     end
   end
 end
