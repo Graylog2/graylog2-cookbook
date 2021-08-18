@@ -1,9 +1,15 @@
 require 'spec_helper'
 
-describe 'graylog2::server' do
+RSpec.describe 'graylog2::server' do
+  before do
+    stub_data_bag_item('secrets', 'graylog').and_return({
+      'server' => {}
+    })
+  end
+
   context 'on an empty environment' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'ubuntu',
         version: '20.04'
       ).converge('graylog2::server')
@@ -16,7 +22,7 @@ describe 'graylog2::server' do
 
   context 'when the cookbook installs Graylog on a Ubuntu system' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'ubuntu',
         version: '20.04'
       ) do |node|
@@ -58,7 +64,7 @@ describe 'graylog2::server' do
 
   context 'when the cookbook installs Graylog on a Centos system' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'centos',
         version: '8'
       ) do |node|

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe 'graylog2::default' do
+RSpec.describe 'graylog2::default' do
   context 'when the cookbook prepares a Ubuntu system' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'ubuntu',
         version: '20.04'
       ) do |node|
@@ -22,7 +22,7 @@ describe 'graylog2::default' do
 
   context 'when the cookbook prepares a Centos system' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'centos',
         version: '8'
       ) do |node|
@@ -35,19 +35,18 @@ describe 'graylog2::default' do
     end
   end
 
-  context 'when the Java installation is not compatible' do
+  context 'when Java is installed' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'centos',
         version: '8'
       ) do |node|
         node.normal['graylog2']['major_version'] = '4.1'
-        node.normal['java_version'] = '7'
       end.converge('java_test').converge('graylog2::default')
     end
 
-    it 'raise an error and inform the user about the wrong version' do
-      expect { chef_run }.to raise_error("Java version needs to be >= 8 and <= 11")
+    it 'Java version check should be executed' do
+      expect(chef_run).to run_ruby_block('Check Java version')
     end
   end
 end

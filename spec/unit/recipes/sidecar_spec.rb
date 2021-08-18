@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe 'graylog2::sidecar' do
+RSpec.describe 'graylog2::sidecar' do
   context 'when the cookbook installs graylog-sidecar on a Ubuntu system' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'ubuntu',
         version: '20.04',
         file_cache_path: '/tmp'
