@@ -38,21 +38,70 @@ pipeline
 
    stages
    {
-      stage('Build')
-      {
-          agent
-          {
-            label 'linux'
+
+     stage('Run Tests')
+     {
+       parallel
+       {
+         stage('Integration Tests - openjdk-centos-83')
+         {
+             agent
+             {
+               label 'linux'
+             }
+             steps
+             {
+               sh '''
+                   vagrant plugin install vagrant-vbguest
+                   kitchen verify openjdk-centos-83
+                   kitchen destroy openjdk-centos-83
+                 '''
+              }
           }
-          steps
+
+          stage('Integration Tests - openjdk-ubuntu-2004')
           {
-            sh '''
-                vagrant plugin install vagrant-vbguest
-                kitchen verify openjdk-ubuntu-2004
-                kitchen destroy openjdk-ubuntu-2004
-                chef exec rspec
-              '''
+              agent
+              {
+                label 'linux'
+              }
+              steps
+              {
+                sh '''
+                    vagrant plugin install vagrant-vbguest
+                    kitchen verify openjdk-ubuntu-2004
+                    kitchen destroy openjdk-ubuntu-2004
+                  '''
+               }
            }
+
+           stage('Integration Tests - openjdk-debian-1010')
+           {
+               agent
+               {
+                 label 'linux'
+               }
+               steps
+               {
+                 sh '''
+                     vagrant plugin install vagrant-vbguest
+                     kitchen verify openjdk-debian-1010
+                     kitchen destroy openjdk-debian-1010
+                   '''
+                }
+            }
+            stage('Run Rspec Tests')
+            {
+                agent
+                {
+                  label 'linux'
+                }
+                steps
+                {
+                  sh 'chef exec rspec'
+                 }
+             }
        }
+     }
    }
 }
