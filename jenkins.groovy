@@ -57,6 +57,13 @@ pipeline
                    kitchen destroy openjdk-centos-83
                  '''
               }
+              post
+              {
+                always
+                {
+                  cleanWs()
+                }
+              }
           }
 
           stage('Integration Tests - openjdk-ubuntu-2004')
@@ -72,6 +79,13 @@ pipeline
                     kitchen verify openjdk-ubuntu-2004
                     kitchen destroy openjdk-ubuntu-2004
                   '''
+               }
+               post
+               {
+                 always
+                 {
+                   cleanWs()
+                 }
                }
            }
 
@@ -89,6 +103,13 @@ pipeline
                      kitchen destroy openjdk-debian-1010
                    '''
                 }
+                post
+                {
+                  always
+                  {
+                    cleanWs()
+                  }
+                }
             }
             stage('Run Rspec Tests')
             {
@@ -99,7 +120,14 @@ pipeline
                 steps
                 {
                   sh 'chef exec rspec'
-                 }
+                }
+                post
+                {
+                  always
+                  {
+                    cleanWs()
+                  }
+                }
              }
        }
      }
