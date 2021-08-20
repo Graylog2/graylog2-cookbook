@@ -43,7 +43,7 @@ pipeline
      {
        parallel
        {
-         stage('Integration Tests - openjdk-centos-83')
+         stage('Integration Tests')
          {
              agent
              {
@@ -55,6 +55,10 @@ pipeline
                    vagrant plugin install vagrant-vbguest | true
                    kitchen verify openjdk-centos-83
                    kitchen destroy openjdk-centos-83
+                   kitchen verify openjdk-ubuntu-2004
+                   kitchen destroy openjdk-ubuntu-2004
+                   kitchen verify openjdk-debian-1010
+                   kitchen destroy openjdk-debian-1010
                  '''
               }
               post
@@ -66,7 +70,7 @@ pipeline
               }
           }
 
-          stage('Integration Tests - openjdk-ubuntu-2004')
+          stage('Run Rspec Tests')
           {
               agent
               {
@@ -74,61 +78,16 @@ pipeline
               }
               steps
               {
-                sh '''
-                    vagrant plugin install vagrant-vbguest | true
-                    kitchen verify openjdk-ubuntu-2004
-                    kitchen destroy openjdk-ubuntu-2004
-                  '''
-               }
-               post
-               {
-                 always
-                 {
-                   cleanWs()
-                 }
-               }
+                sh 'chef exec rspec'
+              }
+              post
+              {
+                always
+                {
+                  cleanWs()
+                }
+              }
            }
-
-           stage('Integration Tests - openjdk-debian-1010')
-           {
-               agent
-               {
-                 label 'linux'
-               }
-               steps
-               {
-                 sh '''
-                     vagrant plugin install vagrant-vbguest | true
-                     kitchen verify openjdk-debian-1010
-                     kitchen destroy openjdk-debian-1010
-                   '''
-                }
-                post
-                {
-                  always
-                  {
-                    cleanWs()
-                  }
-                }
-            }
-            stage('Run Rspec Tests')
-            {
-                agent
-                {
-                  label 'linux'
-                }
-                steps
-                {
-                  sh 'chef exec rspec'
-                }
-                post
-                {
-                  always
-                  {
-                    cleanWs()
-                  }
-                }
-             }
        }
      }
    }
