@@ -11,4 +11,5 @@ group :integration do
   cookbook 'java'
 
   cookbook "elasticsearch_test", :path => "./test/fixtures/cookbooks/elasticsearch_test"
+  cookbook "java_test", :path => "./test/fixtures/cookbooks/java_test"
 end

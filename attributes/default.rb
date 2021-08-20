@@ -2,8 +2,8 @@ node.default['graylog2'] ||= {}
 node.default['mongodb'] ||= {}
 
 # General
-default['graylog2']['major_version']     = '3.1'
-default['graylog2']['server']['version'] = '3.1.1-1'
+default['graylog2']['major_version']     = '4.1'
+default['graylog2']['server']['version'] = '4.1.3-1'
 default['graylog2']['install_enterprise_plugins']   = true
 default['graylog2']['install_enterprise_integrations_plugins'] = true
 default['graylog2']['install_integrations_plugins'] = true
@@ -182,7 +182,7 @@ default['graylog2']['server']['log_level_root']        = 'warn'
 # JVM
 default['graylog2']['server']['java_bin'] = '/usr/bin/java'
 default['graylog2']['server']['java_home'] = ''
-default['graylog2']['server']['java_opts'] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow'
+default['graylog2']['server']['java_opts'] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:-OmitStackTraceInFastThrow'
 default['graylog2']['server']['args']      = ''
 default['graylog2']['server']['wrapper']   = ''
 default['graylog2']['server']['gc_warning_threshold'] = nil
@@ -194,12 +194,12 @@ default['graylog2']['server']['additional_env_vars']      = nil
 default['graylog2']['server']['install_tzdata_java']      = false
 
 # Collector Sidecar
-default['graylog2']['sidecar']['release']                        = '0.1.4'
-default['graylog2']['sidecar']['version']                        = '0.1.4'
-default['graylog2']['sidecar']['build']                          = 1
-default['graylog2']['sidecar']['arch']                           = 'amd64'
-default['graylog2']['sidecar']['package_base_url']               = "https://github.com/Graylog2/collector-sidecar/releases/download/#{node['graylog2']['sidecar'][:release]}"
+default['graylog2']['sidecar']['version']                        = '1.1.0'
+default['graylog2']['sidecar']['release']                        = '1'
+default['graylog2']['sidecar']['repository']['version']          = '1'
+default['graylog2']['sidecar']['repository']['release']          = '2'
 default['graylog2']['sidecar']['server_url']                     = 'http://localhost:9000/api'
+default['graylog2']['sidecar']['server_api_token']               = nil 
 default['graylog2']['sidecar']['update_interval']                = 10
 default['graylog2']['sidecar']['tls_skip_verify']                = false
 default['graylog2']['sidecar']['send_status']                    = false

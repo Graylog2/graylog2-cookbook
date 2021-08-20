@@ -14,7 +14,7 @@ Usage
 To give this cookbook a try simply use the Kitchen test suite.
 
 ```
-kitchen setup oracle-ubuntu-1404
+kitchen setup openjdk-ubuntu-2004
 open http://localhost:9000
 Login with admin/admin
 ```
@@ -28,58 +28,28 @@ you need for your environment.
 |default            |Setup the Graylog package repository|
 |server             |Install Graylog server|
 |authbind           |Give the Graylog user access to privileged ports like 514 (only on Ubuntu/Debian)|
-|collector_sidecar  |Install Graylog's collector sidecar|
+|sidecar            |Install Graylog sidecar|
 
 In a minimal setup you need at least the _default_ and _server_ recipes. Combined with
 MongoDB and Elasticsearch, a run list might look like this:
 
 ```
-run_list "recipe[java]",
-         "recipe[elasticsearch]",
+run_list "recipe[elasticsearch]",
          "recipe[mongodb]",
          "recipe[graylog2]",
          "recipe[graylog2::server]"
 ```
 
-Keep in mind that Graylog needs Elasticsearch 2.x+, what can be installed with the Elasticsearch cookbook version < 3.0.0
+Please refer to Graylog's [System Requirements](https://docs.graylog.org/en/latest/pages/installation.html#system-requirements) for the appropriate versions of MongoDB and Elasticsearch.
 
 ### Attributes
-Graylog runs currently with Java 8. To install the correct version set this attribute:
 
-#### Oracle
-
-```json
-  "java": {
-    "jdk_version": "8",
-    "install_flavor": "oracle",
-    "oracle": {
-      "accept_oracle_download_terms": true
-    }
-  }
-```
-
-#### OpenJDK
-
-```json
-  "java": {
-    "jdk_version": "8",
-    "install_flavor": "openjdk"
-  }
-```
-
-OpenJDK and Oracle JDK are both fine for Graylog. Note that you must accept
-Oracle's download terms if you select the oracle install flavor.
-
-On some platforms you need to accept terms to install OpenJDK too. See the [java
-cookbook's README](https://supermarket.chef.io/cookbooks/java) for more
-information.
-
-You _have_ to use a  certain version of Elasticsearch for every Graylog Version, currently
-this is 5.5.1. The cluster name should be 'graylog':
+You _have_ to use a certain version of Elasticsearch for every Graylog Version, currently
+this is 7.10.2. The cluster name should be 'graylog':
 
 ```json
   "elasticsearch": {
-    "version": "5.5.1",
+    "version": "7.10.2",
     "cluster": {
       "name": "graylog"
     }
@@ -102,7 +72,7 @@ The password can be generated with `echo -n yourpassword | shasum -a 256 | awk '
   }
 ```
 
-Alternatively you can create an encrypted data bag and store the secrets there. The data should be called
+Alternatively, you can create an encrypted data bag and store the secrets there. The data should be called
 'secrets' with an item 'graylog'.
 
 ```shell
@@ -135,7 +105,7 @@ a dynamic cluster set the following attributes:
   }
 ```
 
-If you have multiple server one need to be set as a master, use this attribute to do so
+If you have multiple servers, one need to be set as a master. Use this attribute to do so:
 
 ```
 default.graylog2[:ip_of_master] = node.ipaddress
@@ -145,19 +115,14 @@ default.graylog2[:ip_of_master] = node.ipaddress
 
 If you are running Graylog behind a NAT, you will need to forward port 9000 to the outside as well as:
 
-```json
-  "graylog2": {
-      "rest": {
-        "listen_uri": "http://0.0.0.0:9000/api/"
-      },
-      "web": {
-        "listen_uri": "http://0.0.0.0:9000/",
-        "endpoint_uri": "http://<public facing IP>:9000/api"
-      }
-  }
+```yaml
+graylog2:
+  node['graylog2']['http']['external_uri']: "http://yourgraylogserver.com:9000/"
 ```
 
-See [graylog docs](http://docs.graylog.org/en/2.3/pages/configuration/web_interface.html#single-or-separate-listeners-for-web-interface-and-rest-api) for more info.
+The trailing slash is necessary and Graylog won't start without it.
+
+See the [Graylog documentation](https://docs.graylog.org/en/latest/pages/configuration/web_interface.html) for more info.
 
 ### Authbind
 
@@ -182,8 +147,8 @@ Integration tests:
 
 ```
   $ kitchen list
-  $ kitchen converge oracle-ubuntu-1404
-  $ kitchen verify oracle-ubuntu-1404
+  $ kitchen converge openjdk-ubuntu-2004
+  $ kitchen verify openjdk-ubuntu-2004
 ```
 
 Additionally you can verify the coding style by running RoboCop and Foodcritic.

@@ -1,21 +1,30 @@
 require 'spec_helper'
 
-describe 'graylog2::server' do
+RSpec.describe 'graylog2::server' do
+  before do
+    stub_data_bag_item('secrets', 'graylog').and_return({
+      'server' => {}
+    })
+  end
+
   context 'on an empty environment' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new.converge('graylog2::server')
+      ChefSpec::SoloRunner.new(
+        platform: 'ubuntu',
+        version: '20.04'
+      ).converge('graylog2::server')
     end
 
     it 'raise an error an informs the user to set at least password_secret and root_password_sha2' do
-      expect { chef_run }.to raise_error
+      expect { chef_run }.to raise_error("No password_secret set, either set it via an attribute or in the encrypted data bag in secrets.graylog")
     end
   end
 
   context 'when the cookbook installs Graylog on a Ubuntu system' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'ubuntu',
-        version: '14.04'
+        version: '20.04'
       ) do |node|
         node.normal['graylog2']['password_secret'] = 'password_hash'
         node.normal['graylog2']['root_password_sha2'] = 'salt'
@@ -38,10 +47,6 @@ describe 'graylog2::server' do
       expect(chef_run).to install_package 'graylog-integrations-plugins'
     end
 
-    it 'create node-id file' do
-      expect(chef_run).to run_ruby_block 'create node-id if needed'
-    end
-
     it 'restart Graylog server service' do
       expect(chef_run).to enable_service 'graylog-server'
     end
@@ -59,9 +64,9 @@ describe 'graylog2::server' do
 
   context 'when the cookbook installs Graylog on a Centos system' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(
+      ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version: '6.7'
+        version: '8'
       ) do |node|
         node.normal['graylog2']['password_secret'] = 'password_hash'
         node.normal['graylog2']['root_password_sha2'] = 'salt'

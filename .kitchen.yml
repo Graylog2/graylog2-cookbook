@@ -1,6 +1,7 @@
 ---
 driver:
   name: vagrant
+  vagrantfile_erb: Vagrantfile.erb
 
 driver_config:
   customize:
@@ -23,90 +24,62 @@ driver_config:
 provisioner:
   name: chef_zero
   product_name: chef
-  product_version: 14
+  product_version: 15
   install_strategy: once
   data_path: test
 
 platforms:
-- name: centos-7.6
+- name: centos-8.3
   attributes:
+    elasticsearch:
+      download_url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-%s-x86_64.rpm"
+      download_checksum: "aa10954329d659d7d3a2f8f1abfe3be764b09c44a6248b7a25d6b95c38c03fe3"
     mongodb:
       reload_action: "restart"
-- name: ubuntu-16.04
+- name: ubuntu-20.04
+  attributes:
+    elasticsearch:
+      download_url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-%s-amd64.deb"
+      download_checksum: "b91564a4ebf926c7634b5817e7b8a9f82335a0554a2a15740b3a8f42d2bfff8f"
   run_list:
   - recipe[apt]
-- name: debian-9
+- name: debian-10.10
+  attributes:
+    elasticsearch:
+      download_url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-%s-amd64.deb"
+      download_checksum: "b91564a4ebf926c7634b5817e7b8a9f82335a0554a2a15740b3a8f42d2bfff8f"
   run_list:
   - recipe[apt]
 
 suites:
-  - name: oracle
-    attributes:
-      machine_fqdn: graylog.local
-      machine_fqdn_as_hostname: true
-      apt:
-        compile_time_update: true
-      java:
-        jdk_version: '8'
-        install_flavor: 'oracle'
-        oracle:
-          accept_oracle_download_terms: true
-      mongodb:
-        package_version: '4.0.6'
-      graylog2:
-        password_secret: "2jueVqZpwLLjaWxV"
-        # Credentials are admin:admin
-        root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
-        restart: "delayed"
-        sidecar:
-          release: '0.1.8'
-          version: '0.1.8'
-          build: 1
-      elasticsearch:
-        version: "5.6.14"
-        cluster:
-          name: "graylog"
-    run_list:
-      - recipe[fqdn]
-      - recipe[curl]
-      - recipe[sc-mongodb]
-      - recipe[java]
-      - recipe[elasticsearch_test]
-      - recipe[graylog2]
-      - recipe[graylog2::server]
-      - recipe[graylog2::collector_sidecar]
-      - recipe[graylog2::authbind]
   - name: openjdk
     attributes:
       machine_fqdn: graylog.local
       machine_fqdn_as_hostname: true
       apt:
         compile_time_update: true
-      java:
-        jdk_version: '8'
-        install_flavor: 'openjdk'
+      java_version: '11'
       mongodb:
-        package_version: '4.0.6'
+        package_version: '4.4.8'
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         # Credentials are admin:admin
         root_password_sha2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
         restart: "delayed"
         sidecar:
-          release: '0.1.8'
-          version: '0.1.8'
-          build: 1
+          version: '1.1.0'
+          release: '1'
       elasticsearch:
-        version: "5.6.14"
+        version: "7.10.2"
         cluster:
           name: "graylog"
     run_list:
       - recipe[fqdn]
       - recipe[curl]
       - recipe[sc-mongodb]
-      - recipe[java]
+      - recipe[java_test]
       - recipe[elasticsearch_test]
       - recipe[graylog2]
       - recipe[graylog2::server]
-      - recipe[graylog2::collector_sidecar]
+      - recipe[graylog2::sidecar]
       - recipe[graylog2::authbind]

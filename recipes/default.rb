@@ -1,5 +1,25 @@
 version = node['graylog2']['major_version']
-raise('Java version needs to be >= 8') if node['java']['jdk_version'].to_i < 8
+
+ohai 'Reload Ohai data' do
+  plugin 'languages'
+  action :reload
+end
+
+ruby_block 'Check Java version' do
+  block do
+    nil_or_empty = ->(v) { v.nil? || v.empty? }
+    [node['languages'], node['languages']['java'], node['languages']['java']['version']].each { |v|
+      if nil_or_empty.call(v)
+        raise('Java is not installed.')
+      end
+    }
+
+    java_major_version = node['languages']['java']['version'].split('.')[0].to_i
+    if java_major_version < 8 || java_major_version > 11
+      raise('Java version needs to be >= 8 and <= 11')
+    end
+  end
+end
 
 if platform_family?('rhel', 'amazon')
   repository_file = "graylog-#{version}-repository_latest.rpm"
