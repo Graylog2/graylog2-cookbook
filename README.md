@@ -1,8 +1,5 @@
 Description
 -----------
-Unit tests [![Build Status](https://travis-ci.org/Graylog2/graylog2-cookbook.svg)](https://travis-ci.org/Graylog2/graylog2-cookbook)
-Integration tests [![Build Status](https://jenkins-01.eastus.cloudapp.azure.com/job/graylog2-cookbook/badge/icon)](https://jenkins-01.eastus.cloudapp.azure.com/job/graylog2-cookbook/)
-
 This _Chef_ cookbook installs and configures the [Graylog](http://www.graylog.org) log management system.
 
 It is using the official installation packages provided by [_Graylog, Inc._](http://www.graylog.com). It needs as requirement an installation of Java, [Elasticsearch](http://www.elasticsearch.org) and [MongoDB](https://www.mongodb.org).
