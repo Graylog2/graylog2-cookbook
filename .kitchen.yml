@@ -60,7 +60,7 @@ suites:
         compile_time_update: true
       java_version: '11'
       mongodb:
-        package_version: '4.4.0'
+        package_version: '4.4.8'
       graylog2:
         password_secret: "2jueVqZpwLLjaWxV"
         # Credentials are admin:admin
