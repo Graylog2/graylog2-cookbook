@@ -52,7 +52,7 @@ pipeline
              steps
              {
                sh '''
-                   vagrant plugin install vagrant-vbguest
+                   vagrant plugin install vagrant-vbguest | true
                    kitchen verify openjdk-centos-83
                    kitchen destroy openjdk-centos-83
                  '''
@@ -75,7 +75,7 @@ pipeline
               steps
               {
                 sh '''
-                    vagrant plugin install vagrant-vbguest
+                    vagrant plugin install vagrant-vbguest | true
                     kitchen verify openjdk-ubuntu-2004
                     kitchen destroy openjdk-ubuntu-2004
                   '''
@@ -98,7 +98,7 @@ pipeline
                steps
                {
                  sh '''
-                     vagrant plugin install vagrant-vbguest
+                     vagrant plugin install vagrant-vbguest | true
                      kitchen verify openjdk-debian-1010
                      kitchen destroy openjdk-debian-1010
                    '''
