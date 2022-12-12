@@ -180,6 +180,7 @@ default['graylog2']['server']['log_level_application'] = 'info'
 default['graylog2']['server']['log_level_root']        = 'warn'
 
 # JVM
+default['graylog2']['server']['skip_java_version_check'] = false
 default['graylog2']['server']['java_bin'] = '/usr/bin/java'
 default['graylog2']['server']['java_home'] = ''
 default['graylog2']['server']['java_opts'] = '-Djava.net.preferIPv4Stack=true -Xms1g -Xmx1g -XX:NewRatio=1 -server -XX:+ResizeTLAB -XX:-OmitStackTraceInFastThrow'
@@ -199,7 +200,7 @@ default['graylog2']['sidecar']['release']                        = '1'
 default['graylog2']['sidecar']['repository']['version']          = '1'
 default['graylog2']['sidecar']['repository']['release']          = '2'
 default['graylog2']['sidecar']['server_url']                     = 'http://localhost:9000/api'
-default['graylog2']['sidecar']['server_api_token']               = nil 
+default['graylog2']['sidecar']['server_api_token']               = nil
 default['graylog2']['sidecar']['update_interval']                = 10
 default['graylog2']['sidecar']['tls_skip_verify']                = false
 default['graylog2']['sidecar']['send_status']                    = false
